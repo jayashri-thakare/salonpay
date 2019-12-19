@@ -1,0 +1,181 @@
+<!-- Main Container Starts -->
+<div *ngIf="userdataService.profilenav">
+<div class="mainContainer">
+  <app-messages></app-messages>
+  <h3 class="main-comm-head">Profile <span>Settings</span></h3>
+  <!-- start -->
+  <div class="row">
+    <div class="usr-pro-box-flex usr-pro-box-flex-1">
+      <!-- start -->
+      <div class="usr-pro-box">
+        <!-- start -->
+        <div class="usr-pro-top">
+          <!-- upload start -->
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+              <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>
+            </div>
+            <div class="avatar-preview">
+              <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">
+              </div>
+            </div>
+          </div>
+          <!-- upload end -->
+          <h6>{{userdetail?.firstName}}  {{userdetail?.lastName}}</h6>
+          <p>Technician</p>
+          <i class="icon-edit grd-icon pro-edt side-menu" (click)="openModal('side-menu-userprofile', userdetail)"></i>
+        </div>
+        <!-- end -->
+        <div class="usr-pro-btm">
+          <div class="comm-cont">
+            <p>Birthdate</p>
+            <h6>{{userdetail?.dateOfBirth | date: 'M/d/yyyy'}}</h6>
+          </div>
+          <div class="comm-cont">
+            <p>Gender</p>
+            <h6>{{userdetail?.gender}}</h6>
+          </div>
+        </div>
+        <!-- end -->
+      </div>
+    </div>
+
+    <div class="usr-pro-box-flex usr-pro-box-flex-1">
+      <div class="pro-comm-fle">
+        <h6>Contact</h6>
+        <i class="icon-edit grd-icon side-menu" (click)="openModal('side-menu-contact')"></i>
+      </div>
+
+      <!-- start -->
+      <div class="prof-comm-shad">
+        <div class="comm-cont w100 mb-4">
+          <p>Mobile</p>
+          <h6>{{userdetail?.phoneNumber }}</h6>
+        </div>
+        <div class="comm-cont w100 mb-4">
+          <p>Work</p>
+          <h6>{{userdetail?.workContact}}</h6>
+        </div>
+        <div class="comm-cont w100">
+          <p>Home</p>
+          <h6>{{userdetail?.homeConatct}}</h6>
+        </div>
+      </div>
+      <!-- end -->
+    </div>
+
+    <div class="usr-pro-box-flex usr-pro-box-flex-2">
+      <div class="pro-comm-fle">
+        <h6>Address</h6>
+        <i class="icon-edit grd-icon side-menu" data-name="side-menu-address"  (click)="openModal('side-menu-address')"></i>
+      </div>
+      <!-- start -->
+      <div class="prof-comm-shad">
+        <div class="comm-cont w100 mb-4">
+          <p>Address Line 1</p>
+          <h6>{{userdetail?.addressLine1}}</h6>
+        </div>
+        <div class="comm-cont w100 mb-4">
+          <p>Address Line 2</p>
+          <h6>{{userdetail?.addressLine2}}</h6>
+        </div>
+        <div class="comm-cont w50 w-480-50 mb-480-30">
+          <p>City</p>
+          <h6>{{userdetail?.cityName}}</h6>
+        </div>
+        <div class="comm-cont w50 w-480-50 mb-480-30">
+          <p>State</p>
+          <h6>{{userdetail?.stateName}}</h6>
+        </div>
+        <div class="comm-cont w50 w-480-50 mb-480-30">
+          <p>Country</p>
+          <h6>{{userdetail?.countryName}}</h6>
+        </div>
+        <div class="comm-cont w50 w-480-50">
+          <p>Zip Code</p>
+          <h6>{{userdetail?.zipCode}}</h6>
+        </div>
+      </div>
+      <!-- end -->
+    </div>
+
+    <div class="usr-pro-box-flex usr-pro-box-flex-3">
+      <div class="pro-comm-fle">
+        <h6>login info</h6>
+        <i class="icon-edit grd-icon side-menu" (click)="openModal('side-menu-logininfo')"></i>
+      </div>
+
+      <!-- start -->
+      <div class="prof-comm-shad mb-3">
+        <div class="comm-cont w100">
+          <p>Email</p>
+          <h6>{{userdetail?.email}}</h6>
+        </div>
+      </div>
+      <!-- end -->
+      <!-- start -->
+      <div class="prof-comm-shad">
+        <div class="comm-cont w100">
+          <p>Password</p>
+          <h6>**********</h6>
+        </div>
+      </div>
+      <!-- end -->
+    </div>
+  </div>
+  <!-- end -->
+</div>
+<!-- Main Container Ends -->
+
+<!-- start -->
+<div class="time-track">
+  <div class="time-hed">
+    <h6>Time Tracker</h6>
+    <i class="icon-minus"></i>
+  </div>
+
+  <div class="trak-sld">
+
+    <div class="trk-prof">
+      <div class="trk-det">
+        <div class="user-img"><img src="img/profile.svg" alt=""></div>
+        <div class="trk-name">
+          <h3>Maya Didas<span>Technician</span></h3>
+        </div>
+      </div>
+      <div id="stopWatch">
+        <h6 id="time">00:00</h6>
+      </div>
+    </div>
+
+    <div class="trk-btn">
+      <button class="button" id="start">Start</button>
+      <button class="button blue" id="stop">Stop</button>
+    </div>
+
+    <div class="form-group">
+      <select class="select-field form-field valid" name="select-fld" id="select-fld" required=""
+              aria-invalid="false">
+        <option></option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+        <option>Option 5</option>
+      </select>
+      <p class="form-label sel-blk">Task</p>
+    </div>
+
+  </div>
+</div>
+<div class="time-track-btn"><i class="icon-clock"></i></div>
+<!-- end -->
+<!-- Edit Profile Menu -->
+<div class="overlay"></div>
+
+<profile-modal [userdata]="userdetail"></profile-modal>
+<address-modal [userdata]="userdetail"></address-modal>
+<contact-modal [userdata]="userdetail"></contact-modal>
+<profileinfo-modal [userdata]="userdetail"></profileinfo-modal>
+</div>

@@ -1,0 +1,39 @@
+<div *ngIf="router.url === '/dashboard'" class="salon-side-bar profile-sid-box scrollbar mCustomScrollbar _mCS_2 mCS_no_scrollbar" ><ul>
+  <li>
+    <a (click)="navChange('profile-sid')" class="profile-sid">
+      <i class="icon-profile"></i>
+      <p>{{'Profile' | translate}}</p>
+    </a>
+  </li>
+  <li>
+    <a (click)="navChange('email-sid')" class="email-sid">
+      <i class="icon-envelope"></i>
+      <p>{{'Email' | translate}}</p>
+    </a>
+  </li>
+  <li>
+    <a (click)="navChange('notification-sid')" class="notification-sid">
+      <i class="icon-bell"></i>
+      <p>{{'Notification' | translate}}</p>
+    </a>
+  </li>
+  <li>
+    <a (click)="navChange('account-sid')" class="account-sid">
+      <i class="icon-profile"></i>
+      <p>{{'Account' | translate}}</p>
+    </a>
+  </li>
+  <li>
+    <a (click)="navChange('bank-sid')" class="bank-sid">
+      <i class="icon-bank"></i>
+      <p>{{'Bank' | translate}}</p>
+    </a>
+  </li>
+  <li>
+    <a (click)="navChange('schedule-sid')" class="schedule-sid">
+      <i class="icon-calender"></i>
+      <p>{{'Schedule' | translate}}</p>
+    </a>
+  </li>
+</ul>
+</div>

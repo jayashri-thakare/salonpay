@@ -1,0 +1,15 @@
+<div>
+  <label>
+    <span>Change Language</span>
+    <select #langSelect (change)="translate.use(langSelect.value)">
+      <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+    </select>
+  </label>
+</div>
+
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div>
+  <router-outlet></router-outlet>
+</div>
+

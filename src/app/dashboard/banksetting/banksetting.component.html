@@ -1,0 +1,169 @@
+<!-- Main Container Starts -->
+<div *ngIf="userdataService.banknav">
+<div class="mainContainer p-0">
+  <div class="mail-typ-flex">
+    <!-- start -->
+    <div class="bank-box">
+      <img src="../../../assets/img/bank-add.svg" alt="image missing">
+      <div class="bank-cont">
+        <h2>No Bank Account Added</h2>
+        <p>When you choose to connect your bank account, you will be asked to provide your
+          online banking user name and password. Our secure system will authenticate your bank
+          account for automatic deposits. Please click the connect button below to begin.</p>
+      </div>
+
+      <button class="button dashed-button side-menu" data-name="side-menu-bankacc">
+        <i class="icon-cir-plus mr-2"></i>Add <span class="ml-1">Bank Account</span>
+      </button>
+    </div>
+    <!-- end -->
+  </div>
+</div>
+<!-- Main Container Ends -->
+
+<!-- Edit Profile Menu -->
+<div class="overlay"></div>
+<div class="mobile-side" id="side-menu-bankacc">
+  <!-- common headline -->
+  <h3 class="close-btn main-comm-head">
+    <i class="icon-down-arrow com-arw"></i>Add IMAP <span>settings</span>
+  </h3>
+
+  <!-- start -->
+  <h6 class="poptile">Select Your Bank</h6>
+  <div class="form-group">
+    <input class="form-field" type="text" name="phone" id="res2" required="">
+    <p class="form-label">Search</p>
+    <i class="search icon-search"></i>
+  </div>
+  <!-- end -->
+
+  <!-- common headline end -->
+<!--  <form id="" class="popup-scrll">-->
+
+    <div class="filBox">
+      <!-- start -->
+      <div class="fill-box-in scrollbar">
+
+        <div class="checkbox-img-box">
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img1" name="clint-img1" required>
+            <label for="clint-img1"><img src="../../../assets/img/client1.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img2" name="clint-img2" required>
+            <label for="clint-img2"><img src="../../../assets/img/client2.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img3" name="clint-img3" required>
+            <label for="clint-img3"><img src="../../../assets/img/client2.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img4" name="clint-img4" required>
+            <label for="clint-img4"><img src="../../../assets/img/client1.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img5" name="clint-img5" required>
+            <label for="clint-img5"><img src="../../../assets/img/client1.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img6" name="clint-img6" required>
+            <label for="clint-img6"><img src="../../../assets/img/client2.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img7" name="clint-img7" required>
+            <label for="clint-img7"><img src="../../../assets/img/client2.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img8" name="clint-img8" required>
+            <label for="clint-img8"><img src="../../../assets/img/client1.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img9" name="clint-img9" required>
+            <label for="clint-img9"><img src="../../../assets/img/client1.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img10" name="clint-img10" required>
+            <label for="clint-img10"><img src="../../../assets/img/client2.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img11" name="clint-img11" required>
+            <label for="clint-img11"><img src="../../../assets/img/client2.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+          <!-- start -->
+          <div class="checkbox-img">
+            <input type="checkbox" id="clint-img12" name="clint-img12" required>
+            <label for="clint-img12"><img src="../../../assets/img/client1.svg" alt="image missing"></label>
+          </div>
+          <!-- end -->
+        </div>
+      </div>
+      <!-- end -->
+    </div>
+
+    <div class="popBtn">
+      <button class="button line close-btn" type="button">Cancel</button>
+      <button class="button side-menu" data-name="side-menu-citibank" type="button">Connect</button>
+    </div>
+
+<!--  </form>-->
+
+</div>
+<!-- Edit Profile Menu End -->
+
+<!-- Edit Profile Menu -->
+<div class="overlay"></div>
+<div class="mobile-side" id="side-menu-citibank">
+  <!-- common headline -->
+  <h3 class="close-btn main-comm-head">
+    <i class="icon-down-arrow com-arw"></i>Citi <span>Bank</span>
+  </h3>
+
+  <!-- start -->
+  <h6 class="poptile">Login</h6>
+  <div class="form-group">
+    <input class="form-field" type="text" name="phone" id="res1" required="">
+    <p class="form-label">User ID</p>
+  </div>
+  <div class="form-group">
+    <input class="form-field" type="password" name="phone" id="res2" required="">
+    <p class="form-label">Passoword</p>
+  </div>
+
+  <div class="forgt-rest">
+    <a href="#" class="forgot">Forgot Password?</a>
+    <a href="#" class="grey-rest"><i class="icon-reset"></i> <span>Reset</span></a>
+  </div>
+  <!-- end -->
+  <!-- common headline end -->
+
+  <div class="popBtn">
+    <button class="button line close-btn" type="button">Cancel</button>
+    <a href="user-bank-account.html" class="button mr-0">Login</a>
+  </div>
+
+</div>
+<!-- Edit Profile Menu End -->
+</div>

@@ -1,0 +1,151 @@
+<!-- Main Container Starts -->
+<div *ngIf="userdataService.notificationnav">
+<div class="mainContainer">
+  <h3 class="main-comm-head">Notifications</h3>
+  <!-- start -->
+  <div class="notif-ovr">
+    <div class="email-w520">
+      <!-- start -->
+      <div class="notif-head">
+        <h6>type</h6>
+        <div class="notif-head-left">
+          <p>email</p>
+          <p>sms</p>
+        </div>
+      </div>
+      <!-- start -->
+      <div class="notif-body">
+        <h6>Email Notification</h6>
+        <div class="notif-switch-left">
+          <div class="switch switch--horizontal only-switch">
+            <input id="email1" type="radio" name="emil-noti-emai" />
+            <label for="email1"></label>
+            <input id="email11" type="radio" name="emil-noti-emai" checked="checked" />
+            <label for="email11"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+          <div class="switch switch--horizontal only-switch">
+            <input id="sms1" type="radio" name="emil-noti-sms" checked="checked" />
+            <label for="sms1"></label>
+            <input id="sms11" type="radio" name="emil-noti-sms" />
+            <label for="sms11"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+      <!-- start -->
+      <div class="notif-body">
+        <h6>SMS Notification</h6>
+        <div class="notif-switch-left">
+          <div class="switch switch--horizontal only-switch">
+            <input id="email2" type="radio" name="sms-noti-emai" />
+            <label for="email2"></label>
+            <input id="email21" type="radio" name="sms-noti-emai" checked="checked" />
+            <label for="email21"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+          <div class="switch switch--horizontal only-switch">
+            <input id="sms2" type="radio" name="sms-noti-sms" checked="checked" />
+            <label for="sms2"></label>
+            <input id="sms21" type="radio" name="sms-noti-sms" />
+            <label for="sms21"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+      <!-- start -->
+      <div class="notif-body">
+        <h6>General Notification</h6>
+        <div class="notif-switch-left">
+          <div class="switch switch--horizontal only-switch">
+            <input id="email3" type="radio" name="gen-noti-emai" />
+            <label for="email3"></label>
+            <input id="email31" type="radio" name="gen-noti-emai" checked="checked" />
+            <label for="email31"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+          <div class="switch switch--horizontal only-switch">
+            <input id="sms3" type="radio" name="gen-noti-sms" checked="checked" />
+            <label for="sms3"></label>
+            <input id="sms31" type="radio" name="gen-noti-sms" />
+            <label for="sms31"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+      <!-- start -->
+      <div class="notif-body">
+        <h6>Type of notification</h6>
+        <div class="notif-switch-left">
+          <div class="switch switch--horizontal only-switch">
+            <input id="email4" type="radio" name="type-noti-emai" />
+            <label for="email4"></label>
+            <input id="email41" type="radio" name="type-noti-emai" checked="checked" />
+            <label for="email41"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+          <div class="switch switch--horizontal only-switch">
+            <input id="sms4" type="radio" name="type-noti-sms" checked="checked" />
+            <label for="sms4"></label>
+            <input id="sms41" type="radio" name="type-noti-sms" />
+            <label for="sms41"></label><span class="toggle-outside"><span
+            class="toggle-inside"></span></span>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+
+      <!-- end -->
+    </div>
+  </div>
+  <!-- end -->
+</div>
+<!-- Main Container Ends -->
+
+<!-- start -->
+<div class="time-track">
+  <div class="time-hed">
+    <h6>Time Tracker</h6>
+    <a href="#"><i class="icon-minus"></i></a>
+  </div>
+
+  <div class="trak-sld">
+
+    <div class="trk-prof">
+      <div class="trk-det">
+        <div class="user-img"><img src="img/profile.svg" alt=""></div>
+        <div class="trk-name">
+          <h3>Maya Didas<span>Technician</span></h3>
+        </div>
+      </div>
+      <div id="stopWatch">
+        <h6 id="time">00:00</h6>
+      </div>
+    </div>
+
+    <div class="trk-btn">
+      <button class="button" id="start">Start</button>
+      <button class="button blue" id="stop">Stop</button>
+    </div>
+
+    <div class="form-group">
+      <select class="select-field form-field valid" name="select-fld" id="select-fld" required=""
+              aria-invalid="false">
+        <option></option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+        <option>Option 5</option>
+      </select>
+      <p class="form-label sel-blk">Task</p>
+    </div>
+
+  </div>
+</div>
+<div class="time-track-btn"><i class="icon-clock"></i></div>
+<!-- end -->
+</div>

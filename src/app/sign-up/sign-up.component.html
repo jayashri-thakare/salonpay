@@ -1,0 +1,76 @@
+<body>
+<!-- Header Starts -->
+<!-- <div id="header"></div> -->
+
+<div class="login-container loginActive signup-container">
+  <div class="login-left">
+    <div class="login-left-bg"></div>
+    <div class="login-logo"><a href="#"><img src="../assets/img/logo-white.svg" alt="logo" /></a></div>
+    <h4>{{'Simply' | translate}}, <b>{{'The Best' | translate}}
+      {{'Salon App' | translate}}</b><br />
+      {{'on the planet' | translate}}.</h4>
+    <p>{{'SalonPay is a salon management app with an integrated POS system,' | translate}} <br>
+      {{'CRM and all the features you need to run your salon with ease and simplicity.'| translate}}</p>
+  </div>
+  <div class="login-right">
+    <div class="sign-box">
+      <h3>{{ 'Sign Up' | translate}}</h3>
+      <form [formGroup]="registerForm" (ngSubmit)="RegisterUser(registerForm.value)">
+        <div class="login-box-in">
+          <div class="sign-box-in">
+            <div class="form-group">
+              <input type="text" id="FirstName" formControlName="FirstName"  pattern="[a-zA-Z ]*" class="form-field" [ngClass]="{ 'error': submitted && f.FirstName.errors }" required />
+              <p class="form-label">{{'First Name' | translate}}</p>
+            </div>
+            <div class="form-group">
+              <input type="text" id="LastName"  pattern="[a-zA-Z ]*" formControlName="LastName" class="form-field" [ngClass]="{ 'error': submitted && f.LastName.errors }" required />
+              <p class="form-label">{{'Last Name' | translate}}</p>
+            </div>
+            <div class="form-group">
+              <input type="email" id="Email" formControlName="Email" class="form-field" [ngClass]="{ 'error': submitted && f.Email.errors }" required />
+              <p class="form-label">{{'Email' | translate}}</p>
+            </div>
+            <div class="form-group">
+              <input type="text" id="PhoneNumber" formControlName="PhoneNumber" class="form-field" [ngClass]="{ 'error': submitted && f.PhoneNumber.errors }" required />
+              <p class="form-label">{{'Phone Number' | translate}}</p>
+            </div>
+            <div class="form-group">
+              <input class="form-field" type="password" formControlName="Password" id="Password" [ngClass]="{ 'error': submitted && f.Password.errors }" required />
+              <p class="form-label">{{'Password' | translate}}</p>
+              <i class="view-pass icon-hide"></i>
+            </div>
+            <div class="form-group">
+              <input class="form-field" type="password" formControlName="ConfirmPasssword" id="ConfirmPasssword" [ngClass]="{ 'error': submitted && f.ConfirmPasssword.errors }" required />
+              <p class="form-label">{{'Confirm Password' | translate}}</p>
+              <span *ngIf="submitted && f.ConfirmPasssword.errors">
+                <label class="gen-error" *ngIf="submitted && f.ConfirmPasssword.errors.mustMatch">{{'Password does not match.' | translate}}</label>
+              </span>
+                <i class="view-pass icon-hide"></i>
+            </div>
+            <div class="form-group">
+              <input type="text" id="BusinessName" formControlName="BusinessName" pattern="[a-zA-Z ]*" class="form-field" [ngClass]="{ 'error': submitted && f.BusinessName.errors }" required />
+              <p class="form-label">{{'Business Name' | translate}}</p>
+            </div>
+          </div>
+
+          <button class="button button--block green">{{ 'SignUp' | translate}}</button>
+          <label class="gen-error" *ngIf="signupfail">{{signuperrormsg | translate}}</label>
+          <div class="forget-login">{{'Already Member' | translate}} : <a class="forget-login-link"
+                                                        href="/login">{{'Login' | translate}}</a>
+          </div>
+          <!-- General Error Comes in all forms -->
+
+        </div>
+      </form>
+
+      <div class="login-copy">
+        {{'©2019 Payzli Corp. All rights reserved' | translate}}. <br>
+        <a href="#">{{'Privacy Policy' | translate}}</a> {{'and' | translate}} <a href="#">{{'Terms Of Use' | translate}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Starts -->
+<!-- <div id="footer"></div> -->
+

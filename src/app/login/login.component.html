@@ -1,0 +1,60 @@
+<div class="login-container loginActive">
+  <div class="login-left">
+    <div class="login-left-bg"></div>
+    <div class="login-logo"><a href="#"><img src="../../assets/img/logo-white.svg" alt="logo" /></a></div>
+    <h4>{{'Simply' | translate}}, <b>{{'The Best' | translate}}
+      {{'Salon App' | translate}}</b><br />
+      {{'on the planet' | translate}}.</h4>
+    <p>{{'SalonPay is a salon management app with an integrated POS system,' | translate}} <br>
+      {{'CRM and all the features you need to run your salon with ease and simplicity.'| translate}}</p>
+  </div>
+  <div class="login-right">
+    <div class="login-box">
+      <app-messages></app-messages>
+      <h3>{{'Login' | translate}}</h3>
+      <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <div class="login-box-in">
+          <div class="form-group">
+            <input type="email" id="Email" formControlName="Email" class="form-field" [ngClass]="{ 'error': submitted && f.Email.errors }" />
+            <p class="form-label">{{'Email' | translate}}</p>
+          </div>
+          <div class="form-group">
+            <input class="form-field" type="password" formControlName="Password"  id="Password" [ngClass]="{ 'error': submitted && f.Password.errors }" />
+            <p class="form-label">{{'Password' | translate}}</p>
+            <i class="view-pass icon-hide"></i>
+          </div>
+          <div class="login-remember">
+            <div class="checkbox-box m-0">
+              <input type="checkbox" id="loginRemember" name="loginRemember">
+              <label for="loginRemember">{{'Remember Me' | translate}}</label>
+            </div>
+            <span class="forgot"><a href="/forgot">{{'Forgot Password?' | translate}}</a></span>
+          </div>
+          <button class="button button--block green">{{'Login' | translate}} <i
+            class="icon-right-arrow1 log-arw ml-2"></i></button>
+          <label class="gen-error" *ngIf="loginfail">{{'Your user name or password is wrong!' | translate}}</label>
+
+          <span class="login-or">{{'or' | translate}}</span>
+          <div class="login-other">
+            <button class="button line">
+              <img src="../../assets/img/google-logo.svg" alt="img" class="mr-2" />
+              <span>Google</span>
+            </button>
+            <button class="button line">
+              <i class="icon-facebook mr-2"></i>
+              <span>Facebook</span>
+            </button>
+          </div>
+          <div class="forget-login">{{'Not Registered?' | translate}} : <a class="forget-login-link"
+                                                                           href="/signup">{{'SignUp' | translate}}</a>
+          </div>
+        </div>
+      </form>
+
+      <div class="login-copy">
+        {{'©2019 Payzli Corp. All rights reserved' | translate}}. <br>
+        <a href="#">{{'Privacy Policy' | translate}}</a> {{'and' | translate}} <a href="#">{{'Terms Of Use' | translate}}</a>
+      </div>
+    </div>
+  </div>
+</div>

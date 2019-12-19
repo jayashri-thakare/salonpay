@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160.921" height="52.001" viewBox="0 0 160.921 52.001">
+  <g id="logo-white" transform="translate(-380.001 -161.999)">
+    <text id="A_PAYZLI_PRODUCT" data-name="A PAYZLI PRODUCT" transform="translate(460 211)" fill="#fff" font-size="12" font-family="SegoeUI, Segoe UI" letter-spacing="0.3em"><tspan x="-78.328" y="0">A PAYZLI PRODUCT</tspan></text>
+    <g id="Group_8378" data-name="Group 8378" transform="translate(319.922 137)">
+      <text id="SALON_PAY" data-name="SALON PAY" transform="translate(158 50.999)" fill="#fff" font-size="24" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-62.344" y="0">SALON </tspan><tspan y="0" font-family="SegoeUI, Segoe UI" font-weight="400">PAY</tspan></text>
+      <g id="Group_8309" data-name="Group 8309" transform="translate(-361.405 -230.999)">
+        <path id="Path_2" data-name="Path 2" d="M37.6,20.308A8.521,8.521,0,0,1,29.1,28.816H24.408a12.614,12.614,0,0,0-5.54,1.267A11.91,11.91,0,0,0,12.1,40.9V28.835A17.063,17.063,0,0,1,29.1,11.8,8.509,8.509,0,0,1,37.6,20.308Z" transform="translate(409.384 245.199)" fill="#fff"/>
+        <path id="Path_8" data-name="Path 8" d="M17.5,132.68h4.727V122.3C19.863,124.077,17.727,128.917,17.5,132.68Z" transform="translate(405.005 155.591)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,82 @@
+<!-- Main Container Starts -->
+<div *ngIf="userdataService.accountnav">
+<div class="mainContainer">
+  <div class="main-head-flx">
+    <h3 class="main-comm-head mb-0">Account <span>Settings</span></h3>
+    <i class="icon-edit grd-icon-big hover-rotate side-menu" data-name="account-setting"></i>
+  </div>
+  <!-- start -->
+  <div class="acctset-w370">
+    <!-- start -->
+    <h6 class="poptile">Timezone</h6>
+    <div class="act-para">
+      <p>Washington, DC, USA (GMT-4)
+        Tuesday, 3 September 2019, 10:56 am</p>
+    </div>
+    <h6 class="poptile">Language</h6>
+    <div class="act-para">
+      <p>English</p>
+    </div>
+    <!-- end -->
+  </div>
+  <!-- end -->
+</div>
+<!-- Main Container Ends -->
+
+<!-- Edit Profile Menu -->
+<div class="overlay"></div>
+<div class="mobile-side" id="account-setting">
+  <!-- common headline -->
+  <h3 class="close-btn main-comm-head">
+    <i class="icon-down-arrow com-arw"></i>Account <span>settings</span>
+  </h3>
+  <!-- common headline end -->
+<!--  <form id="edit-timezone" class="popup-scrll">-->
+
+    <div class="filBox">
+      <!-- start -->
+      <div class="fill-box-in scrollbar">
+        <!-- start -->
+        <h6 class="poptile">Timezone</h6>
+        <div class="form-group">
+          <select class="select-field form-field" name="timezone-fld" required="">
+            <option></option>
+            <option>USA (GMT-4)</option>
+            <option>IND (UTC+5:30)</option>
+            <option>USA (GMT-4)</option>
+            <option>IND (UTC+5:30)</option>
+            <option>USA (GMT-4)</option>
+            <option>IND (UTC+5:30)</option>
+          </select>
+          <p class="form-label sel-blk">please select..</p>
+        </div>
+        <!-- end -->
+        <!-- start -->
+        <h6 class="poptile">Language</h6>
+        <div class="form-group">
+          <select class="select-field form-field" name="language-fld" required="">
+            <option></option>
+            <option>English</option>
+            <option>Hindi</option>
+            <option>English</option>
+            <option>Hindi</option>
+            <option>English</option>
+            <option>Hindi</option>
+          </select>
+          <p class="form-label sel-blk">please select..</p>
+        </div>
+        <!-- end -->
+      </div>
+      <!-- end -->
+    </div>
+
+    <div class="popBtn">
+      <button class="button line close-btn" type="button">Cancel</button>
+      <button class="button" type="submit">Update</button>
+    </div>
+
+<!--  </form>-->
+
+</div>
+<!-- Edit Profile Menu End -->
+</div>
