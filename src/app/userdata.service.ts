@@ -69,6 +69,11 @@ export class UserdataService {
       .pipe(map(data => data));
   }
 
+  getUserAccount() {
+    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetTimeZone' + this.userId;
+    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
+  }
+
   getUserDetail() {
  	  if(this.userId === undefined) {
  	    this.userId = localStorage.getItem('userId');
