@@ -3,7 +3,7 @@
 <div class="mainContainer">
   <div class="main-head-flx">
     <h3 class="main-comm-head mb-0">Account <span>Settings</span></h3>
-    <i class="icon-edit grd-icon-big hover-rotate side-menu" data-name="account-setting"></i>
+    <i class="icon-edit grd-icon-big hover-rotate side-menu" data-name="account-setting" (click)="openModal('account-setting')"></i>
   </div>
   <!-- start -->
   <div class="acctset-w370">
@@ -79,4 +79,5 @@
 
 </div>
 <!-- Edit Profile Menu End -->
+  <account-modal></account-modal>
 </div>
