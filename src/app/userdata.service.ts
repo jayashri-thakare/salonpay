@@ -92,6 +92,12 @@ export class UserdataService {
       .pipe(map( data => data));
   }
 
+  update_account_edit(userdata) {
+    this.baseUrl = 'http://localhost:55358/api/ProfileMaster/UpdateAccount';
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+      .pipe(map( data => data));
+  }
+
   update_profile_Users(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/profile/edituser';
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
