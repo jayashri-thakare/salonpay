@@ -4,7 +4,7 @@
 <div class="mainContainer">
   <div class="main-head-flx">
     <h3 class="main-comm-head mb-0">Email <span>Settings</span></h3>
-    <i class="icon-edit grd-icon-big hover-rotate side-menu" data-name="side-menu-imap"></i>
+    <i class="icon-edit grd-icon-big hover-rotate side-menu" (click)="modalService.open('side-menu-imap')"></i>
   </div>
   <!-- start -->
   <div class="comm-w520">
@@ -106,24 +106,6 @@
 
 <!-- Edit Profile Menu -->
 <div class="overlay"> </div>
-<div class="mobile-side" id="side-menu-imap">
-  <!-- common headline -->
-  <h3 class="close-btn main-comm-head">
-    <i class="icon-down-arrow com-arw"></i>Add IMAP <span>settings</span>
-  </h3>
-  <!-- common headline end -->
-<!--  <form id="editProfile" class="popup-scrll">-->
-    <div id="summernote">
-      <p>Regards,</p>
-    </div>
-
-    <div class="popBtn">
-      <button class="button line close-btn" type="button">Cancel</button>
-      <button class="button" type="submit">Add</button>
-    </div>
-
-<!--  </form>-->
-
-</div>
+<email-modal></email-modal>
 <!-- Edit Profile Menu End -->
 </div>
