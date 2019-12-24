@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import 'rxjs/add/operator/map'
 import { map } from 'rxjs/operators';
 import {Observable, of, Subject} from 'rxjs';
@@ -43,6 +43,7 @@ export class UserdataService {
   schedulenav: boolean;
   banknav: boolean;
   userId: any;
+  private params;
  	constructor(private httpClient: HttpClient) { }
  	// Service to sign up users
   // tslint:disable-next-line:indent
@@ -70,7 +71,7 @@ export class UserdataService {
   }
 
   getUserAccount() {
-    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetTimeZone' + this.userId;
+    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetTimeZone';
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
   }
 
@@ -93,8 +94,13 @@ export class UserdataService {
   }
 
   update_account_edit(userdata) {
-    this.baseUrl = 'http://localhost:55358/api/ProfileMaster/UpdateAccount';
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/UpdateAccount?';
+    this.params = new HttpParams()
+      .set('id', localStorage.getItem('userId'))
+      .set('ParentCompanyId', localStorage.getItem('companyId'))
+      .set('TimezoneId', userdata.TimezoneId)
+      .set('LanguageId', userdata.LanguageId);
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.params, httpOptions)
       .pipe(map( data => data));
   }
 
