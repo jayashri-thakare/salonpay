@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -40,6 +39,9 @@ import {CscComponent} from './dashboard/profilesetting/ctcdropdown.component';
 import {InternationalTelNoDirective} from './international-tel-no.directive';
 import { ForgotComponent } from './login/forgot.component';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
+import {AccountEditComponent} from './dashboard/accountsetting/account-edit.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import {EmailEditComponent} from './dashboard/emailsetting/emailsignature.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -53,6 +55,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule,
+    RichTextEditorAllModule,
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.TRACE,
@@ -88,7 +91,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SidebarComponent,
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
-    InternationalTelNoDirective],
+    InternationalTelNoDirective,
+    AccountEditComponent, EmailEditComponent],
   providers: [UserdataService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
