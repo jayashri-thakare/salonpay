@@ -1,274 +1,136 @@
 <!-- Main Container Starts -->
 <div *ngIf="userdataService.schedulenav">
-<div class="mainContainer">
-  <div class="comm-headline-btn">
-    <h3 class="main-comm-head mb-0">Schedule</h3>
-    <a href="user-weekly-schedule.html" class="button line orange">Request Time Off</a>
+  <div class="mainContainer" *ngIf="schedulevar">
+    <form id="editProfile" [formGroup]="scheduleForm"  (ngSubmit)="updateSchedule(scheduleForm)" class="popup-scrll">
+      <div class="comm-headline-btn">
+        <h3 class="main-comm-head mb-0">Schedule</h3>
+        <a (click)="requesttimefunction()" class="button line orange">Request Time Off</a>
+      </div>
+      <div class="common-row-box">
+        <!-- left side starts -->
+        <div class="common-left-box">
+          <h6 class="poptile">Working Days</h6>
+          <div class="">
+            <!-- start -->
+            <div class="radio-box radio-box-2" *ngFor="let days of arrayofdays">
+              <input type="checkbox" id="{{days}}" value="arrayofselecteddays" formControlName="DayName" (click)="selectedDays(days)">
+              <label for="{{days}}">{{days}}</label>
+            </div>
+            <!-- end -->
+          </div>
+          <app-customTimePicker [customTimePicker]= scheduleForm></app-customTimePicker>
+          <button class="button" type="submit">Add</button>
+        </div>
+        <!-- left side Ends -->
+        <!-- right side Ends -->
+        <!-- right side Ends -->
+        <div class="common-right-box scedule-right">
+          <h6 class="poptile">My schedule</h6>
+
+          <!-- start -->
+          <div class="com-shad">
+            <div class="edit-cont">
+              <h6>Mon</h6>
+              <p>9 AM - 5 PM</p>
+            </div>
+            <div class="edt-icon">
+              <i class="icon-edit royblu" (click)="openModal('schedule-edit')"></i>
+              <i class="icon-delete delete"></i>
+            </div>
+          </div>
+          <!-- end -->
+
+        </div>
+        <!-- right side Ends -->
+      </div>
+      <!-- Main Container Ends -->
+    </form>
   </div>
-  <div class="common-row-box">
-    <!-- left side starts -->
-    <div class="common-left-box">
-      <h6 class="poptile">Working Days</h6>
-      <div class="">
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day1" name="chk-day" required="">
-          <label for="chk-day1">Mon</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day2" name="chk-day" required="">
-          <label for="chk-day2">Tue</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day3" name="chk-day" required="">
-          <label for="chk-day3">Wed</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day4" name="chk-day" required="">
-          <label for="chk-day4">Thu</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day5" name="chk-day" required="">
-          <label for="chk-day5">Fri</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day6" name="chk-day" required="">
-          <label for="chk-day6">Sat</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="checkbox" id="chk-day7" name="chk-day" required="">
-          <label for="chk-day7">Sun</label>
-        </div>
-        <!-- end -->
-      </div>
-      <h6 class="poptile">Start Time</h6>
-      <div class="start-time-input">
-        <!-- start -->
-        <div class="form-group">
-          <select class="select-field form-field" name="select-fld" required="">
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-            <option>04</option>
-            <option>05</option>
-            <option>06</option>
-            <option>07</option>
-            <option>08</option>
-            <option>09</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="form-group">
-          <select class="select-field form-field" name="select-fld" required="">
-            <option>00</option>
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-            <option>04</option>
-            <option>05</option>
-            <option>06</option>
-            <option>07</option>
-            <option>08</option>
-            <option>09</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="radio" id="chk-start1" name="chk-start" required="" checked="">
-          <label for="chk-start1">AM</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="radio" id="chk-start2" name="chk-start" required="">
-          <label for="chk-start2">PM</label>
-        </div>
-        <!-- end -->
-      </div>
-      <h6 class="poptile">end Time</h6>
-      <div class="start-time-input">
-        <!-- start -->
-        <div class="form-group">
-          <select class="select-field form-field" name="select-fld" required="">
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-            <option>04</option>
-            <option>05</option>
-            <option>06</option>
-            <option>07</option>
-            <option>08</option>
-            <option>09</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="form-group">
-          <select class="select-field form-field" name="select-fld" required="">
-            <option>00</option>
-            <option>01</option>
-            <option>02</option>
-            <option>03</option>
-            <option>04</option>
-            <option>05</option>
-            <option>06</option>
-            <option>07</option>
-            <option>08</option>
-            <option>09</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="radio" id="chk-end1" name="chk-end" required="">
-          <label for="chk-end1">AM</label>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div class="radio-box radio-box-2">
-          <input type="radio" id="chk-end2" name="chk-end" required="" checked="">
-          <label for="chk-end2">PM</label>
-        </div>
-        <!-- end -->
-      </div>
-      <button class="button">Add</button>
-    </div>
-    <!-- left side Ends -->
-    <!-- right side Ends -->
-    <!-- right side Ends -->
-    <div class="common-right-box scedule-right">
-      <h6 class="poptile">My schedule</h6>
 
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Mon</h6>
-          <p>9 AM - 5 PM</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Tue</h6>
-          <p>9 AM - 5 PM</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Wed</h6>
-          <p>9 AM - 5 PM</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Thu</h6>
-          <p>-</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Fri</h6>
-          <p>9 AM - 5 PM</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Sat</h6>
-          <p>-</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
-      <!-- start -->
-      <div class="com-shad">
-        <div class="edit-cont">
-          <h6>Sun</h6>
-          <p>-</p>
-        </div>
-        <div class="edt-icon">
-          <i class="icon-edit royblu"></i>
-          <i class="icon-delete delete"></i>
-        </div>
-      </div>
-      <!-- end -->
+  <!-- Main Container Starts -->
+  <div class="mainContainer" *ngIf="requesttimevar">
+    <h3 class="main-comm-head"><i class="icon-down-arrow com-arw" (click)="requesttimefunction()"></i>My Weekly Schedule</h3>
 
+    <!-- start -->
+    <div class="acctset-w370">
+      <!-- start -->
+      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm)" class="popup-scrll">
+      <h6 class="poptile">Request Time Off</h6>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active show" data-toggle="pill" href="#tab1">One Day</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#tab2">Multiple days</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade active show" id="tab1">
+            <div class="one-day-box">
+              <div class="form-group">
+                <ejs-datetimepicker id='datetimepicker' formControlName="StartDate" [ngClass]="{ 'error': submitted && f.birthdate.errors }" placeholder='Date' [value]='dateValue' format ='dd/MM/yyyy'></ejs-datetimepicker>
+              </div>
+              <div class="switch switch--horizontal get-switch-val" data-name="weekly-switch">
+                <input class="notif-radio" id="all-day-switch" value="false" (click)="customtime()" type="radio" name="first-switch-email">
+                <label for="all-day-switch">All Day</label>
+                <input class="notif-radio" id="cust-time-switch" value="true" (click)="customtime()" checked type="radio" name="first-switch-email">
+                <label for="cust-time-switch">Custom Time</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
+              </div>
+              <div *ngIf="customday">
+                <app-customTimePicker [customTimePicker]= timeoffForm></app-customTimePicker>
+              </div>
+              <div class="popBtn">
+                <button class="button line" (click)="requesttimefunction()" type="button">Cancel</button>
+                <button class="button" type="submit">Submit</button>
+              </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab2">
+
+          <!-- datepicker start -->
+          <div class="datePicker">
+            <input class="form-control" name="datefilter" />
+            <div class="datePicker-input">
+              <span class="datepicker-form" id="startdate"></span>
+              <p class="datepick-label">From</p>
+            </div>
+            <i class="icon-right-arrow1 frmto-icon"></i>
+            <div class="datePicker-input">
+              <span class="datepicker-form" id="endate"></span>
+              <p class="datepick-label">To</p>
+            </div>
+          </div>
+          <!-- datepicker end -->
+
+
+          <div class="popBtn">
+            <button class="button line" (click)="requesttimefunction()" type="button">Cancel</button>
+            <button class="button" type="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+      <!-- end -->
+      </form>
     </div>
-    <!-- right side Ends -->
+    <!-- end -->
   </div>
   <!-- Main Container Ends -->
-</div>
 
-<!-- login message start -->
-<div class="succe-overlay"></div>
-<div class="login-succes">
-  <div class="note-msg login-succes-lef">
-    <h6>Login Successful</h6>
-    <p>These days everyone has an email address, as it’s virtually impossible to have adequate Internet
-      experience without having one.</p>
-  </div>
+  <!-- login message start -->
+  <div class="succe-overlay"></div>
+  <div class="login-succes">
+    <div class="note-msg login-succes-lef">
+      <h6>Login Successful</h6>
+      <p>These days everyone has an email address, as it’s virtually impossible to have adequate Internet
+        experience without having one.</p>
+    </div>
 
-  <div class="login-succes-rig">
-    <button class="button">Continue</button>
-    <a href="#" class="grey-rest dismiss-btn"><span>Dismiss</span></a>
+    <div class="login-succes-rig">
+      <button class="button">Continue</button>
+      <a href="#" class="grey-rest dismiss-btn"><span>Dismiss</span></a>
+    </div>
   </div>
+  <!-- login message end -->
 </div>
-<!-- login message end -->
-</div>
+<div class="overlay"></div>
+<schedule-modal></schedule-modal>

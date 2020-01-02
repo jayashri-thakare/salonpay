@@ -3,6 +3,7 @@
 <div class="mainContainer">
   <h3 class="main-comm-head">Notifications</h3>
   <!-- start -->
+  <form id="editProfile" [formGroup]="notificationForm"  (ngSubmit)="updateNotification(notificationForm)" class="popup-scrll">
   <div class="notif-ovr">
     <div class="email-w520">
       <!-- start -->
@@ -18,9 +19,9 @@
         <h6>Email Notification</h6>
         <div class="notif-switch-left">
           <div class="switch switch--horizontal only-switch">
-            <input id="email1" type="radio" name="emil-noti-emai" />
+            <input id="email1" type="checkbox" value="Email" formControlName="NotificationType" />
             <label for="email1"></label>
-            <input id="email11" type="radio" name="emil-noti-emai" checked="checked" />
+            <input id="email11" type="checkbox" value="Text" formControlName="NotificationType" />
             <label for="email11"></label><span class="toggle-outside"><span
             class="toggle-inside"></span></span>
           </div>
@@ -102,6 +103,8 @@
     </div>
   </div>
   <!-- end -->
+    <button class="button">Save</button>
+  </form>
 </div>
 <!-- Main Container Ends -->
 

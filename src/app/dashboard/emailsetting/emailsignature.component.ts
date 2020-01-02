@@ -6,7 +6,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import {MessageService} from '../../message.service';
-import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
+// import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
   selector: 'email-modal',
@@ -19,7 +19,7 @@ import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableServ
     '  </h3>\n' +
     '  <!-- common headline end -->\n' +
     '<!--  <form id="editProfile" class="popup-scrll">-->\n' +
-    '<ejs-richtexteditor></ejs-richtexteditor>\n' +
+    // '<ejs-richtexteditor></ejs-richtexteditor>\n' +
     // '   <ejs-richtexteditor id=\'iframeRTE\' [(value)]=\'value\' [toolbarSettings]=\'tools\'></ejs-richtexteditor>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
@@ -32,21 +32,21 @@ import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableServ
     '</div>' +
     '</jw-modal>\n' +
     '<!-- Edit Profile Menu End -->',
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
+  // providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, TableService]
 })
 export class EmailEditComponent implements OnInit {
   accountForm: FormGroup;
   control: FormControl;
   submitted = false;
-  public tools: object = {
-    items: [
-      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
-      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
-      'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
-      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
-      'Indent', 'Outdent', '|', 'CreateLink','CreateTable',
-      'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
-  };
+  // public tools: object = {
+  //   items: [
+  //     'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
+  //     'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
+  //     'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
+  //     'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
+  //     'Indent', 'Outdent', '|', 'CreateLink','CreateTable',
+  //     'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
+  // };
   private userdetail: Observable< object >;
 
   constructor(public translate: TranslateService, private userdataService: UserdataService,

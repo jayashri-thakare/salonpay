@@ -44,6 +44,8 @@ export class UserdataService {
   banknav: boolean;
   userId: any;
   private params;
+  body: any;
+  schedulebody: {};
  	constructor(private httpClient: HttpClient) { }
  	// Service to sign up users
   // tslint:disable-next-line:indent
@@ -83,6 +85,16 @@ export class UserdataService {
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
+
+  getUserSchedule() {
+    if(this.userId === undefined) {
+      this.userId = localStorage.getItem('userId');
+   }
+    this.baseUrl = 'http://172.16.0.99:7894/api/schedule/GetUserSchedule?id=' + this.userId;
+   return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
+   );
+ }
+
   delete(id: number) {
     return this.httpClient.delete(`http://172.16.0.99:8084/api/Signup/${id}`);
   }
@@ -95,12 +107,64 @@ export class UserdataService {
 
   update_account_edit(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/UpdateAccount?';
-    this.params = new HttpParams()
-      .set('id', localStorage.getItem('userId'))
-      .set('ParentCompanyId', localStorage.getItem('companyId'))
-      .set('TimezoneId', userdata.TimezoneId)
-      .set('LanguageId', userdata.LanguageId);
+    // this.params = new HttpParams()
+    //   .set('id', localStorage.getItem('userId'))
+    //   .set('ParentCompanyId', localStorage.getItem('companyId'))
+    //   .set('TimezoneId', userdata.TimezoneId)
+    //   .set('LanguageId', userdata.LanguageId);
+    this.params={}
+    this.params['id']= localStorage.getItem('userId')
+    this.params['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
+    this.params['TimezoneId']= parseInt(userdata.TimezoneId)
+    this.params['LanguageId']= parseInt(userdata.LanguageId)
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.params, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  update_notification(userdata) {
+    debugger;
+    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff?';
+    this.body = {}
+    this.body['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
+    this.body['UserId']= localStorage.getItem('userId')
+    this.body['EnableTextNotification']= userdata.controls.EnableTextNotification.value
+    this.body['NotificationType']= userdata.controls.NotificationType.value
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.body, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  update_schedule(userdata) {
+    debugger;
+    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
+    this.schedulebody = {}
+    this.schedulebody['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
+    this.schedulebody['UserId']= localStorage.getItem('userId')
+    this.schedulebody['DayName']= userdata.value.DayName
+    this.schedulebody['StartTimeHour']= userdata.value.StartTimeHour
+    this.schedulebody['StartTimeMinute']= userdata.value.StartTimeMinute
+    this.schedulebody['StartTimeMeridian']= userdata.value.StartTimeMeridian
+    this.schedulebody['EndTimeHour']= userdata.value.EndTimeHour
+    this.schedulebody['EndTimeMinute']= userdata.value.EndTimeMinute
+    this.schedulebody['EndTimeMeridian']= userdata.value.EndTimeMeridian
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.schedulebody, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  update_timeoff(userdata) {
+    debugger;
+    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
+    this.schedulebody = {}
+    this.schedulebody['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
+    this.schedulebody['UserId']= localStorage.getItem('userId')
+    this.schedulebody['StartDate']= userdata.value.StartDate
+    this.schedulebody['EndDate']= userdata.value.EndDate
+    this.schedulebody['StartTimeHour']= userdata.value.StartTimeHour
+    this.schedulebody['StartTimeMinute']= userdata.value.StartTimeMinute
+    this.schedulebody['StartTimeMeridian']= userdata.value.StartTimeMeridian
+    this.schedulebody['EndTimeHour']= userdata.value.EndTimeHour
+    this.schedulebody['EndTimeMinute']= userdata.value.EndTimeMinute
+    this.schedulebody['EndTimeMeridian']= userdata.value.EndTimeMeridian
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.schedulebody, httpOptions)
       .pipe(map( data => data));
   }
 
@@ -109,6 +173,7 @@ export class UserdataService {
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
+
   update_user_password(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/Profile/EditUserPassword';
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
