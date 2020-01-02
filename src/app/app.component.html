@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="router.url === '/login' || router.url === '/signup' || router.url === '/login' || router.url === '/forgot'">
   <label>
     <span>Change Language</span>
     <select #langSelect (change)="translate.use(langSelect.value)">

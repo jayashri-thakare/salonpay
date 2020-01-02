@@ -36,10 +36,8 @@ export class ControlErrorsDirective {
     ).pipe(
       untilDestroyed(this)).subscribe((v) => {
       const controlErrors = this.control.errors;
-      console.log(controlErrors)
       if (controlErrors) {
         const firstKey = Object.keys(controlErrors)[0];
-        console.log(this.errors[firstKey])
         const getError = this.errors[firstKey];
         const text = this.customErrors[firstKey] || getError(controlErrors[firstKey]);
         this.setError(text);

@@ -40,8 +40,10 @@ import {InternationalTelNoDirective} from './international-tel-no.directive';
 import { ForgotComponent } from './login/forgot.component';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
 import {AccountEditComponent} from './dashboard/accountsetting/account-edit.component';
-import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+// import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import {EmailEditComponent} from './dashboard/emailsetting/emailsignature.component';
+import {CustomTimePickerComponent} from './dashboard/schedulesetting/customtimepicker.component';
+import { ScheduleEditComponent } from './dashboard/schedulesetting/schedule-edit.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -55,7 +57,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule,
-    RichTextEditorAllModule,
+    // RichTextEditorAllModule,
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.TRACE,
@@ -71,6 +73,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     })
   ],
   declarations: [AppComponent,
+    ScheduleEditComponent,
     SignUpComponent,
     LoginComponent,
     ForgotComponent,
@@ -92,7 +95,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
     InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent],
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent],
   providers: [UserdataService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
