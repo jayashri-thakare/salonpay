@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {UserdataService} from '../../userdata.service';
 import {ModalService} from '../../_modal/modal.service';
+import {Observable} from 'rxjs';
+
+// class timeZonesList {
+// }
 
 @Component({
   selector: 'app-accountsetting',
@@ -10,20 +14,22 @@ import {ModalService} from '../../_modal/modal.service';
 })
 export class AccountsettingComponent implements OnInit {
 
+  private modals: any[ ] = [];
+  timeZonesList: {};
+  userLanguageList: {}
   constructor( private router: Router, private userdataService: UserdataService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.userdataService.accountnav = false;
+
   }
 
 
-  private modals: any[] = [];
-
-  openModal(id: string, userdetail) {
+  openModal(id, userdetail) {
     this.modalService.open(id, userdetail);
   }
 
-  closeModal(id: string) {
+  closeModal(id) {
     this.modalService.close(id);
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { ModalService } from '../../_modal/modal.service';
 import {UserdataService} from '../..//userdata.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import {MessageService} from '../../message.service';
@@ -13,13 +13,11 @@ import {MessageService} from '../../message.service';
   template: '<!-- Edit Profile Menu -->\n' +
     '<jw-modal id="side-menu-imap">\n' +
     '<div class="mobile-side">\n' +
-    '  <!-- common headline -->\n' +
     '  <h3 class="close-btn main-comm-head">\n' +
     '    <i class="icon-down-arrow com-arw"></i>Add IMAP <span>settings</span>\n' +
     '  </h3>\n' +
-    '  <!-- common headline end -->\n' +
-    '<!--  <form id="editProfile" class="popup-scrll">-->\n' +
-    // '<ejs-richtexteditor></ejs-richtexteditor>\n' +
+    '<form class="popup-scrll" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)">\n' +
+    '<ejs-richtexteditor formControlName="EmailSignature"></ejs-richtexteditor>\n' +
     // '   <ejs-richtexteditor id=\'iframeRTE\' [(value)]=\'value\' [toolbarSettings]=\'tools\'></ejs-richtexteditor>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
@@ -27,7 +25,7 @@ import {MessageService} from '../../message.service';
     '      <button class="button" type="submit">Add</button>\n' +
     '    </div>\n' +
     '\n' +
-    '<!--  </form>-->\n' +
+    ' </form>\n' +
     '\n' +
     '</div>' +
     '</jw-modal>\n' +
@@ -38,29 +36,28 @@ export class EmailEditComponent implements OnInit {
   accountForm: FormGroup;
   control: FormControl;
   submitted = false;
-  // public tools: object = {
-  //   items: [
-  //     'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
-  //     'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
-  //     'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
-  //     'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
-  //     'Indent', 'Outdent', '|', 'CreateLink','CreateTable',
-  //     'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
-  // };
+  public tools: object = {
+    items: [
+      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
+      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
+      'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
+      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
+      'Indent', 'Outdent', '|', 'CreateLink','CreateTable',
+      'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
+  };
   private userdetail: Observable< object >;
 
   constructor(public translate: TranslateService, private userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
               private userdataservice: UserdataService, private messageService: MessageService) {
   }
-  // get f() {
-  //   return this.accountForm.controls;
-  // }
+  get f() {
+    return this.accountForm.controls;
+  }
   ngOnInit() {
-    // this.accountForm = this.formBuilder.group({
-    //   TimezoneId: ['', [Validators.required]],
-    //   LanguageId: ['',  [Validators.required]],
-    // });
+    this.accountForm = this.formBuilder.group({
+      EmailSignature: ['']
+    });
     // this.getUserAccount();
   }
 
@@ -68,22 +65,24 @@ export class EmailEditComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  getUserAccount() {
-    this.userdataService.getUserAccount().subscribe((data) => {
+  getUserEmail() {
+    this.userdataService.getUserSignature().subscribe((data) => {
       // this.timeZonesList = data["timeZonesList"];
       this.userdetail = data[0];
     });
   }
 
   update_account(userdata) {
+    debugger;
     console.log(userdata, this.accountForm)
     // tslint:disable-next-line:triple-equals
     if (this.accountForm.status == 'VALID') {
-      this.userdataservice.update_account_edit(userdata).subscribe((data) => {
-        this.getUserAccount();
+      this.userdataservice.update_signature(userdata).subscribe((data) => {
+        debugger;
+        this.getUserEmail();
         this.messageService.clear();
-        this.messageService.add('User account updated successfully.')
-        this.closeModal('account-setting');
+        this.messageService.add('Email signature updated successfully.')
+        this.closeModal('side-menu-imap');
       });
     } else {
       console.log(userdata, this.accountForm.status);

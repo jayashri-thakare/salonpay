@@ -98,6 +98,8 @@ export class SchedulesettingComponent implements OnInit {
     console.log(userdata, this.scheduleForm)
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
+      debugger;
+      userdata.value.DayName = this.arrayofselecteddays;
       this.userdataService.update_schedule(userdata).subscribe((data) => {
         console.log('DONEEEEEEEEEE!!!')
       });

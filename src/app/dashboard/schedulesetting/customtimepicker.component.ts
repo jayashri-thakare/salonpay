@@ -46,7 +46,7 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" formControlName="EndTimeMinute" [(ngModel)]="minute1" (change)="datechange(minute1)" required="">\n' +
+    '            <select class="select-field form-field" formControlName="EndTimeMinute" [(ngModel)]="minute1" [value]="EndTimeMinute" (change)="datechange(minute1)" required="">\n' +
     '              <option *ngFor="\let minute1 of arrayofminute">{{minute1}}</option>\n' +
     '            </select>\n' +
     '          </div>\n' +
