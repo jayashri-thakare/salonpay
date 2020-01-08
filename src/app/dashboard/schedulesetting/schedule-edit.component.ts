@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
 import { ModalService } from '../../_modal/modal.service';
 import {UserdataService} from '../..//userdata.service';
@@ -17,20 +17,20 @@ import {MessageService} from '../../message.service';
     '    <i class="icon-down-arrow com-arw"></i>Update <span>Schedule</span>\n' +
     '  </h3>\n' +
     '  <!-- common headline end -->\n' +
-    ' <form [formGroup]="scheduleeditForm"  (ngSubmit)="updateSchedule(scheduleeditForm)" class="popup-scrll">'+
+    ' <form [formGroup]="scheduleeditForm" (ngSubmit)="updateSchedule(scheduleeditForm.value)" class="popup-scrll">'+
    ' <div class="common-row-box">'+
       '<!-- left side starts -->'+
      ' <div class="common-left-box">'+
        ' <h6 class="poptile">Working Days</h6>'+
        ' <div class="">'+
           '<!-- start -->'+
-         ' <div class="radio-box radio-box-2" *ngFor="let days of arrayofdays">'+
-           ' <input type="checkbox" id="{{days}}" value="arrayofselecteddays" formControlName="DayName" (click)="selectedDays(days)">'+
-           ' <label for="{{days}}">{{days}}</label>'+
+         ' <div class="radio-box radio-box-2" *ngFor="let weekdays of arrayofselectedobj">'+
+           ' <input type="checkbox" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="editedDayName" (click)="selectedWeekDays(weekdays)">'+
+           ' <label for="edit_{{weekdays.dayName}}">{{weekdays.dayName}}</label>'+
           '</div>'+
          ' <!-- end -->'+
        ' </div>'+
-       ' <app-customTimePicker [customTimePicker]= scheduleeditForm></app-customTimePicker>'+
+       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" [userdata]="arrayofselectedobj" [addchildAMMessage]="editStartAMMessage" [addchildPMMessage]="editStartPMMessage" [addEndAMMessage]="editEndAMMessage" [addEndPMMessage]="editEndPMMessage"></app-customTimePicker>'+
         // '<button class="button" type="submit">Update</button>'+
       '</div>'+
     '</div>'+
@@ -49,9 +49,14 @@ export class ScheduleEditComponent implements OnInit {
   scheduleeditForm: FormGroup;
   control: FormControl;
   submitted = false;
+  @Input('userdata') arrayofselectedobj: Array<string> = [];
   private arrayofdays: Array<string> = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   private arrayofselecteddays: Array<string> = [];
   private userdetail: Observable< object >;
+  private editStartAMMessage = "edit_StartAM";
+  private editStartPMMessage = "edit_StartPM";
+  private editEndAMMessage = "edit_EndAM";
+  private editEndPMMessage = "edit_EndPM";
 
   constructor(public translate: TranslateService, private userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
@@ -62,7 +67,7 @@ export class ScheduleEditComponent implements OnInit {
   }
   ngOnInit() {
     this.scheduleeditForm = this.formBuilder.group({
-        DayName: [''],
+        editedDayName: [''],
         StartTimeHour: [''],
         StartTimeMinute: [''],
         StartTimeMeridian: [''],
@@ -76,7 +81,7 @@ export class ScheduleEditComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  selectedDays(selected_day){
+  selectedWeekDays(selected_day){
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
@@ -87,12 +92,20 @@ export class ScheduleEditComponent implements OnInit {
     }
   }
 
+  selectedDaysfunc(){
+    if(this.arrayofselecteddays){
+      // console.log(this.userschedule)
+    }
+  }
+
   updateSchedule(userdata) {
+    debugger;
     console.log(userdata, this.scheduleeditForm)
+    userdata.editedDayName = [this.arrayofselectedobj[0]['dayName']];
     // tslint:disable-next-line:triple-equals
     if (this.scheduleeditForm.status == 'VALID') {
       this.userdataService.update_schedule(userdata).subscribe((data) => {
-        console.log('DONEEEEEEEEEE!!!')
+        this.closeModal('schedule-edit');
       });
     } else {
       console.log(userdata, this.scheduleeditForm.status);

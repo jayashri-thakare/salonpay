@@ -1,7 +1,7 @@
 <!-- Main Container Starts -->
 <div *ngIf="userdataService.schedulenav">
   <div class="mainContainer" *ngIf="schedulevar">
-    <form id="editProfile" [formGroup]="scheduleForm"  (ngSubmit)="updateSchedule(scheduleForm)" class="popup-scrll">
+    <form id="editProfile" [formGroup]="scheduleForm" (ngSubmit)="updateSchedule(scheduleForm)" class="popup-scrll">
       <div class="comm-headline-btn">
         <h3 class="main-comm-head mb-0">Schedule</h3>
         <a (click)="requesttimefunction()" class="button line orange">Request Time Off</a>
@@ -13,12 +13,12 @@
           <div class="">
             <!-- start -->
             <div class="radio-box radio-box-2" *ngFor="let days of arrayofdays">
-              <input type="checkbox" id="{{days}}" value="arrayofselecteddays" formControlName="DayName" (click)="selectedDays(days)">
+              <input type="checkbox" id="{{days}}" formControlName="DayName" (click)="selectedDays(days)">
               <label for="{{days}}">{{days}}</label>
             </div>
             <!-- end -->
           </div>
-          <app-customTimePicker [customTimePicker]= scheduleForm></app-customTimePicker>
+          <app-customTimePicker [customTimePicker]= scheduleForm [userdata]="userschedule" [addchildAMMessage]="addStartAMMessage" [addchildPMMessage]="addStartPMMessage" [addEndAMMessage]="addEndAMMessage" [addEndPMMessage]="addEndPMMessage"></app-customTimePicker>
           <button class="button" type="submit">Add</button>
         </div>
         <!-- left side Ends -->
@@ -28,13 +28,13 @@
           <h6 class="poptile">My schedule</h6>
 
           <!-- start -->
-          <div class="com-shad">
+          <div class="com-shad" *ngFor="let schedule of userschedule">
             <div class="edit-cont">
-              <h6>Mon</h6>
-              <p>9 AM - 5 PM</p>
+              <h6>{{schedule.dayName}}</h6>
+              <p>{{schedule.startTimeHour}} {{schedule.startTimeMeridian}} - {{schedule.endTimeHour}} {{schedule.endTimeMeridian}}</p>
             </div>
             <div class="edt-icon">
-              <i class="icon-edit royblu" (click)="openModal('schedule-edit')"></i>
+              <i class="icon-edit royblu" (click)="openModal('schedule-edit');selectdayobj(schedule)"></i>
               <i class="icon-delete delete"></i>
             </div>
           </div>
@@ -77,7 +77,7 @@
                 <label for="cust-time-switch">Custom Time</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
               </div>
               <div *ngIf="customday">
-                <app-customTimePicker [customTimePicker]= timeoffForm></app-customTimePicker>
+                <app-customTimePicker [customTimePicker]= "timeoffForm"></app-customTimePicker>
               </div>
               <div class="popBtn">
                 <button class="button line" (click)="requesttimefunction()" type="button">Cancel</button>
@@ -133,4 +133,4 @@
   <!-- login message end -->
 </div>
 <div class="overlay"></div>
-<schedule-modal></schedule-modal>
+<schedule-modal [userdata]= "arrayofselectedobj"></schedule-modal>

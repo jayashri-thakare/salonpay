@@ -9,10 +9,12 @@ import {ModalService} from '../../_modal/modal.service';
   styleUrls: ['./accountsetting.component.css']
 })
 export class AccountsettingComponent implements OnInit {
+  useraccountdetail: any;
 
   constructor( private router: Router, private userdataService: UserdataService, private modalService: ModalService) { }
 
   ngOnInit() {
+    this.getuserAccount();
     this.userdataService.accountnav = false;
   }
 
@@ -25,6 +27,14 @@ export class AccountsettingComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+
+  getuserAccount() {
+    this.userdataService.getUpdateUserAccount().subscribe((data) => {
+      this.useraccountdetail = data;
+      console.log(this.useraccountdetail)
+      localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 
 }

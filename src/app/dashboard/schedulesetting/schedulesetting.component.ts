@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserdataService} from '../../userdata.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -18,11 +18,17 @@ export class SchedulesettingComponent implements OnInit {
   private schedulevar: boolean;
   private arrayofdays: Array<string> = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   private arrayofselecteddays: Array<string> = [];
+  // private arrayofselectedobj: Array<string> = [];
   public currentDate: Date = new Date ();
   public dateValue: Date = new Date ();
   // public maxDate: Date = new Date (this.currentDate)
   userschedule: any;
   customday: boolean;
+  @Input('userdata') arrayofselectedobj: Array<string> = [];
+  private addStartAMMessage = "add_StartAM";
+  private addStartPMMessage = "add_StartPM";
+  private addEndAMMessage = "add_EndAM";
+  private addEndPMMessage = "add_EndPM";
 
   constructor(private modalService: ModalService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
@@ -71,10 +77,16 @@ export class SchedulesettingComponent implements OnInit {
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
-      console.log(this.arrayofselecteddays)
     }else{
       this.arrayofselecteddays.splice(index, 1);
-      console.log(this.arrayofselecteddays)
+    }
+  }
+
+  selectdayobj(selected_obj){
+    var index = this.arrayofselectedobj.indexOf(selected_obj);
+    if(index<0){
+      this.arrayofselectedobj.splice(index, 1);
+      this.arrayofselectedobj.push(selected_obj);
     }
   }
 
@@ -96,9 +108,11 @@ export class SchedulesettingComponent implements OnInit {
 
   updateSchedule(userdata) {
     console.log(userdata, this.scheduleForm)
+    userdata.value.DayName = this.arrayofselecteddays;
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
-      this.userdataService.update_schedule(userdata).subscribe((data) => {
+      this.userdataService.add_schedule(userdata).subscribe((data) => {
+        this.getuserSchedule();
         console.log('DONEEEEEEEEEE!!!')
       });
     } else {
@@ -129,7 +143,8 @@ export class SchedulesettingComponent implements OnInit {
   getuserSchedule() {
     this.userdataService.getUserSchedule().subscribe((data) => {
       this.userschedule = data;
-      localStorage.setItem('companyId', data['parentCompanyId']);
+      console.log(this.userschedule)
+      localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
 

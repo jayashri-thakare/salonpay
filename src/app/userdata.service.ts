@@ -46,6 +46,8 @@ export class UserdataService {
   private params;
   body: any;
   schedulebody: {};
+  ParentCompanyId: number;
+  editschedulebody: {};
  	constructor(private httpClient: HttpClient) { }
  	// Service to sign up users
   // tslint:disable-next-line:indent
@@ -90,10 +92,21 @@ export class UserdataService {
     if(this.userId === undefined) {
       this.userId = localStorage.getItem('userId');
    }
-    this.baseUrl = 'http://172.16.0.99:7894/api/schedule/GetUserSchedule?id=' + this.userId;
+   this.ParentCompanyId= parseInt(localStorage.getItem('companyId'))
+    this.baseUrl = 'http://172.16.0.99:7894/api/schedule/GetUserSchedule?id=' + this.userId +'&ParentCompanyID=' + this.ParentCompanyId;
    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
    );
  }
+
+  getUpdateUserAccount() {
+    if(this.userId === undefined) {
+      this.userId = localStorage.getItem('userId');
+  }
+  this.ParentCompanyId= parseInt(localStorage.getItem('companyId'))
+    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetAccountSetting?id=' + this.userId +'&ParentCompanyID=' + this.ParentCompanyId;
+  return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
+  );
+  }
 
   delete(id: number) {
     return this.httpClient.delete(`http://172.16.0.99:8084/api/Signup/${id}`);
@@ -128,12 +141,13 @@ export class UserdataService {
     this.body['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
     this.body['UserId']= localStorage.getItem('userId')
     this.body['EnableTextNotification']= userdata.controls.EnableTextNotification.value
-    this.body['NotificationType']= userdata.controls.NotificationType.value
+    // this.body['NotificationType']= userdata.controls.NotificationType.value
+    this.body['Notification']= userdata.value.Notification
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.body, httpOptions)
       .pipe(map( data => data));
   }
 
-  update_schedule(userdata) {
+  add_schedule(userdata) {
     debugger;
     this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
     this.schedulebody = {}
@@ -147,6 +161,15 @@ export class UserdataService {
     this.schedulebody['EndTimeMinute']= userdata.value.EndTimeMinute
     this.schedulebody['EndTimeMeridian']= userdata.value.EndTimeMeridian
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.schedulebody, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  update_schedule(userdata) {
+    debugger;
+    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/UpdateOneDaySchedule?';
+    userdata.ParentCompanyId = this.ParentCompanyId;
+    userdata.UserId = this.userId;
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
