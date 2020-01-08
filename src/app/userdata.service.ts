@@ -79,6 +79,11 @@ export class UserdataService {
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
   }
 
+  getUserSignature() {
+    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetTimeZone';
+    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
+  }
+
   getUserDetail() {
  	  if(this.userId === undefined) {
  	    this.userId = localStorage.getItem('userId');
@@ -114,6 +119,15 @@ export class UserdataService {
 
   update_user_address(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/profile/editaddress';
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  update_signature(userdata) {
+    this.baseUrl = 'http://172.16.0.99:7894/api/Email/SaveEmailSignature?';
+    userdata.UserId = localStorage.getItem('userId');
+    // tslint:disable-next-line:radix
+    userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
