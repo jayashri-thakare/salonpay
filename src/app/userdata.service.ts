@@ -164,17 +164,9 @@ export class UserdataService {
   add_schedule(userdata) {
     debugger;
     this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
-    this.schedulebody = {}
-    this.schedulebody['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
-    this.schedulebody['UserId']= localStorage.getItem('userId')
-    this.schedulebody['DayName']= userdata.value.DayName
-    this.schedulebody['StartTimeHour']= userdata.value.StartTimeHour
-    this.schedulebody['StartTimeMinute']= userdata.value.StartTimeMinute
-    this.schedulebody['StartTimeMeridian']= userdata.value.StartTimeMeridian
-    this.schedulebody['EndTimeHour']= userdata.value.EndTimeHour
-    this.schedulebody['EndTimeMinute']= userdata.value.EndTimeMinute
-    this.schedulebody['EndTimeMeridian']= userdata.value.EndTimeMeridian
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.schedulebody, httpOptions)
+    userdata.ParentCompanyId = this.ParentCompanyId;
+    userdata.UserId = this.userId;
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
@@ -190,18 +182,9 @@ export class UserdataService {
   update_timeoff(userdata) {
     debugger;
     this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
-    this.schedulebody = {}
-    this.schedulebody['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
-    this.schedulebody['UserId']= localStorage.getItem('userId')
-    this.schedulebody['StartDate']= userdata.value.StartDate
-    this.schedulebody['EndDate']= userdata.value.EndDate
-    this.schedulebody['StartTimeHour']= userdata.value.StartTimeHour
-    this.schedulebody['StartTimeMinute']= userdata.value.StartTimeMinute
-    this.schedulebody['StartTimeMeridian']= userdata.value.StartTimeMeridian
-    this.schedulebody['EndTimeHour']= userdata.value.EndTimeHour
-    this.schedulebody['EndTimeMinute']= userdata.value.EndTimeMinute
-    this.schedulebody['EndTimeMeridian']= userdata.value.EndTimeMeridian
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.schedulebody, httpOptions)
+    userdata.ParentCompanyId = this.ParentCompanyId;
+    userdata.UserId = this.userId;
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
