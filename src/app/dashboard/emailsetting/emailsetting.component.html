@@ -13,10 +13,7 @@
       <h6 class="poptile">Email Signature</h6>
       <div class="mail-regrd">
         <p class="regd">Regards,</p>
-        <h6 class="nam-desi">John Doe
-          <span>Manager</span></h6>
-        <p>M: 1-541-754-3010</p>
-        <a href="#">www.salonpay.com</a>
+        <div [innerHTML]="userdetail.emailSignature  | safeHtml" ></div>
       </div>
       <p class="regd">Disclaimer: This e-mail is confidential. If you are not the intended recipient you
         must
@@ -106,6 +103,6 @@
 
 <!-- Edit Profile Menu -->
 <div class="overlay"> </div>
-<email-modal></email-modal>
+<email-modal [userdata]="userdetail"></email-modal>
 <!-- Edit Profile Menu End -->
 </div>

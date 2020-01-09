@@ -110,7 +110,7 @@ export class AddressEditComponent implements OnInit {
     });
     this.cscService.getCountries().subscribe((data) => {
       this.countries = data;
-      localStorage.setItem('companyId', data['parentCompanyId']);
+      // localStorage.setItem('companyId', data['parentCompanyId']);
     });
   }
 

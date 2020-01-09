@@ -39,7 +39,7 @@ export class AccountsettingComponent implements OnInit {
     this.userdataService.getUpdateUserAccount().subscribe((data) => {
       this.useraccountdetail = data;
       console.log(this.useraccountdetail)
-      localStorage.setItem('companyId', data['ParentCompanyID']);
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
 

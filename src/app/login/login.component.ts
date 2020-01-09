@@ -46,12 +46,11 @@ export class LoginComponent implements OnInit {
         } else {
           this.loginfail = false;
           if (localStorage.getItem('userId')){
-            localStorage.removeItem('userId');
+            localStorage.clear();
           }
-            localStorage.setItem('userId', response['userID']);
-          // }
+          localStorage.setItem('userId', response['userID']);
+          localStorage.setItem('companyId', response['parentCompanyId']);
           localStorage.setItem('Token', response["token"]);
-          // this.userdataservice.userId = response['userID'];
           this.router.navigate(['/dashboard']);
         }
       });

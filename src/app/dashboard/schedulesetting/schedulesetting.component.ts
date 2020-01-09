@@ -144,7 +144,7 @@ export class SchedulesettingComponent implements OnInit {
     this.userdataService.getUserSchedule().subscribe((data) => {
       this.userschedule = data;
       console.log(this.userschedule)
-      localStorage.setItem('companyId', data['ParentCompanyID']);
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
 
