@@ -30,7 +30,6 @@ export class SchedulesettingComponent implements OnInit {
   private addStartPMMessage = "add_StartPM";
   private addEndAMMessage = "add_EndAM";
   private addEndPMMessage = "add_EndPM";
-  private schedule = {};
 
   constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
@@ -116,7 +115,6 @@ export class SchedulesettingComponent implements OnInit {
     if (this.scheduleForm.status == 'VALID') {
       this.userdataService.add_schedule(userdata).subscribe((data) => {
         this.getuserSchedule();
-        this.schedule = {};
         this.messageService.clear();
         this.messageService.add('Schedule added succesfully.');
       });
