@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {UserdataService} from '../../userdata.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ModalService } from 'src/app/_modal/modal.service';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-schedulesetting',
@@ -29,8 +30,9 @@ export class SchedulesettingComponent implements OnInit {
   private addStartPMMessage = "add_StartPM";
   private addEndAMMessage = "add_EndAM";
   private addEndPMMessage = "add_EndPM";
+  private schedule = {};
 
-  constructor(private modalService: ModalService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
+  constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
   get f() {
     return this.scheduleForm.controls;
@@ -107,13 +109,16 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
+    debugger;
     console.log(userdata, this.scheduleForm)
-    userdata.value.DayName = this.arrayofselecteddays;
+    userdata.DayName = this.arrayofselecteddays;
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
       this.userdataService.add_schedule(userdata).subscribe((data) => {
         this.getuserSchedule();
-        console.log('DONEEEEEEEEEE!!!')
+        this.schedule = {};
+        this.messageService.clear();
+        this.messageService.add('Schedule added succesfully.');
       });
     } else {
       console.log(userdata, this.scheduleForm.status);
@@ -129,7 +134,8 @@ export class SchedulesettingComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
-        console.log('DONEEEEEEEEEE!!!')
+        this.messageService.clear();
+        this.messageService.add('Time Off added succesfully.');
       });
     } else {
       console.log(userdata, this.timeoffForm.status);

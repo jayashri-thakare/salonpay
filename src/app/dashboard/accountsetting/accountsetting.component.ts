@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {UserdataService} from '../../userdata.service';
 import {ModalService} from '../../_modal/modal.service';
 import {Observable} from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 // class timeZonesList {
 // }
@@ -18,7 +19,9 @@ export class AccountsettingComponent implements OnInit {
   private modals: any[ ] = [];
   timeZonesList: {};
   userLanguageList: {}
-  constructor( private router: Router, private userdataService: UserdataService, private modalService: ModalService) { }
+  constructor(private translate: TranslateService, private router: Router, private userdataService: UserdataService, private modalService: ModalService) {
+   
+   }
 
   ngOnInit() {
     this.getuserAccount();
@@ -26,6 +29,14 @@ export class AccountsettingComponent implements OnInit {
 
   }
 
+  translatelanguage(){
+    this.translate.addLangs(['English', 'Vietnamese']);
+    this.translate.setDefaultLang(this.useraccountdetail.langType);
+    console.log(this.useraccountdetail.langType)
+
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use(browserLang.match(/English|Vietnamese/) ? browserLang : this.useraccountdetail.langType)
+  }
 
   openModal(id, userdetail) {
     this.modalService.open(id, userdetail);
@@ -39,6 +50,7 @@ export class AccountsettingComponent implements OnInit {
     this.userdataService.getUpdateUserAccount().subscribe((data) => {
       this.useraccountdetail = data;
       console.log(this.useraccountdetail)
+      this.translatelanguage();
       localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
