@@ -12,6 +12,9 @@ export class NotificationsettingComponent implements OnInit {
   notificationForm: FormGroup;
   control: FormControl;
   submitted = false;
+  private notificationobject = {};
+  private EmailNotification = {};
+  private SMSNotification = {};
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
@@ -21,10 +24,28 @@ export class NotificationsettingComponent implements OnInit {
 
   ngOnInit() {
     this.userdataService.notificationnav = false;
+    // this.notificationsetting()
     this.notificationForm = this.formBuilder.group({
-      NotificationType: [''],
-      EnableTextNotification: [true]
+      NotificationTypeEmail: [''],
+      NotificationTypeSMS: [''],
+      EnableTextNotification: [true],
+      Notification: this.notificationobject
     });
+  }
+
+  notificationsetting(notify, type){
+    debugger;
+    if(type === 'email'){
+      this.EmailNotification['Email'] = notify.currentTarget.checked;
+    }else if(type === 'sms'){
+      this.EmailNotification['SMS'] = notify.currentTarget.checked;
+    }
+    // this.SMSNotification['Email'] = true;
+    // this.SMSNotification['SMS'] = false;
+    this.notificationobject['Email-Notification'] = this.EmailNotification;
+    this.notificationobject['SMS-Notification'] = this.SMSNotification;
+    console.log(this.notificationobject);
+    console.log(this.EmailNotification);
   }
 
   updateNotification(userdata) {

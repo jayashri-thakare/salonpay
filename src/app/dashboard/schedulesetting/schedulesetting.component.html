@@ -1,7 +1,8 @@
 <!-- Main Container Starts -->
 <div *ngIf="userdataService.schedulenav">
   <div class="mainContainer" *ngIf="schedulevar">
-    <form id="editProfile" [formGroup]="scheduleForm" (ngSubmit)="updateSchedule(scheduleForm)" class="popup-scrll">
+    <form id="editProfile" [formGroup]="scheduleForm" (ngSubmit)="updateSchedule(scheduleForm.value)" class="popup-scrll">
+      <app-messages></app-messages>
       <div class="comm-headline-btn">
         <h3 class="main-comm-head mb-0">Schedule</h3>
         <a (click)="requesttimefunction()" class="button line orange">Request Time Off</a>
@@ -13,7 +14,7 @@
           <div class="">
             <!-- start -->
             <div class="radio-box radio-box-2" *ngFor="let days of arrayofdays">
-              <input type="checkbox" id="{{days}}" formControlName="DayName" (click)="selectedDays(days)">
+              <input type="checkbox" id="{{days}}" [(ngModel)]="schedule.dayName" formControlName="DayName" (click)="selectedDays(days)">
               <label for="{{days}}">{{days}}</label>
             </div>
             <!-- end -->
@@ -54,7 +55,7 @@
     <!-- start -->
     <div class="acctset-w370">
       <!-- start -->
-      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm)" class="popup-scrll">
+      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm.value)" class="popup-scrll">
       <h6 class="poptile">Request Time Off</h6>
       <ul class="nav nav-pills">
         <li class="nav-item">

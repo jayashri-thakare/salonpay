@@ -51,7 +51,7 @@ export class AccountsettingComponent implements OnInit {
       this.useraccountdetail = data;
       console.log(this.useraccountdetail)
       this.translatelanguage();
-      localStorage.setItem('companyId', data['ParentCompanyID']);
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
 

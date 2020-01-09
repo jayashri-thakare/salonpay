@@ -80,15 +80,18 @@ export class UserdataService {
   }
 
   getUserSignature() {
-    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetTimeZone';
-    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:7894/api/Email/GetEmailSignature?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getUserDetail() {
- 	  if(this.userId === undefined) {
- 	    this.userId = localStorage.getItem('userId');
+    if(this.userId === undefined) {
+      this.userId = localStorage.getItem('userId');
     }
- 	  this.baseUrl = 'http://172.16.0.99:7894/api/profile/getuserdetails?id=' + this.userId;
+    // tslint:disable-next-line:indent
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:7894/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
@@ -134,16 +137,16 @@ export class UserdataService {
 
   update_account_edit(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/UpdateAccount?';
-    // this.params = new HttpParams()
-    //   .set('id', localStorage.getItem('userId'))
-    //   .set('ParentCompanyId', localStorage.getItem('companyId'))
-    //   .set('TimezoneId', userdata.TimezoneId)
-    //   .set('LanguageId', userdata.LanguageId);
-    this.params={}
-    this.params['id']= localStorage.getItem('userId')
-    this.params['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
-    this.params['TimezoneId']= parseInt(userdata.TimezoneId)
-    this.params['LanguageId']= parseInt(userdata.LanguageId)
+    this.params = new HttpParams()
+      .set('id', 'a8540ee9-4fc4-441e-b615-db538d2e03b7')
+      .set('ParentCompanyId', '6' )
+      .set('TimezoneId', userdata.TimezoneId)
+      .set('LanguageId', userdata.LanguageId);
+    // this.params={}
+    // this.params['id']= localStorage.getItem('userId')
+    // this.params['ParentCompanyId']= 6 ;
+    // this.params['TimezoneId']= parseInt(userdata.TimezoneId)
+    // this.params['LanguageId']= parseInt(userdata.LanguageId)
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.params, httpOptions)
       .pipe(map( data => data));
   }

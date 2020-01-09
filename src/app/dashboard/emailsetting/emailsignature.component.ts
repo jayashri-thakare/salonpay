@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import { ModalService } from '../../_modal/modal.service';
 import {UserdataService} from '../..//userdata.service';
@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import {MessageService} from '../../message.service';
+import {parseJsonSchemaToCommandDescription} from '@angular/cli/utilities/json-schema';
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
@@ -17,7 +18,7 @@ import {MessageService} from '../../message.service';
     '    <i class="icon-down-arrow com-arw"></i>Add IMAP <span>settings</span>\n' +
     '  </h3>\n' +
     '<form class="popup-scrll" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)">\n' +
-    '<ejs-richtexteditor formControlName="EmailSignature"></ejs-richtexteditor>\n' +
+    '<ejs-richtexteditor formControlName="EmailSignature" ngModel="{{userdetail.emailSignature}}"></ejs-richtexteditor>\n' +
     // '   <ejs-richtexteditor id=\'iframeRTE\' [(value)]=\'value\' [toolbarSettings]=\'tools\'></ejs-richtexteditor>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
@@ -45,8 +46,10 @@ export class EmailEditComponent implements OnInit {
       'Indent', 'Outdent', '|', 'CreateLink','CreateTable',
       'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
   };
-  private userdetail: Observable< object >;
-
+  // private userdetail: Observable< object >;
+  // private signature: Observable<any>;
+  @Input('userdata') userdetail: any;
+  private signature: string;
   constructor(public translate: TranslateService, private userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
               private userdataservice: UserdataService, private messageService: MessageService) {
@@ -58,28 +61,16 @@ export class EmailEditComponent implements OnInit {
     this.accountForm = this.formBuilder.group({
       EmailSignature: ['']
     });
-    // this.getUserAccount();
   }
 
   closeModal(id: string) {
     this.modalService.close(id);
   }
 
-  getUserEmail() {
-    this.userdataService.getUserSignature().subscribe((data) => {
-      // this.timeZonesList = data["timeZonesList"];
-      this.userdetail = data[0];
-    });
-  }
-
   update_account(userdata) {
-    debugger;
-    console.log(userdata, this.accountForm)
-    // tslint:disable-next-line:triple-equals
     if (this.accountForm.status == 'VALID') {
       this.userdataservice.update_signature(userdata).subscribe((data) => {
-        debugger;
-        this.getUserEmail();
+        this.userdataService.publish('call-signature');
         this.messageService.clear();
         this.messageService.add('Email signature updated successfully.')
         this.closeModal('side-menu-imap');

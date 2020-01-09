@@ -99,13 +99,15 @@ export class ScheduleEditComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
-    debugger;
     console.log(userdata, this.scheduleeditForm)
     userdata.editedDayName = [this.arrayofselectedobj[0]['dayName']];
     // tslint:disable-next-line:triple-equals
     if (this.scheduleeditForm.status == 'VALID') {
       this.userdataService.update_schedule(userdata).subscribe((data) => {
+        this.userdataService.publish('call-parent');
         this.closeModal('schedule-edit');
+        this.messageService.clear();
+        this.messageService.add('Schedule Updated succesfully.');
       });
     } else {
       console.log(userdata, this.scheduleeditForm.status);

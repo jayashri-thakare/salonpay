@@ -44,12 +44,8 @@ export class ProfilesettingComponent implements OnInit {
   }
 
   getUserDetails() {
-    // if (this.userdetail) {
-    //   this.userdetail = null;
-    // }
     this.userdataService.getUserDetail().subscribe((data) => {
       this.userdetail = data;
-      localStorage.setItem('companyId', data['parentCompanyId']);
     });
   }
 

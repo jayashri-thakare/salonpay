@@ -70,7 +70,6 @@ export class ContactEditComponent implements OnInit {
       WorkContact: [''],
       HomeConatct: ['']
     });
-
   }
 
   updateDetail(userdata) {

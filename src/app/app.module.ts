@@ -17,7 +17,7 @@ import {MessagesComponent} from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ProfilesettingComponent } from './dashboard/profilesetting/profilesetting.component';
-import { EmailsettingComponent } from './dashboard/emailsetting/emailsetting.component';
+import {EmailsettingComponent, Safe} from './dashboard/emailsetting/emailsetting.component';
 import { NotificationsettingComponent } from './dashboard/notificationsetting/notificationsetting.component';
 import { AccountsettingComponent } from './dashboard/accountsetting/accountsetting.component';
 import { BanksettingComponent } from './dashboard/banksetting/banksetting.component';
@@ -95,7 +95,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
     InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent],
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
   providers: [UserdataService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
