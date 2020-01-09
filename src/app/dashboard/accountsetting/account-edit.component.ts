@@ -25,7 +25,7 @@ import {MessageService} from '../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">Timezone</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <select class="form-control" formControlName="TimezoneId">\n' +
+    '          <select class="select-field form-field" formControlName="TimezoneId">\n' +
     '             <option value="">Select Timezone...</option>\n' +
     '             <option *ngFor="let timezone of userdetail?.timeZonesList" [value]="timezone.id">{{timezone.name}}</option>\n' +
     '          </select>\n' +
@@ -34,7 +34,7 @@ import {MessageService} from '../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">Language</h6>\n' +
     '        <div class="form-group">\n' +
-'              <select  class="form-control" formControlName="LanguageId">\n' +
+'              <select  class="select-field form-field" formControlName="LanguageId">\n' +
     '            <option value="">Select Language...</option>\n' +
     '            <option *ngFor="let language of userdetail?.userLanguageList" [value]="language.id">{{language.langType}}</option>\n' +
     '          </select> \n' +

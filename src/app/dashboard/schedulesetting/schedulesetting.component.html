@@ -19,7 +19,7 @@
             </div>
             <!-- end -->
           </div>
-          <app-customTimePicker [customTimePicker]= scheduleForm [userdata]="userschedule" [addchildAMMessage]="addStartAMMessage" [addchildPMMessage]="addStartPMMessage" [addEndAMMessage]="addEndAMMessage" [addEndPMMessage]="addEndPMMessage"></app-customTimePicker>
+          <app-customTimePicker [customTimePicker]= scheduleForm [userdata]="userschedule" addchildAMMessage="add"></app-customTimePicker>
           <button class="button" type="submit">Add</button>
         </div>
         <!-- left side Ends -->
@@ -32,7 +32,7 @@
           <div class="com-shad" *ngFor="let schedule of userschedule">
             <div class="edit-cont">
               <h6>{{schedule.dayName}}</h6>
-              <p>{{schedule.startTimeHour}} {{schedule.startTimeMeridian}} - {{schedule.endTimeHour}} {{schedule.endTimeMeridian}}</p>
+              <p>{{schedule.startTimeHour}} : {{schedule.startTimeMinute}} {{schedule.startTimeMeridian}} - {{schedule.endTimeHour}} : {{schedule.endTimeMinute}} {{schedule.endTimeMeridian}}</p>
             </div>
             <div class="edt-icon">
               <i class="icon-edit royblu" (click)="openModal('schedule-edit');selectdayobj(schedule)"></i>
@@ -55,7 +55,7 @@
     <!-- start -->
     <div class="acctset-w370">
       <!-- start -->
-      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm)" class="popup-scrll">
+      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm.value)" class="popup-scrll">
       <h6 class="poptile">Request Time Off</h6>
       <ul class="nav nav-pills">
         <li class="nav-item">
@@ -78,7 +78,7 @@
                 <label for="cust-time-switch">Custom Time</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
               </div>
               <div *ngIf="customday">
-                <app-customTimePicker [customTimePicker]= "timeoffForm"></app-customTimePicker>
+                <app-customTimePicker [customTimePicker]= timeoffForm [userdata]="userschedule"></app-customTimePicker>
               </div>
               <div class="popBtn">
                 <button class="button line" (click)="requesttimefunction()" type="button">Cancel</button>

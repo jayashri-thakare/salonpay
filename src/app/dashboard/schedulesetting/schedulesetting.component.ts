@@ -26,10 +26,6 @@ export class SchedulesettingComponent implements OnInit {
   userschedule: any;
   customday: boolean;
   @Input('userdata') arrayofselectedobj: Array<string> = [];
-  private addStartAMMessage = "add_StartAM";
-  private addStartPMMessage = "add_StartPM";
-  private addEndAMMessage = "add_EndAM";
-  private addEndPMMessage = "add_EndPM";
 
   constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
@@ -108,13 +104,13 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
-    debugger;
     console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
       this.userdataService.add_schedule(userdata).subscribe((data) => {
         this.getuserSchedule();
+        this.scheduleForm.reset();
         this.messageService.clear();
         this.messageService.add('Schedule added succesfully.');
       });

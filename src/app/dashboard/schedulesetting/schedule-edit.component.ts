@@ -25,12 +25,12 @@ import {MessageService} from '../../message.service';
        ' <div class="">'+
           '<!-- start -->'+
          ' <div class="radio-box radio-box-2" *ngFor="let weekdays of arrayofselectedobj">'+
-           ' <input type="checkbox" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="editedDayName" (click)="selectedWeekDays(weekdays)">'+
+           ' <input type="checkbox" [disabled]="isdisable" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="editedDayName" (click)="selectedWeekDays(weekdays)">'+
            ' <label for="edit_{{weekdays.dayName}}">{{weekdays.dayName}}</label>'+
           '</div>'+
          ' <!-- end -->'+
        ' </div>'+
-       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" [userdata]="arrayofselectedobj" [addchildAMMessage]="editStartAMMessage" [addchildPMMessage]="editStartPMMessage" [addEndAMMessage]="editEndAMMessage" [addEndPMMessage]="editEndPMMessage"></app-customTimePicker>'+
+       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" [userdata]="arrayofselectedobj" addchildAMMessage="edit"></app-customTimePicker>'+
         // '<button class="button" type="submit">Update</button>'+
       '</div>'+
     '</div>'+
@@ -53,10 +53,6 @@ export class ScheduleEditComponent implements OnInit {
   private arrayofdays: Array<string> = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   private arrayofselecteddays: Array<string> = [];
   private userdetail: Observable< object >;
-  private editStartAMMessage = "edit_StartAM";
-  private editStartPMMessage = "edit_StartPM";
-  private editEndAMMessage = "edit_EndAM";
-  private editEndPMMessage = "edit_EndPM";
 
   constructor(public translate: TranslateService, private userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
@@ -66,6 +62,7 @@ export class ScheduleEditComponent implements OnInit {
     return this.scheduleeditForm.controls;
   }
   ngOnInit() {
+    const isdisable = true;
     this.scheduleeditForm = this.formBuilder.group({
         editedDayName: [''],
         StartTimeHour: [''],
@@ -89,12 +86,6 @@ export class ScheduleEditComponent implements OnInit {
     }else{
       this.arrayofselecteddays.splice(index, 1);
       console.log(this.arrayofselecteddays)
-    }
-  }
-
-  selectedDaysfunc(){
-    if(this.arrayofselecteddays){
-      // console.log(this.userschedule)
     }
   }
 

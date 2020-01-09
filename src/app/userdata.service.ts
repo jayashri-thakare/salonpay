@@ -137,17 +137,9 @@ export class UserdataService {
 
   update_account_edit(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/UpdateAccount?';
-    this.params = new HttpParams()
-      .set('id', 'a8540ee9-4fc4-441e-b615-db538d2e03b7')
-      .set('ParentCompanyId', '6' )
-      .set('TimezoneId', userdata.TimezoneId)
-      .set('LanguageId', userdata.LanguageId);
-    // this.params={}
-    // this.params['id']= localStorage.getItem('userId')
-    // this.params['ParentCompanyId']= 6 ;
-    // this.params['TimezoneId']= parseInt(userdata.TimezoneId)
-    // this.params['LanguageId']= parseInt(userdata.LanguageId)
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.params, httpOptions)
+      userdata.ParentCompanyId = this.ParentCompanyId;
+      userdata.UserId = this.userId;
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
@@ -165,7 +157,6 @@ export class UserdataService {
   }
 
   add_schedule(userdata) {
-    debugger;
     this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
@@ -213,15 +204,9 @@ export class UserdataService {
       userdata.id = this.userId;
       this.update_profile_Users(userdata).subscribe((data) => {
         this.publish('call-parent');
-        // this.getUserUpdated();
-        // return true;
       });
     } else {
       console.log(userdata);
-      // this.submitted = true;
-      // if (this.userprofileForm.invalid) {
-      //   return;
-      // }
     }
   }
   private subjects: Subject<any>[] = [];
