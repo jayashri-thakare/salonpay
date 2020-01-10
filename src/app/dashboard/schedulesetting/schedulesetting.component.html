@@ -4,13 +4,13 @@
     <form id="editProfile" [formGroup]="scheduleForm" (ngSubmit)="updateSchedule(scheduleForm.value)" class="popup-scrll">
       <app-messages></app-messages>
       <div class="comm-headline-btn">
-        <h3 class="main-comm-head mb-0">Schedule</h3>
-        <a (click)="requesttimefunction()" class="button line orange">Request Time Off</a>
+        <h3 class="main-comm-head mb-0">{{'Schedule' | translate}}</h3>
+        <a (click)="requesttimefunction()" class="button line orange">{{'Request' | translate}} {{'Time' | translate}} {{'Off' | translate}}</a>
       </div>
       <div class="common-row-box">
         <!-- left side starts -->
         <div class="common-left-box">
-          <h6 class="poptile">Working Days</h6>
+          <h6 class="poptile">{{'Working' | translate}} {{'Days' | translate}}</h6>
           <div class="">
             <!-- start -->
             <div class="radio-box radio-box-2" *ngFor="let days of arrayofdays">
@@ -20,13 +20,13 @@
             <!-- end -->
           </div>
           <app-customTimePicker [customTimePicker]= scheduleForm [userdata]="userschedule" addchildAMMessage="add"></app-customTimePicker>
-          <button class="button" type="submit">Add</button>
+          <button class="button" type="submit">{{'Add' | translate}}</button>
         </div>
         <!-- left side Ends -->
         <!-- right side Ends -->
         <!-- right side Ends -->
         <div class="common-right-box scedule-right">
-          <h6 class="poptile">My schedule</h6>
+          <h6 class="poptile">{{'My' | translate}} {{'Schedule' | translate}}</h6>
 
           <!-- start -->
           <div class="com-shad" *ngFor="let schedule of userschedule">
@@ -36,7 +36,7 @@
             </div>
             <div class="edt-icon">
               <i class="icon-edit royblu" (click)="openModal('schedule-edit');selectdayobj(schedule)"></i>
-              <i class="icon-delete delete"></i>
+              <i class="icon-delete delete" (click)="selectdayobj(schedule)" data-toggle="modal" data-target="#delete-popup"></i>
             </div>
           </div>
           <!-- end -->
@@ -50,19 +50,19 @@
 
   <!-- Main Container Starts -->
   <div class="mainContainer" *ngIf="requesttimevar">
-    <h3 class="main-comm-head"><i class="icon-down-arrow com-arw" (click)="requesttimefunction()"></i>My Weekly Schedule</h3>
+    <h3 class="main-comm-head"><i class="icon-down-arrow com-arw" (click)="requesttimefunction()"></i>{{'My' | translate}} {{'Weekly' | translate}} {{'Schedule' | translate}}</h3>
 
     <!-- start -->
     <div class="acctset-w370">
       <!-- start -->
-      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm.value)" class="popup-scrll">
-      <h6 class="poptile">Request Time Off</h6>
+      <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm.value, DateRangePicker)" class="popup-scrll">
+      <h6 class="poptile">{{'Request' | translate}} {{'Time' | translate}} {{'Off' | translate}}</h6>
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link active show" data-toggle="pill" href="#tab1">One Day</a>
+          <a class="nav-link active show" data-toggle="pill" href="#tab1">{{'One' | translate}} {{'Day' | translate}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="pill" href="#tab2">Multiple days</a>
+          <a class="nav-link" data-toggle="pill" href="#tab2">{{'Multiple' | translate}} {{'Days' | translate}}</a>
         </li>
       </ul>
       <div class="tab-content">
@@ -73,40 +73,26 @@
               </div>
               <div class="switch switch--horizontal get-switch-val" data-name="weekly-switch">
                 <input class="notif-radio" id="all-day-switch" value="false" (click)="customtime()" type="radio" name="first-switch-email">
-                <label for="all-day-switch">All Day</label>
+                <label for="all-day-switch">{{'All' | translate}} {{'Day' | translate}}</label>
                 <input class="notif-radio" id="cust-time-switch" value="true" (click)="customtime()" checked type="radio" name="first-switch-email">
-                <label for="cust-time-switch">Custom Time</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
+                <label for="cust-time-switch">{{'Custom' | translate}} {{'Time' | translate}}</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
               </div>
               <div *ngIf="customday">
                 <app-customTimePicker [customTimePicker]= timeoffForm [userdata]="userschedule"></app-customTimePicker>
               </div>
               <div class="popBtn">
-                <button class="button line" (click)="requesttimefunction()" type="button">Cancel</button>
-                <button class="button" type="submit">Submit</button>
+                <button class="button line" (click)="requesttimefunction()" type="button">{{'Cancel' | translate}}</button>
+                <button class="button" type="submit">{{'Submit' | translate}}</button>
               </div>
             </div>
         </div>
         <div class="tab-pane" id="tab2">
-
-          <!-- datepicker start -->
-          <div class="datePicker">
-            <input class="form-control" name="datefilter" />
-            <div class="datePicker-input">
-              <span class="datepicker-form" id="startdate"></span>
-              <p class="datepick-label">From</p>
-            </div>
-            <i class="icon-right-arrow1 frmto-icon"></i>
-            <div class="datePicker-input">
-              <span class="datepicker-form" id="endate"></span>
-              <p class="datepick-label">To</p>
-            </div>
-          </div>
-          <!-- datepicker end -->
+          <ejs-daterangepicker id='DateRangePicker' [(ngModel)]="DateRangePicker" formControlName="StartDate"></ejs-daterangepicker>
 
 
           <div class="popBtn">
-            <button class="button line" (click)="requesttimefunction()" type="button">Cancel</button>
-            <button class="button" type="submit">Submit</button>
+            <button class="button line" (click)="requesttimefunction()" type="button">{{'Cancel' | translate}}</button>
+            <button class="button" type="submit">{{'Submit' | translate}}</button>
           </div>
         </div>
       </div>
@@ -135,3 +121,20 @@
 </div>
 <div class="overlay"></div>
 <schedule-modal [userdata]= "arrayofselectedobj"></schedule-modal>
+
+<div id="delete-popup" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure. You want to delete Schedule.</p>
+      </div>
+      <div class="modal-footer padd0">
+        <button class="button line close-btn" data-dismiss="modal" type="button">Cancel</button>
+        <button class="button" type="submit" (click)="deleteSchedule(arrayofselectedobj)">Delete</button>
+      </div>
+    </div>
+
+  </div>
+</div>

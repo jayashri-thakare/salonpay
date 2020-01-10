@@ -1,17 +1,17 @@
 <!-- Main Container Starts -->
 <div *ngIf="userdataService.notificationnav">
 <div class="mainContainer">
-  <h3 class="main-comm-head">Notifications</h3>
+  <h3 class="main-comm-head">{{'Notifications' | translate}}</h3>
   <!-- start -->
   <form id="editProfile" [formGroup]="notificationForm"  (ngSubmit)="updateNotification(notificationForm)" class="popup-scrll">
   <div class="notif-ovr">
     <div class="email-w520">
       <!-- start -->
       <div class="notif-head">
-        <h6>type</h6>
+        <h6>{{'type' | translate}}</h6>
         <div class="notif-head-left">
-          <p>email</p>
-          <p>sms</p>
+          <p>{{'Email' | translate}}</p>
+          <p>{{'sms' | translate}}</p>
         </div>
       </div>
       <!-- start -->
@@ -103,7 +103,7 @@
     </div>
   </div>
   <!-- end -->
-    <button class="button">Save</button>
+    <button class="button w50">{{'Save' | translate}}</button>
   </form>
 </div>
 <!-- Main Container Ends -->

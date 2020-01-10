@@ -29,11 +29,11 @@
         <!-- end -->
         <div class="usr-pro-btm">
           <div class="comm-cont">
-            <p>Birthdate</p>
+            <p>{{'Birthdate' | translate}}</p>
             <h6>{{userdetail?.dateOfBirth | date: 'M/d/yyyy'}}</h6>
           </div>
           <div class="comm-cont">
-            <p>Gender</p>
+            <p>{{'Gender' | translate}}</p>
             <h6>{{userdetail?.gender}}</h6>
           </div>
         </div>
@@ -43,22 +43,22 @@
 
     <div class="usr-pro-box-flex usr-pro-box-flex-1">
       <div class="pro-comm-fle">
-        <h6>Contact</h6>
+        <h6>{{'Contact' | translate}}</h6>
         <i class="icon-edit grd-icon side-menu" (click)="openModal('side-menu-contact')"></i>
       </div>
 
       <!-- start -->
       <div class="prof-comm-shad">
         <div class="comm-cont w100 mb-4">
-          <p>Mobile</p>
+          <p>{{'Mobile' | translate}}</p>
           <h6>{{userdetail?.phoneNumber }}</h6>
         </div>
         <div class="comm-cont w100 mb-4">
-          <p>Work</p>
+          <p>{{'Work' | translate}}</p>
           <h6>{{userdetail?.workContact}}</h6>
         </div>
         <div class="comm-cont w100">
-          <p>Home</p>
+          <p>{{'Home' | translate}}</p>
           <h6>{{userdetail?.homeConatct}}</h6>
         </div>
       </div>
@@ -67,33 +67,33 @@
 
     <div class="usr-pro-box-flex usr-pro-box-flex-2">
       <div class="pro-comm-fle">
-        <h6>Address</h6>
+        <h6>{{'Address' | translate}}</h6>
         <i class="icon-edit grd-icon side-menu" data-name="side-menu-address"  (click)="openModal('side-menu-address')"></i>
       </div>
       <!-- start -->
       <div class="prof-comm-shad">
         <div class="comm-cont w100 mb-4">
-          <p>Address Line 1</p>
+          <p>{{'Address Line 1' | translate}}</p>
           <h6>{{userdetail?.addressLine1}}</h6>
         </div>
         <div class="comm-cont w100 mb-4">
-          <p>Address Line 2</p>
+          <p>{{'Address Line 2' | translate}}</p>
           <h6>{{userdetail?.addressLine2}}</h6>
         </div>
         <div class="comm-cont w50 w-480-50 mb-4">
-          <p>City</p>
+          <p>{{'City' | translate}}</p>
           <h6>{{userdetail?.cityName}}</h6>
         </div>
         <div class="comm-cont w50 w-480-50 mb-480-30">
-          <p>State</p>
+          <p>{{'State' | translate}}</p>
           <h6>{{userdetail?.stateName}}</h6>
         </div>
         <div class="comm-cont w50 w-480-50 mb-480-30">
-          <p>Country</p>
+          <p>{{'Country' | translate}}</p>
           <h6>{{userdetail?.countryName}}</h6>
         </div>
         <div class="comm-cont w50 w-480-50">
-          <p>Zip Code</p>
+          <p>{{'Zip Code' | translate}}</p>
           <h6>{{userdetail?.zipCode}}</h6>
         </div>
       </div>
@@ -102,14 +102,14 @@
 
     <div class="usr-pro-box-flex usr-pro-box-flex-3">
       <div class="pro-comm-fle">
-        <h6>login info</h6>
+        <h6>{{'login info' | translate}}</h6>
         <i class="icon-edit grd-icon side-menu" (click)="openModal('side-menu-logininfo')"></i>
       </div>
 
       <!-- start -->
       <div class="prof-comm-shad mb-3">
         <div class="comm-cont w100">
-          <p>Email</p>
+          <p>{{'Email' | translate}}</p>
           <h6>{{userdetail?.email}}</h6>
         </div>
       </div>
@@ -117,7 +117,7 @@
       <!-- start -->
       <div class="prof-comm-shad">
         <div class="comm-cont w100">
-          <p>Password</p>
+          <p>{{'Password' | translate}}</p>
           <h6>**********</h6>
         </div>
       </div>

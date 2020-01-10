@@ -26,6 +26,7 @@ export class SchedulesettingComponent implements OnInit {
   userschedule: any;
   customday: boolean;
   @Input('userdata') arrayofselectedobj: Array<string> = [];
+  userdelschedule: any;
 
   constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
@@ -123,8 +124,12 @@ export class SchedulesettingComponent implements OnInit {
     }
   }
 
-  updateTimeoff(userdata) {
+  updateTimeoff(userdata, date) {
     console.log(userdata, this.timeoffForm)
+    if(date){
+      userdata.StartDate = date[0];
+      userdata.EndDate = date[1];
+    }
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
@@ -146,6 +151,19 @@ export class SchedulesettingComponent implements OnInit {
       console.log(this.userschedule)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  deleteSchedule(selected_day) {
+    selected_day.DayName = this.arrayofselectedobj[0]['dayName'];
+    // tslint:disable-next-line:triple-equals
+    if (selected_day) {
+      this.userdataService.deleteUserSchedule(selected_day.DayName).subscribe((data) => {
+        console.log(data)
+        this.getuserSchedule();
+        this.messageService.clear();
+        this.messageService.add(data['result']);
+      });
+    } 
   }
 
 }

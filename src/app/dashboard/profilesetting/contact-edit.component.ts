@@ -10,7 +10,7 @@ import {MessageService} from '../../message.service';
     '  <div class="mobile-side" >\n' +
     '    <!-- common headline -->\n' +
     '    <h3 class="close-btn main-comm-head" (click)="closeModal(\'side-menu-contact\');">\n' +
-    '      <i class="icon-down-arrow com-arw"></i>Edit<span> Contact</span>\n' +
+    '      <i class="icon-down-arrow com-arw"></i>{{\'Edit\' | translate}}<span> {{\'Contact\' | translate}}</span>\n' +
     '    </h3>\n' +
     '    <!-- common headline end -->\n' +
     '   <form id="editContact" [formGroup]="usercontactForm" (ngSubmit)="updateDetail(usercontactForm.value)"  class="popup-scrll">\n' +
@@ -19,21 +19,21 @@ import {MessageService} from '../../message.service';
     '      <!-- start -->\n' +
     '      <div class="fill-box-in">\n' +
     '        <!-- start -->\n' +
-    '        <h6 class="poptile">Contact</h6>\n' +
+    '        <h6 class="poptile">{{\'Contact\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
     '          <input type="string" id="cont-mob" ngModel="{{userdetail?.phoneNumber}}" internationalTelNo name="cont-mob" formControlName="PhoneNumber" class="form-field" \n' +
     '                 aria-invalid="false" />\n' +
-    '          <p class="form-label">Mobile</p>\n' +
+    '          <p class="form-label">{{\'Mobile\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
     '          <input type="string" id="cont-work" ngModel="{{userdetail?.workContact}}" internationalTelNo name="cont-work" formControlName="WorkContact" class="form-field" \n' +
     '                 aria-invalid="false" />\n' +
-    '          <p class="form-label">Work</p>\n' +
+    '          <p class="form-label">{{\'Work\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
     '          <input type="string" id="cont-home" ngModel="{{userdetail?.homeConatct}}" internationalTelNo name="cont-home" formControlName="HomeConatct" class="form-field" \n' +
     '                 aria-invalid="false" />\n' +
-    '          <p class="form-label">Home</p>\n' +
+    '          <p class="form-label">{{\'Home\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
     '      </div>\n' +
@@ -41,8 +41,8 @@ import {MessageService} from '../../message.service';
     '    </div>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
-    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-contact\');">Cancel</button>\n' +
-    '      <button class="button" type="submit">Update</button>\n' +
+    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-contact\');">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Update\' | translate}}</button>\n' +
     '    </div>\n' +
     '\n' +
     '    </form>\n' +
