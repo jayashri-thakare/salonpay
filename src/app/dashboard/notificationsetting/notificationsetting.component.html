@@ -3,7 +3,7 @@
 <div class="mainContainer">
   <h3 class="main-comm-head">{{'Notifications' | translate}}</h3>
   <!-- start -->
-  <form id="editProfile" [formGroup]="notificationForm"  (ngSubmit)="updateNotification(notificationForm)" class="popup-scrll">
+  <form id="editProfile" [formGroup]="notificationForm"  (ngSubmit)="updateNotification(notificationForm.value)" class="popup-scrll">
   <div class="notif-ovr">
     <div class="email-w520">
       <!-- start -->
@@ -15,7 +15,7 @@
         </div>
       </div>
       <!-- start -->
-      <div class="notif-body">
+      <div class="notif-body" *ngFor="let notification of notifications">
         <h6>Email Notification</h6>
         <div class="notif-switch-left">
           <div class="switch switch--horizontal only-switch">
@@ -36,67 +36,13 @@
       </div>
       <!-- end -->
       <!-- start -->
-      <div class="notif-body">
-        <h6>SMS Notification</h6>
-        <div class="notif-switch-left">
-          <div class="switch switch--horizontal only-switch">
-            <input id="email2" type="radio" name="sms-noti-emai" />
-            <label for="email2"></label>
-            <input id="email21" type="radio" name="sms-noti-emai" checked="checked" />
-            <label for="email21"></label><span class="toggle-outside"><span
-            class="toggle-inside"></span></span>
-          </div>
-          <div class="switch switch--horizontal only-switch">
-            <input id="sms2" type="radio" name="sms-noti-sms" checked="checked" />
-            <label for="sms2"></label>
-            <input id="sms21" type="radio" name="sms-noti-sms" />
-            <label for="sms21"></label><span class="toggle-outside"><span
-            class="toggle-inside"></span></span>
-          </div>
-        </div>
-      </div>
+
       <!-- end -->
       <!-- start -->
-      <div class="notif-body">
-        <h6>General Notification</h6>
-        <div class="notif-switch-left">
-          <div class="switch switch--horizontal only-switch">
-            <input id="email3" type="radio" name="gen-noti-emai" />
-            <label for="email3"></label>
-            <input id="email31" type="radio" name="gen-noti-emai" checked="checked" />
-            <label for="email31"></label><span class="toggle-outside"><span
-            class="toggle-inside"></span></span>
-          </div>
-          <div class="switch switch--horizontal only-switch">
-            <input id="sms3" type="radio" name="gen-noti-sms" checked="checked" />
-            <label for="sms3"></label>
-            <input id="sms31" type="radio" name="gen-noti-sms" />
-            <label for="sms31"></label><span class="toggle-outside"><span
-            class="toggle-inside"></span></span>
-          </div>
-        </div>
-      </div>
+
       <!-- end -->
       <!-- start -->
-      <div class="notif-body">
-        <h6>Type of notification</h6>
-        <div class="notif-switch-left">
-          <div class="switch switch--horizontal only-switch">
-            <input id="email4" type="radio" name="type-noti-emai" />
-            <label for="email4"></label>
-            <input id="email41" type="radio" name="type-noti-emai" checked="checked" />
-            <label for="email41"></label><span class="toggle-outside"><span
-            class="toggle-inside"></span></span>
-          </div>
-          <div class="switch switch--horizontal only-switch">
-            <input id="sms4" type="radio" name="type-noti-sms" checked="checked" />
-            <label for="sms4"></label>
-            <input id="sms41" type="radio" name="type-noti-sms" />
-            <label for="sms41"></label><span class="toggle-outside"><span
-            class="toggle-inside"></span></span>
-          </div>
-        </div>
-      </div>
+
       <!-- end -->
 
       <!-- end -->
