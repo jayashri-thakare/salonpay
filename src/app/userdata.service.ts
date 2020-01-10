@@ -10,9 +10,9 @@ class User {
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'http://172.16.0.99:7894',
     // Authorization: localStorage.getItem('Token'),
-    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
     'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept, Origin'
   })
 };
@@ -27,6 +27,7 @@ class userdetail {
   providedIn: 'root'
 })
 export class UserdataService {
+ 	constructor(private httpClient: HttpClient) { }
   baseUrl = 'http://172.16.0.114:5555/api/account/signup';
   private obj: {};
   private userdetail: {};
@@ -48,11 +49,11 @@ export class UserdataService {
   schedulebody: {};
   ParentCompanyId: number;
   editschedulebody: {};
- 	constructor(private httpClient: HttpClient) { }
+  private subjects: Subject<any>[] = [];
  	// Service to sign up users
   // tslint:disable-next-line:indent
 	public registerUsers(obj) {
- 	  this.email = obj['Email'];
+ 	  this.email = obj.Email;
     return this.httpClient.post(this.baseUrl, obj, httpOptions )
     .pipe(map(data => data));
   }
@@ -86,7 +87,7 @@ export class UserdataService {
   }
 
   getUserDetail() {
-    if(this.userId === undefined) {
+    if (this.userId === undefined) {
       this.userId = localStorage.getItem('userId');
     }
     // tslint:disable-next-line:indent
@@ -96,23 +97,30 @@ export class UserdataService {
     );
   }
 
+  getNotification() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/GetNotifcationSetting?UserId=' + this.userId + '&ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
+    );
+  }
+
   getUserSchedule() {
-    if(this.userId === undefined) {
+    if (this.userId === undefined) {
       this.userId = localStorage.getItem('userId');
    }
-   this.ParentCompanyId= parseInt(localStorage.getItem('companyId'))
-    this.baseUrl = 'http://172.16.0.99:7894/api/schedule/GetUserSchedule?id=' + this.userId +'&ParentCompanyID=' + this.ParentCompanyId;
-   return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:7894/api/schedule/GetUserSchedule?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
    );
  }
 
   getUpdateUserAccount() {
-    if(this.userId === undefined) {
+    if (this.userId === undefined) {
       this.userId = localStorage.getItem('userId');
   }
-  this.ParentCompanyId= parseInt(localStorage.getItem('companyId'))
-    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetAccountSetting?id=' + this.userId +'&ParentCompanyID=' + this.ParentCompanyId;
-  return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/GetAccountSetting?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
   );
   }
 
@@ -137,21 +145,27 @@ export class UserdataService {
 
   update_account_edit(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/UpdateAccount?';
-      userdata.ParentCompanyId = this.ParentCompanyId;
-      userdata.UserId = this.userId;
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+
+    this.params = new HttpParams()
+      .set('id', localStorage.getItem('userId'))
+      .set('ParentCompanyId', localStorage.getItem('companyId'))
+      .set('TimezoneId', userdata.TimezoneId)
+      .set('LanguageId', userdata.LanguageId);
+    // userdata.ParentCompanyId = this.ParentCompanyId;
+    // userdata.UserId = this.userId;
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.params, httpOptions)
       .pipe(map( data => data));
   }
 
   update_notification(userdata) {
     debugger;
-    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff?';
-    this.body = {}
-    this.body['ParentCompanyId']= parseInt(localStorage.getItem('companyId'))
-    this.body['UserId']= localStorage.getItem('userId')
-    this.body['EnableTextNotification']= userdata.controls.EnableTextNotification.value
+    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff';
+    this.body = {};
+    this.body.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.body.UserId = localStorage.getItem('userId');
+    this.body.EnableTextNotification = userdata.controls.EnableTextNotification.value;
     // this.body['NotificationType']= userdata.controls.NotificationType.value
-    this.body['Notification']= userdata.value.Notification
+    this.body.Notification = userdata.value.Notification;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.body, httpOptions)
       .pipe(map( data => data));
   }
@@ -175,15 +189,11 @@ export class UserdataService {
 
   update_timeoff(userdata) {
     debugger;
-    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/Timeoffrequest?';
+    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/Timeoffrequest';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
-  }
-
-  deleteUserSchedule(selected_day) {
-    return this.httpClient.delete('http://172.16.0.99:7894/api/schedule/Delete?id=' + this.userId +'&ParentCompanyID=' + this.ParentCompanyId + '&DayName=' + selected_day);
   }
 
   update_profile_Users(userdata) {
@@ -213,7 +223,6 @@ export class UserdataService {
       console.log(userdata);
     }
   }
-  private subjects: Subject<any>[] = [];
 
   publish(eventName: string) {
 // ensure a subject for the event name exists
