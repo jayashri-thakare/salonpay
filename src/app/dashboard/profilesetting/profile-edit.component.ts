@@ -14,7 +14,7 @@ import {MessageService} from '../../message.service';
     '  <div class="mobile-side">\n' +
     '    <!-- common headline -->\n' +
     '    <h3 class="close-btn main-comm-head" (click)="closeModal(\'side-menu-userprofile\');">\n' +
-    '      <i class="icon-down-arrow com-arw"></i>Edit<span> Profile</span>\n' +
+    '      <i class="icon-down-arrow com-arw"></i>{{\'Edit\' | translate }}<span> {{\'Profile\' | translate}}</span>\n' +
     '    </h3>\n' +
     '    <!-- common headline end -->\n' +
     '    <form id="editProfile" [formGroup]="userprofileForm"  (ngSubmit)="updateDetail(userprofileForm, userprofileForm.value)" class="popup-scrll">\n' +
@@ -23,27 +23,23 @@ import {MessageService} from '../../message.service';
     '      <!-- start -->\n' +
     '      <div class="fill-box-in">\n' +
     '        <!-- start -->\n' +
-    '        <h6 class="poptile">My Profile</h6>\n' +
+    '        <h6 class="poptile">{{\'My\' | translate}} {{\'Profile\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="first-name" ngModel="{{userdetail?.firstName}}" formControlName="firstName" class="form-field"  \n' +
+    '          <input type="text" id="first-name" value="{{userdetail?.firstName}}" ngModel="{{userdetail?.firstName}}" formControlName="firstName" class="form-field"  \n' +
     '                 aria-invalid="false" />\n' +
-    // '          <p class="form-label">First Name </p>\n' +
+    '          <p class="form-label">First Name </p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="last-name" ngModel="{{ userdetail?.lastName }}" formControlName="lastName"  class="form-field" \n' +
+    '          <input type="text" id="last-name" value="{{ userdetail?.lastName }}" ngModel="{{ userdetail?.lastName }}" formControlName="lastName"  class="form-field" \n' +
     '                 aria-invalid="false" />\n' +
-    // '          <p class="form-label">Last Name</p>\n' +
+    '          <p class="form-label">Last Name</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    // '          <input type="text" formControlName="DateOfBirth" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" class="form-field datetimepicker-input" id="datetimepicker-profile"\n' +
-    // '                 data-toggle="datetimepicker" data-target="#datetimepicker-profile" />\n' +
-    // '          <i class="icon-calender"></i>\n' +
-    // '          <p class="form-label">Birthdate</p>\n' +
-    '              <ejs-datetimepicker id=\'datetimepicker\' formControlName="DateOfBirth" [max]="maxDate" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" placeholder=\'Birthday\' [value]=\'dateValue\' format =\'dd/MM/yyyy\'></ejs-datetimepicker>' +
+    '              <ejs-datetimepicker id=\'datetimepicker\' ngModel="{{ userdetail?.dateOfBirth | date: \'M/d/yyyy\' }}" formControlName="DateOfBirth" [max]="maxDate" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" placeholder=\'Birthday\' [value]=\'dateValue\' format =\'dd/MM/yyyy\'></ejs-datetimepicker>' +
     '        </div>\n' +
     '        <!-- end -->\n' +
     '        <!-- start -->\n' +
-    '        <h6 class="poptile">Gender</h6>\n' +
+    '        <h6 class="poptile">{{\'Gender\' | translate}}</h6>\n' +
     '        <div class="radio-box">\n' +
     '          <input type="radio" id="radio1" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Male" formControlName="Gender" />\n' +
     '          <label for="radio1">Male</label>\n' +
@@ -62,8 +58,8 @@ import {MessageService} from '../../message.service';
     '    </div>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
-    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-userprofile\');">Cancel</button>\n' +
-    '      <button class="button" type="submit">Update</button>\n' +
+    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-userprofile\');">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Update\' | translate}}</button>\n' +
     '    </div>\n' +
     '\n' +
     '    </form>\n' +

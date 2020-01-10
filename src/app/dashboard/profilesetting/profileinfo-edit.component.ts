@@ -11,7 +11,7 @@ import {ProfilesettingComponent} from './profilesetting.component';
     '  <div class="mobile-side" >\n' +
     '    <!-- common headline -->\n' +
     '    <h3 class="close-btn main-comm-head" (click)="closeModal(\'side-menu-logininfo\');">\n' +
-    '      <i class="icon-down-arrow com-arw"></i>Edit<span> login info </span>\n' +
+    '      <i class="icon-down-arrow com-arw"></i>{{\'Edit\' | translate}}<span> {{\'login info\' | translate}} </span>\n' +
     '    </h3>\n' +
     '    <!-- common headline end -->\n' +
     '    <form id="editLogin" [formGroup]="userinfoForm" (ngSubmit)="update_profile_info(userinfoForm.value)" class="popup-scrll">\n' +
@@ -20,20 +20,20 @@ import {ProfilesettingComponent} from './profilesetting.component';
     '      <!-- start -->\n' +
     '      <div class="fill-box-in">\n' +
     '        <!-- start -->\n' +
-    '        <h6 class="poptile">login info</h6>\n' +
+    '        <h6 class="poptile">{{\'login info\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
     '          <input class="form-field field--not-empty" type="text" id="info-email" ngModel="{{ userdetail?.email }}" formControlName="Email"\n' +
     '                 required="" aria-invalid="false"  readonly />\n' +
-    '          <p class="form-label">Email</p>\n' +
+    '          <p class="form-label">{{\'Email\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
     '          <input class="form-field" type="password"  id="info-password" ngModel="{{ userdetail?.password }}" formControlName="oldPassword" required>\n' +
-    '          <p class="form-label">Old Password</p>\n' +
+    '          <p class="form-label">{{\'Old\' | translate}} {{\'Password\' | translate}}</p>\n' +
     '          <i class="view-pass icon-hide"></i>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
     '          <input class="form-field" type="password"  id="new-password" ngModel="{{ userdetail?.password }}" formControlName="newPassword" required>\n' +
-    '          <p class="form-label">New Password</p>\n' +
+    '          <p class="form-label">{{\'New\' | translate}} {{\'Password\' | translate}}</p>\n' +
     '          <i class="view-pass icon-hide"></i>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
@@ -42,8 +42,8 @@ import {ProfilesettingComponent} from './profilesetting.component';
     '    </div>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
-    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-logininfo\')">Cancel</button>\n' +
-    '      <button class="button" type="submit">Update</button>\n' +
+    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-logininfo\')">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Update\' | translate}}</button>\n' +
     '    </div>\n' +
     '\n' +
     '     </form>\n' +

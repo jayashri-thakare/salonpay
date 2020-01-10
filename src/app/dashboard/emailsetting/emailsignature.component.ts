@@ -15,15 +15,15 @@ import {parseJsonSchemaToCommandDescription} from '@angular/cli/utilities/json-s
     '<jw-modal id="side-menu-imap">\n' +
     '<div class="mobile-side">\n' +
     '  <h3 class="close-btn main-comm-head">\n' +
-    '    <i class="icon-down-arrow com-arw"></i>Add IMAP <span>settings</span>\n' +
+    '    <i class="icon-down-arrow com-arw"></i>{{\'Add\' | translate}} IMAP <span>{{\'Settings\' | translate}}</span>\n' +
     '  </h3>\n' +
     '<form class="popup-scrll" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)">\n' +
     '<ejs-richtexteditor formControlName="EmailSignature" ngModel="{{userdetail.emailSignature}}"></ejs-richtexteditor>\n' +
     // '   <ejs-richtexteditor id=\'iframeRTE\' [(value)]=\'value\' [toolbarSettings]=\'tools\'></ejs-richtexteditor>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
-    '      <button class="button line close-btn" type="button" (click)="modalService.close(\'side-menu-imap\')">Cancel</button>\n' +
-    '      <button class="button" type="submit">Add</button>\n' +
+    '      <button class="button line close-btn" type="button" (click)="modalService.close(\'side-menu-imap\')">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Add\' | translate}}</button>\n' +
     '    </div>\n' +
     '\n' +
     ' </form>\n' +

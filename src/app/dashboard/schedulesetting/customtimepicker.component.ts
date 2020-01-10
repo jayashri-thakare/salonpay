@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-customTimePicker',
   template: '<form [formGroup]="customTimePicker">'+
-    '<h6 class="poptile">Start Time</h6>\n' +
+    '<h6 class="poptile">{{\'Start\' | translate}} {{\'Time\' | translate}}</h6>\n' +
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
@@ -37,7 +37,7 @@ import { FormGroup } from '@angular/forms';
     '          </div>\n' +
     '          <!-- end -->\n' +
     '        </div>\n' +
-    '        <h6 class="poptile">end Time</h6>\n' +
+    '        <h6 class="poptile">{{\'End\' | translate}} {{\'Time\' | translate}}</h6>\n' +
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +

@@ -12,7 +12,7 @@ const httpOptions = {
     'Content-Type':  'application/json',
     'Access-Control-Allow-Origin': '*',
     // Authorization: localStorage.getItem('Token'),
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
     'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept, Origin'
   })
 };
@@ -175,11 +175,15 @@ export class UserdataService {
 
   update_timeoff(userdata) {
     debugger;
-    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/saveUserSchedule?';
+    this.baseUrl = ' http://172.16.0.99:7894/api/schedule/Timeoffrequest?';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
+  }
+
+  deleteUserSchedule(selected_day) {
+    return this.httpClient.delete('http://172.16.0.99:7894/api/schedule/Delete?id=' + this.userId +'&ParentCompanyID=' + this.ParentCompanyId + '&DayName=' + selected_day);
   }
 
   update_profile_Users(userdata) {

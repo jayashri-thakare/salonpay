@@ -44,6 +44,7 @@ import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor'
 import {EmailEditComponent} from './dashboard/emailsetting/emailsignature.component';
 import {CustomTimePickerComponent} from './dashboard/schedulesetting/customtimepicker.component';
 import { ScheduleEditComponent } from './dashboard/schedulesetting/schedule-edit.component';
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   imports: [
+    DateRangePickerModule,
     DateTimePickerModule,
     AppRoutingModule,
     BrowserModule,

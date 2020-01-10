@@ -1,4 +1,4 @@
-div {
+/* div {
   -webkit-animation: seconds 1.0s forwards;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-delay: 5s;
@@ -26,4 +26,16 @@ div {
     opacity: 0;
     left: -9999px;
   }
+} */
+
+.text-font{
+  font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 0rem;
+    color: #fff;
+    text-align: center;
+}
+.padd0{
+  padding: 0;
+  background: linear-gradient(to right, #2ecba9 0, #358fd0 100%);
 }

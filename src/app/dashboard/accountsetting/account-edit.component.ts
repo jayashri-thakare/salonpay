@@ -14,7 +14,7 @@ import {MessageService} from '../../message.service';
     '<div class="mobile-side" >\n' +
     '  <!-- common headline -->\n' +
     '  <h3 class="close-btn main-comm-head" (click)="closeModal(\'account-setting\');">\n' +
-    '    <i class="icon-down-arrow com-arw"></i>Account <span>settings</span>\n' +
+    '    <i class="icon-down-arrow com-arw"></i>{{\'Account\' | translate}} <span>{{\'Settings\' | translate}}</span>\n' +
     '  </h3>\n' +
     '  <!-- common headline end -->\n' +
     ' <form id="edit-timezone" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)" class="popup-scrll">\n' +
@@ -23,7 +23,7 @@ import {MessageService} from '../../message.service';
     '      <!-- start -->\n' +
     '      <div class="fill-box-in scrollbar">\n' +
     '        <!-- start -->\n' +
-    '        <h6 class="poptile">Timezone</h6>\n' +
+    '        <h6 class="poptile">{{\'Timezone\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
     '          <select class="select-field form-field" formControlName="TimezoneId">\n' +
     '             <option value="">Select Timezone...</option>\n' +
@@ -32,7 +32,7 @@ import {MessageService} from '../../message.service';
     '        </div>\n' +
     '        <!-- end -->\n' +
     '        <!-- start -->\n' +
-    '        <h6 class="poptile">Language</h6>\n' +
+    '        <h6 class="poptile">{{\'Language\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
 '              <select  class="select-field form-field" formControlName="LanguageId">\n' +
     '            <option value="">Select Language...</option>\n' +
@@ -45,8 +45,8 @@ import {MessageService} from '../../message.service';
     '    </div>\n' +
     '\n' +
     '    <div class="popBtn">\n' +
-    '      <button class="button line close-btn" type="button" (click)="closeModal(\'account-setting\');">Cancel</button>\n' +
-    '      <button class="button" type="submit">Update</button>\n' +
+    '      <button class="button line close-btn" type="button" (click)="closeModal(\'account-setting\');">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Update\' | translate}}</button>\n' +
     '    </div>\n' +
     '\n' +
     ' </form>\n' +
