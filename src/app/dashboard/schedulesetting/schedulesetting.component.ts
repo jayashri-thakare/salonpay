@@ -143,15 +143,14 @@ export class SchedulesettingComponent implements OnInit {
       userdata.StartDate = date[0];
       userdata.EndDate = date[1];
     }
-    if(userdata.SubType === undefined){
-      userdata.SubType = 1
-    }
     userdata.Type = this.onemultiplevar
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
-      debugger;
-      userdata.SubType = JSON.stringify(userdata.SubType)
       userdata.Type = JSON.stringify(userdata.Type)
+      if(userdata.SubType === undefined && userdata.Type === "0"){
+        userdata.SubType = 1
+      }
+      userdata.SubType = JSON.stringify(userdata.SubType)
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
         this.messageService.clear();
         this.messageService.add('Time Off added succesfully.');
