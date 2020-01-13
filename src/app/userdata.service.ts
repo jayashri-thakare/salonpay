@@ -134,6 +134,10 @@ export class UserdataService {
       .pipe(map( data => data));
   }
 
+  deleteUserSchedule(deldata) {
+    return this.httpClient.delete('http://172.16.0.99:7894/api/schedule/Delete?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId + '&DayName=' + deldata);
+  }
+
   update_signature(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/Email/SaveEmailSignature?';
     userdata.UserId = localStorage.getItem('userId');

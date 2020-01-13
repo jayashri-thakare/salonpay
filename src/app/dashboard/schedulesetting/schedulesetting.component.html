@@ -59,10 +59,10 @@
       <h6 class="poptile">{{'Request' | translate}} {{'Time' | translate}} {{'Off' | translate}}</h6>
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link active show" data-toggle="pill" href="#tab1">{{'One' | translate}} {{'Day' | translate}}</a>
+          <a class="nav-link active show" (click)="onemultiplefunc('one')" data-toggle="pill" href="#tab1">{{'One' | translate}} {{'Day' | translate}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="pill" href="#tab2">{{'Multiple' | translate}} {{'Days' | translate}}</a>
+          <a class="nav-link" data-toggle="pill" (click)="onemultiplefunc('multiple')" href="#tab2">{{'Multiple' | translate}} {{'Days' | translate}}</a>
         </li>
       </ul>
       <div class="tab-content">
@@ -72,9 +72,9 @@
                 <ejs-datetimepicker id='datetimepicker' formControlName="StartDate" [ngClass]="{ 'error': submitted && f.birthdate.errors }" placeholder='Date' [value]='dateValue' format ='dd/MM/yyyy'></ejs-datetimepicker>
               </div>
               <div class="switch switch--horizontal get-switch-val" data-name="weekly-switch">
-                <input class="notif-radio" id="all-day-switch" value="false" (click)="customtime()" type="radio" name="first-switch-email">
+                <input class="notif-radio" id="all-day-switch" (click)="customtime()" [value]="0" [(ngModel)]="customdayvalue" formControlName="SubType" type="radio">
                 <label for="all-day-switch">{{'All' | translate}} {{'Day' | translate}}</label>
-                <input class="notif-radio" id="cust-time-switch" value="true" (click)="customtime()" checked type="radio" name="first-switch-email">
+                <input class="notif-radio" id="cust-time-switch" (click)="customtime()" [checked]="true" [(ngModel)]="customdayvalue" formControlName="SubType" [value]="1" type="radio">
                 <label for="cust-time-switch">{{'Custom' | translate}} {{'Time' | translate}}</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
               </div>
               <div *ngIf="customday">

@@ -27,6 +27,7 @@ export class SchedulesettingComponent implements OnInit {
   customday: boolean;
   @Input('userdata') arrayofselectedobj: Array<string> = [];
   userdelschedule: any;
+  onemultiplevar: number;
 
   constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
@@ -35,6 +36,7 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.onemultiplefunc('one')
     this.userdataService.schedulenav = false;
     this.requesttimevar = false;
     this.schedulevar = true;
@@ -57,7 +59,9 @@ export class SchedulesettingComponent implements OnInit {
       EndTimeHour: [''],
       EndTimeMinute: [''],
       EndTimeMeridian: [''],
-      EndDate: ['']
+      EndDate: [''],
+      SubType: [''],
+      Type: ['']
     });
   }
 
@@ -68,6 +72,14 @@ export class SchedulesettingComponent implements OnInit {
     }else {
       this.requesttimevar = false;
       this.schedulevar = true;
+    }
+  }
+
+  onemultiplefunc(type){
+    if(type === 'one'){
+      this.onemultiplevar = 0;
+    }else if('multiple'){
+      this.onemultiplevar = 1;
     }
   }
 
@@ -125,13 +137,21 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateTimeoff(userdata, date) {
+    debugger;
     console.log(userdata, this.timeoffForm)
     if(date){
       userdata.StartDate = date[0];
       userdata.EndDate = date[1];
     }
+    if(userdata.SubType === undefined){
+      userdata.SubType = 1
+    }
+    userdata.Type = this.onemultiplevar
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
+      debugger;
+      userdata.SubType = JSON.stringify(userdata.SubType)
+      userdata.Type = JSON.stringify(userdata.Type)
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
         this.messageService.clear();
         this.messageService.add('Time Off added succesfully.');
@@ -155,6 +175,7 @@ export class SchedulesettingComponent implements OnInit {
 
   deleteSchedule(selected_day) {
     selected_day.DayName = this.arrayofselectedobj[0]['dayName'];
+    console.log(selected_day.DayName)
     // tslint:disable-next-line:triple-equals
     if (selected_day) {
       this.userdataService.deleteUserSchedule(selected_day.DayName).subscribe((data) => {
