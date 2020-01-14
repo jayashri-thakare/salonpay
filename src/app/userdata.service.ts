@@ -150,15 +150,15 @@ export class UserdataService {
   update_account_edit(userdata) {
     this.baseUrl = 'http://172.16.0.99:7894/api/ProfileMaster/UpdateAccount?';
 
-    this.params = new HttpParams()
-      .set('id', localStorage.getItem('userId'))
-      .set('ParentCompanyId', localStorage.getItem('companyId'))
-      .set('TimezoneId', userdata.TimezoneId)
-      .set('LanguageId', userdata.LanguageId);
-    // userdata.ParentCompanyId = this.ParentCompanyId;
-    // userdata.UserId = this.userId;
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.params, httpOptions)
-      .pipe(map( data => data));
+    // this.params = new HttpParams()
+    //   .set('id', localStorage.getItem('userId'))
+    //   .set('ParentCompanyId', localStorage.getItem('companyId'))
+    //   .set('TimezoneId', userdata.TimezoneId)
+    //   .set('LanguageId', userdata.LanguageId);
+    userdata.ParentCompanyId = this.ParentCompanyId;
+    userdata.UserId = this.userId;
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+    .pipe(map( data => data));
   }
 
   update_notification(userdata) {
@@ -197,7 +197,7 @@ export class UserdataService {
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
-      .pipe(map( data => data));
+    .pipe(map( data => data));
   }
 
   update_profile_Users(userdata) {

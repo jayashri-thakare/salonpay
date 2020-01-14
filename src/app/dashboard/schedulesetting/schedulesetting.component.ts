@@ -87,6 +87,7 @@ export class SchedulesettingComponent implements OnInit {
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
+      console.log(this.arrayofselecteddays)
     }else{
       this.arrayofselecteddays.splice(index, 1);
     }
@@ -119,6 +120,7 @@ export class SchedulesettingComponent implements OnInit {
   updateSchedule(userdata) {
     console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
+    console.log(userdata.DayName)
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
       this.userdataService.add_schedule(userdata).subscribe((data) => {
