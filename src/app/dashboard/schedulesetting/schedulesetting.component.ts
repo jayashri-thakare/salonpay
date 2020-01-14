@@ -163,7 +163,7 @@ export class SchedulesettingComponent implements OnInit {
         this.messageService.clear();
         this.messageService.add(data['result']);
       });
-    } 
+    }
   }
 
 }
