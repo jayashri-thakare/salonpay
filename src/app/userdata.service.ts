@@ -167,9 +167,7 @@ export class UserdataService {
     this.body = {};
     this.body.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.body.UserId = localStorage.getItem('userId');
-    this.body.EnableTextNotification = userdata.controls.EnableTextNotification.value;
-    // this.body['NotificationType']= userdata.controls.NotificationType.value
-    this.body.Notification = userdata.value.Notification;
+    this.body.NotificationType = userdata;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, this.body, httpOptions)
       .pipe(map( data => data));
   }

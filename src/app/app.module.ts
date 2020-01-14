@@ -45,6 +45,7 @@ import {EmailEditComponent} from './dashboard/emailsetting/emailsignature.compon
 import {CustomTimePickerComponent} from './dashboard/schedulesetting/customtimepicker.component';
 import { ScheduleEditComponent } from './dashboard/schedulesetting/schedule-edit.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -98,7 +99,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CscComponent,
     InternationalTelNoDirective,
     AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
-  providers: [UserdataService],
+  providers: [UserdataService, DatePipe],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
 })

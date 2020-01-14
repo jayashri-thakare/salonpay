@@ -50,12 +50,14 @@
 
   <!-- Main Container Starts -->
   <div class="mainContainer" *ngIf="requesttimevar">
+    <app-messages></app-messages>
     <h3 class="main-comm-head"><i class="icon-down-arrow com-arw" (click)="requesttimefunction()"></i>{{'My' | translate}} {{'Weekly' | translate}} {{'Schedule' | translate}}</h3>
 
     <!-- start -->
     <div class="acctset-w370">
       <!-- start -->
       <form [formGroup]="timeoffForm"  (ngSubmit)="updateTimeoff(timeoffForm.value, DateRangePicker)" class="popup-scrll">
+       
       <h6 class="poptile">{{'Request' | translate}} {{'Time' | translate}} {{'Off' | translate}}</h6>
       <ul class="nav nav-pills">
         <li class="nav-item">

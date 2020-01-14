@@ -4,6 +4,7 @@ import {UserdataService} from '../../userdata.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { MessageService } from 'src/app/message.service';
+import {DatePipe} from '@angular/common'
 
 @Component({
   selector: 'app-schedulesetting',
@@ -29,7 +30,7 @@ export class SchedulesettingComponent implements OnInit {
   userdelschedule: any;
   onemultiplevar: number;
 
-  constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
+  constructor(public datepipe: DatePipe, private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
   get f() {
     return this.scheduleForm.controls;
@@ -142,8 +143,8 @@ export class SchedulesettingComponent implements OnInit {
     debugger;
     console.log(userdata, this.timeoffForm)
     if(date){
-      userdata.StartDate = date[0];
-      userdata.EndDate = date[1];
+      userdata.StartDate = this.datepipe.transform(date[0], 'yyyy-MM-dd');
+      userdata.EndDate = this.datepipe.transform(date[1], 'yyyy-MM-dd');
     }
     userdata.Type = this.onemultiplevar
     // tslint:disable-next-line:triple-equals
@@ -153,9 +154,11 @@ export class SchedulesettingComponent implements OnInit {
         userdata.SubType = 1
       }
       userdata.SubType = JSON.stringify(userdata.SubType)
+      userdata.StartDate = this.datepipe.transform(userdata.StartDate, 'yyyy-MM-dd');
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
+        this.timeoffForm.reset();
         this.messageService.clear();
-        this.messageService.add('Time Off added succesfully.');
+        this.messageService.add('Time OFF Request added succesfully.');
       });
     } else {
       console.log(userdata, this.timeoffForm.status);

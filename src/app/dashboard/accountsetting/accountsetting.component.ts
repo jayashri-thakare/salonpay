@@ -31,11 +31,11 @@ export class AccountsettingComponent implements OnInit {
 
   translatelanguage(){
     this.translate.addLangs(['English', 'Vietnamese']);
-    this.translate.setDefaultLang(this.useraccountdetail.langType);
-    console.log(this.useraccountdetail.langType)
+    this.translate.setDefaultLang(this.useraccountdetail.language);
+    console.log(this.useraccountdetail.language)
 
     const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang.match(/English|Vietnamese/) ? browserLang : this.useraccountdetail.langType)
+    this.translate.use(browserLang.match(/English|Vietnamese/) ? browserLang : this.useraccountdetail.language)
   }
 
   openModal(id, userdetail) {
