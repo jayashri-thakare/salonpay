@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {Router} from '@angular/router';
 import { ModalService } from '../../_modal/modal.service';
 import {UserdataService} from '../..//userdata.service';
@@ -27,7 +27,7 @@ import {MessageService} from '../../message.service';
     '        <div class="form-group">\n' +
     '          <select class="select-field form-field" formControlName="TimezoneId">\n' +
     '             <option value="">Select Timezone...</option>\n' +
-    '             <option *ngFor="let timezone of userdetail?.timeZonesList" [value]="timezone.id">{{timezone.name}}</option>\n' +
+    '             <option *ngFor="let timezone of userdetail?.timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 40}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
@@ -61,6 +61,7 @@ export class AccountEditComponent implements OnInit {
   submitted = false;
   private userdetail: Observable< object >;
   useraccountdetail: any;
+  @Output() accountdetail = new EventEmitter<object>();
 
   constructor(public translate: TranslateService, private userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
@@ -76,6 +77,7 @@ export class AccountEditComponent implements OnInit {
     });
     this.getUserAccount();
     this.getuserAccountdetail();
+    this.accountdetail.emit(this.useraccountdetail);
   }
 
   closeModal(id: string) {
@@ -94,7 +96,7 @@ export class AccountEditComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.accountForm.status == 'VALID') {
       this.userdataservice.update_account_edit(userdata).subscribe((data) => {
-        this.getuserAccountdetail();
+        this.userdataService.publish('call-account');
         this.messageService.clear();
         this.messageService.add('User account updated successfully.')
         this.closeModal('account-setting');

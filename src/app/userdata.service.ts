@@ -99,7 +99,7 @@ export class UserdataService {
 
   getNotification() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/GetNotifcationSetting?UserId=' + this.userId + '&ParentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/GetNotifcationSetting?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
@@ -162,7 +162,6 @@ export class UserdataService {
   }
 
   update_notification(userdata) {
-    debugger;
     this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff';
     this.body = {};
     this.body.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
@@ -181,7 +180,6 @@ export class UserdataService {
   }
 
   update_schedule(userdata) {
-    debugger;
     this.baseUrl = ' http://172.16.0.99:7894/api/schedule/UpdateOneDaySchedule?';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
@@ -190,7 +188,6 @@ export class UserdataService {
   }
 
   update_timeoff(userdata) {
-    debugger;
     this.baseUrl = ' http://172.16.0.99:7894/api/schedule/Timeoffrequest';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;

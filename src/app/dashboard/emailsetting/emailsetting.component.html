@@ -1,7 +1,7 @@
 <!-- Main Container Starts -->
 
 <div id="email-sid" *ngIf="userdataService.emailnav">
-<div class="mainContainer">
+<div class="mainContainer" *ngIf="emailsign">
   <div class="main-head-flx">
     <h3 class="main-comm-head mb-0">{{'Email' | translate}} <span>{{'Settings' | translate}}</span></h3>
     <i class="icon-edit grd-icon-big hover-rotate side-menu" (click)="modalService.open('side-menu-imap')"></i>
@@ -47,7 +47,7 @@
           </ul>
         </div>
       </div>
-      <a href="user-email-types.html" class="button dashed-button">
+      <a class="button dashed-button" (click)="mailconnectfuc();">
         <i class="icon-cir-plus mr-2"></i>Connect <span class="ml-1">Inbox</span>
       </a>
     </div>
@@ -101,8 +101,219 @@
 <div class="time-track-btn"><i class="icon-clock"></i></div>
 <!-- end -->
 
-<!-- Edit Profile Menu -->
+ <!-- Main Container Starts -->
+ <div class="mainContainer" *ngIf="emailconnect">
+  <h3 class="main-comm-head mb-0" (click)="mailconnectfuc()"><i class="icon-down-arrow com-arw"></i>{{'Email' | translate}} <span>{{'Settings' | translate}}</span></h3>
+  <div class="mail-typ-flex">
+      <!-- start -->
+      <div class="mail-typ-box">
+          <h2>What kind of email do you want to connect?</h2>
+
+          <div class="mail-typ-othr">
+              <!-- start -->
+              <div class="mail-typ" data-toggle="modal" data-target="#gmailPopup">
+                  <div class="mail-typ-img"><img src="../../../assets/img/mail1.svg" alt=""></div>
+                  <p>Gmail</p>
+              </div>
+              <!-- end -->
+              <!-- start -->
+              <div class="mail-typ" data-toggle="modal" data-target="#officePopup">
+                  <div class="mail-typ-img"><img src="../../../assets/img/mail2.svg" alt=""></div>
+                  <p>Office 365</p>
+              </div>
+              <!-- end -->
+              <!-- start -->
+              <div class="mail-typ side-menu" (click)="openModal('other-edit')">
+                  <div class="mail-typ-img"><img src="../../../assets/img/mail3.svg" alt=""></div>
+                  <p>Other</p>
+              </div>
+              <!-- end -->
+          </div>
+      </div>
+      <!-- end -->
+  </div>
+</div>
+<!-- Main Container Ends -->
+
+<!--  Modal Starts -->
+<div class="modal fade" id="gmailPopup">
+  <!-- [big-window] [modal-lg] [modal-md] [modal-sm] -->
+  <div class="modal-dialog modal-dialog-centered medium-window">
+      <div class="modal-content">
+          <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+          <h2 class="modal-title">Gmail</h2>
+          <p class="modal-subtitle">Connect your Gmail inbox to SalonPay</p>
+
+          <div class="gmail-pop-cont scrollbar">
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                  been the
+                  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                  of type and
+                  scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                  the leap into
+                  electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                  with the release of
+                  Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                  software like</p>
+              <p>
+                  Aldus PageMaker including versions of Lorem Ipsum. It is a long established fact that a
+                  reader will be
+                  distracted by the readable content of a page when looking at its layout. The point of using
+                  Lorem Ipsum is
+                  that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                  here, content here',
+                  making it look like readable English. Many desktop publishing packages and web page editors
+                  now use
+                  Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many
+                  web sites still in
+                  their infancy. Various versions have evolved over the years, sometimes by accident,
+                  sometimes on purpose.</p>
+              <p>
+                  Aldus PageMaker including versions of Lorem Ipsum. It is a long established fact that a
+                  reader will be
+                  distracted by the readable content of a page when looking at its layout. The point of using
+                  Lorem Ipsum is
+                  that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                  here, content here',
+                  making it look like readable English. Many desktop publishing packages and web page editors
+                  now use
+                  Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many
+                  web sites still in
+                  their infancy. Various versions have evolved over the years, sometimes by accident,
+                  sometimes on purpose.</p>
+          </div>
+
+          <div class="modal-btn modal-btn-flex">
+              <a href="#" class="choose">Choose a different provider</a>
+              <button class="button" data-toggle="modal" data-target="#gmailloginpopup" data-dismiss="modal">Continue</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+<!--  Modal Ends -->
+
+<!--  Modal Starts -->
+<div class="modal fade" id="officePopup">
+  <!-- [big-window] [modal-lg] [modal-md] [modal-sm] -->
+  <div class="modal-dialog modal-dialog-centered medium-window">
+      <div class="modal-content">
+          <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+          <h2 class="modal-title">Office 365</h2>
+          <p class="modal-subtitle">Connect your Office 365 inbox to SalonPay</p>
+
+          <div class="gmail-pop-cont scrollbar">
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                  been the
+                  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                  of type and
+                  scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                  the leap into
+                  electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                  with the release of
+                  Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                  software like</p>
+              <p>
+                  Aldus PageMaker including versions of Lorem Ipsum. It is a long established fact that a
+                  reader will be
+                  distracted by the readable content of a page when looking at its layout. The point of using
+                  Lorem Ipsum is
+                  that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                  here, content here',
+                  making it look like readable English. Many desktop publishing packages and web page editors
+                  now use
+                  Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many
+                  web sites still in
+                  their infancy. Various versions have evolved over the years, sometimes by accident,
+                  sometimes on purpose.</p>
+              <p>
+                  Aldus PageMaker including versions of Lorem Ipsum. It is a long established fact that a
+                  reader will be
+                  distracted by the readable content of a page when looking at its layout. The point of using
+                  Lorem Ipsum is
+                  that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                  here, content here',
+                  making it look like readable English. Many desktop publishing packages and web page editors
+                  now use
+                  Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many
+                  web sites still in
+                  their infancy. Various versions have evolved over the years, sometimes by accident,
+                  sometimes on purpose.</p>
+          </div>
+
+          <div class="modal-btn modal-btn-flex">
+              <a href="#" class="choose">Choose a different provider</a>
+              <button class="button" data-toggle="modal" data-target="#officeloginpopup" data-dismiss="modal">Continue</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+<!--  Modal Ends -->
+<!--  Modal Starts -->
+<div class="modal fade" id="gmailloginpopup">
+  <!-- [big-window] [modal-lg] [modal-md] [modal-sm] -->
+  <div class="modal-dialog modal-dialog-centered medium-window">
+      <div class="modal-content">
+          <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+          <h2 class="modal-title">Gmail Login</h2>
+          <p class="modal-subtitle">Connect your Gmail inbox to SalonPay</p>
+
+          <div class="gmail-pop-cont scrollbar">
+            <div class="form-group">
+              <input type="email" id="Email" class="form-field" />
+              <p class="form-label">{{'Email' | translate}}</p>
+            </div>
+            <div class="form-group">
+              <input class="form-field" type="password"  id="Password" />
+              <p class="form-label">{{'Password' | translate}}</p>
+              <i class="view-pass icon-hide"></i>
+            </div>
+          </div>
+
+          <div class="modal-btn modal-btn-flex">
+              <button class="button">Continue</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+<!--  Modal Ends -->
+<!--  Modal Starts -->
+<div class="modal fade" id="officeloginpopup">
+  <!-- [big-window] [modal-lg] [modal-md] [modal-sm] -->
+  <div class="modal-dialog modal-dialog-centered medium-window">
+      <div class="modal-content">
+          <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+          <h2 class="modal-title">Office Login</h2>
+          <p class="modal-subtitle">Connect your Office inbox to SalonPay</p>
+
+          <div class="gmail-pop-cont scrollbar">
+            <div class="form-group">
+              <input type="email" id="Email" class="form-field" />
+              <p class="form-label">{{'Email' | translate}}</p>
+            </div>
+            <div class="form-group">
+              <input class="form-field" type="password"  id="Password" />
+              <p class="form-label">{{'Password' | translate}}</p>
+              <i class="view-pass icon-hide"></i>
+            </div>
+          </div>
+
+          <div class="modal-btn modal-btn-flex">
+              <button class="button">Continue</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+<!--  Modal Ends -->
 <div class="overlay"> </div>
+<IMAP-modal></IMAP-modal>
 <email-modal [userdata]="userdetail"></email-modal>
 <!-- Edit Profile Menu End -->
 </div>

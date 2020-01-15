@@ -19,6 +19,7 @@ export class AccountsettingComponent implements OnInit {
   private modals: any[ ] = [];
   timeZonesList: {};
   userLanguageList: {}
+  subscription: any;
   constructor(private translate: TranslateService, private router: Router, private userdataService: UserdataService, private modalService: ModalService) {
    
    }
@@ -26,7 +27,7 @@ export class AccountsettingComponent implements OnInit {
   ngOnInit() {
     this.getuserAccount();
     this.userdataService.accountnav = false;
-
+    this.subscription = this.userdataService.on('call-account').subscribe(() => this.getuserAccount());
   }
 
   translatelanguage(){

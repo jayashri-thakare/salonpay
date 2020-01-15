@@ -46,6 +46,7 @@ import {CustomTimePickerComponent} from './dashboard/schedulesetting/customtimep
 import { ScheduleEditComponent } from './dashboard/schedulesetting/schedule-edit.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { DatePipe } from '@angular/common';
+import {IMAPSettingComponent} from './dashboard/emailsetting/imapsetting.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -76,6 +77,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     })
   ],
   declarations: [AppComponent,
+    IMAPSettingComponent,
     ScheduleEditComponent,
     SignUpComponent,
     LoginComponent,
