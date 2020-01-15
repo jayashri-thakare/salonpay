@@ -1,7 +1,7 @@
 <!-- <div  *ngIf="messageService.edited">
   <div *ngFor='let message of messageService.messages'> {{message}} </div>
 </div> -->
-<div class="modal-content padd0" *ngIf="messageService.edited">
+<div class="padd0" *ngIf="messageService.edited">
   <div class="modal-body">
     <h6 class="text-font" *ngFor='let message of messageService.messages'>{{message}}</h6>
   </div>

@@ -119,7 +119,11 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
-    console.log(userdata, this.scheduleForm)
+    if(userdata.DayName == '' || userdata.EndTimeHour == '' || userdata.EndTimeMeridian == '' || userdata.EndTimeMinute == '' || userdata.StartTimeHour == '' || userdata.StartTimeMeridian == '' || userdata.StartTimeMinute == ''|| userdata.DayName == null || userdata.EndTimeHour == null || userdata.EndTimeMeridian == null || userdata.EndTimeMinute == null || userdata.StartTimeHour == null || userdata.StartTimeMeridian == null || userdata.StartTimeMinute == null){
+      this.messageService.clear();
+      this.messageService.add('Please Fill All the fields.');
+    }else{
+          console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
     console.log(userdata.DayName)
     // tslint:disable-next-line:triple-equals
@@ -137,15 +141,21 @@ export class SchedulesettingComponent implements OnInit {
         return;
       }
     }
+    }
+
   }
 
   updateTimeoff(userdata, date) {
-    debugger;
-    console.log(userdata, this.timeoffForm)
     if(date){
       userdata.StartDate = this.datepipe.transform(date[0], 'yyyy-MM-dd');
       userdata.EndDate = this.datepipe.transform(date[1], 'yyyy-MM-dd');
     }
+    userdata.StartDate = this.datepipe.transform(userdata.StartDate, 'yyyy-MM-dd');
+    if(userdata.StartDate == '' || userdata.StartDate == null){
+      this.messageService.clear();
+      this.messageService.add('Please Fill all the fields.');
+    }else{
+      console.log(userdata, this.timeoffForm)
     userdata.Type = this.onemultiplevar
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
@@ -154,7 +164,6 @@ export class SchedulesettingComponent implements OnInit {
         userdata.SubType = 1
       }
       userdata.SubType = JSON.stringify(userdata.SubType)
-      userdata.StartDate = this.datepipe.transform(userdata.StartDate, 'yyyy-MM-dd');
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
         this.timeoffForm.reset();
         this.messageService.clear();
@@ -167,6 +176,8 @@ export class SchedulesettingComponent implements OnInit {
         return;
       }
     }
+    }
+    
   }
 
   getuserSchedule() {
