@@ -28,10 +28,13 @@ export class EmailsettingComponent implements OnInit {
   @Input('userdata') userdetail: any;
   private signature: string;
   private subscription: Subscription;
+  emailsign: boolean;
+  emailconnect: boolean;
 
   constructor(private router: Router, private userdataService: UserdataService, private modalService: ModalService) { }
 
   ngOnInit() {
+    this.emailsign = true;
     this.userdataService.emailnav = false;
     this.getUserSignature();
     this.subscription = this.userdataService.on('call-signature').subscribe(() => this.getUserSignature());
@@ -41,5 +44,19 @@ export class EmailsettingComponent implements OnInit {
     this.userdataService.getUserSignature().subscribe((data) => {
       this.userdetail = data;
     });
+  }
+
+  openModal(id, userdetail) {
+    this.modalService.open(id, userdetail);
+  }
+
+  mailconnectfuc(){
+    if(this.emailsign == true){
+      this.emailsign = false;
+      this.emailconnect = true;
+    }else{
+      this.emailsign = true;
+      this.emailconnect = false;
+    }
   }
 }
