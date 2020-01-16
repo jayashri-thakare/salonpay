@@ -60,6 +60,7 @@ export class AccountEditComponent implements OnInit {
   control: FormControl;
   submitted = false;
   private userdetail: Observable< object >;
+  useraccountdetail: any;
 
   constructor(public translate: TranslateService, private userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
@@ -74,6 +75,7 @@ export class AccountEditComponent implements OnInit {
       LanguageId: ['',  [Validators.required]],
     });
     this.getUserAccount();
+    this.getuserAccountdetail();
   }
 
   closeModal(id: string) {
@@ -92,7 +94,7 @@ export class AccountEditComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.accountForm.status == 'VALID') {
       this.userdataservice.update_account_edit(userdata).subscribe((data) => {
-        this.getUserAccount();
+        this.getuserAccountdetail();
         this.messageService.clear();
         this.messageService.add('User account updated successfully.')
         this.closeModal('account-setting');
@@ -104,5 +106,22 @@ export class AccountEditComponent implements OnInit {
         return;
       }
     }
+  }
+
+  translatelanguage(){
+    this.translate.addLangs(['English', 'Vietnamese']);
+    this.translate.setDefaultLang(this.useraccountdetail.language);
+    console.log(this.useraccountdetail.language)
+
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use(browserLang.match(/English|Vietnamese/) ? browserLang : this.useraccountdetail.language)
+  }
+
+  getuserAccountdetail() {
+    this.userdataService.getUpdateUserAccount().subscribe((data) => {
+      this.useraccountdetail = data;
+      console.log(this.useraccountdetail)
+      this.translatelanguage();
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {UserdataService} from '../../userdata.service';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 
 // tslint:disable-next-line:class-name
@@ -37,15 +37,18 @@ export class NotificationsettingComponent implements OnInit {
     this.userdataService.notificationnav = false;
     // this.notificationsetting()
     this.notificationForm = this.formBuilder.group({
-      NotificationTypeEmail: [''],
-      NotificationTypeSMS: [''],
-      EnableTextNotification: [''],
-      EnableEmailNotification: ['']
+      // NotificationTypeEmail: [''],
+      // NotificationTypeSMS: [''],
+      // EnableTextNotification: [''],
+      // EnableEmailNotification: [''],
+      notifications: new FormArray([])
       // Notification: this.notificationobject
     });
     // this.getNotifications();
-    this.getMasterNotification();
+    // this.getMasterNotification();
+    this.getNotifications();
   }
+
 
   getMasterNotification() {
     this.userdataService.getMasterNotification().subscribe((data) => {
@@ -56,8 +59,8 @@ export class NotificationsettingComponent implements OnInit {
   getNotifications() {
     this.userdataService.getNotification().subscribe((data) => {
       console.log(data)
-      this.notifications = data;
-      // this.notifications = data[0].notify;
+      // this.notifications = data;
+      this.notifications = data[0].notify;
     });
   }
   notificationsetting(notify, type, note) {
@@ -100,14 +103,14 @@ export class NotificationsettingComponent implements OnInit {
     debugger;
     console.log(userdata, this.notificationForm)
     // tslint:disable-next-line:triple-equals
-    this.a1 = [];
-    this.a2 = {};
-    let a2;
-    a2 = this.note1;
-    let a1;
-    a1 = a2;
+    // this.a1 = [];
+    // this.a2 = {};
+    // let a2;
+    // a2 = this.note1;
+    // let a1;
+    // a1 = a2;
     if (this.notificationForm.status == 'VALID') {
-      userdata["NotificationType"] = [a1];
+      userdata["NotificationType"] = [this.note1];
       this.userdataService.update_notification(userdata).subscribe((data) => {
         debugger;
         console.log('DONEEEEEEEEEE!!!')

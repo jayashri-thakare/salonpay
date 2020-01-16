@@ -19,10 +19,11 @@
                 <div class="background"></div>
               </label>
               <br/>
-              <input id="fileInput" type='file' (change)="onSelectFile($event)">
+              <input id="fileInput" type='file' (change)="upload_profile_image($event)">
 
 <!--              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />-->
               <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>
+              ==={{userdataService?.imagepath}}
             </div>
 <!--            <div class="avatar-preview">-->
 <!--              <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">-->
@@ -102,7 +103,7 @@
         </div>
         <div class="comm-cont w50 w-480-50">
           <p>{{'Zip Code' | translate}}</p>
-          <h6>{{userdetail?.zipCode}}</h6>
+          <h6>{{userdetail?.zipcode}}</h6>
         </div>
       </div>
       <!-- end -->

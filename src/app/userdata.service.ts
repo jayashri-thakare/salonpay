@@ -15,7 +15,7 @@ const httpOptions = {
     'Access-Control-Allow-Origin': '*',
     // Authorization: localStorage.getItem('Token'),
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-    'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept, Origin,Access-Control-Allow-Origin'
+    'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept, Origin'
   })
 };
 
@@ -29,6 +29,8 @@ class userdetail {
   providedIn: 'root'
 })
 export class UserdataService {
+  // tslint:disable-next-line:ban-types
+  imagepath: string;
  	constructor(private httpClient: HttpClient) {
  	  // let url = environment.apiUrl;
     this.url = environment.apiUrl; }
@@ -111,7 +113,7 @@ export class UserdataService {
   }
   getNotification() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://49.248.77.14:7894/api/notificationsetting/GetNotifcationSetting?UserId=' + this.userId + '&ParentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'http://49.248.77.14:7894/api/notificationsetting/GetNotifcationSetting?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
@@ -146,6 +148,10 @@ export class UserdataService {
       .pipe(map( data => data));
   }
 
+  deleteUserSchedule(deldata) {
+    return this.httpClient.delete('http://172.16.0.99:7894/api/schedule/Delete?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId + '&DayName=' + deldata);
+  }
+
   update_signature(userdata) {
     this.baseUrl = 'http://49.248.77.14:7894/api/Email/SaveEmailSignature?';
     userdata.UserId = localStorage.getItem('userId');
@@ -168,32 +174,13 @@ export class UserdataService {
   }
 
   update_notification(userdata) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/notificationsetting/NotoficationOnOff? ';
-    userdata["UserId"] = localStorage.getItem('userId');
-    userdata["ParentCompanyId"] = parseInt (localStorage.getItem('companyId'));
+    debugger;
+    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff? ';
+    userdata.UserId = localStorage.getItem('userId');
+    userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));
     // userdata["NotificationType"] = [{"Custom_notification": {"EnableEmailNotification": true}}]
-    userdata = JSON.stringify(userdata)
-    console.log(userdata)
-    // userdata = {
-    //   "UserId" :"0caf29b2-eeb8-436d-8213-f31042ceea6a",
-    //   "ParentCompanyId":6,
-    //   "NotificationType":	[{
-    //     "Custom_notification":
-    //       {
-    //         "EnableTextNotification":false,
-    //         "EnableEmailNotification":true
-    //       },
-    //     "General_notification":
-    //       {
-    //         "EnableTextNotification":false,
-    //         "EnableEmailNotification":true
-    //       }
-    //
-    //   }]}
-
-
-
-
+    // userdata = JSON.stringify(userdata)
+    console.log(userdata);
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
@@ -204,6 +191,22 @@ export class UserdataService {
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
+  }
+
+  upload_profile_image(userdata) {
+	  debugger;
+	   this.baseUrl = 'http://172.16.0.99:7894/api/Profile/UploadProfilePicture?';
+	   let input = new FormData();
+	   input.append('file', userdata[0]);
+	   input.append('id', this.userId);
+    // this.httpClient.post(this.baseUrl, input).subscribe((val) => {
+    //   debugger;
+    //   console.log(val);
+    //   // this.imagepath = val;
+    // });
+    // return false;
+	   return this.httpClient.post<Observable<userdetail>>(this.baseUrl, input)
+	      .pipe(map( data => data));
   }
 
   update_schedule(userdata) {
@@ -219,7 +222,7 @@ export class UserdataService {
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
-      .pipe(map( data => data));
+    .pipe(map( data => data));
   }
 
   update_profile_Users(userdata) {

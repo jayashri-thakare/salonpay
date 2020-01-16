@@ -15,21 +15,21 @@
         </div>
       </div>
       <!-- start -->
-      <div class="notif-body" *ngFor="let notification of notifications;trackBy:notification?.typeCode">
+      <div class="notif-body"  *ngFor="let notification of notifications;trackBy:notification?.typeCode; let i = index">
 
-        <h6>{{notification.typeName}}</h6>
-        <div class="notif-switch-left">
+        <h6>{{notification.notificationType}} </h6>
+        <div class="notif-switch-left" formArrayName="notifications">
           <div class="switch switch--horizontal only-switch">
-            <input id="email1" type="checkbox"  (change)="notificationsetting($event, 'email', notification.typeName)" formControlName="NotificationTypeEmail" />
+            <input id="email1" type="radio" [(ngModel)]="notification.enableEmailNotification" (change)="notificationsetting($event, 'email', notification.notificationType)" [formControlName]="i" />
             <label for="email1"></label>
-            <input id="email11" type="checkbox" (change)="notificationsetting($event, 'email', notification.typeName)" formControlName="NotificationTypeEmail" />
+            <input id="email11" type="radio" [(ngModel)]="notification.enableEmailNotification" (change)="notificationsetting($event, 'email', notification.notificationType)" [formControlName]="i" />
             <label for="email11"></label><span class="toggle-outside"><span
             class="toggle-inside"></span></span>
           </div>
           <div class="switch switch--horizontal only-switch">
-            <input id="sms1" type="checkbox" (change)="notificationsetting($event, 'sms', notification.typeName)" formControlName="NotificationTypeSMS"/>
+            <input id="sms1" type="radio"  [(ngModel)]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" [formControlName]="i"/>
             <label for="sms1"></label>
-            <input id="sms11" type="checkbox" (change)="notificationsetting($event, 'sms', notification.typeName)" formControlName="NotificationTypeSMS"/>
+            <input id="sms11" type="radio" [(ngModel)]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" [formControlName]="i"/>
             <label for="sms11"></label><span class="toggle-outside"><span
             class="toggle-inside"></span></span>
           </div>
@@ -64,7 +64,7 @@
     </div>
   </div>
   <!-- end -->
-    <button class="button w50">{{'Save' | translate}}</button>
+    <button class="button w10">{{'Save' | translate}}</button>
   </form>
 </div>
 <!-- Main Container Ends -->

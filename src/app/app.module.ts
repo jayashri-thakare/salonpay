@@ -19,7 +19,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { ProfilesettingComponent } from './dashboard/profilesetting/profilesetting.component';
 import {EmailsettingComponent, Safe} from './dashboard/emailsetting/emailsetting.component';
 import { NotificationsettingComponent } from './dashboard/notificationsetting/notificationsetting.component';
-import {AccountsettingComponent} from './dashboard/accountsetting/accountsetting.component';
+import { AccountsettingComponent } from './dashboard/accountsetting/accountsetting.component';
 import { BanksettingComponent } from './dashboard/banksetting/banksetting.component';
 import { SchedulesettingComponent } from './dashboard/schedulesetting/schedulesetting.component';
 import { SidebarComponent } from './_layout/sidebar/sidebar.component';
@@ -45,6 +45,7 @@ import {EmailEditComponent} from './dashboard/emailsetting/emailsignature.compon
 import {CustomTimePickerComponent} from './dashboard/schedulesetting/customtimepicker.component';
 import { ScheduleEditComponent } from './dashboard/schedulesetting/schedule-edit.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { DatePipe } from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -74,34 +75,33 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     })
   ],
-    declarations: [AppComponent,
-        ScheduleEditComponent,
-        SignUpComponent,
-        LoginComponent,
-        ForgotComponent,
-        ControlErrorsDirective,
-        ControlErrorContainerDirective,
-        FormSubmitDirective,
-        ControlErrorComponent,
-        MessagesComponent,
-        ControlErrorComponent,
-        DashboardComponent,
-        ResetpasswordComponent,
-        ProfilesettingComponent,
-        EmailsettingComponent,
-        NotificationsettingComponent,
-        AccountsettingComponent,
-        BanksettingComponent,
-        SchedulesettingComponent,
-        SidebarComponent,
-        HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
-        CscComponent,
-        InternationalTelNoDirective,
-        AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
-  providers: [UserdataService],
+  declarations: [AppComponent,
+    ScheduleEditComponent,
+    SignUpComponent,
+    LoginComponent,
+    ForgotComponent,
+    ControlErrorsDirective,
+    ControlErrorContainerDirective,
+    FormSubmitDirective,
+    ControlErrorComponent,
+    MessagesComponent,
+    ControlErrorComponent,
+    DashboardComponent,
+    ResetpasswordComponent,
+    ProfilesettingComponent,
+    EmailsettingComponent,
+    NotificationsettingComponent,
+    AccountsettingComponent,
+    BanksettingComponent,
+    SchedulesettingComponent,
+    SidebarComponent,
+    HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
+    CscComponent,
+    InternationalTelNoDirective,
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
+  providers: [UserdataService, DatePipe],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
-
 })
 export class AppModule { }
 
