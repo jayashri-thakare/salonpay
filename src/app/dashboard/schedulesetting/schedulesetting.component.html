@@ -121,20 +121,18 @@
 </div>
 <div class="overlay"></div>
 <schedule-modal [userdata]= "arrayofselectedobj"></schedule-modal>
+<div class="modal fade" id="delete-popup">
+  <div class="modal-dialog medium-window">
+      <div class="modal-content">
+          <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
 
-<div id="delete-popup" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+          <h2 class="modal-title">Are you sure you want to delete this Schedule?</h2>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Are you sure. You want to delete Schedule.</p>
+          <div class="modal-btn">
+              <button class="button line mr-2" data-dismiss="modal">No</button>
+              <button class="button red" data-dismiss="modal" (click)="deleteSchedule(arrayofselectedobj)">Yes</button>
+          </div>
+
       </div>
-      <div class="modal-footer padd0">
-        <button class="button line close-btn" data-dismiss="modal" type="button">Cancel</button>
-        <button class="button" type="submit" (click)="deleteSchedule(arrayofselectedobj)">Delete</button>
-      </div>
-    </div>
-
   </div>
 </div>
