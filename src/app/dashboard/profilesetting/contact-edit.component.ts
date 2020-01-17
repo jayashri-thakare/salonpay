@@ -21,17 +21,17 @@ import {MessageService} from '../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Contact\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="string" id="cont-mob" ngModel="{{userdetail?.phoneNumber}}" internationalTelNo name="cont-mob" formControlName="PhoneNumber" class="form-field" \n' +
+    '          <input type="string" id="cont-mob" ngModel="{{userdetail?.phoneNumber}}" internationalTelNo name="cont-mob" formControlName="PhoneNumber" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Mobile\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="string" id="cont-work" ngModel="{{userdetail?.workContact}}" internationalTelNo name="cont-work" formControlName="WorkContact" class="form-field" \n' +
+    '          <input type="string" id="cont-work" ngModel="{{userdetail?.workContact}}" internationalTelNo name="cont-work" formControlName="WorkContact" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Work\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="string" id="cont-home" ngModel="{{userdetail?.homeConatct}}" internationalTelNo name="cont-home" formControlName="HomeConatct" class="form-field" \n' +
+    '          <input type="string" id="cont-home" ngModel="{{userdetail?.homeConatct}}" internationalTelNo name="cont-home" formControlName="HomeConatct" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Home\' | translate}}</p>\n' +
     '        </div>\n' +

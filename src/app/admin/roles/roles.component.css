@@ -1,0 +1,11 @@
+#admin, #manager, #employee, #technician{
+    cursor: pointer;
+}
+.addbtncol{
+    color: #fff !important;
+}
+.savebtnroles{
+    width: 20%;
+    height: 45px;
+    font-size: 16px;
+}

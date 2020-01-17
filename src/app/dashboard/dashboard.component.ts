@@ -6,12 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 
-// @Component({
-//   selector: 'app-device',
-//   templateUrl: './side-bar.html'
-// })
-// class DeviceComponent {}
-
 export class DashboardComponent implements OnInit {
 
   constructor() { }

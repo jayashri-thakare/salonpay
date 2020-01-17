@@ -1,4 +1,4 @@
-<div *ngIf="router.url === '/dashboard'">
+<div *ngIf="router.url === '/dashboard' || router.url === '/admin'">
   <header>
     <div class="head-top">
       <div class="head-lef">
@@ -6,12 +6,12 @@
       </div>
       <div class="head-rig">
         <ul>
-          <li><a href="#" class="active">{{'Dashboard' | translate}}</a></li>
+          <li><a href="dashboard" class="active">{{'Dashboard' | translate}}</a></li>
           <li><a href="#">{{'Customers' | translate}}</a></li>
           <li><a href="#">{{'Appointment' | translate}}</a></li>
           <li><a href="#">{{'Sales' | translate}}</a></li>
           <li><a href="#">{{'Analytics' | translate}}</a></li>
-          <li><a href="#">{{'Administration' | translate}}</a></li>
+          <li><a href="admin">{{'Administration' | translate}}</a></li>
         </ul>
         <button class="button white">{{'New' | translate}} {{'Appointment' | translate}}</button>
         <button class="button line whitelin">{{'New' | translate}} {{'Sale' | translate}}</button>

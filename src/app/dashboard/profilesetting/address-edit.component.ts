@@ -23,12 +23,12 @@ import {MessageService} from '../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Address\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-line1" name="add-line1" ngModel="{{userdetail?.addressLine1}}" formControlName="AddressLine1" class="form-field" \n' +
+    '          <input type="text" id="add-line1" name="add-line1" ngModel="{{userdetail?.addressLine1}}" formControlName="AddressLine1" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Address Line 1\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-line2" name="add-line2" ngModel="{{userdetail?.addressLine2}}" formControlName="AddressLine2" class="form-field" \n' +
+    '          <input type="text" id="add-line2" name="add-line2" ngModel="{{userdetail?.addressLine2}}" formControlName="AddressLine2" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Address Line 2\' | translate}}</p>\n' +
     '        </div>\n' +
@@ -39,13 +39,13 @@ import {MessageService} from '../../message.service';
     '          </select>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <select formControlName="StateId" ngModel="{{userdetail?.stateId}}" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
+    '          <select formControlName="StateId" ngModel="{{userdetail?.stateid}}" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
     '            <option value="">Select state...</option>\n' +
     '            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <select formControlName="CityId" ngModel="{{userdetail?.cityId}}" class="select-field form-field">\n' +
+    '          <select formControlName="CityId" ngModel="{{userdetail?.cityid}}" class="select-field form-field">\n' +
     '            <option value="">Select city...</option>\n' +
     '            <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>\n' +
     '          </select>\n' +
@@ -61,7 +61,7 @@ import {MessageService} from '../../message.service';
     // '          <p class="form-label">State</p>\n' +
     // '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-code" name="add-code" formControlName="ZipCode" class="form-field" \n' +
+    '          <input type="text" id="add-code" name="add-code" ngModel="{{userdetail?.zipcode}}" formControlName="ZipCode" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">Zip Code</p>\n' +
     '        </div>\n' +

@@ -17,7 +17,7 @@ import {MessageService} from '../../message.service';
     '      <i class="icon-down-arrow com-arw"></i>{{\'Edit\' | translate }}<span> {{\'Profile\' | translate}}</span>\n' +
     '    </h3>\n' +
     '    <!-- common headline end -->\n' +
-    '    <form id="editProfile" [formGroup]="userprofileForm"  (ngSubmit)="updateDetail(userprofileForm, userprofileForm.value)" class="popup-scrll">\n' +
+    '    <form id="editProfile" [formGroup]="userprofileForm" (ngSubmit)="updateDetail(userprofileForm, userprofileForm.value)" class="popup-scrll">\n' +
     '\n' +
     '    <div class="filBox">\n' +
     '      <!-- start -->\n' +
@@ -25,12 +25,12 @@ import {MessageService} from '../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'My\' | translate}} {{\'Profile\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="first-name" value="{{userdetail?.firstName}}" ngModel="{{userdetail?.firstName}}" formControlName="firstName" class="form-field"  \n' +
+    '          <input type="text" id="first-name" value="{{userdetail?.firstName}}" ngModel="{{userdetail?.firstName}}" formControlName="firstName" class="form-field field--not-empty"  \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">First Name </p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="last-name" value="{{ userdetail?.lastName }}" ngModel="{{ userdetail?.lastName }}" formControlName="lastName"  class="form-field" \n' +
+    '          <input type="text" id="last-name" value="{{ userdetail?.lastName }}" ngModel="{{ userdetail?.lastName }}" formControlName="lastName"  class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">Last Name</p>\n' +
     '        </div>\n' +
@@ -41,15 +41,15 @@ import {MessageService} from '../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Gender\' | translate}}</h6>\n' +
     '        <div class="radio-box">\n' +
-    '          <input type="radio" id="radio1" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Male" formControlName="Gender" />\n' +
+    '          <input type="radio" id="radio1" [ngClass]="{ \'error\': submitted && f.Gender.errors }" ngModel="{{userdetail?.gender}}" value="Male" formControlName="Gender" />\n' +
     '          <label for="radio1">Male</label>\n' +
     '        </div>\n' +
     '        <div class="radio-box">\n' +
-    '          <input type="radio" id="radio2" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Female" formControlName="Gender" />\n' +
+    '          <input type="radio" id="radio2" [ngClass]="{ \'error\': submitted && f.Gender.errors }" ngModel="{{userdetail?.gender}}" value="Female" formControlName="Gender" />\n' +
     '          <label for="radio2">Female</label>\n' +
     '        </div>\n' +
     '        <div class="radio-box">\n' +
-    '          <input type="radio" id="radio3" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Others" formControlName="Gender" />\n' +
+    '          <input type="radio" id="radio3" [ngClass]="{ \'error\': submitted && f.Gender.errors }" ngModel="{{userdetail?.gender}}" value="Others" formControlName="Gender" />\n' +
     '          <label for="radio3">Others</label>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
