@@ -22,14 +22,14 @@
           <div class="switch switch--horizontal only-switch">
             <input id="email1" type="checkbox" [(ngModel)]="notification.enableEmailNotification" (change)="notificationsetting($event, 'email', notification.notificationType)" formControlName="EnableEmailNotification" />
             <label for="email1"></label>
-            <input id="email11" type="checkbox" [(ngModel)]="notification.enableEmailNotification" (change)="notificationsetting($event, 'email', notification.notificationType)" formControlName="EnableEmailNotification1" />
+            <input id="email11" type="checkbox" [(ngModel)]="notification.enableEmailNotification" (change)="notificationsetting($event, 'email', notification.notificationType)" formControlName="EnableEmailNotification" />
             <label for="email11"></label><span class="toggle-outside"><span
             class="toggle-inside"></span></span>
           </div>
           <div class="switch switch--horizontal only-switch">
             <input id="sms1" type="checkbox"  [(ngModel)]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="EnableTextNotification"/>
             <label for="sms1"></label>
-            <input id="sms11" type="checkbox" [(ngModel)]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="EnableTextNotification1"/>
+            <input id="sms11" type="checkbox" [(ngModel)]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="EnableTextNotification"/>
             <label for="sms11"></label><span class="toggle-outside"><span
             class="toggle-inside"></span></span>
           </div>
