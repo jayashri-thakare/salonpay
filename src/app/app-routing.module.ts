@@ -11,13 +11,15 @@ import {BanksettingComponent} from './dashboard/banksetting/banksetting.componen
 import {SchedulesettingComponent} from './dashboard/schedulesetting/schedulesetting.component';
 import {ForgotComponent } from './login/forgot.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {AdminComponent} from './admin/admin.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'resetpassword/:id', component: ResetpasswordComponent , pathMatch: 'full'},
   { path: 'forgot', component: ForgotComponent },
-  { path: 'dashboard', component: DashboardComponent}
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'admin', component: AdminComponent}
 ];
 
 @NgModule({

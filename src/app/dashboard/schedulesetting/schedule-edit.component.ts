@@ -30,7 +30,7 @@ import {MessageService} from '../../message.service';
           '</div>'+
          ' <!-- end -->'+
        ' </div>'+
-       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" [userdata]="arrayofselectedobj" addchildAMMessage="edit"></app-customTimePicker>'+
+       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" userdata="{{arrayofselectedobj}}" addchildAMMessage="edit"></app-customTimePicker>'+
         // '<button class="button" type="submit">Update</button>'+
       '</div>'+
     '</div>'+
@@ -62,6 +62,7 @@ export class ScheduleEditComponent implements OnInit {
     return this.scheduleeditForm.controls;
   }
   ngOnInit() {
+    console.log(this.arrayofselectedobj)
     const isdisable = true;
     this.scheduleeditForm = this.formBuilder.group({
         editedDayName: [''],

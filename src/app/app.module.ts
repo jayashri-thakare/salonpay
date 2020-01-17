@@ -47,6 +47,11 @@ import { ScheduleEditComponent } from './dashboard/schedulesetting/schedule-edit
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { DatePipe } from '@angular/common';
 import {IMAPSettingComponent} from './dashboard/emailsetting/imapsetting.component'
+import {AdminComponent} from './admin/admin.component'
+import {UserComponent} from './admin/user/user.component'
+import {RolesComponent} from './admin/roles/roles.component'
+import {AddRolesComponent} from './admin/roles/addroles.component'
+import { AdminService } from './admin/admin.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -77,6 +82,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     })
   ],
   declarations: [AppComponent,
+    AdminComponent,
+    UserComponent,
+    RolesComponent,
+    AddRolesComponent,
     IMAPSettingComponent,
     ScheduleEditComponent,
     SignUpComponent,
@@ -101,7 +110,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CscComponent,
     InternationalTelNoDirective,
     AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
-  providers: [UserdataService, DatePipe],
+  providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
 })
