@@ -5,6 +5,7 @@ import { CscService } from 'src/app/services/cscdropdown.service';
 import { FormBuilder } from '@angular/forms';
 import { UserdataService } from 'src/app/userdata.service';
 import { MessageService } from 'src/app/message.service';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-roles',
@@ -17,12 +18,15 @@ export class RolesComponent implements OnInit {
   manager: boolean;
   employee: boolean;
   technician: boolean;
+  addform: boolean;
+  updateform: boolean;
 
-  constructor(private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
+  constructor(private AdminService: AdminService, private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
     private userdataService: UserdataService, private cscService: CscService,
     private messageService: MessageService) { }
 
   ngOnInit() {
+    this.AdminService.rolesnav = false;
     this.admin = true;
     this.manager = false;
     this.employee = false;
@@ -66,6 +70,16 @@ export class RolesComponent implements OnInit {
       document.querySelector('#employee').classList.remove('active');
       document.querySelector('#manager').classList.remove('active');
       document.querySelector('#admin').classList.add('active');
+    }
+  }
+
+  addupdateform(type){
+    if(type == 'add'){
+      this.updateform = false;
+      this.addform = true; 
+    }else if(type == 'update'){
+      this.updateform = true;
+      this.addform = false;
     }
   }
 

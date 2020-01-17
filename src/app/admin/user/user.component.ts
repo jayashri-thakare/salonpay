@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-user',
@@ -11,9 +12,10 @@ export class UserComponent implements OnInit {
   rolesvar: boolean;
   historyvar: boolean;
 
-  constructor() { }
+  constructor(private AdminService: AdminService) { }
 
   ngOnInit() {
+    this.AdminService.usernav = true;
     this.userdetailvar = true;
     this.rolesvar = false;
     this.historyvar = false;

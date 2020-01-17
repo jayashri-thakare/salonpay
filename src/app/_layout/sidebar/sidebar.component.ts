@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {element} from 'protractor';
 import {UserdataService} from '../../userdata.service';
+import { AdminService } from 'src/app/admin/admin.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,12 +12,14 @@ import {UserdataService} from '../../userdata.service';
 export class SidebarComponent implements OnInit {
   private element: any;
   classvar: any;
-  constructor(private router: Router, private el: ElementRef, private userdataService: UserdataService) {
+  classvar1: string;
+  constructor(private AdminService: AdminService, private router: Router, private el: ElementRef, private userdataService: UserdataService) {
     this.element = el.nativeElement;
   }
 
   ngOnInit() {
     this.classvar = 'profile-sid-box';
+    this.classvar1 = 'menu-sid1-box';
   }
 
   navChange(id) {
@@ -76,6 +79,32 @@ export class SidebarComponent implements OnInit {
       this.userdataService.accountnav = false;
       this.userdataService.banknav = false;
       this.classvar = 'profile-sid-box';
+    }
+  }
+
+  adminnavChange(id){
+    if(id == 'menu-sid1'){
+      this.AdminService.usernav = true;
+      this.AdminService.rolesnav = false;
+      this.AdminService.servicesnav = false;
+      this.AdminService.inventorynav = false;
+      this.AdminService.communicationnav = false;
+      this.AdminService.taxtablenav = false;
+      this.AdminService.couponsnav = false;
+      this.AdminService.rewardsnav = false;
+      this.AdminService.businessnav = false;
+      this.classvar1 = 'menu-sid1-box'
+    }else if(id == 'menu-sid2'){
+      this.AdminService.usernav = false;
+      this.AdminService.rolesnav = true;
+      this.AdminService.servicesnav = false;
+      this.AdminService.inventorynav = false;
+      this.AdminService.communicationnav = false;
+      this.AdminService.taxtablenav = false;
+      this.AdminService.couponsnav = false;
+      this.AdminService.rewardsnav = false;
+      this.AdminService.businessnav = false;
+      this.classvar1 = 'menu-sid2-box'
     }
   }
 }
