@@ -258,26 +258,26 @@
   <div class="modal-dialog modal-dialog-centered medium-window">
       <div class="modal-content">
           <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+          <form [formGroup]="gmailaccount" (ngSubmit)="save_account(gmailaccount.value)">
+            <h2 class="modal-title">Gmail Login</h2>
+            <p class="modal-subtitle">Connect your Gmail inbox to SalonPay</p>
 
-          <h2 class="modal-title">Gmail Login</h2>
-          <p class="modal-subtitle">Connect your Gmail inbox to SalonPay</p>
-
-          <div class="gmail-pop-cont scrollbar">
-            <div class="form-group">
-              <input type="email" id="Email" class="form-field" />
-              <p class="form-label">{{'Email' | translate}}</p>
+            <div class="gmail-pop-cont scrollbar">
+              <div class="form-group">
+                <input type="email" id="Email" class="form-field" />
+                <p class="form-label">{{'Email' | translate}}</p>
+              </div>
+              <div class="form-group">
+                <input class="form-field" type="password"  id="Password" />
+                <p class="form-label">{{'Password' | translate}}</p>
+                <i class="view-pass icon-hide"></i>
+              </div>
             </div>
-            <div class="form-group">
-              <input class="form-field" type="password"  id="Password" />
-              <p class="form-label">{{'Password' | translate}}</p>
-              <i class="view-pass icon-hide"></i>
+
+            <div class="modal-btn modal-btn-flex">
+                <button class="button">Continue</button>
             </div>
-          </div>
-
-          <div class="modal-btn modal-btn-flex">
-              <button class="button">Continue</button>
-          </div>
-
+          </form>
       </div>
   </div>
 </div>
