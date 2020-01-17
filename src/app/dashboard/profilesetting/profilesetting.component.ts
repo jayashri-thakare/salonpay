@@ -47,10 +47,9 @@ export class ProfilesettingComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-      this.userdataService.upload_profile_image(event.target.files).subscribe((data) => {
-        debugger;
-        this.userdetail = data;
-      });
+      // this.userdataService.upload_profile_image(event.target.files).subscribe((data) => {
+      //   this.userdetail.profilePicPath = data['profilePicPath'];
+      // });
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => { // called once readAsDataURL is completed
         if (!event.target) {

@@ -5,6 +5,9 @@ import {ModalService} from '../../_modal/modal.service';
 import { ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 import {Subscription} from 'rxjs';
 import {DomSanitizer} from '@angular/platform-browser';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MessageService} from '../../message.service';
+
 
 @Pipe({name: 'safeHtml'})
 // tslint:disable-next-line:component-class-suffix
@@ -26,17 +29,30 @@ export class Safe {
 
 export class EmailsettingComponent implements OnInit {
   @Input('userdata') userdetail: any;
+  gmailaccount: FormGroup;
+  control: FormControl;
+  submitted = false;
   private signature: string;
   private subscription: Subscription;
   emailsign: boolean;
   emailconnect: boolean;
 
-  constructor(private router: Router, private userdataService: UserdataService, private modalService: ModalService) { }
+  constructor(private router: Router, private userdataService: UserdataService, 
+              private formBuilder: FormBuilder,
+              private modalService: ModalService,
+              private messageService: MessageService) { }
+
+  get f() {
+    return this.gmailaccount.controls;
+  }
 
   ngOnInit() {
     this.emailsign = true;
     this.userdataService.emailnav = false;
     this.getUserSignature();
+    this.gmailaccount = this.formBuilder.group({
+
+    });
     this.subscription = this.userdataService.on('call-signature').subscribe(() => this.getUserSignature());
   }
 
@@ -46,6 +62,25 @@ export class EmailsettingComponent implements OnInit {
     });
   }
 
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+  save_account(userdata) {
+    if (this.gmailaccount.status == 'VALID') {
+      this.userdataService.update_signature(userdata).subscribe((data) => {
+        this.userdataService.publish('call-signature');
+        this.messageService.clear();
+        this.messageService.add('Email signature updated successfully.')
+        this.closeModal('side-menu-imap');
+      });
+    } else {
+      console.log(userdata, this.gmailaccount.status);
+      this.submitted = true;
+      if (this.gmailaccount.invalid) {
+        return;
+      }
+    }
+  }
   openModal(id, userdetail) {
     this.modalService.open(id, userdetail);
   }

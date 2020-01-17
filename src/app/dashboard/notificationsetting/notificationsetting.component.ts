@@ -37,11 +37,13 @@ export class NotificationsettingComponent implements OnInit {
     this.userdataService.notificationnav = false;
     // this.notificationsetting()
     this.notificationForm = this.formBuilder.group({
-      // NotificationTypeEmail: [''],
-      // NotificationTypeSMS: [''],
-      // EnableTextNotification: [''],
-      // EnableEmailNotification: [''],
-      notifications: new FormArray([])
+      NotificationTypeEmail: [''],
+      NotificationTypeSMS: [''],
+      EnableEmailNotification: [''],
+      // EnableEmailNotification1: [''],
+      EnableTextNotification: [''],
+      // EnableTextNotification1: ['']
+      // notifications: new FormArray([])
       // Notification: this.notificationobject
     });
     // this.getNotifications();

@@ -194,19 +194,14 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
-	  debugger;
 	   this.baseUrl = 'http://172.16.0.99:7894/api/Profile/UploadProfilePicture?';
 	   let input = new FormData();
 	   input.append('file', userdata[0]);
 	   input.append('id', this.userId);
-    // this.httpClient.post(this.baseUrl, input).subscribe((val) => {
-    //   debugger;
-    //   console.log(val);
-    //   // this.imagepath = val;
-    // });
-    // return false;
-	   return this.httpClient.post<Observable<userdetail>>(this.baseUrl, input)
-	      .pipe(map( data => data));
+    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
+      this.imagepath = val['profilePicPath'];
+    });
+    return false;
   }
 
   update_schedule(userdata) {

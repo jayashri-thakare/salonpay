@@ -19,11 +19,11 @@
                 <div class="background"></div>
               </label>
               <br/>
-              <input id="fileInput" type='file' (change)="upload_profile_image($event)">
+              <input id="fileInput" type='file' (change)="userdataService.upload_profile_image($event.target.files)">
 
 <!--              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />-->
               <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>
-              ==={{userdataService?.imagepath}}
+              {{userdataService.imagepath}}
             </div>
 <!--            <div class="avatar-preview">-->
 <!--              <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">-->

@@ -15,7 +15,7 @@ import {parseJsonSchemaToCommandDescription} from '@angular/cli/utilities/json-s
     '<jw-modal id="side-menu-imap">\n' +
     '<div class="mobile-side">\n' +
     '  <h3 class="close-btn main-comm-head">\n' +
-    '    <i class="icon-down-arrow com-arw"></i>{{\'Add\' | translate}} IMAP <span>{{\'Settings\' | translate}}</span>\n' +
+    '    <i class="icon-down-arrow com-arw"></i>{{\'Email\' | translate}}  <span>{{\'Signature\' | translate}}</span>\n' +
     '  </h3>\n' +
     '<form class="popup-scrll" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)">\n' +
     '<ejs-richtexteditor formControlName="EmailSignature" ngModel="{{userdetail.emailSignature}}"></ejs-richtexteditor>\n' +
