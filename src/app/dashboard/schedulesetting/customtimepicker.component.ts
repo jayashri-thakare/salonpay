@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" (change)="datechange(hour)" formControlName="StartTimeHour" required>\n' +
+    '            <select class="select-field form-field" (change)="datechange(hour)" formControlName="StartTimeHour">\n' +
     '              <option value="">HH</option> '+
     '              <option (change)="hourschangefunc()" *ngFor="\let hour of arrayofhours" [value]="hour">{{hour}}</option>\n' +
     '            </select>\n' +
@@ -18,7 +18,7 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" formControlName="StartTimeMinute" [(ngModel)]="minute" (change)="datechange(minute)" required>\n' +
+    '            <select class="select-field form-field" formControlName="StartTimeMinute" [(ngModel)]="minute" (change)="datechange(minute)">\n' +
     '              <option value="">MM</option> '+
     '              <option *ngFor="let minute of arrayofminute">{{minute}}</option>\n' +
     '            </select>\n' +
@@ -26,13 +26,13 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="radio-box radio-box-2">\n' +
-    '            <input type="radio" id="{{addchildAMMessage}}_AM" value="AM" formControlName="StartTimeMeridian" (click)="datechange(\'AM\')" required>\n' +
+    '            <input type="radio" id="{{addchildAMMessage}}_AM" value="AM" formControlName="StartTimeMeridian" (click)="datechange(\'AM\')">\n' +
     '            <label for="{{addchildAMMessage}}_AM">AM</label>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="radio-box radio-box-2">\n' +
-    '            <input type="radio" id="{{addchildAMMessage}}_PM" value="PM" formControlName="StartTimeMeridian" (click)="datechange(\'PM\')" required>\n' +
+    '            <input type="radio" id="{{addchildAMMessage}}_PM" value="PM" formControlName="StartTimeMeridian" (click)="datechange(\'PM\')">\n' +
     '            <label for="{{addchildAMMessage}}_PM">PM</label>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
@@ -41,7 +41,7 @@ import { FormGroup } from '@angular/forms';
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" [(ngModel)]="EndTimeHour" (change)="datechange(hour1)" formControlName="EndTimeHour" required>\n' +
+    '            <select class="select-field form-field" [(ngModel)]="EndTimeHour" (change)="datechange(hour1)" formControlName="EndTimeHour" >\n' +
     '              <option value="">HH</option> '+
     '              <option *ngFor="\let hour1 of arrayofhours">{{hour1}}</option>\n' +
     '            </select>\n' +
@@ -49,7 +49,7 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" formControlName="EndTimeMinute" [(ngModel)]="minute1" (change)="datechange(minute1)" required>\n' +
+    '            <select class="select-field form-field" formControlName="EndTimeMinute" [(ngModel)]="minute1" (change)="datechange(minute1)" >\n' +
     '              <option value="">MM</option> '+
     '              <option *ngFor="\let minute1 of arrayofminute">{{minute1}}</option>\n' +
     '            </select>\n' +
@@ -57,13 +57,13 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="radio-box radio-box-2">\n' +
-    '            <input type="radio" id="{{addchildAMMessage}}_endAM" value="AM" (click)="datechange1(\'AM\')" formControlName="EndTimeMeridian" required>\n' +
+    '            <input type="radio" id="{{addchildAMMessage}}_endAM" value="AM" (click)="datechange1(\'AM\')" formControlName="EndTimeMeridian" >\n' +
     '            <label for="{{addchildAMMessage}}_endAM">AM</label>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="radio-box radio-box-2">\n' +
-    '            <input type="radio" id="{{addchildAMMessage}}_endPM" value="PM" (click)="datechange1(\'PM\')" formControlName="EndTimeMeridian" required>\n' +
+    '            <input type="radio" id="{{addchildAMMessage}}_endPM" value="PM" (click)="datechange1(\'PM\')" formControlName="EndTimeMeridian" >\n' +
     '            <label for="{{addchildAMMessage}}_endPM">PM</label>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +

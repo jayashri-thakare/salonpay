@@ -4,7 +4,6 @@ import {UserdataService} from '../../userdata.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { MessageService } from 'src/app/message.service';
-import {DatePipe} from '@angular/common'
 
 @Component({
   selector: 'app-schedulesetting',
@@ -28,16 +27,14 @@ export class SchedulesettingComponent implements OnInit {
   customday: boolean;
   @Input('userdata') arrayofselectedobj: Array<string> = [];
   userdelschedule: any;
-  onemultiplevar: number;
 
-  constructor(public datepipe: DatePipe, private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
+  constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
   get f() {
     return this.scheduleForm.controls;
   }
 
   ngOnInit() {
-    this.onemultiplefunc('one')
     this.userdataService.schedulenav = false;
     this.requesttimevar = false;
     this.schedulevar = true;
@@ -60,9 +57,7 @@ export class SchedulesettingComponent implements OnInit {
       EndTimeHour: [''],
       EndTimeMinute: [''],
       EndTimeMeridian: [''],
-      EndDate: [''],
-      SubType: [''],
-      Type: ['']
+      EndDate: ['']
     });
   }
 
@@ -76,19 +71,10 @@ export class SchedulesettingComponent implements OnInit {
     }
   }
 
-  onemultiplefunc(type){
-    if(type === 'one'){
-      this.onemultiplevar = 0;
-    }else if('multiple'){
-      this.onemultiplevar = 1;
-    }
-  }
-
   selectedDays(selected_day){
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
-      console.log(this.arrayofselecteddays)
     }else{
       this.arrayofselecteddays.splice(index, 1);
     }
@@ -119,13 +105,8 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
-    if(userdata.DayName == '' || userdata.EndTimeHour == '' || userdata.EndTimeMeridian == '' || userdata.EndTimeMinute == '' || userdata.StartTimeHour == '' || userdata.StartTimeMeridian == '' || userdata.StartTimeMinute == ''|| userdata.DayName == null || userdata.EndTimeHour == null || userdata.EndTimeMeridian == null || userdata.EndTimeMinute == null || userdata.StartTimeHour == null || userdata.StartTimeMeridian == null || userdata.StartTimeMinute == null){
-      this.messageService.clear();
-      this.messageService.add('Please Fill All the fields.');
-    }else{
-          console.log(userdata, this.scheduleForm)
+    console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
-    console.log(userdata.DayName)
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
       this.userdataService.add_schedule(userdata).subscribe((data) => {
@@ -141,33 +122,19 @@ export class SchedulesettingComponent implements OnInit {
         return;
       }
     }
-    }
-
   }
 
   updateTimeoff(userdata, date) {
+    console.log(userdata, this.timeoffForm)
     if(date){
-      userdata.StartDate = this.datepipe.transform(date[0], 'yyyy-MM-dd');
-      userdata.EndDate = this.datepipe.transform(date[1], 'yyyy-MM-dd');
+      userdata.StartDate = date[0];
+      userdata.EndDate = date[1];
     }
-    userdata.StartDate = this.datepipe.transform(userdata.StartDate, 'yyyy-MM-dd');
-    if(userdata.StartDate == '' || userdata.StartDate == null){
-      this.messageService.clear();
-      this.messageService.add('Please Fill all the fields.');
-    }else{
-      console.log(userdata, this.timeoffForm)
-    userdata.Type = this.onemultiplevar
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
-      userdata.Type = JSON.stringify(userdata.Type)
-      if(userdata.SubType === undefined && userdata.Type === "0"){
-        userdata.SubType = 1
-      }
-      userdata.SubType = JSON.stringify(userdata.SubType)
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
-        this.timeoffForm.reset();
         this.messageService.clear();
-        this.messageService.add('Time OFF Request added succesfully.');
+        this.messageService.add('Time Off added succesfully.');
       });
     } else {
       console.log(userdata, this.timeoffForm.status);
@@ -176,8 +143,6 @@ export class SchedulesettingComponent implements OnInit {
         return;
       }
     }
-    }
-    
   }
 
   getuserSchedule() {
@@ -190,7 +155,6 @@ export class SchedulesettingComponent implements OnInit {
 
   deleteSchedule(selected_day) {
     selected_day.DayName = this.arrayofselectedobj[0]['dayName'];
-    console.log(selected_day.DayName)
     // tslint:disable-next-line:triple-equals
     if (selected_day) {
       this.userdataService.deleteUserSchedule(selected_day.DayName).subscribe((data) => {
@@ -199,7 +163,7 @@ export class SchedulesettingComponent implements OnInit {
         this.messageService.clear();
         this.messageService.add(data['result']);
       });
-    } 
+    }
   }
 
 }

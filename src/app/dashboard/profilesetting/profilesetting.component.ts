@@ -1,22 +1,21 @@
-import {Component, ComponentFactoryResolver, ComponentRef, OnDestroy, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserdataService} from '../../userdata.service';
 import {ModalService} from '../../_modal/modal.service';
 import {Subscription} from 'rxjs';
 import {CscService} from '../../services/cscdropdown.service';
-import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: 'profilesetting.component.html'
-  // styleUrls: ['./profilesetting.component.css']
+  templateUrl: 'profilesetting.component.html',
+  styleUrls: ['./profilesetting.component.css']
 })
 export class ProfilesettingComponent implements OnInit {
   subscription: Subscription;
   // private userdetail;
   // userdata = this.userdetail;
   @Input('userdata') userdetail: any;
-
+  private url;
   // private subscription: any;
   private form: string;
   constructor( private router: Router, private userdataService: UserdataService, private modalService: ModalService,
@@ -41,6 +40,28 @@ export class ProfilesettingComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+
+
+  upload_profile_image(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      this.userdataService.upload_profile_image(event.target.files).subscribe((data) => {
+        debugger;
+        this.userdetail = data;
+      });
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        if (!event.target) {
+          console.log("in if");
+        } else {
+          // @ts-ignore
+          const {result} = event.target;
+          this.url = result;
+        }
+      };
+    }
   }
 
   getUserDetails() {

@@ -6,3 +6,7 @@
 //   logLevel: NgxLoggerLevel.OFF,
 //   serverLogLevel: NgxLoggerLevel.ERROR
 // };
+export const environment = {
+  apiUrl: 'http://salonpay.leosys.net',
+  enableDebug: false
+};
