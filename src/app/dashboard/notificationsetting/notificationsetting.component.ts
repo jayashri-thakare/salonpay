@@ -39,9 +39,11 @@ export class NotificationsettingComponent implements OnInit {
     this.notificationForm = this.formBuilder.group({
       // NotificationTypeEmail: [''],
       // NotificationTypeSMS: [''],
-      // EnableTextNotification: [''],
-      // EnableEmailNotification: [''],
-      notifications: new FormArray([])
+      EnableEmailNotification: [''],
+      // EnableEmailNotification1: [''],
+      EnableTextNotification: [''],
+      // EnableTextNotification1: ['']
+      // notifications: new FormArray([])
       // Notification: this.notificationobject
     });
     // this.getNotifications();
