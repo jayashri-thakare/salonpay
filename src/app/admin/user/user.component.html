@@ -1,5 +1,6 @@
 <div *ngIf="AdminService.usernav">
     <div class="mainContainer main-container-flg">
+        <app-messages></app-messages>
         <div class="comm-headline-btn">
             <h3 class="main-comm-head m-0">
                 Users
@@ -7,7 +8,7 @@
             </h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
-                    <a href="#" class="button flg-btn side-menu" data-name="add-tax-table">+ Add New</a>
+                    <a class="button flg-btn side-menu addbtncol" (click)="openModal('add-tax-table1');addupdateform('add');">+ Add New</a>
                     <div class="form-group mb-0 mr-2">
                         <!-- <form> -->
                             <input class="form-field" type="text" name="filter-searh" required>
@@ -37,16 +38,16 @@
                             <li><a href="#">Cancelled</a></li>
                         </ul>
                     </div>
-    
+
                 </div>
             </div>
         </div>
-    
+
         <div class="admin-comm-box">
             <div class="admin-comm-lef">
                 <ul class="clearfix tabs user-detail-lef-tab" data-tabgroup="first-tab-group">
-                    <li>
-                        <a href="#tab1" class="admin-comm-rig-btn active">
+                    <li *ngFor="let user of userlist" (click)="getemailfunc(user)" id="{{user.user.email}}">
+                        <a class="admin-comm-rig-btn">
                             <!-- start -->
                             <div class="table-bdy">
                                 <!-- start -->
@@ -55,177 +56,36 @@
                                         <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt=""></div>
                                         <div class="tech-usr-cont">
                                             <p>User</p>
-                                            <h3>David Dion</h3>
+                                            <h3>{{user.user.firstName}} {{user.user.lastName}}</h3>
                                         </div>
                                     </div>
                                     <div class="yur-mail-rig">
                                         <i class="icon-status1 status"></i>
                                         <ul class="status-list">
-                                            <li><i class="icon-edit"></i> Edit</li>
-                                            <li class="delt"><i class="icon-delete"></i> Delete</li>
+                                            <li (click)="openModal('add-tax-table1');addupdateform('update');selectroleobj(user.user)"><i class="icon-edit" ></i> Edit</li>
+                                            <li class="delt" data-toggle="modal" data-target="#deletePopup" (click)="selectroleobj(user.user)"><i class="icon-delete"></i> Delete</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <!-- end -->
-    
+
                                 <ul class="table-rw">
                                     <!-- start -->
                                     <li class="table-dta">
                                         <span>Mobile</span>
-                                        +1-818-269-1084
+                                        {{user.user.phoneNumber}}
                                     </li>
                                     <!-- end -->
                                     <!-- start -->
                                     <li class="table-dta">
                                         <span>Email</span>
-                                        iramembrit@salescorp.com
+                                        {{user.user.email}}
                                     </li>
                                     <!-- end -->
                                     <!-- start -->
                                     <li class="table-dta">
                                         <span>Role</span>
-                                        Manager
-                                    </li>
-                                    <!-- end -->
-                                </ul>
-                            </div>
-                            <!-- end -->
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab2" class="admin-comm-rig-btn">
-                            <!-- start -->
-                            <div class="table-bdy">
-                                <!-- start -->
-                                <div class="tab-top-head">
-                                    <div class="techi-user">
-                                        <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt=""></div>
-                                        <div class="tech-usr-cont">
-                                            <p>User</p>
-                                            <h3>David Dion</h3>
-                                        </div>
-                                    </div>
-                                    <div class="yur-mail-rig">
-                                        <i class="icon-status1 status"></i>
-                                        <ul class="status-list">
-                                            <li><i class="icon-edit"></i> Edit</li>
-                                            <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- end -->
-    
-                                <ul class="table-rw">
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Mobile</span>
-                                        +1-818-269-1084
-                                    </li>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Email</span>
-                                        iramembrit@salescorp.com
-                                    </li>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Role</span>
-                                        Manager
-                                    </li>
-                                    <!-- end -->
-                                </ul>
-                            </div>
-                            <!-- end -->
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab3" class="admin-comm-rig-btn">
-                            <!-- start -->
-                            <div class="table-bdy">
-                                <!-- start -->
-                                <div class="tab-top-head">
-                                    <div class="techi-user">
-                                        <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt=""></div>
-                                        <div class="tech-usr-cont">
-                                            <p>User</p>
-                                            <h3>David Dion</h3>
-                                        </div>
-                                    </div>
-                                    <div class="yur-mail-rig">
-                                        <i class="icon-status1 status"></i>
-                                        <ul class="status-list">
-                                            <li><i class="icon-edit"></i> Edit</li>
-                                            <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- end -->
-    
-                                <ul class="table-rw">
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Mobile</span>
-                                        +1-818-269-1084
-                                    </li>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Email</span>
-                                        iramembrit@salescorp.com
-                                    </li>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Role</span>
-                                        Manager
-                                    </li>
-                                    <!-- end -->
-                                </ul>
-                            </div>
-                            <!-- end -->
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tab4" class="admin-comm-rig-btn">
-                            <!-- start -->
-                            <div class="table-bdy">
-                                <!-- start -->
-                                <div class="tab-top-head">
-                                    <div class="techi-user">
-                                        <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt=""></div>
-                                        <div class="tech-usr-cont">
-                                            <p>User</p>
-                                            <h3>David Dion</h3>
-                                        </div>
-                                    </div>
-                                    <div class="yur-mail-rig">
-                                        <i class="icon-status1 status"></i>
-                                        <ul class="status-list">
-                                            <li><i class="icon-edit"></i> Edit</li>
-                                            <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- end -->
-    
-                                <ul class="table-rw">
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Mobile</span>
-                                        +1-818-269-1084
-                                    </li>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Email</span>
-                                        iramembrit@salescorp.com
-                                    </li>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <li class="table-dta">
-                                        <span>Role</span>
-                                        Manager
+                                        {{user.roleList}}
                                     </li>
                                     <!-- end -->
                                 </ul>
@@ -235,7 +95,7 @@
                     </li>
                 </ul>
             </div>
-    
+
             <div class="admin-comm-rig">
                 <div class="admin-comm-rig-close">
                     <i class="icon-cir-plus"></i>
@@ -249,9 +109,11 @@
                             <li><a (click)="userdetailsctive('roles')" id="roles">Roles</a></li>
                             <li><a (click)="userdetailsctive('history')" id="history">History</a></li>
                         </ul>
-    
+
                         <section id="second-tab-group" class="tabgroup">
                             <div id="inner-tab1" *ngIf="userdetailvar">
+                                <div *ngFor="let userdetail of userlist">
+                                    <div *ngIf="userdetail.user.email == emailvar || (userdetail.user.email == pageinitemail && onloadvar)">
                                 <!-- user details start -->
                                 <!-- start -->
                                 <div class="comm-headline-btn comm-headline-btn-admin">
@@ -260,10 +122,10 @@
                                         <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right"
                                             title="Merge Sales"></i>
                                     </h3>
-                                    <a href="#" class="button">Update</a>
+                                    <a class="button addbtncol" (click)="openModal('add-tax-table1');addupdateform('update');selectroleobj(userdetail.user)">Update</a>
                                 </div>
                                 <!-- end -->
-                                <div class="admin-comm-rig-scroll scrollbar">
+                                <div class="admin-comm-rig-scroll scrollbar" >
                                     <!-- start -->
                                     <div class="avatar-upload inventory-image">
                                         <div class="avatar-edit">
@@ -276,7 +138,7 @@
                                         </div>
                                     </div>
                                     <!-- end -->
-    
+
                                     <!-- start -->
                                     <div class="row">
                                         <div class="w100">
@@ -285,15 +147,15 @@
                                             <div class="prof-comm-shad mb-4">
                                                 <div class="comm-cont w33 w-1200-50 mb-1200-10 p-0">
                                                     <p>First Name</p>
-                                                    <h6>Ira</h6>
+                                                    <h6>{{userdetail.user.firstName}}</h6>
                                                 </div>
                                                 <div class="comm-cont w33 w-1200-50 mb-1200-10 p-0">
                                                     <p>Last Name</p>
-                                                    <h6>Membrit</h6>
+                                                    <h6>{{userdetail.user.lastName}}</h6>
                                                 </div>
                                                 <div class="comm-cont w33 w-1200-50 p-0">
                                                     <p>Gender</p>
-                                                    <h6>Female</h6>
+                                                    <h6>{{userdetail.user.gender}}</h6>
                                                 </div>
                                             </div>
                                             <!-- end -->
@@ -304,11 +166,11 @@
                                             <div class="prof-comm-shad mb-4">
                                                 <div class="comm-cont w33 w-1200-100 mb-1200-10 p-0">
                                                     <p>Mobile</p>
-                                                    <h6>+1-818-269-1084</h6>
+                                                    <h6>{{userdetail.user.phoneNumber}}</h6>
                                                 </div>
                                                 <div class="comm-cont w33 w-1200-100 mb-1200-0 p-0">
                                                     <p>Email</p>
-                                                    <h6>iramembrit@salescorp.com</h6>
+                                                    <h6>{{userdetail.user.email}}</h6>
                                                 </div>
                                             </div>
                                             <!-- end -->
@@ -319,7 +181,7 @@
                                             <div class="prof-comm-shad mb-4">
                                                 <div class="comm-cont w100 p-0">
                                                     <p>Service(s)</p>
-                                                    <h6>Haircut, Manicure Pedicure, Hai Spa</h6>
+                                                    <h6>{{userdetail.serviceAssociatedList}}</h6>
                                                 </div>
                                             </div>
                                             <!-- end -->
@@ -330,7 +192,7 @@
                                             <div class="prof-comm-shad mb-4">
                                                 <div class="comm-cont w100 p-0">
                                                     <p>Experience Level</p>
-                                                    <h6>5 Years</h6>
+                                                    <h6>{{userdetail.levelType}}</h6>
                                                 </div>
                                             </div>
                                             <!-- end -->
@@ -341,7 +203,7 @@
                                             <div class="prof-comm-shad mb-4">
                                                 <div class="comm-cont w100 p-0">
                                                     <p>Track Hours</p>
-                                                    <h6>Yes</h6>
+                                                    <h6>{{userdetail.user.timeTrack}}</h6>
                                                 </div>
                                             </div>
                                             <!-- end -->
@@ -350,8 +212,12 @@
                                     <!-- end -->
                                 </div>
                                 <!-- user details end -->
+                                </div>
+                                </div>
                             </div>
                             <div id="inner-tab2" *ngIf="rolesvar">
+                                <div *ngFor="let userdet of userlist">
+                                    <div *ngIf="userdet.user.email == emailvar || (userdet.user.email == pageinitemail && onloadvar)">
                                 <!-- roles start -->
                                 <!-- start -->
                                 <div class="comm-headline-btn comm-headline-btn-admin">
@@ -369,17 +235,16 @@
                                 <!-- end -->
                                 <div class="admin-comm-rig-scroll scrollbar">
                                     <!-- start -->
-                                    <h6 class="comm-subhdn">Ira Membrit's Role</h6>
+                                    <h6 class="comm-subhdn">{{userdet.user.firstName}}'s Role</h6>
                                     <div class="row">
                                         <div class="w50 w-1200-100">
                                             <!-- start -->
                                             <div class="yur-mail-box">
                                                 <h6 class="promo-head">Administrator</h6>
                                                 <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin1" type="radio" name="admi-radio1" />
+                                                    <input id="admin1" type="radio" [value]="admin" name="admi-radio1" />
                                                     <label for="admin1"></label>
-                                                    <input id="admin12" type="radio" name="admi-radio1"
-                                                        checked="checked" />
+                                                    <input id="admin12" type="radio" [value]="true" (click)="usersroles($event, 'Admin')" name="admi-radio1" />
                                                     <label for="admin12"></label><span class="toggle-outside"><span
                                                             class="toggle-inside"></span></span>
                                                 </div>
@@ -391,10 +256,10 @@
                                             <div class="yur-mail-box">
                                                 <h6 class="promo-head">Manager</h6>
                                                 <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin2" type="radio" name="admi-radio2"
+                                                    <input id="admin2" type="radio" [value]="false" (click)="usersroles($event, 'Manager')" name="admi-radio2"
                                                         checked="checked" />
                                                     <label for="admin2"></label>
-                                                    <input id="admin22" type="radio" name="admi-radio2" />
+                                                    <input id="admin22" type="radio" [value]="true" (click)="usersroles($event, 'Manager')" name="admi-radio2" />
                                                     <label for="admin22"></label><span class="toggle-outside"><span
                                                             class="toggle-inside"></span></span>
                                                 </div>
@@ -406,10 +271,10 @@
                                             <div class="yur-mail-box">
                                                 <h6 class="promo-head">Employee</h6>
                                                 <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin3" type="radio" name="admi-radio3"
+                                                    <input id="admin3" type="radio" [value]="false" (click)="usersroles($event, 'Employee')" name="admi-radio3"
                                                         checked="checked" />
                                                     <label for="admin3"></label>
-                                                    <input id="admin32" type="radio" name="admi-radio3" />
+                                                    <input id="admin32" type="radio" [value]="true" (click)="usersroles($event, 'Employee')" name="admi-radio3" />
                                                     <label for="admin32"></label><span class="toggle-outside"><span
                                                             class="toggle-inside"></span></span>
                                                 </div>
@@ -421,10 +286,10 @@
                                             <div class="yur-mail-box">
                                                 <h6 class="promo-head">Technician</h6>
                                                 <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin4" type="radio" name="admi-radio4"
+                                                    <input id="admin4" type="radio" [value]="false" (click)="usersroles($event, 'Technician')" name="admi-radio4"
                                                         checked="checked" />
                                                     <label for="admin4"></label>
-                                                    <input id="admin42" type="radio" name="admi-radio4" />
+                                                    <input id="admin42" type="radio" [value]="true" (click)="usersroles($event, 'Technician')" name="admi-radio4" />
                                                     <label for="admin42"></label><span class="toggle-outside"><span
                                                             class="toggle-inside"></span></span>
                                                 </div>
@@ -433,7 +298,7 @@
                                         </div>
                                     </div>
                                     <!-- end -->
-    
+
                                     <!-- start -->
                                     <h6 class="comm-subhdn">Module Rights</h6>
                                     <div class="row">
@@ -536,7 +401,7 @@
                                         </div>
                                     </div>
                                     <!-- end -->
-    
+
                                     <!-- start -->
                                     <h6 class="comm-subhdn">Individual Rights</h6>
                                     <div class="row">
@@ -699,9 +564,11 @@
                                         </div>
                                     </div>
                                     <!-- end -->
-    
+
                                 </div>
                                 <!-- roles end -->
+                                </div>
+                                </div>
                             </div>
                             <div id="inner-tab3" *ngIf="historyvar">
                                 <!-- History start -->
@@ -743,17 +610,17 @@
                                                     <li><a href="#">Cancelled</a></li>
                                                 </ul>
                                             </div>
-    
+
                                         </div>
                                     </div>
                                 </div>
                                 <!-- end -->
                                 <div class="admin-comm-rig-scroll scrollbar">
                                     <!-- start -->
-                                    <div class="table-bdy">
+                                    <div class="table-bdy" *ngFor="let history of userhistory">
                                         <!-- start -->
                                         <div class="tab-top-head">
-                                            <h4 class="gridhead mb-0">Booked Appointment</h4>
+                                            <h4 class="gridhead mb-0">{{history.eventName}}</h4>
                                             <div class="yur-mail-rig">
                                                 <i class="icon-status1 status"></i>
                                                 <ul class="status-list">
@@ -763,40 +630,40 @@
                                             </div>
                                         </div>
                                         <!-- end -->
-    
+
                                         <ul class="table-rw">
                                             <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
+                                            <!-- <li class="table-dta mr-0 w33 w-1440-50">
                                                 <span>Service</span>
                                                 <div class="table-prodt-list">
                                                     <p>Nail Polish, Pedicure</p> <i class="icon-info"
                                                         data-toggle="tooltip" data-placement="bottom" data-html="true"
                                                         title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
                                                 </div>
-                                            </li>
+                                            </li> -->
                                             <!-- end -->
                                             <!-- start -->
                                             <li class="table-dta mr-0 w33 w-1440-50">
                                                 <span>Event Category</span>
-                                                Cliff Hanger
+                                                {{history.eventCategory}}
                                             </li>
                                             <!-- end -->
                                             <!-- start -->
                                             <li class="table-dta mr-0 w33 w-1440-50">
                                                 <span>Date</span>
-                                                5 Aug 2019
+                                                {{history.date}}
                                             </li>
                                             <!-- end -->
                                             <!-- start -->
                                             <li class="table-dta mr-0 w33 w-1440-50">
                                                 <span>Time</span>
-                                                05:00 - 05:30 PM
+                                                {{history.time}}
                                             </li>
                                             <!-- end -->
                                             <!-- start -->
                                             <li class="table-dta mr-0 w33 w-1440-50">
                                                 <span>Description</span>
-                                                <p class="txt-elips">The standard chunk of Lorem</p>
+                                                <p class="txt-elips">{{history.description}}</p>
                                             </li>
                                             <!-- end -->
                                             <!-- start -->
@@ -806,332 +673,7 @@
                                                     </div>
                                                     <div class="tech-usr-cont">
                                                         <p>User</p>
-                                                        <h3>David Dion</h3>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                        </ul>
-                                    </div>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <div class="table-bdy">
-                                        <!-- start -->
-                                        <div class="tab-top-head">
-                                            <h4 class="gridhead mb-0">Booked Appointment</h4>
-                                            <div class="yur-mail-rig">
-                                                <i class="icon-status1 status"></i>
-                                                <ul class="status-list">
-                                                    <li><i class="icon-edit"></i> Edit</li>
-                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- end -->
-    
-                                        <ul class="table-rw">
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Service</span>
-                                                <div class="table-prodt-list">
-                                                    <p>Nail Polish, Pedicure</p> <i class="icon-info"
-                                                        data-toggle="tooltip" data-placement="bottom" data-html="true"
-                                                        title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Event Category</span>
-                                                Cliff Hanger
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Date</span>
-                                                5 Aug 2019
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Time</span>
-                                                05:00 - 05:30 PM
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Description</span>
-                                                <p class="txt-elips">The standard chunk of Lorem</p>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <div class="techi-user">
-                                                    <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt="">
-                                                    </div>
-                                                    <div class="tech-usr-cont">
-                                                        <p>User</p>
-                                                        <h3>David Dion</h3>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                        </ul>
-                                    </div>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <div class="table-bdy">
-                                        <!-- start -->
-                                        <div class="tab-top-head">
-                                            <h4 class="gridhead mb-0">Booked Appointment</h4>
-                                            <div class="yur-mail-rig">
-                                                <i class="icon-status1 status"></i>
-                                                <ul class="status-list">
-                                                    <li><i class="icon-edit"></i> Edit</li>
-                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- end -->
-    
-                                        <ul class="table-rw">
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Service</span>
-                                                <div class="table-prodt-list">
-                                                    <p>Nail Polish, Pedicure</p> <i class="icon-info"
-                                                        data-toggle="tooltip" data-placement="bottom" data-html="true"
-                                                        title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Event Category</span>
-                                                Cliff Hanger
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Date</span>
-                                                5 Aug 2019
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Time</span>
-                                                05:00 - 05:30 PM
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Description</span>
-                                                <p class="txt-elips">The standard chunk of Lorem</p>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <div class="techi-user">
-                                                    <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt="">
-                                                    </div>
-                                                    <div class="tech-usr-cont">
-                                                        <p>User</p>
-                                                        <h3>David Dion</h3>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                        </ul>
-                                    </div>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <div class="table-bdy">
-                                        <!-- start -->
-                                        <div class="tab-top-head">
-                                            <h4 class="gridhead mb-0">Booked Appointment</h4>
-                                            <div class="yur-mail-rig">
-                                                <i class="icon-status1 status"></i>
-                                                <ul class="status-list">
-                                                    <li><i class="icon-edit"></i> Edit</li>
-                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- end -->
-    
-                                        <ul class="table-rw">
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Service</span>
-                                                <div class="table-prodt-list">
-                                                    <p>Nail Polish, Pedicure</p> <i class="icon-info"
-                                                        data-toggle="tooltip" data-placement="bottom" data-html="true"
-                                                        title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Event Category</span>
-                                                Cliff Hanger
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Date</span>
-                                                5 Aug 2019
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Time</span>
-                                                05:00 - 05:30 PM
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Description</span>
-                                                <p class="txt-elips">The standard chunk of Lorem</p>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <div class="techi-user">
-                                                    <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt="">
-                                                    </div>
-                                                    <div class="tech-usr-cont">
-                                                        <p>User</p>
-                                                        <h3>David Dion</h3>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                        </ul>
-                                    </div>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <div class="table-bdy">
-                                        <!-- start -->
-                                        <div class="tab-top-head">
-                                            <h4 class="gridhead mb-0">Booked Appointment</h4>
-                                            <div class="yur-mail-rig">
-                                                <i class="icon-status1 status"></i>
-                                                <ul class="status-list">
-                                                    <li><i class="icon-edit"></i> Edit</li>
-                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- end -->
-    
-                                        <ul class="table-rw">
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Service</span>
-                                                <div class="table-prodt-list">
-                                                    <p>Nail Polish, Pedicure</p> <i class="icon-info"
-                                                        data-toggle="tooltip" data-placement="bottom" data-html="true"
-                                                        title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Event Category</span>
-                                                Cliff Hanger
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Date</span>
-                                                5 Aug 2019
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Time</span>
-                                                05:00 - 05:30 PM
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Description</span>
-                                                <p class="txt-elips">The standard chunk of Lorem</p>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <div class="techi-user">
-                                                    <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt="">
-                                                    </div>
-                                                    <div class="tech-usr-cont">
-                                                        <p>User</p>
-                                                        <h3>David Dion</h3>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                        </ul>
-                                    </div>
-                                    <!-- end -->
-                                    <!-- start -->
-                                    <div class="table-bdy">
-                                        <!-- start -->
-                                        <div class="tab-top-head">
-                                            <h4 class="gridhead mb-0">Booked Appointment</h4>
-                                            <div class="yur-mail-rig">
-                                                <i class="icon-status1 status"></i>
-                                                <ul class="status-list">
-                                                    <li><i class="icon-edit"></i> Edit</li>
-                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- end -->
-    
-                                        <ul class="table-rw">
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Service</span>
-                                                <div class="table-prodt-list">
-                                                    <p>Nail Polish, Pedicure</p> <i class="icon-info"
-                                                        data-toggle="tooltip" data-placement="bottom" data-html="true"
-                                                        title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
-                                                </div>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Event Category</span>
-                                                Cliff Hanger
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Date</span>
-                                                5 Aug 2019
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Time</span>
-                                                05:00 - 05:30 PM
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <span>Description</span>
-                                                <p class="txt-elips">The standard chunk of Lorem</p>
-                                            </li>
-                                            <!-- end -->
-                                            <!-- start -->
-                                            <li class="table-dta mr-0 w33 w-1440-50">
-                                                <div class="techi-user">
-                                                    <div class="tech-user-img"><img src="../../../assets/img/histry-user.svg" alt="">
-                                                    </div>
-                                                    <div class="tech-usr-cont">
-                                                        <p>User</p>
-                                                        <h3>David Dion</h3>
+                                                        <h3>{{history.userName}}</h3>
                                                     </div>
                                                 </div>
                                             </li>
@@ -1148,130 +690,33 @@
                 </section>
                 <!-- end -->
             </div>
-    
+
         </div>
-    
-    
+
+
     </div>
     <!-- Main Container Ends -->
-    
+
     <!-- Add/Edit Product -->
     <div class="overlay"></div>
-    <div class="mobile-side" id="add-tax-table">
-        <!-- common headline -->
-        <h3 class="close-btn main-comm-head">
-            <i class="icon-down-arrow com-arw"></i>Edit <span>User</span>
-        </h3>
-        <!-- common headline end -->
-        <!-- <form class="popup-scrll"> -->
-    
-            <div class="filBox">
-                <!-- start -->
-                <div class="fill-box-in scrollbar">
-                    <div class="avatar-upload inventory-image">
-                        <div class="avatar-edit">
-                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-                            <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>
-                        </div>
-                        <div class="avatar-preview">
-                            <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="full-name" name="full-name" class="form-field" required />
-                        <p class="form-label">Full Name</p>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="last-name" name="last-name" class="form-field" required />
-                        <p class="form-label">Last Name</p>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-field" required />
-                        <p class="form-label">Email</p>
-                    </div>
-                    <div class="form-group">
-                        <input type="number" id="phone-no" name="phone-no" class="form-field" max-length="10"
-                            required />
-                        <p class="form-label">Phone Number</p>
-                    </div>
-                    <!-- start -->
-                    <div class="form-group popup-select2">
-                        <select id="service-select" class="select-field-2 form-field field--not-empty"
-                            name="multiSelect[]" multiple="multiple">
-                            <option value="1" selected>Haircut</option>
-                            <option value="2">option 1</option>
-                            <option value="3">option 2</option>
-                        </select>
-                        <p class="form-label sel-blk">Service</p>
-                    </div>
-                    <!-- end -->
-                    <div class="form-group">
-                        <select class="select-field form-field" name="select-fld" id="select-fld" required>
-                            <option></option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <p class="form-label sel-blk">Experience Level</p>
-                    </div>
-                    <!-- start -->
-                    <div class="form-group">
-                        <h6 class="poptile">Track Hours</h6>
-                        <div class="switch switch--horizontal m-0">
-                            <input id="trk-hrs-no" type="radio" name="track-switch">
-                            <label for="trk-hrs-no">No</label>
-                            <input id="trk-hrs-yes" type="radio" name="track-switch" checked="checked">
-                            <label for="trk-hrs-yes">Yes</label><span class="toggle-outside"><span
-                                    class="toggle-inside"></span></span>
-                        </div>
-                    </div>
-                    <!-- end -->
-                    <!-- start -->
-                    <h6 class="poptile">Gender</h6>
-                    <div class="radio-box">
-                        <input type="radio" id="radio1" name="radio-small" required />
-                        <label for="radio1">Male</label>
-                    </div>
-                    <div class="radio-box">
-                        <input type="radio" id="radio2" name="radio-small" required checked />
-                        <label for="radio2">Female</label>
-                    </div>
-                    <div class="radio-box">
-                        <input type="radio" id="radio3" name="radio-small" required />
-                        <label for="radio3">Others</label>
-                    </div>
-                    <!-- end -->
-                </div>
-                <!-- end -->
-            </div>
-    
-            <div class="popBtn">
-                <button class="button line close-btn" type="button">Cancel</button>
-                <button class="button" type="submit">Create</button>
-            </div>
-    
-        <!-- </form> -->
-    
-    </div>
+
     <!-- Add/Edit Product End -->
     <!-- Delete Modal Starts -->
     <div class="modal fade" id="deletePopup">
         <div class="modal-dialog medium-window">
             <div class="modal-content">
                 <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
-    
-                <h2 class="modal-title">Are you sure you want to delete this Template?</h2>
-    
+
+                <h2 class="modal-title">Are you sure you want to delete this User?</h2>
+
                 <div class="modal-btn">
                     <button class="button line mr-2" data-dismiss="modal">No</button>
-                    <button class="button red" data-dismiss="modal">Yes</button>
+                    <button class="button red" data-dismiss="modal" (click)="deleteUser(arrayofselectedobj)">Yes</button>
                 </div>
-    
+
             </div>
         </div>
     </div>
     <!-- Delete Modal Ends -->
 </div>
+<adduser-modal [addAdmin]="addform" [updateAdmin]="updateform" [userobj]="arrayofselectedobj"></adduser-modal>
