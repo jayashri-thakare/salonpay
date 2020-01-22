@@ -34,7 +34,6 @@ import {AddressEditComponent} from './dashboard/profilesetting/address-edit.comp
 import {ContactEditComponent} from './dashboard/profilesetting/contact-edit.component';
 import {ProfileinfoEditComponent} from './dashboard/profilesetting/profileinfo-edit.component';
 import {UserdataService} from './userdata.service';
-import {ForgotpasswordComponent} from './login/forgotpassword.component';
 import {CscComponent} from './dashboard/profilesetting/ctcdropdown.component';
 import {InternationalTelNoDirective} from './international-tel-no.directive';
 import { ForgotComponent } from './login/forgot.component';
@@ -52,6 +51,7 @@ import {UserComponent} from './admin/user/user.component'
 import {RolesComponent} from './admin/roles/roles.component'
 import {AddRolesComponent} from './admin/roles/addroles.component'
 import { AdminService } from './admin/admin.service';
+import {TimerComponent} from './timetracker.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -81,35 +81,35 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     })
   ],
-  declarations: [AppComponent,
-    AdminComponent,
-    UserComponent,
-    RolesComponent,
-    AddRolesComponent,
-    IMAPSettingComponent,
-    ScheduleEditComponent,
-    SignUpComponent,
-    LoginComponent,
-    ForgotComponent,
-    ControlErrorsDirective,
-    ControlErrorContainerDirective,
-    FormSubmitDirective,
-    ControlErrorComponent,
-    MessagesComponent,
-    ControlErrorComponent,
-    DashboardComponent,
-    ResetpasswordComponent,
-    ProfilesettingComponent,
-    EmailsettingComponent,
-    NotificationsettingComponent,
-    AccountsettingComponent,
-    BanksettingComponent,
-    SchedulesettingComponent,
-    SidebarComponent,
-    HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
-    CscComponent,
-    InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
+    declarations: [AppComponent,
+        AdminComponent,
+        UserComponent,
+        RolesComponent,
+        AddRolesComponent,
+        IMAPSettingComponent,
+        ScheduleEditComponent,
+        SignUpComponent,
+        LoginComponent,
+        ForgotComponent,
+        ControlErrorsDirective,
+        ControlErrorContainerDirective,
+        FormSubmitDirective,
+        ControlErrorComponent,
+        MessagesComponent,
+        ControlErrorComponent,
+        DashboardComponent,
+        ResetpasswordComponent,
+        ProfilesettingComponent,
+        EmailsettingComponent,
+        NotificationsettingComponent,
+        AccountsettingComponent,
+        BanksettingComponent,
+        SchedulesettingComponent,
+        SidebarComponent,
+        HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
+        CscComponent,
+        InternationalTelNoDirective,
+        AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
