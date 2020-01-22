@@ -20,7 +20,7 @@ export class AccountsettingComponent implements OnInit {
   timeZonesList: {};
   userLanguageList: {}
   subscription: any;
-  constructor(private translate: TranslateService, private router: Router, private userdataService: UserdataService, private modalService: ModalService) {
+  constructor(private translate: TranslateService, private router: Router, public userdataService: UserdataService, private modalService: ModalService) {
    
    }
 
@@ -39,8 +39,8 @@ export class AccountsettingComponent implements OnInit {
     this.translate.use(browserLang.match(/English|Vietnamese/) ? browserLang : this.useraccountdetail.language)
   }
 
-  openModal(id, userdetail) {
-    this.modalService.open(id, userdetail);
+  openModal(id) {
+    this.modalService.open1(id);
   }
 
   closeModal(id) {

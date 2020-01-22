@@ -18,7 +18,7 @@ export class ProfilesettingComponent implements OnInit {
   public url;
   // private subscription: any;
   private form: string;
-  constructor( private router: Router, private userdataService: UserdataService, private modalService: ModalService,
+  constructor( private router: Router, public userdataService: UserdataService, private modalService: ModalService,
                private cscService: CscService) {
 
   }
@@ -34,8 +34,8 @@ export class ProfilesettingComponent implements OnInit {
     this.userdetail = this.userdetail;
   }
 
-  openModal(id: string, userdetail) {
-    this.modalService.open(id, userdetail);
+  openModal(id: string) {
+    this.modalService.open1(id);
   }
 
   closeModal(id: string) {

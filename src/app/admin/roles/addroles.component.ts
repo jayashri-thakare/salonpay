@@ -126,7 +126,7 @@ export class AddRolesComponent implements OnInit {
   @Input('updateAdmin') updateform: any;
   @Input('userroleobj') arrayofselectedobj: any;
   userroles: any;
-  constructor(private AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
   
   get f() {
     return this.addrolesForm.controls;

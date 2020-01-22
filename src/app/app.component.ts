@@ -13,7 +13,7 @@ import { environment } from './../environments/environment';
 export class AppComponent {
   title = 'SalonPay';
   HOSTNAME = 'http://salonpay.leosys.net';
-  constructor(public translate: TranslateService, private router: Router) {
+  constructor(public translate: TranslateService, public router: Router) {
     translate.addLangs(['English', 'Vietnamese']);
     translate.setDefaultLang('English');
     console.log(environment.apiUrl);

@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   private element: any;
   classvar: any;
   classvar1: string;
-  constructor(private AdminService: AdminService, private router: Router, private el: ElementRef, private userdataService: UserdataService) {
+  constructor(private AdminService: AdminService, public router: Router, private el: ElementRef, private userdataService: UserdataService) {
     this.element = el.nativeElement;
   }
 

@@ -18,10 +18,10 @@ export class RolesComponent implements OnInit {
   rolesRightForm: FormGroup;
   control: FormControl;
   submitted = false;
-  admin: boolean;
-  manager: boolean;
-  employee: boolean;
-  technician: boolean;
+  // admin: boolean;
+  // manager: boolean;
+  // employee: boolean;
+  // technician: boolean;
   addform: boolean;
   updateform: boolean;
   userroles: any;
@@ -33,7 +33,7 @@ export class RolesComponent implements OnInit {
   noclaimvar: boolean;
   claimvar: boolean;
 
-  constructor(private AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   get f() {
     return this.rolesRightForm.controls;
@@ -45,10 +45,10 @@ export class RolesComponent implements OnInit {
       
     });
     this.AdminService.rolesnav = false;
-    this.admin = true;
-    this.manager = false;
-    this.employee = false;
-    this.technician = false;
+    // this.admin = true;
+    // this.manager = false;
+    // this.employee = false;
+    // this.technician = false;
     this.getuserRoles();
     this.getrolesModuleRights();
     this.getrolesIndividualRights();
@@ -66,37 +66,37 @@ export class RolesComponent implements OnInit {
 
   rolesfunction(type){
     if(type == 'manager'){
-      this.admin = false;
-      this.manager = true;
-      this.employee = false;
-      this.technician = false;
+      // this.admin = false;
+      // this.manager = true;
+      // this.employee = false;
+      // this.technician = false;
       document.querySelector('#admin').classList.remove('active');
       document.querySelector('#employee').classList.remove('active');
       document.querySelector('#technician').classList.remove('active');
       document.querySelector('#manager').classList.add('active');
     }else if(type == 'employee'){
-      this.admin = false;
-      this.manager = false;
-      this.employee = true;
-      this.technician = false;
+      // this.admin = false;
+      // this.manager = false;
+      // this.employee = true;
+      // this.technician = false;
       document.querySelector('#admin').classList.remove('active');
       document.querySelector('#technician').classList.remove('active');
       document.querySelector('#manager').classList.remove('active');
       document.querySelector('#employee').classList.add('active');
     }else if(type == 'technician'){
-      this.admin = false;
-      this.manager = false;
-      this.employee = false;
-      this.technician = true;
+      // this.admin = false;
+      // this.manager = false;
+      // this.employee = false;
+      // this.technician = true;
       document.querySelector('#admin').classList.remove('active');
       document.querySelector('#employee').classList.remove('active');
       document.querySelector('#manager').classList.remove('active');
       document.querySelector('#technician').classList.add('active');
     }else if(type == 'admin'){
-      this.admin = true;
-      this.manager = false;
-      this.employee = false;
-      this.technician = false;
+      // this.admin = true;
+      // this.manager = false;
+      // this.employee = false;
+      // this.technician = false;
       document.querySelector('#technician').classList.remove('active');
       document.querySelector('#employee').classList.remove('active');
       document.querySelector('#manager').classList.remove('active');
@@ -114,8 +114,8 @@ export class RolesComponent implements OnInit {
     }
   }
 
-  openModal(id: string, userdetail) {
-    this.modalService.open(id, userdetail);
+  openModal(id: string) {
+    this.modalService.open1(id);
   }
 
   closeModal(id: string) {

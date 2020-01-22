@@ -37,9 +37,9 @@ export class EmailsettingComponent implements OnInit {
   emailsign: boolean;
   emailconnect: boolean;
 
-  constructor(private router: Router, private userdataService: UserdataService,
+  constructor(private router: Router, public userdataService: UserdataService,
               private formBuilder: FormBuilder,
-              private modalService: ModalService,
+              public modalService: ModalService,
               private messageService: MessageService) { }
 
   get f() {
@@ -82,8 +82,8 @@ export class EmailsettingComponent implements OnInit {
       }
     }
   }
-  openModal(id, userdetail) {
-    this.modalService.open(id, userdetail);
+  openModal(id) {
+    this.modalService.open1(id);
   }
 
   // addOffice() {

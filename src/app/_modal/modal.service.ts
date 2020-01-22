@@ -21,6 +21,12 @@ export class ModalService {
     modal.open();
   }
 
+  open1(id: string) {
+    // open modal specified by id
+    const modal = this.modals.find(x => x.id === id);
+    modal.open();
+  }
+
   setUser(userdetail) {
     this.userdetail = userdetail;
   }

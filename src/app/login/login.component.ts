@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   model: any = {};
   private msg: string;
   // messageService: [];
-  private loginfail: boolean;
+  public loginfail: boolean;
   @Input('userID') userID: any;
 
   constructor( private formBuilder: FormBuilder,
