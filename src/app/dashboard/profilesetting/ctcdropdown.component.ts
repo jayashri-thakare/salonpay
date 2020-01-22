@@ -4,7 +4,7 @@ import {CscService} from '../../services/cscdropdown.service';
 
 @Component({
   selector: 'csc-app',
-  templateUrl: '<form [formGroup]="createAccountForm">\n' +
+  template: '<form [formGroup]="createCountryForm">\n' +
     '        <div class="form-group">\n' +
     '          <select formControlName="country" class="form-control" (change)="onChangeCountry($event.target.value)">\n' +
     '            <option value="">Select country...</option>\n' +
@@ -31,7 +31,9 @@ export class CscComponent implements OnInit {
   states: {};
   cities: {};
   constructor(private cscService: CscService) {}
-
+  get f() {
+    return this.createCountryForm.controls;
+  }
   ngOnInit() {
     this.cscService.getCountries().subscribe(
       data => this.countries = data
