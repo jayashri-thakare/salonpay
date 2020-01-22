@@ -34,7 +34,6 @@ import {AddressEditComponent} from './dashboard/profilesetting/address-edit.comp
 import {ContactEditComponent} from './dashboard/profilesetting/contact-edit.component';
 import {ProfileinfoEditComponent} from './dashboard/profilesetting/profileinfo-edit.component';
 import {UserdataService} from './userdata.service';
-import {ForgotpasswordComponent} from './login/forgotpassword.component';
 import {CscComponent} from './dashboard/profilesetting/ctcdropdown.component';
 import {InternationalTelNoDirective} from './international-tel-no.directive';
 import { ForgotComponent } from './login/forgot.component';
@@ -58,6 +57,7 @@ import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
 import { UserDetailComponent } from './admin/user/userdetail.component'
 import { UserRolesComponent } from './admin/user/userroles.component'
 import { UserHistoryComponent } from './admin/user/userhistory.component'
+import {TimerComponent} from './timetracker.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -122,7 +122,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
     InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe],
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
