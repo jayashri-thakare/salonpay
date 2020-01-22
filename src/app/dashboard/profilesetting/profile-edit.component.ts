@@ -17,7 +17,7 @@ import {MessageService} from '../../message.service';
     '      <i class="icon-down-arrow com-arw"></i>{{\'Edit\' | translate }}<span> {{\'Profile\' | translate}}</span>\n' +
     '    </h3>\n' +
     '    <!-- common headline end -->\n' +
-    '    <form id="editProfile" [formGroup]="userprofileForm" (ngSubmit)="updateDetail(userprofileForm, userprofileForm.value)" class="popup-scrll">\n' +
+    '    <form id="editProfile" [formGroup]="userprofileForm" (ngSubmit)="updateDetail(userprofileForm.value)" class="popup-scrll">\n' +
     '\n' +
     '    <div class="filBox">\n' +
     '      <!-- start -->\n' +
