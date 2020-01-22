@@ -34,7 +34,7 @@ export class UserdataService {
  	constructor(private httpClient: HttpClient) {
  	  // let url = environment.apiUrl;
     this.url = environment.apiUrl; }
-  baseUrl = 'http://49.248.77.14:5555/api/account/signup';
+  baseUrl = 'https://payziliapi3.azurewebsites.net/api/account/signup';
 
   private obj: {};
   private userdetail: {};
@@ -57,6 +57,10 @@ export class UserdataService {
   schedulebody: {};
   ParentCompanyId: number;
   editschedulebody: {};
+  office_ClientID = '6196a40d-aa7e-4069-80a5-312865bb368c';
+  office_ClientSecret = '__2uE:eybf6f/llxTBcBBeOwZIrXoI95';
+  office_TenantID = '819c5746-460c-416e-b656-d4f259797ea6';
+
   private subjects: Subject<any>[] = [];
  	// Service to sign up users
   // tslint:disable-next-line:indent
@@ -67,31 +71,78 @@ export class UserdataService {
   }
 
   public forgotPassword(obj) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/Account/ForgetPassword' ;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Account/ForgetPassword' ;
     return this.httpClient.post(this.baseUrl, obj, httpOptions )
       .pipe(map(data => data));
   }
   public resetPassword(obj) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/Account/ResetPassword';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Account/ResetPassword';
     return this.httpClient.post(this.baseUrl, obj, httpOptions )
       .pipe(map(data => data));
   }
 
   getLogin(userdata) {
-    this.baseUrl = 'http://49.248.77.14:5555/api/account/login';
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/account/login';
     return this.httpClient.post(this.baseUrl, userdata, httpOptions )
       .pipe(map(data => data));
   }
 
+  addOffice(userdata) {
+    // tslint:disable-next-line:no-debugger
+  	debugger;
+	  // const input = new URLSearchParams();
+   //  // input.append('grant_type', 'password');
+	  // // input.append('scope', ' https://graph.microsoft.com/.default');
+	  // // input.append('client_id', this.office_ClientID);
+	  // // input.append('client_secret', this.office_ClientSecret);
+	  // input.append('password', userdata.password);
+	  // input.append('username', userdata.username);
+
+   // this.baseUrl = 'https://login.microsoftonline.com/819c5746-460c-416e-b656-d4f259797ea6/oauth2/v2.0/token ';
+   //  let body = JSON.stringify(input)
+   //  const httpOptions = {
+   //    headers: new HttpHeaders({
+   //      'Content-Type': 'application/x-www-form-urlencoded'
+   //      // Authorization: 'Basic ' + btoa('client_id' + ':' + '__2uE:eybf6f/llxTBcBBeOwZIrXoI95')
+   //    })
+   //  };
+
+   	  const input = new URLSearchParams();
+      input.append('grant_type', 'password');
+	  input.append('scope', ' https://graph.microsoft.com/.default');
+	  input.append('client_id', this.office_ClientID);
+	  input.append('client_secret', this.office_ClientSecret);
+	  input.append('password', 'vx!4Un7E%928');
+	  input.append('username', 'kapil@payzli.com');
+
+   this.baseUrl = 'https://login.microsoftonline.com/819c5746-460c-416e-b656-d4f259797ea6/oauth2/v2.0/token ';
+    let body = JSON.stringify(input)
+    const httpOptions = {
+	  headers: new HttpHeaders({
+	    'Content-Type':  'application/x-www-form-urlencoded',
+	    'Access-Control-Allow-Origin': '*'
+	  })
+	}
+
+    this.httpClient.post(this.baseUrl, input, httpOptions).subscribe((val) => {
+      debugger
+    });
+
+
+	  // this.httpClient.post(this.baseUrl, body, httpOptions).subscribe((val) => {
+    //   debugger;
+    // });
+  }
+
   getUserAccount() {
     console.log(url);
-    this.baseUrl = 'http://49.248.77.14:7894/api/ProfileMaster/GetTimeZone';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/ProfileMaster/GetTimeZone';
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
   }
 
   getUserSignature() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://49.248.77.14:7894/api/Email/GetEmailSignature?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Email/GetEmailSignature?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -101,19 +152,19 @@ export class UserdataService {
     }
     // tslint:disable-next-line:indent
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://49.248.77.14:7894/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
 
   getMasterNotification() {
-    this.baseUrl = 'http://49.248.77.14:7894/api/notificationsetting/GetNotificationTypes';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/GetNotificationTypes';
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
   getNotification() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://49.248.77.14:7894/api/notificationsetting/GetNotifcationSetting?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/GetNotifcationSetting?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
@@ -123,7 +174,7 @@ export class UserdataService {
       this.userId = localStorage.getItem('userId');
    }
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://49.248.77.14:7894/api/schedule/GetUserSchedule?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/schedule/GetUserSchedule?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
    );
  }
@@ -133,7 +184,7 @@ export class UserdataService {
       this.userId = localStorage.getItem('userId');
   }
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://49.248.77.14:7894/api/ProfileMaster/GetAccountSetting?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/ProfileMaster/GetAccountSetting?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
   );
   }
@@ -143,17 +194,17 @@ export class UserdataService {
   }
 
   update_user_address(userdata) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/profile/editaddress';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/profile/editaddress';
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
   deleteUserSchedule(deldata) {
-    return this.httpClient.delete('http://172.16.0.99:7894/api/schedule/Delete?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId + '&DayName=' + deldata);
+    return this.httpClient.delete('https://payzliapi1.azurewebsites.net/api/schedule/Delete?id=' + this.userId + '&ParentCompanyID=' + this.ParentCompanyId + '&DayName=' + deldata);
   }
 
   update_signature(userdata) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/Email/SaveEmailSignature?';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Email/SaveEmailSignature?';
     userdata.UserId = localStorage.getItem('userId');
     userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
@@ -161,7 +212,7 @@ export class UserdataService {
   }
 
   update_account_edit(userdata) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/ProfileMaster/UpdateAccount?';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/ProfileMaster/UpdateAccount?';
     // this.params = new HttpParams()
     //   .set('id', localStorage.getItem('userId'))
     //   .set('ParentCompanyId', localStorage.getItem('companyId'))
@@ -175,7 +226,7 @@ export class UserdataService {
 
   update_notification(userdata) {
     debugger;
-    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff? ';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/NotoficationOnOff? ';
     userdata.UserId = localStorage.getItem('userId');
     userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));
     // userdata["NotificationType"] = [{"Custom_notification": {"EnableEmailNotification": true}}]
@@ -186,7 +237,7 @@ export class UserdataService {
   }
 
   add_schedule(userdata) {
-    this.baseUrl = ' http://49.248.77.14:7894/api/schedule/saveUserSchedule?';
+    this.baseUrl = ' https://payzliapi1.azurewebsites.net/api/schedule/saveUserSchedule?';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
@@ -194,18 +245,71 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
-	   this.baseUrl = 'http://172.16.0.99:7894/api/Profile/UploadProfilePicture?';
-	   let input = new FormData();
+	   this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture?';
+	   const input = new FormData();
 	   input.append('file', userdata[0]);
 	   input.append('id', this.userId);
-    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
+
+// 	  const input = new URLSearchParams();
+//       input.append('grant_type', 'password');
+// 	  input.append('scope', ' https://graph.microsoft.com/.default');
+// 	  input.append('client_id', this.office_ClientID);
+// 	  input.append('client_secret', this.office_ClientSecret);
+// 	  input.append('password', 'vx!4Un7E%928');
+// 	  input.append('username', 'kapil@payzli.com');
+//
+//    this.baseUrl = 'https://login.microsoftonline.com/819c5746-460c-416e-b656-d4f259797ea6/oauth2/v2.0/token ';
+//     let body = JSON.stringify(input)
+//     const httpOptions = {
+//   headers: new HttpHeaders({
+//     'Content-Type':  'application/x-www-form-urlencoded',
+//     'Access-Control-Allow-Origin': '*',
+// 	'Access-Control-Allow-Credentials': 'true',
+// 	'Access-Control-Allow-Headers': 'Content-Type',
+// 	'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+//   })
+// };
+
+    this.httpClient.post(this.baseUrl, input, httpOptions).subscribe((val) => {
+    	debugger;
       this.imagepath = val['profilePicPath'];
     });
-    return false;
+  }
+
+  add_time_tracker(statusflag) {
+  	debugger;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/TrackTimer/SavetrackTimer';
+    let userdata = {};
+    userdata['UserId'] = this.userId;
+    userdata['ParentCompanyId'] = this.ParentCompanyId;
+    userdata['StatusFlag'] = statusflag;
+
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  get_time_difference() {
+  	debugger;
+  	this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/trackTimer/TimeDiffrence';
+  //  	    let userdata = {};
+	// userdata['UserId'] = this.userId;
+	// userdata['ParentCompanyId'] = this.ParentCompanyId;
+	// userdata['StatusFlag'] = false;
+    let userdata = {
+      "UserId":"0caf29b2-eeb8-436d-8213-f31042ceea6a",
+      "ParentCompanyId":4,
+      "StatusFlag":false
+      }
+  	// @ts-ignore
+    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
+
+    // this.httpClient.get(this.baseUrl, userdata).subscribe((data) => {
+    // 	debugger;
+    // });
   }
 
   update_schedule(userdata) {
-    this.baseUrl = ' http://49.248.77.14:7894/api/schedule/UpdateOneDaySchedule?';
+    this.baseUrl = ' https://payzliapi1.azurewebsites.net/api/schedule/UpdateOneDaySchedule?';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
@@ -213,7 +317,7 @@ export class UserdataService {
   }
 
   update_timeoff(userdata) {
-    this.baseUrl = ' http://49.248.77.14:7894/api/schedule/Timeoffrequest';
+    this.baseUrl = ' https://payzliapi1.azurewebsites.net/api/schedule/Timeoffrequest';
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
@@ -221,13 +325,13 @@ export class UserdataService {
   }
 
   update_profile_Users(userdata) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/profile/edituser';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/profile/edituser';
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
   update_user_password(userdata) {
-    this.baseUrl = 'http://49.248.77.14:7894/api/Profile/EditUserPassword';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/EditUserPassword';
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
