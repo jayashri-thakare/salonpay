@@ -37,7 +37,7 @@ export class EmailsettingComponent implements OnInit {
   emailsign: boolean;
   emailconnect: boolean;
 
-  constructor(private router: Router, private userdataService: UserdataService, 
+  constructor(private router: Router, private userdataService: UserdataService,
               private formBuilder: FormBuilder,
               private modalService: ModalService,
               private messageService: MessageService) { }
@@ -51,7 +51,8 @@ export class EmailsettingComponent implements OnInit {
     this.userdataService.emailnav = false;
     this.getUserSignature();
     this.gmailaccount = this.formBuilder.group({
-
+        username: [''],
+        password: [''],
     });
     this.subscription = this.userdataService.on('call-signature').subscribe(() => this.getUserSignature());
   }
@@ -84,6 +85,17 @@ export class EmailsettingComponent implements OnInit {
   openModal(id, userdetail) {
     this.modalService.open(id, userdetail);
   }
+
+  // addOffice() {
+  //   this.userdataService.addOffice().subscribe((data) => {
+  //     debugger;
+  //       this.userdataService.publish('call-signature');
+  //       this.messageService.clear();
+  //       this.messageService.add('Email signature updated successfully.')
+  //       this.closeModal('side-menu-imap');
+  //     });
+
+  // }
 
   mailconnectfuc(){
     if(this.emailsign == true){

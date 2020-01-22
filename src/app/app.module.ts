@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -51,7 +51,13 @@ import {UserComponent} from './admin/user/user.component'
 import {RolesComponent} from './admin/roles/roles.component'
 import {AddRolesComponent} from './admin/roles/addroles.component'
 import { AdminService } from './admin/admin.service';
-import {TimerComponent} from './timetracker.component';
+import { DeleteComponent } from './delete.component'
+import { AddUserComponent } from './admin/user/adduser.component'
+import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
+import { UserDetailComponent } from './admin/user/userdetail.component'
+import { UserRolesComponent } from './admin/user/userroles.component'
+import { UserHistoryComponent } from './admin/user/userhistory.component'
+import {TimerComponent} from './timetracker.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -59,6 +65,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   imports: [
+    MultiSelectAllModule,
     DateRangePickerModule,
     DateTimePickerModule,
     AppRoutingModule,
@@ -66,6 +73,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule,
+    FormsModule,
     RichTextEditorAllModule,
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
@@ -81,35 +89,40 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     })
   ],
-    declarations: [AppComponent,
-        AdminComponent,
-        UserComponent,
-        RolesComponent,
-        AddRolesComponent,
-        IMAPSettingComponent,
-        ScheduleEditComponent,
-        SignUpComponent,
-        LoginComponent,
-        ForgotComponent,
-        ControlErrorsDirective,
-        ControlErrorContainerDirective,
-        FormSubmitDirective,
-        ControlErrorComponent,
-        MessagesComponent,
-        ControlErrorComponent,
-        DashboardComponent,
-        ResetpasswordComponent,
-        ProfilesettingComponent,
-        EmailsettingComponent,
-        NotificationsettingComponent,
-        AccountsettingComponent,
-        BanksettingComponent,
-        SchedulesettingComponent,
-        SidebarComponent,
-        HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
-        CscComponent,
-        InternationalTelNoDirective,
-        AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent],
+  declarations: [AppComponent,
+    AddUserComponent,
+    UserDetailComponent,
+    UserRolesComponent,
+    UserHistoryComponent,
+    DeleteComponent,
+    AdminComponent,
+    UserComponent,
+    RolesComponent,
+    AddRolesComponent,
+    IMAPSettingComponent,
+    ScheduleEditComponent,
+    SignUpComponent,
+    LoginComponent,
+    ForgotComponent,
+    ControlErrorsDirective,
+    ControlErrorContainerDirective,
+    FormSubmitDirective,
+    ControlErrorComponent,
+    MessagesComponent,
+    ControlErrorComponent,
+    DashboardComponent,
+    ResetpasswordComponent,
+    ProfilesettingComponent,
+    EmailsettingComponent,
+    NotificationsettingComponent,
+    AccountsettingComponent,
+    BanksettingComponent,
+    SchedulesettingComponent,
+    SidebarComponent,
+    HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
+    CscComponent,
+    InternationalTelNoDirective,
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]

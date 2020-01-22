@@ -4,6 +4,7 @@ import { ModalService } from '../../_modal/modal.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdminService} from '../admin.service';
 import {MessageService} from '../../message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'addroles-modal',
@@ -64,7 +65,7 @@ import {MessageService} from '../../message.service';
     '            </div>\n' +
     '\n' +
     '        </form>\n' +
-    '        <form *ngIf="updateform" [formGroup]="updaterolesForm" (ngSubmit)="updateroles(updaterolesForm.value)"  class="popup-scrll">\n' +
+    '        <form *ngIf="updateform" [formGroup]="updaterolesForm" (ngSubmit)="updateroles(updaterolesForm.value, arrayofselectedobj)"  class="popup-scrll">\n' +
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
@@ -72,32 +73,32 @@ import {MessageService} from '../../message.service';
     '\n' +
     '                    <!-- Tab panes -->\n' +
     '                    <div class="tab-content">\n' +
-    '                        <div class="tab-pane active" id="role-popup-tab1">\n' +
+    '                        <div class="tab-pane active" id="role-popup-tab1" *ngFor="let roles of arrayofselectedobj">\n' +
     '                            <!-- start -->\n' +
     '                            <div class="form-group">\n' +
-    '                                <input type="text" id="mod-role-name" name="mod-role-name" formControlName="RoleName" class="form-field"\n' +
+    '                                <input type="text" id="mod-role-name" name="mod-role-name" ngModel="{{roles.name}}" formControlName="RoleName" class="form-field field--not-empty"\n' +
     '                                    required />\n' +
     '                                <p class="form-label">Role Name</p>\n' +
     '                            </div>\n' +
     '                            <div class="form-textarea-group">\n' +
-    '                                <textarea type="text" class="form-field" formControlName="Description"></textarea>\n' +
+    '                                <textarea type="text" class="form-field field--not-empty" ngModel="{{roles.description}}" formControlName="Description"></textarea>\n' +
     '                                <p class="form-label">Description</p>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +
     '                        </div>\n' +
-    '                        <div class="tab-pane fade" id="role-popup-tab2">\n' +
-    '                            <!-- start -->\n' +
-    '                            <div class="form-group">\n' +
-    '                                <input type="text" id="indi-role-name" name="indi-role-name" class="form-field"\n' +
-    '                                    required />\n' +
-    '                                <p class="form-label">Role Name</p>\n' +
-    '                            </div>\n' +
-    '                            <div class="form-textarea-group">\n' +
-    '                                <textarea type="text" class="form-field"></textarea>\n' +
-    '                                <p class="form-label">Description</p>\n' +
-    '                            </div>\n' +
-    '                            <!-- end -->\n' +
-    '                        </div>\n' +
+    // '                        <div class="tab-pane fade" id="role-popup-tab2">\n' +
+    // '                            <!-- start -->\n' +
+    // '                            <div class="form-group">\n' +
+    // '                                <input type="text" id="indi-role-name" name="indi-role-name" class="form-field"\n' +
+    // '                                    required />\n' +
+    // '                                <p class="form-label">Role Name</p>\n' +
+    // '                            </div>\n' +
+    // '                            <div class="form-textarea-group">\n' +
+    // '                                <textarea type="text" class="form-field"></textarea>\n' +
+    // '                                <p class="form-label">Description</p>\n' +
+    // '                            </div>\n' +
+    // '                            <!-- end -->\n' +
+    // '                        </div>\n' +
     '                    </div>\n' +
     '\n' +
     '\n' +
@@ -120,15 +121,22 @@ export class AddRolesComponent implements OnInit {
   updaterolesForm: FormGroup;
   control: FormControl;
   submitted = false;
+  private subscription: Subscription;
   @Input('addAdmin') addform: any;
   @Input('updateAdmin') updateform: any;
+  @Input('userroleobj') arrayofselectedobj: any;
+  userroles: any;
   constructor(private AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
   
   get f() {
     return this.addrolesForm.controls;
     return this.updaterolesForm.controls;
   }
+  get f1() {
+    return this.updaterolesForm.controls;
+  }
   ngOnInit() {
+    // this.getuserRoles();
     this.addrolesForm = this.formBuilder.group({
       RoleName: ['', Validators.required],
       Description: ['', Validators.required]
@@ -137,6 +145,7 @@ export class AddRolesComponent implements OnInit {
       RoleName: ['', Validators.required],
       Description: ['', Validators.required]
     });
+    // this.subscription = this.AdminService.on('call-roles').subscribe(() => this.getuserRoles());
   }
 
   closeModal(id: string) {
@@ -149,6 +158,7 @@ export class AddRolesComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.addrolesForm.status == 'VALID') {
       this.AdminService.create_role_service(Admin).subscribe((data) => {
+        this.AdminService.publish('call-parent');
         this.messageService.clear();
         this.messageService.add('Role Created successfully.')
         this.closeModal('add-tax-table');
@@ -162,23 +172,34 @@ export class AddRolesComponent implements OnInit {
     }
   }
 
-  updateroles(Admin) {
+  updateroles(Admin, selectedobj) {
     debugger;
-    console.log(Admin, this.addrolesForm)
+    Admin.RoleId = selectedobj[0].id
+    console.log(Admin, this.updaterolesForm)
     // tslint:disable-next-line:triple-equals
-    if (this.addrolesForm.status == 'VALID') {
+    if (this.updaterolesForm.status == 'VALID') {
       this.AdminService.update_role_service(Admin).subscribe((data) => {
+        this.AdminService.publish('call-roles');
         this.messageService.clear();
         this.messageService.add('Role Updated successfully.')
         this.closeModal('add-tax-table');
       });
     } else {
-      console.log(Admin, this.addrolesForm.status);
+      console.log(Admin, this.updaterolesForm.status);
       this.submitted = true;
-      if (this.addrolesForm.invalid) {
+      if (this.updaterolesForm.invalid) {
         return;
       }
     }
+  }
+
+  getuserRoles() {
+    this.AdminService.getUserRoles().subscribe((data) => {
+      this.userroles = data;
+      this.userroles = this.userroles.result;
+      console.log(this.userroles)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 
 }
