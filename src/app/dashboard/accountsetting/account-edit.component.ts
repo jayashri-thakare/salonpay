@@ -60,6 +60,8 @@ export class AccountEditComponent implements OnInit {
   control: FormControl;
   submitted = false;
   public userdetail: Observable< object >;
+  public timeZonesList;
+  public userLanguageList;
   useraccountdetail: any;
   @Output() accountdetail = new EventEmitter<object>();
 

@@ -22,6 +22,7 @@ export class NotificationsettingComponent implements OnInit {
   private SMSNotification = {};
   private note = {};
   public notifications: Observable<userdetail>;
+  public notification;
   private Email = {};
   private SMS = {};
   private note1 = {};
