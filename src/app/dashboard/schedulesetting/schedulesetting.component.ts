@@ -19,6 +19,7 @@ export class SchedulesettingComponent implements OnInit {
   public schedulevar: boolean;
   public arrayofdays: Array<string> = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   private arrayofselecteddays: Array<string> = [];
+  public DateRangePicker;
   // private arrayofselectedobj: Array<string> = [];
   public currentDate: Date = new Date ();
   public dateValue: Date = new Date ();
