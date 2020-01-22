@@ -25,7 +25,7 @@ import {MessageService} from '../../message.service';
        ' <div class="">'+
           '<!-- start -->'+
          ' <div class="radio-box radio-box-2" *ngFor="let weekdays of arrayofselectedobj">'+
-           ' <input type="checkbox" [disabled]="isdisable" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="editedDayName" (click)="selectedWeekDays(weekdays)">'+
+           ' <input type="checkbox" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="editedDayName" (click)="selectedWeekDays(weekdays)">'+
            ' <label for="edit_{{weekdays.dayName}}">{{weekdays.dayName}}</label>'+
           '</div>'+
          ' <!-- end -->'+
@@ -63,7 +63,6 @@ export class ScheduleEditComponent implements OnInit {
   }
   ngOnInit() {
     console.log(this.arrayofselectedobj)
-    const isdisable = true;
     this.scheduleeditForm = this.formBuilder.group({
         editedDayName: [''],
         StartTimeHour: [''],

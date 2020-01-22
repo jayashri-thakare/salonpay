@@ -15,9 +15,9 @@ export class SchedulesettingComponent implements OnInit {
   timeoffForm: FormGroup;
   control: FormControl;
   submitted = false;
-  private requesttimevar: boolean;
-  private schedulevar: boolean;
-  private arrayofdays: Array<string> = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  public requesttimevar: boolean;
+  public schedulevar: boolean;
+  public arrayofdays: Array<string> = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   private arrayofselecteddays: Array<string> = [];
   // private arrayofselectedobj: Array<string> = [];
   public currentDate: Date = new Date ();
@@ -28,7 +28,7 @@ export class SchedulesettingComponent implements OnInit {
   @Input('userdata') arrayofselectedobj: Array<string> = [];
   userdelschedule: any;
 
-  constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
+  constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
 
   get f() {
     return this.scheduleForm.controls;
@@ -96,8 +96,8 @@ export class SchedulesettingComponent implements OnInit {
     }
   }
 
-  openModal(id: string, userdetail) {
-    this.modalService.open(id, userdetail);
+  openModal(id: string) {
+    this.modalService.open1(id);
   }
 
   closeModal(id: string) {

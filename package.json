@@ -22,6 +22,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@syncfusion/ej2-angular-calendars": "^17.4.44",
+    "@syncfusion/ej2-angular-dropdowns": "^17.4.44",
     "@syncfusion/ej2-angular-richtexteditor": "^17.4.44",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",

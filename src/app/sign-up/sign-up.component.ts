@@ -17,8 +17,8 @@ export class SignUpComponent implements OnInit {
   model: any = {};
   public msg: string;
   public email1: string;
-  private signuperrormsg: string;
-  private signupfail: boolean;
+  public signuperrormsg: string;
+  public signupfail: boolean;
   constructor(private formBuilder: FormBuilder, private logger: NGXLogger,
               private userdataService: UserdataService, private router: Router,
               private messageService: MessageService) {

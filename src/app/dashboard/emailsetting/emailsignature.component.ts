@@ -51,7 +51,7 @@ export class EmailEditComponent implements OnInit {
   @Input('userdata') userdetail: any;
   private signature: string;
   constructor(public translate: TranslateService, private userdataService: UserdataService,
-              private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
+              private formBuilder: FormBuilder, public modalService: ModalService, private router: Router,
               private userdataservice: UserdataService, private messageService: MessageService) {
   }
   get f() {

@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
   employeecheck: any;
   techniciancheck: any;
 
-  constructor(private modalService: ModalService,private messageService: MessageService, private AdminService: AdminService) { }
+  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService) { }
 
   ngOnInit() {
     this.AdminService.usernav = true;
@@ -68,8 +68,8 @@ export class UserComponent implements OnInit {
     }
   }
 
-  openModal(id: string, userdetail) {
-    this.modalService.open(id, userdetail);
+  openModal(id: string) {
+    this.modalService.open1(id);
   }
 
   closeModal(id: string) {

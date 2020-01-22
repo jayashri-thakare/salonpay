@@ -9,7 +9,7 @@ import {UserdataService} from '../../userdata.service';
 })
 export class BanksettingComponent implements OnInit {
 
-  constructor(private router: Router, private userdataService: UserdataService) { }
+  constructor(private router: Router, public userdataService: UserdataService) { }
 
   ngOnInit() {
     this.userdataService.banknav = false;

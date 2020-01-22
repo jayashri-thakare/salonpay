@@ -12,7 +12,7 @@ import { FormGroup } from '@angular/forms';
     '          <div class="form-group">\n' +
     '            <select class="select-field form-field" (change)="datechange(hour)" formControlName="StartTimeHour">\n' +
     '              <option value="">HH</option> '+
-    '              <option (change)="hourschangefunc()" *ngFor="\let hour of arrayofhours" [value]="hour">{{hour}}</option>\n' +
+    '              <option *ngFor="\let hour of arrayofhours" [value]="hour">{{hour}}</option>\n' +
     '            </select>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
@@ -41,7 +41,7 @@ import { FormGroup } from '@angular/forms';
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" [(ngModel)]="EndTimeHour" (change)="datechange(hour1)" formControlName="EndTimeHour" >\n' +
+    '            <select class="select-field form-field"  (change)="datechange(hour1)" formControlName="EndTimeHour" >\n' +
     '              <option value="">HH</option> '+
     '              <option *ngFor="\let hour1 of arrayofhours">{{hour1}}</option>\n' +
     '            </select>\n' +
@@ -78,8 +78,8 @@ export class CustomTimePickerComponent implements OnInit {
   otherhalf: any;
   minute1: any;
   hour1: any;
-  private arrayofhours: Array<any> = [];
-  private arrayofminute: Array<any> = [];
+  public arrayofhours: Array<any> = [];
+  public arrayofminute: Array<any> = [];
   @Input() customTimePicker: FormGroup;
   @Input('userdata') arrayofselectedobj : Array<any> = [];
   private arrayofapplieddays: Array<any> = [];

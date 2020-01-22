@@ -59,11 +59,11 @@ export class AccountEditComponent implements OnInit {
   accountForm: FormGroup;
   control: FormControl;
   submitted = false;
-  private userdetail: Observable< object >;
+  public userdetail: Observable< object >;
   useraccountdetail: any;
   @Output() accountdetail = new EventEmitter<object>();
 
-  constructor(public translate: TranslateService, private userdataService: UserdataService,
+  constructor(public translate: TranslateService, public userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
               private userdataservice: UserdataService, private messageService: MessageService) {
   }
