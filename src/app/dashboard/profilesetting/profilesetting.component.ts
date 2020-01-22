@@ -15,7 +15,7 @@ export class ProfilesettingComponent implements OnInit {
   // private userdetail;
   // userdata = this.userdetail;
   @Input('userdata') userdetail: any;
-  private url;
+  public url;
   // private subscription: any;
   private form: string;
   constructor( private router: Router, private userdataService: UserdataService, private modalService: ModalService,
