@@ -21,14 +21,14 @@ export class NotificationsettingComponent implements OnInit {
   private EmailNotification = {};
   private SMSNotification = {};
   private note = {};
-  public notifications: Observable<userdetail>;
+  public notifications: Observable<userdetail>
   public notification;
   private Email = {};
   private SMS = {};
   private note1 = {};
   private a1: any[];
   private a2: {};
-  constructor(private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userdataService: UserdataService) { }
 
   get f() {
     return this.notificationForm.controls;
