@@ -6,6 +6,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  // tslint:disable-next-line:component-selector
     selector: 'timer',
     template: `
         <h1>
@@ -63,6 +64,7 @@ export class TimerComponent implements OnInit {
     hoursDisplay: number = 0;
     secondsDisplay: number = 0;
     totalTime: any
+    StatusFlag: boolean;
     @Input('userdata') userdetail: any;
     sub: Subscription;
     constructor(private userdataService: UserdataService,
@@ -80,7 +82,11 @@ export class TimerComponent implements OnInit {
       console.log(splitted);
       this.hoursDisplay = splitted[0];
       this.secondsDisplay = splitted[2];
-      let timer = Observable.timer(1, 1000);
+      // let timer = Observable.timer(1, 1000);
+      // this.sub = timer.subscribe(this.totalTime);
+
+      let timer = Observable.timer(2000,1000);
+      // timer.subscribe(t=>this.ticks = t);
         this.sub = timer.subscribe(
             t => {
                 this.ticks = t;
@@ -89,6 +95,7 @@ export class TimerComponent implements OnInit {
                 this.hoursDisplay = this.getHours(2);
             }
         );
+
       this.userdataService.get_time_difference().subscribe((data) => {
         debugger;
       // this.userdetail = data;
@@ -97,7 +104,7 @@ export class TimerComponent implements OnInit {
     }
 
 
-    private startTimer(statusflag) {
+    public startTimer(statusflag) {
 
         let timer = Observable.timer(1, 1000);
         this.sub = timer.subscribe(
@@ -120,24 +127,24 @@ export class TimerComponent implements OnInit {
     }
 
 
-    private stopTimer(statusflag) {
+    public stopTimer(statusflag) {
          this.sub.unsubscribe();
          this.saveTimer(statusflag);
     }
 
-    private getSeconds(ticks: number) {
+    public getSeconds(ticks: number) {
         return this.pad(ticks % 60);
     }
 
-    private getMinutes(ticks: number) {
+    public getMinutes(ticks: number) {
          return this.pad((Math.floor(ticks / 60)) % 60);
     }
 
-    private getHours(ticks: number) {
+    public getHours(ticks: number) {
         return this.pad(Math.floor((ticks / 60) / 60));
     }
 
-    private pad(digit: any) {
+    public pad(digit: any) {
         return digit <= 9 ? '0' + digit : digit;
     }
 }

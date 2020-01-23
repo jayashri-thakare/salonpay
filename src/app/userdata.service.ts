@@ -25,6 +25,9 @@ const httpOptions = {
 class userdetail {
 }
 
+class timeZonesList {
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +41,7 @@ export class UserdataService {
 
   private obj: {};
   private userdetail: {};
+  private timeZonesList: {};
   private string: string;
   // tslint:disable-next-line:indent
   private email: string;
@@ -137,7 +141,7 @@ export class UserdataService {
   getUserAccount() {
     console.log(url);
     this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/ProfileMaster/GetTimeZone';
-    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
+    return this.httpClient.get<Observable<timeZonesList>>(this.baseUrl, httpOptions).pipe(map( data => data));
   }
 
   getUserSignature() {
@@ -220,7 +224,7 @@ export class UserdataService {
     //   .set('LanguageId', userdata.LanguageId);
     userdata.ParentCompanyId = this.ParentCompanyId;
     userdata.UserId = this.userId;
-    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+    return this.httpClient.post<Observable<timeZonesList>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 
