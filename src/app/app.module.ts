@@ -53,10 +53,7 @@ import {AddRolesComponent} from './admin/roles/addroles.component'
 import { AdminService } from './admin/admin.service';
 import { DeleteComponent } from './delete.component'
 import { AddUserComponent } from './admin/user/adduser.component'
-// import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
-import { UserDetailComponent } from './admin/user/userdetail.component'
-import { UserRolesComponent } from './admin/user/userroles.component'
-import { UserHistoryComponent } from './admin/user/userhistory.component'
+import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
 import {TimerComponent} from './timetracker.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -65,7 +62,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   imports: [
-    // MultiSelectAllModule,
+    MultiSelectAllModule,
     DateRangePickerModule,
     DateTimePickerModule,
     AppRoutingModule,
@@ -91,9 +88,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   declarations: [AppComponent,
     AddUserComponent,
-    UserDetailComponent,
-    UserRolesComponent,
-    UserHistoryComponent,
     DeleteComponent,
     AdminComponent,
     UserComponent,
