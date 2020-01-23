@@ -145,7 +145,6 @@ export class AddRolesComponent implements OnInit {
       RoleName: ['', Validators.required],
       Description: ['', Validators.required]
     });
-    // this.subscription = this.AdminService.on('call-roles').subscribe(() => this.getuserRoles());
   }
 
   closeModal(id: string) {
@@ -158,7 +157,7 @@ export class AddRolesComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.addrolesForm.status == 'VALID') {
       this.AdminService.create_role_service(Admin).subscribe((data) => {
-        this.AdminService.publish('call-parent');
+        this.AdminService.publish('call-roles');
         this.messageService.clear();
         this.messageService.add('Role Created successfully.')
         this.closeModal('add-tax-table');

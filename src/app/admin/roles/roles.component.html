@@ -199,8 +199,8 @@
                                     </div>
                                     <div class="module-btm customer-switch">
                                         <div class="checkbox-box" *ngFor="let permission of moduleright.permissions">
-                                            <input type="checkbox" id="mod-chk1" ngModel="{{permission.isActive}}" name="mod-chk1" required="">
-                                            <label for="mod-chk1">{{permission.permission}}</label>
+                                            <input type="checkbox" id="{{permission.permission}}" name="{{permission.permission}}" value="{{permission.permission}}" required="">
+                                            <label for="{{permission.permission}}">{{permission.permission}}</label>
                                         </div>
                                     </div>
                                 </div>

@@ -52,7 +52,7 @@ export class RolesComponent implements OnInit {
     this.getuserRoles();
     this.getrolesModuleRights();
     this.getrolesIndividualRights();
-    // this.subscription = this.AdminService.on('call-roles').subscribe(() => this.getuserRoles());
+    this.subscription = this.AdminService.on('call-roles').subscribe(() => this.getuserRoles());
   }
 
   selectroleobj(selected_obj){
