@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { MessageService } from 'src/app/message.service';
 import { Subscription } from 'rxjs';
@@ -11,6 +12,10 @@ import { Subscription } from 'rxjs';
 })
 
 export class UserComponent implements OnInit {
+  userrightForm: FormGroup;
+  // userrightForm: FormArray
+  control: FormControl;
+  submitted = false;
   userdetailvar: boolean;
   rolesvar: boolean;
   historyvar: boolean;
@@ -28,19 +33,33 @@ export class UserComponent implements OnInit {
   managercheck: any;
   employeecheck: any;
   techniciancheck: any;
+  rolesmodulerights: any;
+  rolesindividualrights: any;
 
-  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService) { }
+  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.AdminService.usernav = true;
     this.userdetailvar = true;
     this.rolesvar = false;
     this.historyvar = false;
-    this.getuserHistory();
     this.getuserRoles();
     this.getuserList();
     this.getusrRoles();
-    // this.subscription = this.AdminService.on('call-user').subscribe(() => this.getuserList());
+    this.getrolesModuleRights();
+    this.getrolesIndividualRights();
+    this.userrightForm = this.formBuilder.group({
+
+    });
+    // this.userrightForm = new FormArray(this.moduleright.map(x => new FormArray([]))
+    // this.moduleright.forEach((x, index) => {  //for each hobiee
+    //   const array=this.userrightForm.at(index) as FormArray
+    //   x.children.forEach(c=>{
+    //     array.push(new FormControl(c.selected))
+    //   })
+    // })
+
+    this.subscription = this.AdminService.on('call-user').subscribe(() => this.getuserList());
   }
 
   userdetailsctive(type){
@@ -86,8 +105,8 @@ export class UserComponent implements OnInit {
     }
   }
 
-  getuserHistory() {
-    this.AdminService.getUserHistory().subscribe((data) => {
+  getuserHistory(user) {
+    this.AdminService.getUserHistory(user).subscribe((data) => {
       this.userhistory = data;
       this.userhistory = this.userhistory.result;
     });
@@ -150,7 +169,23 @@ export class UserComponent implements OnInit {
     this.AdminService.getUserRoles().subscribe((data) => {
       this.userroles = data;
       this.userroles = this.userroles.result;
-      console.log(this.userroles)
+      console.log(this.userroles, "rolesofuser")
+    });
+  }
+
+  getrolesModuleRights() {
+    this.AdminService.getrolesModuleRights().subscribe((data) => {
+      this.rolesmodulerights = data;
+      this.rolesmodulerights = this.rolesmodulerights.result;
+      console.log(this.rolesmodulerights, "module")
+    });
+  }
+
+  getrolesIndividualRights() {
+    this.AdminService.getrolesIndividualRights().subscribe((data) => {
+      this.rolesindividualrights = data;
+      this.rolesindividualrights = this.rolesindividualrights.result;
+      console.log(this.rolesindividualrights)
     });
   }
 

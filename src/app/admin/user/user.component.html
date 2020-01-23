@@ -46,7 +46,7 @@
         <div class="admin-comm-box">
             <div class="admin-comm-lef">
                 <ul class="clearfix tabs user-detail-lef-tab" data-tabgroup="first-tab-group">
-                    <li *ngFor="let user of userlist" (click)="getemailfunc(user)" id="{{user.user.email}}">
+                    <li *ngFor="let user of userlist" (click)="getemailfunc(user);getuserHistory(user)" id="{{user.user.email}}">
                         <a class="admin-comm-rig-btn">
                             <!-- start -->
                             <div class="table-bdy">
@@ -107,7 +107,7 @@
                         <ul class="clearfix tabs user-detail-tab-rig" data-tabgroup="second-tab-group">
                             <li><a (click)="userdetailsctive('userdetail')" id="userdetail" class="active">User Details</a></li>
                             <li><a (click)="userdetailsctive('roles')" id="roles">Roles</a></li>
-                            <li><a (click)="userdetailsctive('history')" id="history">History</a></li>
+                            <li><a (click)="userdetailsctive('history');getuserHistory(userlist[0])" id="history">History</a></li>
                         </ul>
 
                         <section id="second-tab-group" class="tabgroup">
@@ -236,11 +236,11 @@
                                 <div class="admin-comm-rig-scroll scrollbar">
                                     <!-- start -->
                                     <h6 class="comm-subhdn">{{userdet.user.firstName}}'s Role</h6>
-                                    <div class="row">
+                                    <div class="row" *ngFor="let roles of userroles">
                                         <div class="w50 w-1200-100">
                                             <!-- start -->
                                             <div class="yur-mail-box">
-                                                <h6 class="promo-head">Administrator</h6>
+                                                <h6 class="promo-head">{{roles.name}}</h6>
                                                 <div class="switch switch--horizontal only-switch">
                                                     <input id="admin1" type="radio" [value]="false" name="admi-radio1" />
                                                     <label for="admin1"></label>
@@ -251,320 +251,71 @@
                                             </div>
                                             <!-- end -->
                                         </div>
-                                        <div class="w50 w-1200-100">
-                                            <!-- start -->
-                                            <div class="yur-mail-box">
-                                                <h6 class="promo-head">Manager</h6>
-                                                <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin2" type="radio" [value]="false" name="admi-radio2"
-                                                        checked="checked" />
-                                                    <label for="admin2"></label>
-                                                    <input id="admin22" type="radio" [value]="true" name="admi-radio2" />
-                                                    <label for="admin22"></label><span class="toggle-outside"><span
-                                                            class="toggle-inside"></span></span>
-                                                </div>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w50 w-1200-100">
-                                            <!-- start -->
-                                            <div class="yur-mail-box">
-                                                <h6 class="promo-head">Employee</h6>
-                                                <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin3" type="radio" [value]="false" name="admi-radio3"
-                                                        checked="checked" />
-                                                    <label for="admin3"></label>
-                                                    <input id="admin32" type="radio" [value]="true" name="admi-radio3" />
-                                                    <label for="admin32"></label><span class="toggle-outside"><span
-                                                            class="toggle-inside"></span></span>
-                                                </div>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w50 w-1200-100">
-                                            <!-- start -->
-                                            <div class="yur-mail-box">
-                                                <h6 class="promo-head">Technician</h6>
-                                                <div class="switch switch--horizontal only-switch">
-                                                    <input id="admin4" type="radio" [value]="false" name="admi-radio4"
-                                                        checked="checked" />
-                                                    <label for="admin4"></label>
-                                                    <input id="admin42" type="radio" [value]="true" name="admi-radio4" />
-                                                    <label for="admin42"></label><span class="toggle-outside"><span
-                                                            class="toggle-inside"></span></span>
-                                                </div>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
                                     </div>
                                     <!-- end -->
+                                    <form [formGroup]="userrightForm" (ngSubmit)="createuser(userrightForm.value)">
+                                        <!-- start -->
+                                        <h6 class="comm-subhdn">Module Rights</h6>
+                                        <div class="row">
+                                            <div class="w100" *ngFor="let moduleright of rolesmodulerights">
+                                                <!-- start -->
+                                                <div class="module-role-box">
+                                                    <div class="module-rig">
+                                                        <h6 class="promo-head">{{moduleright.moduleName}}</h6>
+                                                        <div class="switch switch--horizontal only-switch"
+                                                            data-name="customer-switch">
+                                                            <input class="notif-radio" id="{{moduleright.moduleName}}" type="radio"
+                                                                name="{{moduleright.moduleName}}" [value]="false" />
+                                                            <label for="{{moduleright.moduleName}}"></label>
+                                                            <input class="notif-radio" id="{{moduleright.moduleName}}" type="radio"
+                                                                name="{{moduleright.moduleName}}" [value]="true" />
+                                                            <label for="{{moduleright.moduleName}}"></label><span class="toggle-outside"><span
+                                                                    class="toggle-inside"></span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="module-btm customer-switch">
+                                                        <div class="checkbox-box" *ngFor="let permission of moduleright.permissions">
+                                                            <div>
+                                                                <input type="checkbox" id="{{permission.permission}}_{{moduleright.moduleName}}" name="{{permission.permission}}" required="">
+                                                                <label for="{{permission.permission}}_{{moduleright.moduleName}}">{{permission.permission}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end -->
+                                            </div>
+                                        </div>
+                                        <!-- end -->
 
-                                    <!-- start -->
-                                    <h6 class="comm-subhdn">Module Rights</h6>
-                                    <div class="row">
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Customers</h6>
-                                                    <div class="switch switch--horizontal only-switch"
-                                                        data-name="customer-switch">
-                                                        <input class="notif-radio" id="module1" type="radio"
-                                                            name="module-radio1" value="off" />
-                                                        <label for="module1"></label>
-                                                        <input class="notif-radio" id="module12" type="radio"
-                                                            name="module-radio1" value="on" checked="checked" />
-                                                        <label for="module12"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
+                                        <!-- start -->
+                                        <h6 class="comm-subhdn">Individual Rights</h6>
+                                        <div class="row">
+                                            <div class="w100" *ngFor="let individualright of rolesindividualrights">
+                                                <!-- start -->
+                                                <div class="module-role-box">
+                                                    <div class="module-rig">
+                                                        <h6 class="promo-head">{{individualright.permission}}</h6>
+                                                        <div class="switch switch--horizontal only-switch">
+                                                            <input id="{{individualright.permission}}" type="checkbox" name="indiv-radio1" ngModel="{{individualright.isActive}}"/>
+                                                            <label for="{{individualright.permission}}"></label>
+                                                            <input id="{{individualright.permission}}" type="checkbox" name="indiv-radio1" ngModel="{{individualright.isActive}}"/>
+                                                            <label for="{{individualright.permission}}"></label><span class="toggle-outside"><span
+                                                                    class="toggle-inside"></span></span>
+                                                        </div>
                                                     </div>
+                                                    <p class="role-para">If this right is given then the user will be
+                                                        able to see
+                                                        the New
+                                                        Sale button
+                                                        and will
+                                                        be able to create sales and use the point of sale portion of the
+                                                        application.</p>
                                                 </div>
-                                                <div class="module-btm customer-switch">
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="mod-chk1" name="mod-chk1"
-                                                            required="">
-                                                        <label for="mod-chk1">View</label>
-                                                    </div>
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="mod-chk2" name="mod-chk2"
-                                                            required="">
-                                                        <label for="mod-chk2">Create</label>
-                                                    </div>
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="mod-chk3" name="mod-chk3"
-                                                            required="">
-                                                        <label for="mod-chk3">Update</label>
-                                                    </div>
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="mod-chk4" name="mod-chk4"
-                                                            required="">
-                                                        <label for="mod-chk4">Delete</label>
-                                                    </div>
-                                                </div>
+                                                <!-- end -->
                                             </div>
-                                            <!-- end -->
                                         </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="yur-mail-box">
-                                                <h6 class="promo-head">Appointments</h6>
-                                                <div class="switch switch--horizontal only-switch">
-                                                    <input id="module2" type="radio" name="module-radio2"
-                                                        checked="checked" />
-                                                    <label for="module2"></label>
-                                                    <input id="module22" type="radio" name="module-radio2" />
-                                                    <label for="module22"></label><span class="toggle-outside"><span
-                                                            class="toggle-inside"></span></span>
-                                                </div>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Sales</h6>
-                                                    <div class="switch switch--horizontal only-switch"
-                                                        data-name="sale-switch">
-                                                        <input class="notif-radio" id="module3" type="radio"
-                                                            name="module-radio3" value="off" />
-                                                        <label for="module3"></label>
-                                                        <input class="notif-radio" id="module32" type="radio"
-                                                            name="module-radio3" value="on" checked="checked" />
-                                                        <label for="module32"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <div class="module-btm sale-switch">
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="sale-chk1" name="sale-chk1"
-                                                            required="">
-                                                        <label for="sale-chk1">View</label>
-                                                    </div>
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="sale-chk2" name="sale-chk2"
-                                                            required="">
-                                                        <label for="sale-chk2">Create</label>
-                                                    </div>
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="sale-chk3" name="sale-chk3"
-                                                            required="">
-                                                        <label for="sale-chk3">Update</label>
-                                                    </div>
-                                                    <div class="checkbox-box">
-                                                        <input type="checkbox" id="sale-chk4" name="sale-chk4"
-                                                            required="">
-                                                        <label for="sale-chk4">Delete</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                    </div>
-                                    <!-- end -->
-
-                                    <!-- start -->
-                                    <h6 class="comm-subhdn">Individual Rights</h6>
-                                    <div class="row">
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Create New Sale</h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv1" type="radio" name="indiv-radio1" />
-                                                        <label for="indiv1"></label>
-                                                        <input id="indiv12" type="radio" name="indiv-radio1"
-                                                            checked="checked" />
-                                                        <label for="indiv12"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will be
-                                                    able to see
-                                                    the New
-                                                    Sale button
-                                                    and will
-                                                    be able to create sales and use the point of sale portion of the
-                                                    application.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Create New Appointment</h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv2" type="radio" name="indiv-radio2" />
-                                                        <label for="indiv2"></label>
-                                                        <input id="indiv22" type="radio" name="indiv-radio2"
-                                                            checked="checked" />
-                                                        <label for="indiv22"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will be
-                                                    able to see
-                                                    the New
-                                                    Appointment button and will be able to create appointments.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Manage Sales Commissions, Tips and Turns
-                                                    </h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv3" type="radio" name="indiv-radio3" />
-                                                        <label for="indiv3"></label>
-                                                        <input id="indiv32" type="radio" name="indiv-radio3"
-                                                            checked="checked" />
-                                                        <label for="indiv32"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will have
-                                                    the ability
-                                                    override
-                                                    and manage the commissions, tip allocation and turn allocation
-                                                    for any
-                                                    completed
-                                                    sale.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Cancel Appointments</h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv4" type="radio" name="indiv-radio4" />
-                                                        <label for="indiv4"></label>
-                                                        <input id="indiv42" type="radio" name="indiv-radio4"
-                                                            checked="checked" />
-                                                        <label for="indiv42"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will have
-                                                    access to
-                                                    the cancel
-                                                    appointment function.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Bulk Edit</h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv5" type="radio" name="indiv-radio5" />
-                                                        <label for="indiv5"></label>
-                                                        <input id="indiv52" type="radio" name="indiv-radio5"
-                                                            checked="checked" />
-                                                        <label for="indiv52"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will be
-                                                    able to bulk
-                                                    edit,
-                                                    customers, appointments and sales.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Communicate with Customers</h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv6" type="radio" name="indiv-radio6" />
-                                                        <label for="indiv6"></label>
-                                                        <input id="indiv62" type="radio" name="indiv-radio6"
-                                                            checked="checked" />
-                                                        <label for="indiv62"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will have
-                                                    access to
-                                                    the
-                                                    customers communication menu and will be able to view emails and
-                                                    communicate
-                                                    with
-                                                    customers via email and text messages.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                        <div class="w100">
-                                            <!-- start -->
-                                            <div class="module-role-box">
-                                                <div class="module-rig">
-                                                    <h6 class="promo-head">Add Customer Notes</h6>
-                                                    <div class="switch switch--horizontal only-switch">
-                                                        <input id="indiv7" type="radio" name="indiv-radio7" />
-                                                        <label for="indiv7"></label>
-                                                        <input id="indiv72" type="radio" name="indiv-radio7"
-                                                            checked="checked" />
-                                                        <label for="indiv72"></label><span class="toggle-outside"><span
-                                                                class="toggle-inside"></span></span>
-                                                    </div>
-                                                </div>
-                                                <p class="role-para">If this right is given then the user will have
-                                                    the ability
-                                                    to add
-                                                    notes to the customers profile.</p>
-                                            </div>
-                                            <!-- end -->
-                                        </div>
-                                    </div>
-                                    <!-- end -->
-
+                                        <button class="button" type="submit">Save</button>
+                                    </form>
                                 </div>
                                 <!-- roles end -->
                                 </div>

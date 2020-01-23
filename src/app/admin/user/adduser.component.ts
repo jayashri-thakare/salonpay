@@ -132,7 +132,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group popup-select2">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" (click)="selectedDays(services)" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -202,6 +202,8 @@ export class AddUserComponent implements OnInit {
     // set the placeholder to MultiSelect Dropdown input element
     public localWaterMark: string = 'Select services';
   userlist: any;
+  arrayofselectedserviceids: Array<any> = [];
+  arrayofselectedservice: Array<any> = [];
 
   constructor(private AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -254,7 +256,7 @@ export class AddUserComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.adduserForm.status == 'VALID') {
       this.AdminService.create_user_service(Admin).subscribe((data) => {
-        // this.AdminService.publish('call-user');
+        this.AdminService.publish('call-user');
         this.messageService.clear();
         this.messageService.add('User Created successfully.')
         this.closeModal('add-tax-table1');
@@ -290,6 +292,15 @@ export class AddUserComponent implements OnInit {
       if (this.updateuserForm.invalid) {
         return;
       }
+    }
+  }
+
+  selectedDays(selected_Ids){
+    var index = this.arrayofselectedservice.indexOf(selected_Ids);
+    if(index<0){
+      this.arrayofselectedserviceids.push(selected_Ids);
+    }else{
+      this.arrayofselectedserviceids.splice(index, 1);
     }
   }
 
