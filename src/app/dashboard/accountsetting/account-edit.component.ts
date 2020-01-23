@@ -27,7 +27,7 @@ import {MessageService} from '../../message.service';
     '        <div class="form-group">\n' +
     '          <select class="select-field form-field" formControlName="TimezoneId">\n' +
     '             <option value="">Select Timezone...</option>\n' +
-    '             <option *ngFor="let timezone of userdetail?.timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 40}}</option>\n' +
+    '             <option *ngFor="let timezone of timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 40}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
@@ -36,7 +36,7 @@ import {MessageService} from '../../message.service';
     '        <div class="form-group">\n' +
 '              <select  class="select-field form-field" formControlName="LanguageId">\n' +
     '            <option value="">Select Language...</option>\n' +
-    '            <option *ngFor="let language of userdetail?.userLanguageList" [value]="language.id">{{language.langType}}</option>\n' +
+    '            <option *ngFor="let language of userLanguageList" [value]="language.id">{{language.langType}}</option>\n' +
     '          </select> \n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
@@ -60,8 +60,8 @@ export class AccountEditComponent implements OnInit {
   control: FormControl;
   submitted = false;
   public userdetail: Observable< object >;
-  public timeZonesList;
-  public userLanguageList;
+  public timeZonesList: Observable< object >;
+  public userLanguageList: Observable< object >;
   useraccountdetail: any;
   @Output() accountdetail = new EventEmitter<object>();
 
@@ -89,7 +89,9 @@ export class AccountEditComponent implements OnInit {
   getUserAccount() {
     this.userdataService.getUserAccount().subscribe((data) => {
       // this.timeZonesList = data["timeZonesList"];
-      this.userdetail = data[0];
+      // this.userdetail = data[0];
+      this.timeZonesList = data[0]["timeZonesList"];
+      this.userLanguageList = data[0]["userLanguageList"]
     });
   }
 

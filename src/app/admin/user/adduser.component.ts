@@ -51,7 +51,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group popup-select2">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    // '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -132,7 +132,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group popup-select2">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    // '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
