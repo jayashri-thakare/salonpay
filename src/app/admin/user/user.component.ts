@@ -12,6 +12,9 @@ import { Subscription } from 'rxjs';
 })
 
 export class UserComponent implements OnInit {
+
+  // tslint:disable-next-line:no-shadowed-variable
+  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   userrightForm: FormGroup;
   // userrightForm: FormArray
   control: FormControl;
@@ -36,8 +39,6 @@ export class UserComponent implements OnInit {
   rolesmodulerights: any;
   rolesindividualrights: any;
 
-  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
-
   ngOnInit() {
     this.AdminService.usernav = true;
     this.userdetailvar = true;
@@ -45,9 +46,9 @@ export class UserComponent implements OnInit {
     this.historyvar = false;
     this.getuserRoles();
     this.getuserList();
-    this.getusrRoles();
-    this.getrolesModuleRights();
-    this.getrolesIndividualRights();
+    // this.getusrRoles();
+    // this.getrolesModuleRights();
+    // this.getrolesIndividualRights();
     this.userrightForm = this.formBuilder.group({
 
     });
@@ -60,6 +61,7 @@ export class UserComponent implements OnInit {
     // })
 
     this.subscription = this.AdminService.on('call-user').subscribe(() => this.getuserList());
+    // this.subscription = this.AdminService.on('add-form').subscribe(() => this.addupdateform());
   }
 
   userdetailsctive(type){
@@ -87,6 +89,7 @@ export class UserComponent implements OnInit {
     }
   }
 
+
   openModal(id: string) {
     this.modalService.open1(id);
   }
@@ -98,7 +101,7 @@ export class UserComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updateform = false;
-      this.addform = true; 
+      this.addform = true;
     }else if(type == 'update'){
       this.updateform = true;
       this.addform = false;
@@ -124,7 +127,7 @@ export class UserComponent implements OnInit {
     this.AdminService.getUserAdminList().subscribe((data) => {
       this.userlist = data;
       this.userlist = this.userlist.result;
-      console.log(this.userlist, "userlist")
+      this.AdminService.setIndex(0,  this.userlist[0].user.id);
       this.pageviewemailfunc(this.userlist);
     });
   }
@@ -140,7 +143,6 @@ export class UserComponent implements OnInit {
   }
 
   deleteUser(selected_user) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (selected_user) {
       this.AdminService.deleteUser(selected_user[0].id).subscribe((data) => {
@@ -160,33 +162,9 @@ export class UserComponent implements OnInit {
 
   pageviewemailfunc(userlist){
     if(userlist){
-      this.pageinitemail = userlist[0].user.email; 
+      this.pageinitemail = userlist[0].user.email;
       this.onloadvar = true;
     }
-  }
-
-  getusrRoles() {
-    this.AdminService.getUserRoles().subscribe((data) => {
-      this.userroles = data;
-      this.userroles = this.userroles.result;
-      console.log(this.userroles, "rolesofuser")
-    });
-  }
-
-  getrolesModuleRights() {
-    this.AdminService.getrolesModuleRights().subscribe((data) => {
-      this.rolesmodulerights = data;
-      this.rolesmodulerights = this.rolesmodulerights.result;
-      console.log(this.rolesmodulerights, "module")
-    });
-  }
-
-  getrolesIndividualRights() {
-    this.AdminService.getrolesIndividualRights().subscribe((data) => {
-      this.rolesindividualrights = data;
-      this.rolesindividualrights = this.rolesindividualrights.result;
-      console.log(this.rolesindividualrights)
-    });
   }
 
 }

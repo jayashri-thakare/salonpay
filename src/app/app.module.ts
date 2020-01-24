@@ -53,9 +53,12 @@ import {AddRolesComponent} from './admin/roles/addroles.component'
 import { AdminService } from './admin/admin.service';
 import { DeleteComponent } from './delete.component'
 import { AddUserComponent } from './admin/user/adduser.component'
-// import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
+import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
 
 import {TimerComponent} from './timetracker.component'
+import {UserDetailsComponent} from './admin/user/userdetails.component';
+import {UserRightsComponent} from './admin/user/userroles.component';
+import {UserHistoryComponent} from './admin/user/userhistory.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -63,7 +66,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   imports: [
-    // MultiSelectAllModule,
+    MultiSelectAllModule,
     DateRangePickerModule,
     DateTimePickerModule,
     AppRoutingModule,
@@ -117,7 +120,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
     InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent],
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, UserDetailsComponent, UserRightsComponent, UserHistoryComponent],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
