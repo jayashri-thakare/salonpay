@@ -51,7 +51,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group popup-select2">\n' +
-    // '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -132,7 +132,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group popup-select2">\n' +
-    // '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -244,8 +244,6 @@ export class AddUserComponent implements OnInit {
   }
 
   createuser(Admin) {
-    debugger;
-    console.log(Admin, this.adduserForm)
     Admin.TimeTrack = Boolean(Admin.TimeTrack)
     Admin.ExpLevelId = parseInt(Admin.ExpLevelId);
     Admin.ServiceIds = parseInt(Admin.ServiceIds);
@@ -269,8 +267,6 @@ export class AddUserComponent implements OnInit {
   }
 
   updateuser(Admin) {
-    debugger;
-    console.log(Admin, this.updateuserForm)
     Admin.TimeTrack = Boolean(Admin.TimeTrack)
     Admin.ExpLevelId = parseInt(Admin.ExpLevelId);
     Admin.ServiceIds = parseInt(Admin.ServiceIds);
