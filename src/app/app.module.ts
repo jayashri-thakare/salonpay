@@ -54,7 +54,6 @@ import { AdminService } from './admin/admin.service';
 import { DeleteComponent } from './delete.component'
 import { AddUserComponent } from './admin/user/adduser.component'
 import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns'
-
 import {TimerComponent} from './timetracker.component'
 import {UserDetailsComponent} from './admin/user/userdetails.component';
 import {UserRightsComponent} from './admin/user/userroles.component';
