@@ -59,6 +59,7 @@ import {TimerComponent} from './timetracker.component'
 import {UserDetailsComponent} from './admin/user/userdetails.component';
 import {UserRightsComponent} from './admin/user/userroles.component';
 import {UserHistoryComponent} from './admin/user/userhistory.component';
+import { AdminServiceComponent} from './admin/services/service.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -120,7 +121,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
     InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, UserDetailsComponent, UserRightsComponent, UserHistoryComponent],
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, UserDetailsComponent,
+    UserRightsComponent, UserHistoryComponent, AdminServiceComponent],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]

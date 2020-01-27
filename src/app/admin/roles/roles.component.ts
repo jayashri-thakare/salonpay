@@ -24,11 +24,11 @@ export class RolesComponent implements OnInit {
   // technician: boolean;
   addform: boolean;
   updateform: boolean;
-  userroles: any;
+  public userroles: any;
   arrayofselectedobj: Array<any> = [];
   private subscription: Subscription;
-  rolesmodulerights: any;
-  rolesindividualrights: any;
+  public rolesmodulerights: any;
+  public rolesindividualrights: any;
   getrolesclaim: any;
   noclaimvar: boolean;
   claimvar: boolean;
@@ -42,7 +42,7 @@ export class RolesComponent implements OnInit {
   ngOnInit() {
     this.noclaimvar = true;
     this.rolesRightForm = this.formBuilder.group({
-      
+
     });
     this.AdminService.rolesnav = false;
     // this.admin = true;
@@ -55,7 +55,7 @@ export class RolesComponent implements OnInit {
     this.subscription = this.AdminService.on('call-roles').subscribe(() => this.getuserRoles());
   }
 
-  selectroleobj(selected_obj){
+  public selectroleobj(selected_obj){
     var index = this.arrayofselectedobj.indexOf(selected_obj);
     if(index<0){
       this.arrayofselectedobj.splice(index, 1);
@@ -107,7 +107,7 @@ export class RolesComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updateform = false;
-      this.addform = true; 
+      this.addform = true;
     }else if(type == 'update'){
       this.updateform = true;
       this.addform = false;

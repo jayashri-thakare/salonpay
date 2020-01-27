@@ -116,9 +116,9 @@ import {Observable} from 'rxjs';
 })
 
 export class UserRightsComponent implements OnInit {
-  private userroles: Observable<any>;
-  private rolesindividualrights: Observable<any>;
-  private rolesmodulerights: Observable<any>;
+  public userroles: Observable<any>;
+  public rolesindividualrights: Observable<any>;
+  public rolesmodulerights: Observable<any>;
 
   constructor(private modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;

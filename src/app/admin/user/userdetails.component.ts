@@ -17,7 +17,7 @@ import {AdminService} from '../admin.service';
     '                                        <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right"\n' +
     '                                            title="Merge Sales"></i>\n' +
     '                                    </h3>\n' +
-    '                                    <a class="button addbtncol" (click)="openModal(\'add-tax-table1\');updateform(\'update\');selectroleobj(userdetail.user)">Update</a>\n' +
+    '                                    <a class="button addbtncol" (click)="openModal(\'add-tax-table1\');updateform(\'update\');">Update</a>\n' +
     '                                </div>\n' +
     '                                <!-- end -->\n' +
     '                                <div class="admin-comm-rig-scroll scrollbar" >\n' +
@@ -118,6 +118,14 @@ export class UserDetailsComponent implements OnInit {
   constructor(private modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
   ngOnInit() {
+  }
+
+  openModal(id: string) {
+    this.modalService.open1(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
 
   updateform(type) {

@@ -39,6 +39,7 @@ export class AdminService {
 
   private subjects: Subject<any>[] = [];
   selecteduserid: any;
+  public navTab = 1;
   constructor(private httpClient: HttpClient) { }
 
   create_role_service(Admin) {
@@ -54,6 +55,10 @@ export class AdminService {
     this.showTab = tab;
   }
 
+  public showNav(nav) {
+    this.navTab = nav;
+    console.log(this.navTab);
+  }
   public setIndex(index: number, userid){
     this.selectedIndex = index;
     this.selecteduserid = userid;
