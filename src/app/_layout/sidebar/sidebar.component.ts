@@ -105,6 +105,28 @@ export class SidebarComponent implements OnInit {
       this.AdminService.rewardsnav = false;
       this.AdminService.businessnav = false;
       this.classvar1 = 'menu-sid2-box'
+    }else if(id == 'menu-sid4'){
+      this.AdminService.usernav = false;
+      this.AdminService.rolesnav = false;
+      this.AdminService.servicesnav = false;
+      this.AdminService.inventorynav = true;
+      this.AdminService.communicationnav = false;
+      this.AdminService.taxtablenav = false;
+      this.AdminService.couponsnav = false;
+      this.AdminService.rewardsnav = false;
+      this.AdminService.businessnav = false;
+      this.classvar1 = 'menu-sid4-box'
+    }else if(id == 'menu-sid7'){
+      this.AdminService.usernav = false;
+      this.AdminService.rolesnav = false;
+      this.AdminService.servicesnav = false;
+      this.AdminService.inventorynav = false;
+      this.AdminService.communicationnav = false;
+      this.AdminService.taxtablenav = false;
+      this.AdminService.couponsnav = true;
+      this.AdminService.rewardsnav = false;
+      this.AdminService.businessnav = false;
+      this.classvar1 = 'menu-sid7-box'
     }
   }
 }

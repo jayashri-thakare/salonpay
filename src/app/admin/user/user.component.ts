@@ -16,7 +16,6 @@ export class UserComponent implements OnInit {
   // tslint:disable-next-line:no-shadowed-variable
   constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   userrightForm: FormGroup;
-  // userrightForm: FormArray
   control: FormControl;
   submitted = false;
   userdetailvar: boolean;
@@ -46,22 +45,9 @@ export class UserComponent implements OnInit {
     this.historyvar = false;
     this.getuserRoles();
     this.getuserList();
-    // this.getusrRoles();
-    // this.getrolesModuleRights();
-    // this.getrolesIndividualRights();
-    this.userrightForm = this.formBuilder.group({
-
-    });
-    // this.userrightForm = new FormArray(this.moduleright.map(x => new FormArray([]))
-    // this.moduleright.forEach((x, index) => {  //for each hobiee
-    //   const array=this.userrightForm.at(index) as FormArray
-    //   x.children.forEach(c=>{
-    //     array.push(new FormControl(c.selected))
-    //   })
-    // })
 
     this.subscription = this.AdminService.on('call-user').subscribe(() => this.getuserList());
-    // this.subscription = this.AdminService.on('add-form').subscribe(() => this.addupdateform());
+    this.subscription = this.AdminService.on('call-user-update').subscribe(() => this.addupdateform('update'));
   }
 
   userdetailsctive(type){

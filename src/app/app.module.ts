@@ -48,7 +48,7 @@ import { DatePipe } from '@angular/common';
 import {IMAPSettingComponent} from './dashboard/emailsetting/imapsetting.component'
 import {AdminComponent} from './admin/admin.component'
 import {UserComponent} from './admin/user/user.component'
-import {RolesComponent} from './admin/roles/roles.component'
+import {AdminRolesComponent} from './admin/roles/roles.component'
 import {AddRolesComponent} from './admin/roles/addroles.component'
 import { AdminService } from './admin/admin.service';
 import { DeleteComponent } from './delete.component'
@@ -58,6 +58,11 @@ import {TimerComponent} from './timetracker.component'
 import {UserDetailsComponent} from './admin/user/userdetails.component';
 import {UserRightsComponent} from './admin/user/userroles.component';
 import {UserHistoryComponent} from './admin/user/userhistory.component';
+import {AdminInventoryComponent} from './admin/inventory/inventory.component'
+import {AddInventoryComponent} from './admin/inventory/addinventory.component'
+import {AdminCouponComponent} from './admin/coupon/coupon.component'
+import {AddCouponComponent} from './admin/coupon/addcoupon.component'
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -89,12 +94,17 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     })
   ],
-  declarations: [AppComponent,
+  declarations: [JwPaginationComponent,
+    AppComponent,
+    AdminCouponComponent,
+    AddCouponComponent,
+    AddInventoryComponent,
+    AdminInventoryComponent,
     AddUserComponent,
     DeleteComponent,
     AdminComponent,
     UserComponent,
-    RolesComponent,
+    AdminRolesComponent,
     AddRolesComponent,
     IMAPSettingComponent,
     ScheduleEditComponent,

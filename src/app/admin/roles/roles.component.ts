@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { Router } from '@angular/router';
 import { CscService } from 'src/app/services/cscdropdown.service';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { UserdataService } from 'src/app/userdata.service';
 import { MessageService } from 'src/app/message.service';
 import { AdminService } from '../admin.service';
@@ -14,14 +14,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./roles.component.css']
 })
 
-export class RolesComponent implements OnInit {
+export class AdminRolesComponent implements OnInit {
   rolesRightForm: FormGroup;
   control: FormControl;
   submitted = false;
-  // admin: boolean;
-  // manager: boolean;
-  // employee: boolean;
-  // technician: boolean;
   addform: boolean;
   updateform: boolean;
   userroles: any;
@@ -30,8 +26,23 @@ export class RolesComponent implements OnInit {
   rolesmodulerights: any;
   rolesindividualrights: any;
   getrolesclaim: any;
-  noclaimvar: boolean;
-  claimvar: boolean;
+  Customers_var: any;
+  Appointments_var: any;
+  Sales_var: any;
+  private ModuleRightsobj = {};
+  private claims = {};
+  private Rightsobj = {};
+  private individualRightsobj = {};
+  arrayofselectedmoduleobj: Array<any>= [];
+  arrayofselectedindividualobj: Array<any>= [];
+  rolevar: any;
+  onloadvar: boolean;
+  pageinitrole: any;
+  ModuleRights: FormArray;
+  IndividualRights: FormArray;
+  claimsuccess: any;
+  getrolesindclaim: any;
+  getrolesmodclaim: any;
 
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -40,20 +51,47 @@ export class RolesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.noclaimvar = true;
-    this.rolesRightForm = this.formBuilder.group({
-      
-    });
+    // this.rolesRightForm = this.formBuilder.group({
+    //   // RoleName: '',
+    //   ModuleRights: this.formBuilder.array([ this.moduleItem() ]),
+    //   IndividualRights: this.formBuilder.array([ this.individualItem() ])
+    // });
     this.AdminService.rolesnav = false;
-    // this.admin = true;
-    // this.manager = false;
-    // this.employee = false;
-    // this.technician = false;
     this.getuserRoles();
     this.getrolesModuleRights();
     this.getrolesIndividualRights();
     this.subscription = this.AdminService.on('call-roles').subscribe(() => this.getuserRoles());
   }
+
+  // moduleItem(): FormGroup {
+  //   return this.formBuilder.group({
+  //     ModuleName: [''],
+  //     IsSelected: [''],
+  //     Rights: this.formBuilder.group({
+  //       Create: [''],
+  //       Update: [''],
+  //       Delete: [''],
+  //       View: ['']
+  //     })
+  //   });
+  // }
+
+  // individualItem(): FormGroup {
+  //   return this.formBuilder.group({
+  //     ModuleName: [''],
+  //     IsSelected: ['']
+  //   });
+  // }
+
+  // addModule(): void {
+  //   this.ModuleRights = this.rolesRightForm.get('ModuleRights') as FormArray;
+  //   this.ModuleRights.push(this.moduleItem());
+  // }
+
+  // addRight(): void {
+  //   this.Rights = this.rolesRightForm.get('Rights') as FormArray;
+  //   this.Rights.push(this.moduleRightItem());
+  // }
 
   selectroleobj(selected_obj){
     var index = this.arrayofselectedobj.indexOf(selected_obj);
@@ -62,46 +100,6 @@ export class RolesComponent implements OnInit {
       this.arrayofselectedobj.push(selected_obj);
     }
     console.log(this.arrayofselectedobj)
-  }
-
-  rolesfunction(type){
-    if(type == 'manager'){
-      // this.admin = false;
-      // this.manager = true;
-      // this.employee = false;
-      // this.technician = false;
-      document.querySelector('#admin').classList.remove('active');
-      document.querySelector('#employee').classList.remove('active');
-      document.querySelector('#technician').classList.remove('active');
-      document.querySelector('#manager').classList.add('active');
-    }else if(type == 'employee'){
-      // this.admin = false;
-      // this.manager = false;
-      // this.employee = true;
-      // this.technician = false;
-      document.querySelector('#admin').classList.remove('active');
-      document.querySelector('#technician').classList.remove('active');
-      document.querySelector('#manager').classList.remove('active');
-      document.querySelector('#employee').classList.add('active');
-    }else if(type == 'technician'){
-      // this.admin = false;
-      // this.manager = false;
-      // this.employee = false;
-      // this.technician = true;
-      document.querySelector('#admin').classList.remove('active');
-      document.querySelector('#employee').classList.remove('active');
-      document.querySelector('#manager').classList.remove('active');
-      document.querySelector('#technician').classList.add('active');
-    }else if(type == 'admin'){
-      // this.admin = true;
-      // this.manager = false;
-      // this.employee = false;
-      // this.technician = false;
-      document.querySelector('#technician').classList.remove('active');
-      document.querySelector('#employee').classList.remove('active');
-      document.querySelector('#manager').classList.remove('active');
-      document.querySelector('#admin').classList.add('active');
-    }
   }
 
   addupdateform(type){
@@ -122,10 +120,142 @@ export class RolesComponent implements OnInit {
     this.modalService.close(id);
   }
 
+  moduleonoff(event, checkvalue, moduleright){
+    console.log(event, moduleright)
+    if(moduleright == "Customers"){
+      this.Customers_var = checkvalue;
+      this.ModuleRightsobj['ModuleName'] = moduleright;
+      this.ModuleRightsobj['IsSelected'] = checkvalue;
+      this.ModuleRightsobj['Rights'] = {
+        "View": false,
+        "Update": false,
+        "Create": false,
+        "Delete": false
+      }
+    }else if(moduleright == "Appointments"){
+      this.Appointments_var = checkvalue;
+      this.ModuleRightsobj['ModuleName'] = moduleright;
+      this.ModuleRightsobj['IsSelected'] = checkvalue;
+      this.ModuleRightsobj['Rights'] = {
+        "View": false,
+        "Update": false,
+        "Create": false,
+        "Delete": false
+      }
+    }else if(moduleright == "Sales"){
+      this.Sales_var = checkvalue;
+      this.ModuleRightsobj['ModuleName'] = moduleright;
+      this.ModuleRightsobj['IsSelected'] = event.currentTarget.checked;
+      this.ModuleRightsobj['Rights'] = {
+        "View": false,
+        "Update": false,
+        "Create": false,
+        "Delete": false
+      }
+    }
+    console.log(this.ModuleRightsobj)
+    var index = this.arrayofselectedmoduleobj.indexOf(this.ModuleRightsobj);
+    if(index<0 && checkvalue){
+      this.arrayofselectedmoduleobj.push(this.ModuleRightsobj);
+      this.ModuleRightsobj = {};
+    }else{
+      for(let i=0; i < this.arrayofselectedmoduleobj.length; i++){
+        if(this.arrayofselectedmoduleobj[i]['ModuleName'] == moduleright){
+          this.arrayofselectedmoduleobj.splice(i, 1);
+        }
+      }
+    }
+    console.log(this.arrayofselectedmoduleobj)
+  }
+
+  modulepermission(event, type, moduleright){
+    console.log(event, type, moduleright)
+    for(let i=0; i < this.arrayofselectedmoduleobj.length; i++){
+      if(this.arrayofselectedmoduleobj[i]['ModuleName'] == moduleright){
+        if(type){
+          this.arrayofselectedmoduleobj[i]['Rights'][type] = event.currentTarget.checked
+        }
+      }
+    }
+    console.log(this.arrayofselectedmoduleobj)
+  }
+
+  rightsupdate(mirights, event, type){
+    debugger;
+    for(let i=0; i < this.getrolesmodclaim.length; i++){
+      if(this.getrolesmodclaim[i]['moduleName'] == mirights){
+        if(mirights){
+          this.getrolesmodclaim[i]['isSelected'] = event;
+          if(type){
+            for(let j=0; j < this.getrolesmodclaim[i]['rights'].length; j++){
+              this.getrolesmodclaim[i]['rights'][j][type] = event.currentTarget.checked;
+            }
+          }
+        }
+      }
+    }
+    this.getrolesModuleRights = this.getrolesmodclaim
+    console.log(this.getrolesModuleRights)
+  }
+
+  irightsupdate(mirights, event){
+    debugger;
+    if(event){
+      for(let i=0; i < this.getrolesindclaim.length; i++){
+        if(this.getrolesindclaim[i]['moduleName'] == mirights){
+          if(mirights){
+            this.getrolesindclaim[i]['isSelected'] = event;
+          }
+        }
+      }
+    }
+    console.log(this.getrolesindclaim)
+  }
+
+  individualonoff(event, checkvalue, individualright){
+    console.log(event, individualright)
+    if(individualright == "Create New Sale"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }else if(individualright == "Create New Appointment"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }else if(individualright == "Manage Sales Commissions,Tips and Turns"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }else if(individualright == "Cancel Appointments"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }else if(individualright == "Bulk Edit"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }else if(individualright == "Communicate with Customers"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }else if(individualright == "Add Customer Notes"){
+      this.individualRightsobj['ModuleName'] = individualright;
+      this.individualRightsobj['IsSelected'] = checkvalue;
+    }
+    console.log(this.individualRightsobj)
+    var index = this.arrayofselectedindividualobj.indexOf(this.individualRightsobj);
+    if(index<0 && checkvalue){
+      this.arrayofselectedindividualobj.push(this.individualRightsobj);
+      this.individualRightsobj = {};
+    }else{
+      for(let i=0; i < this.arrayofselectedindividualobj.length; i++){
+        if(this.arrayofselectedindividualobj[i]['ModuleName'] == individualright){
+          this.arrayofselectedindividualobj.splice(i, 1);
+        }
+      }
+    }
+    console.log(this.arrayofselectedindividualobj)
+  }
+
   getuserRoles() {
     this.AdminService.getUserRoles().subscribe((data) => {
       this.userroles = data;
       this.userroles = this.userroles.result;
+      this.pageviewrolefunc(this.userroles);
       console.log(this.userroles)
     });
   }
@@ -160,21 +290,72 @@ export class RolesComponent implements OnInit {
     });
   }
 
-  GetCompanyRolesClaims() {
-    this.AdminService.GetCompanyRolesClaims().subscribe((data) => {
+  GetCompanyRolesClaims(roleid) {
+    this.AdminService.GetCompanyRolesClaims(roleid).subscribe((data) => {
       this.getrolesclaim = data;
-      // this.getrolesclaim = this.getrolesclaim.result;
       console.log(this.getrolesclaim)
+      this.claimsuccess = this.getrolesclaim.success;
+      this.getrolesmodclaim = this.getrolesclaim.result[0].claim.moduleRights;
+      this.getrolesindclaim = this.getrolesclaim.result[0].claim.individualRights;
+      console.log(this.claimsuccess, this.getrolesmodclaim, this.getrolesindclaim)
     });
   }
 
-  claimvarfunc(){
-    if(this.noclaimvar == true){
-      this.claimvar = true;
-      this.noclaimvar = false;
+  getrolefunc(userrole){
+    if(userrole){
+      this.rolevar = userrole.id;
+      this.onloadvar = false;
+    }
+  }
+
+  pageviewrolefunc(userrole){
+    if(userrole){
+      this.pageinitrole = userrole[0].email; 
+      this.onloadvar = true;
+    }
+  }
+
+  addupdateroleclaims(Admin) {
+    debugger;
+    this.claims['ModuleRights'] = this.arrayofselectedmoduleobj;
+    this.claims['IndividualRights'] = this.arrayofselectedindividualobj;
+    this.claims['RoleName'] = Admin.name;
+    this.claims['RoleId'] = Admin.id;
+    // tslint:disable-next-line:triple-equals
+    if (this.claims['IndividualRights'].length == 0 && this.claims['ModuleRights'].length == 0 ) {
+      this.messageService.clear();
+      this.messageService.add('Please add Rights of the User.')
     }else{
-      this.claimvar = false;
-      this.noclaimvar = true;
+      this.AdminService.addUpdateRoleClaims(this.claims).subscribe((data) => {
+        // this.AdminService.publish('call-user');
+        this.claims = {};
+        this.arrayofselectedindividualobj = [];
+        this.arrayofselectedmoduleobj = [];
+        this.messageService.clear();
+        this.messageService.add('Claims Created successfully.')
+      });
+    }
+  }
+
+  updateroleclaims(Admin) {
+    debugger;
+    this.claims['ModuleRights'] = this.getrolesmodclaim;
+    this.claims['IndividualRights'] = this.getrolesindclaim;
+    this.claims['RoleName'] = Admin.name;
+    this.claims['RoleId'] = Admin.id;
+    // tslint:disable-next-line:triple-equals
+    if (this.claims['IndividualRights'].length == 0 && this.claims['ModuleRights'].length == 0 ) {
+      this.messageService.clear();
+      this.messageService.add('Please add Rights of the User.')
+    }else{
+      this.AdminService.addUpdateRoleClaims(this.claims).subscribe((data) => {
+        // this.AdminService.publish('call-user');
+        this.claims = {};
+        this.arrayofselectedindividualobj = [];
+        this.arrayofselectedmoduleobj = [];
+        this.messageService.clear();
+        this.messageService.add('Claims Created successfully.')
+      });
     }
   }
 

@@ -251,7 +251,7 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
-	   this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture?';
+	   this.baseUrl = 'http://172.16.0.114:5555/api/Profile/UploadProfilePicture?';
 	   const input = new FormData();
 	   input.append('file', userdata[0]);
 	   input.append('id', this.userId);
