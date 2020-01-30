@@ -82,29 +82,4 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  adminnavChange(id){
-    if(id == 'menu-sid1'){
-      this.AdminService.usernav = true;
-      this.AdminService.rolesnav = false;
-      this.AdminService.servicesnav = false;
-      this.AdminService.inventorynav = false;
-      this.AdminService.communicationnav = false;
-      this.AdminService.taxtablenav = false;
-      this.AdminService.couponsnav = false;
-      this.AdminService.rewardsnav = false;
-      this.AdminService.businessnav = false;
-      this.classvar1 = 'menu-sid1-box'
-    }else if(id == 'menu-sid2'){
-      this.AdminService.usernav = false;
-      this.AdminService.rolesnav = true;
-      this.AdminService.servicesnav = false;
-      this.AdminService.inventorynav = false;
-      this.AdminService.communicationnav = false;
-      this.AdminService.taxtablenav = false;
-      this.AdminService.couponsnav = false;
-      this.AdminService.rewardsnav = false;
-      this.AdminService.businessnav = false;
-      this.classvar1 = 'menu-sid2-box'
-    }
-  }
 }

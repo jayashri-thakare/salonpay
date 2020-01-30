@@ -36,10 +36,14 @@ export class AdminService {
   CreatedByUserId: any;
   public showTab  = 1;
   selectedIndex: number = null;
-
+  public serviceData: {
+    serviceId: any;
+  };
+  private result = {};
   private subjects: Subject<any>[] = [];
   selecteduserid: any;
   public navTab = 1;
+  editservice: boolean;
   constructor(private httpClient: HttpClient) { }
 
   create_role_service(Admin) {
@@ -55,6 +59,17 @@ export class AdminService {
     this.showTab = tab;
   }
 
+  getServiceObject(id) {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.editservice = true;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=' + id ;
+    // return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+    this.httpClient.get(this.baseUrl).subscribe((data) => {
+    	this.result = data;
+    	this.serviceData = this.result["result"]["serviceDetails"];
+    });
+
+  }
   public showNav(nav) {
     this.navTab = nav;
     console.log(this.navTab);
@@ -77,9 +92,43 @@ export class AdminService {
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  getServiceCategories() {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesDDL?ParentCompanyId=6';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getAddonServices() {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetServiceDDL?ParentCompanyId=5';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getServiceDetails() {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=18';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getAllServices() {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=0';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
   deleteUserRoles(roleid) {
     debugger;
     return this.httpClient.delete('https://payziliapi3.azurewebsites.net/api/Roles/DeleteRole?RoleId=' + roleid);
+  }
+
+  add_service(servicedata) {
+    if (this.editservice === true) {
+      servicedata.ServiceId = this.serviceData.serviceId ;
+      this.baseUrl = 'http://172.16.0.114:5555/api/Services/UpdateService';
+    }
+    else {
+      this.baseUrl = 'http://172.16.0.114:5555/api/Services/CreateService';
+    }
+    servicedata.ParentCompanyId = parseInt(localStorage.companyId);
+    servicedata.CreatedByUserId = localStorage.userId;
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, servicedata, httpOptions)
+      .pipe(map( data => data));
   }
 
   create_user_service(Admin) {

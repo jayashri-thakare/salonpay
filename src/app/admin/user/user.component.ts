@@ -41,9 +41,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.AdminService.usernav = true;
-    this.userdetailvar = true;
-    this.rolesvar = false;
-    this.historyvar = false;
+    this.AdminService.navTab = 1;
+    // this.userdetailvar = true;
+    // this.rolesvar = false;
+    // this.historyvar = false;
     this.getuserRoles();
     this.getuserList();
     // this.getusrRoles();

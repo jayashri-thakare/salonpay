@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminService} from '../admin.service';
+import {ModalService} from '../../_modal/modal.service';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-adminservice',
@@ -7,12 +9,26 @@ import {AdminService} from '../admin.service';
 })
 
 export class AdminServiceComponent implements OnInit {
-
+  subscription: Subscription;
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(public adminService: AdminService) {
+  private serviceList: Observable<any>;
+  private result: Observable<any>;
+  constructor(public adminService: AdminService, public modalService: ModalService) {
   }
 
   ngOnInit() {
-    this.adminService.usernav = true;
+    this.getServiceList();
+  }
+
+  getServiceList() {
+    this.adminService.getAllServices().subscribe((res) => {
+      this.result = res ;
+      this.serviceList = this.result["result"] ;
+    });
+  }
+
+  getServiceObject(service) {
+    debugger;
+    this.adminService.serviceData = service;
   }
 }
