@@ -65,6 +65,7 @@ import {AddCouponComponent} from './admin/coupon/addcoupon.component'
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { AdminServiceComponent} from './admin/services/service.component';
 import {AddServiceComponent} from './admin/services/addservice.component';
+import {AdminRewardsComponent} from './admin/rewards/rewards.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -98,6 +99,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
     declarations: [AppComponent,
         AddUserComponent,
+        AdminRewardsComponent,
         AdminCouponComponent,
         AddCouponComponent,
         AddInventoryComponent,
