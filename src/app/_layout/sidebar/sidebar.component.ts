@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   private element: any;
   classvar: any;
   classvar1: string;
-  constructor(private AdminService: AdminService, public router: Router, private el: ElementRef, private userdataService: UserdataService) {
+  constructor(public AdminService: AdminService, public router: Router, private el: ElementRef, private userdataService: UserdataService) {
     this.element = el.nativeElement;
   }
 
@@ -82,51 +82,4 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  adminnavChange(id){
-    if(id == 'menu-sid1'){
-      this.AdminService.usernav = true;
-      this.AdminService.rolesnav = false;
-      this.AdminService.servicesnav = false;
-      this.AdminService.inventorynav = false;
-      this.AdminService.communicationnav = false;
-      this.AdminService.taxtablenav = false;
-      this.AdminService.couponsnav = false;
-      this.AdminService.rewardsnav = false;
-      this.AdminService.businessnav = false;
-      this.classvar1 = 'menu-sid1-box'
-    }else if(id == 'menu-sid2'){
-      this.AdminService.usernav = false;
-      this.AdminService.rolesnav = true;
-      this.AdminService.servicesnav = false;
-      this.AdminService.inventorynav = false;
-      this.AdminService.communicationnav = false;
-      this.AdminService.taxtablenav = false;
-      this.AdminService.couponsnav = false;
-      this.AdminService.rewardsnav = false;
-      this.AdminService.businessnav = false;
-      this.classvar1 = 'menu-sid2-box'
-    }else if(id == 'menu-sid4'){
-      this.AdminService.usernav = false;
-      this.AdminService.rolesnav = false;
-      this.AdminService.servicesnav = false;
-      this.AdminService.inventorynav = true;
-      this.AdminService.communicationnav = false;
-      this.AdminService.taxtablenav = false;
-      this.AdminService.couponsnav = false;
-      this.AdminService.rewardsnav = false;
-      this.AdminService.businessnav = false;
-      this.classvar1 = 'menu-sid4-box'
-    }else if(id == 'menu-sid7'){
-      this.AdminService.usernav = false;
-      this.AdminService.rolesnav = false;
-      this.AdminService.servicesnav = false;
-      this.AdminService.inventorynav = false;
-      this.AdminService.communicationnav = false;
-      this.AdminService.taxtablenav = false;
-      this.AdminService.couponsnav = true;
-      this.AdminService.rewardsnav = false;
-      this.AdminService.businessnav = false;
-      this.classvar1 = 'menu-sid7-box'
-    }
-  }
 }

@@ -111,16 +111,16 @@ export class UserdataService {
    //    })
    //  };
 
-   	  const input = new URLSearchParams();
-      input.append('grant_type', 'password');
-	  input.append('scope', ' https://graph.microsoft.com/.default');
-	  input.append('client_id', this.office_ClientID);
-	  input.append('client_secret', this.office_ClientSecret);
-	  input.append('password', 'vx!4Un7E%928');
-	  input.append('username', 'kapil@payzli.com');
+   	//   const input = new URLSearchParams();
+    //   input.append('grant_type', 'password');
+	  // input.append('scope', ' https://graph.microsoft.com/.default');
+	  // input.append('client_id', this.office_ClientID);
+	  // input.append('client_secret', this.office_ClientSecret);
+	  // input.append('password', 'vx!4Un7E%928');
+	  // input.append('username', 'kapil@payzli.com');
 
    // this.baseUrl = 'https://login.microsoftonline.com/819c5746-460c-416e-b656-d4f259797ea6/oauth2/v2.0/token ';
-    this.baseUrl = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6196a40d-aa7e-4069-80a5-312865bb368c&response_type=code&redirect_uri=https://www.google.com&response_mode=query&scope=offline_access%20user.read%20mail.read&user.read.all%20&state=12345';
+    this.baseUrl = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6196a40d-aa7e-4069-80a5-312865bb368c&response_type=code&redirect_uri=https://payzli.leosys.net/dashboard&response_mode=query&scope=offline_access%20user.read%20mail.read&user.read.all%20&state=12345';
 
   //   let body = JSON.stringify(input)
   //   const httpOptions = {

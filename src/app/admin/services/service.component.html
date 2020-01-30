@@ -1,0 +1,257 @@
+<!-- Header Starts -->
+<div *ngIf="adminService.navTab==3">
+  <div class="mainContainer main-container-flg">
+    <div class="comm-headline-btn">
+      <h3 class="main-comm-head m-0">Services</h3>
+      <div class="filter-container-up filter-container-grid">
+        <div class="filter-container">
+          <button class="button flg-btn side-menu" (click)="modalService.open1('add-service');">+ Add New</button>
+          <div class="form-group mb-0 mr-2">
+            <form>
+              <input class="form-field" type="text" name="filter-searh" required>
+              <p class="form-label">Search</p>
+              <button class="search icon-search" type="submit"></button>
+            </form>
+          </div>
+          <div class="yur-mail-rig filtdrp-status">
+            <button type="button" class="button line grey status mr-2">
+              <i class="icon-fliter-list"></i>
+              <span>Sort by</span>
+            </button>
+            <ul class="status-list center">
+              <li class="drpFil">Sort by</li>
+              <li><a href="#">Ascending</a></li>
+              <li><a href="#">Descending</a></li>
+            </ul>
+          </div>
+          <div class="yur-mail-rig filtdrp-status">
+            <button type="button" class="button line grey status mr-2">
+              <i class="icon-filter"></i>
+              <span>Fliters</span>
+            </button>
+            <ul class="status-list center">
+              <li class="drpFil">Filters</li>
+              <li><a href="#">Upcoming</a></li>
+              <li><a href="#">Cancelled</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="f-row f-4 f-1440-3 f-900-2 f-640-1">
+      <div class="f-col" *ngFor="let service of serviceList ; let i = index;">
+        <!-- start -->
+        <div class="app-grid-box">
+          <div class="techi-top techi-top-qty">
+            <div class="user-det">
+              <i class="icon-haircut prodt-ico"></i>
+              <div class="usr-name">
+                <h3>{{service?.serviceName}}<span>{{service?.serviceCode}}</span></h3>
+              </div>
+            </div>
+            <div class="yur-mail-rig">
+              <i class="icon-status1 status"></i>
+              <ul class="status-list">
+                <li (click)="modalService.open('add-service',service?.serviceId ); adminService.getServiceObject(service?.serviceId);"><i class="icon-edit" ></i> Edit</li>
+                <li><i class="icon-share"></i> Share</li>
+                <li class="delt" (click)="deleteService(service?.serviceId)"><i class="icon-delete"></i> Delete</li>
+              </ul>
+            </div>
+          </div>
+          <!-- start -->
+          <div class="app-pad-box">
+            <div class="techi-user">
+              <i class="icon-clock"></i>
+              <div class="tech-usr-cont">
+                <p>Default Time</p>
+                <h3>{{service?.serviceTime}}</h3>
+              </div>
+            </div>
+          </div>
+          <!-- end -->
+        </div>
+        <!-- end -->
+      </div>
+<!--      <div class="f-col">-->
+<!--        &lt;!&ndash; start &ndash;&gt;-->
+<!--        <div class="app-grid-box">-->
+<!--          <div class="techi-top techi-top-qty">-->
+<!--            <div class="user-det">-->
+<!--              <i class="icon-haircut prodt-ico"></i>-->
+<!--              <div class="usr-name">-->
+<!--                <h3>Haircut<span>8795641</span></h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="yur-mail-rig">-->
+<!--              <i class="icon-status1 status"></i>-->
+<!--              <ul class="status-list">-->
+<!--                <li><i class="icon-edit"></i> Edit</li>-->
+<!--                <li><i class="icon-share"></i> Share</li>-->
+<!--                <li class="delt"><i class="icon-delete"></i> Delete</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; start &ndash;&gt;-->
+<!--          <div class="app-pad-box">-->
+<!--            <div class="techi-user">-->
+<!--              <i class="icon-clock"></i>-->
+<!--              <div class="tech-usr-cont">-->
+<!--                <p>Default Time</p>-->
+<!--                <h3>30 Minutes</h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end &ndash;&gt;-->
+<!--      </div>-->
+<!--      <div class="f-col">-->
+<!--        &lt;!&ndash; start &ndash;&gt;-->
+<!--        <div class="app-grid-box">-->
+<!--          <div class="techi-top techi-top-qty">-->
+<!--            <div class="user-det">-->
+<!--              <i class="icon-haircut prodt-ico"></i>-->
+<!--              <div class="usr-name">-->
+<!--                <h3>Haircut<span>8795641</span></h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="yur-mail-rig">-->
+<!--              <i class="icon-status1 status"></i>-->
+<!--              <ul class="status-list">-->
+<!--                <li><i class="icon-edit"></i> Edit</li>-->
+<!--                <li><i class="icon-share"></i> Share</li>-->
+<!--                <li class="delt"><i class="icon-delete"></i> Delete</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; start &ndash;&gt;-->
+<!--          <div class="app-pad-box">-->
+<!--            <div class="techi-user">-->
+<!--              <i class="icon-clock"></i>-->
+<!--              <div class="tech-usr-cont">-->
+<!--                <p>Default Time</p>-->
+<!--                <h3>30 Minutes</h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end &ndash;&gt;-->
+<!--      </div>-->
+<!--      <div class="f-col">-->
+<!--        &lt;!&ndash; start &ndash;&gt;-->
+<!--        <div class="app-grid-box">-->
+<!--          <div class="techi-top techi-top-qty">-->
+<!--            <div class="user-det">-->
+<!--              <i class="icon-haircut prodt-ico"></i>-->
+<!--              <div class="usr-name">-->
+<!--                <h3>Haircut<span>8795641</span></h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="yur-mail-rig">-->
+<!--              <i class="icon-status1 status"></i>-->
+<!--              <ul class="status-list">-->
+<!--                <li><i class="icon-edit"></i> Edit</li>-->
+<!--                <li><i class="icon-share"></i> Share</li>-->
+<!--                <li class="delt"><i class="icon-delete"></i> Delete</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; start &ndash;&gt;-->
+<!--          <div class="app-pad-box">-->
+<!--            <div class="techi-user">-->
+<!--              <i class="icon-clock"></i>-->
+<!--              <div class="tech-usr-cont">-->
+<!--                <p>Default Time</p>-->
+<!--                <h3>30 Minutes</h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end &ndash;&gt;-->
+<!--      </div>-->
+<!--      <div class="f-col">-->
+<!--        &lt;!&ndash; start &ndash;&gt;-->
+<!--        <div class="app-grid-box">-->
+<!--          <div class="techi-top techi-top-qty">-->
+<!--            <div class="user-det">-->
+<!--              <i class="icon-haircut prodt-ico"></i>-->
+<!--              <div class="usr-name">-->
+<!--                <h3>Haircut<span>8795641</span></h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="yur-mail-rig">-->
+<!--              <i class="icon-status1 status"></i>-->
+<!--              <ul class="status-list">-->
+<!--                <li><i class="icon-edit"></i> Edit</li>-->
+<!--                <li><i class="icon-share"></i> Share</li>-->
+<!--                <li class="delt"><i class="icon-delete"></i> Delete</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; start &ndash;&gt;-->
+<!--          <div class="app-pad-box">-->
+<!--            <div class="techi-user">-->
+<!--              <i class="icon-clock"></i>-->
+<!--              <div class="tech-usr-cont">-->
+<!--                <p>Default Time</p>-->
+<!--                <h3>30 Minutes</h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end &ndash;&gt;-->
+<!--      </div>-->
+<!--      <div class="f-col">-->
+<!--        &lt;!&ndash; start &ndash;&gt;-->
+<!--        <div class="app-grid-box">-->
+<!--          <div class="techi-top techi-top-qty">-->
+<!--            <div class="user-det">-->
+<!--              <i class="icon-haircut prodt-ico"></i>-->
+<!--              <div class="usr-name">-->
+<!--                <h3>Haircut<span>8795641</span></h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="yur-mail-rig">-->
+<!--              <i class="icon-status1 status"></i>-->
+<!--              <ul class="status-list">-->
+<!--                <li><i class="icon-edit"></i> Edit</li>-->
+<!--                <li><i class="icon-share"></i> Share</li>-->
+<!--                <li class="delt"><i class="icon-delete"></i> Delete</li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; start &ndash;&gt;-->
+<!--          <div class="app-pad-box">-->
+<!--            <div class="techi-user">-->
+<!--              <i class="icon-clock"></i>-->
+<!--              <div class="tech-usr-cont">-->
+<!--                <p>Default Time</p>-->
+<!--                <h3>30 Minutes</h3>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end &ndash;&gt;-->
+<!--        </div>-->
+        <!-- end -->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+  <!-- Main Container Ends -->
+
+  <!-- Add Service -->
+  <div class="overlay"></div>
+  <app-addservice></app-addservice>
+  <!-- Add Service End -->
+
+
+  <script src="js/all.js"></script>
+  <script>
+    $("#serviceForm").validate();
+  </script>
+
+</div>

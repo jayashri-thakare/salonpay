@@ -20,11 +20,11 @@ export class AdminRolesComponent implements OnInit {
   submitted = false;
   addform: boolean;
   updateform: boolean;
-  userroles: any;
+  public userroles: any;
   arrayofselectedobj: Array<any> = [];
   private subscription: Subscription;
-  rolesmodulerights: any;
-  rolesindividualrights: any;
+  public rolesmodulerights: any;
+  public rolesindividualrights: any;
   getrolesclaim: any;
   Customers_var: any;
   Appointments_var: any;
@@ -105,7 +105,7 @@ export class AdminRolesComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updateform = false;
-      this.addform = true; 
+      this.addform = true;
     }else if(type == 'update'){
       this.updateform = true;
       this.addform = false;
