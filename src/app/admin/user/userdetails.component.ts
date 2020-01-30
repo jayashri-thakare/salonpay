@@ -17,7 +17,7 @@ import {AdminService} from '../admin.service';
     '                                        <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right"\n' +
     '                                            title="Merge Sales"></i>\n' +
     '                                    </h3>\n' +
-    '                                    <a class="button addbtncol" (click)="openModal(\'add-tax-table1\');updateform(\'update\');">Update</a>\n' +
+    '                                    <a class="button addbtncol" (click)="modalService.open1(\'add-tax-table1\');adminService.publish(\'call-user-update\');selectroleobj(userdetail.user)">Update</a>\n' +
     '                                </div>\n' +
     '                                <!-- end -->\n' +
     '                                <div class="admin-comm-rig-scroll scrollbar" >\n' +
@@ -114,29 +114,20 @@ import {AdminService} from '../admin.service';
 
 export class UserDetailsComponent implements OnInit {
   private addform: boolean;
+  arrayofselectedobj: Array<any>=[];
 
   constructor(private modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
   ngOnInit() {
   }
 
-  openModal(id: string) {
-    this.modalService.open1(id);
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
-  }
-
-  updateform(type) {
-    if(type == 'add'){
-      // @ts-ignore
-      this.updateform = false;
-      this.addform = true;
-    }else if(type == 'update'){
-      // @ts-ignore
-      this.updateform = true;
-      this.addform = false;
+  selectroleobj(selected_obj){
+    console.log(selected_obj)
+    var index = this.arrayofselectedobj.indexOf(selected_obj.user);
+    if(index<0){
+      this.arrayofselectedobj.splice(index, 1);
+      this.arrayofselectedobj.push(selected_obj);
     }
+    // this.arrayofselectedobj.push(selected_obj.user);
   }
 }

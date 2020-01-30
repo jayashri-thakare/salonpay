@@ -1,0 +1,480 @@
+<!-- Main Container Starts -->
+<div *ngIf="AdminService.navTab==7">
+    <div class="mainContainer main-container-flg">
+        <div class="comm-headline-btn">
+            <h3 class="main-comm-head m-0">Coupons</h3>
+            <div class="filter-container-up filter-container-grid">
+                <div class="filter-container">
+                    <button class="button flg-btn side-menu" (click)="openModal('add-coupon')">+ Add New</button>
+                    <div class="form-group mb-0 mr-2">
+                        <form>
+                            <input class="form-field" type="text" name="filter-searh" required>
+                            <p class="form-label">Search</p>
+                            <button class="search icon-search" type="submit"></button>
+                        </form>
+                    </div>
+                    <div class="yur-mail-rig filtdrp-status">
+                        <button type="button" class="button line grey status mr-2">
+                            <i class="icon-fliter-list"></i>
+                            <span>Sort by</span>
+                        </button>
+                        <ul class="status-list center">
+                            <li class="drpFil">Sort by</li>
+                            <li><a href="#">Ascending</a></li>
+                            <li><a href="#">Descending</a></li>
+                        </ul>
+                    </div>
+                    <div class="yur-mail-rig filtdrp-status">
+                        <button type="button" class="button line grey status mr-2">
+                            <i class="icon-filter"></i>
+                            <span>Fliters</span>
+                        </button>
+                        <ul class="status-list center">
+                            <li class="drpFil">Filters</li>
+                            <li><a href="#">Upcoming</a></li>
+                            <li><a href="#">Cancelled</a></li>
+                        </ul>
+                    </div>
+                    <div class="radio-box radio-box-2 rad-org flg-grid-btn">
+                        <input type="radio" class="listCheck" id="grid" name="list-view" value="grid" checked>
+                        <label for="grid"><i class="icon-gird"></i></label>
+                    </div>
+
+                    <div class="radio-box radio-box-2 rad-org flg-list-btn">
+                        <input type="radio" class="listCheck" id="list" name="list-view" value="list">
+                        <label for="list"><i class="icon-list"></i></label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="gridView">
+            <div class="f-row f-3 f-1440-2 f-768-1">
+                <div class="f-col">
+                    <!-- start -->
+                    <div class="app-grid-box">
+                        <div class="techi-top techi-top-qty">
+                            <div class="user-det">
+                                <i class="icon-coupon prodt-ico"></i>
+                                <div class="usr-name">
+                                    <h3><span>Coupon Code <b class="tech-badge active">Active</b></span>
+                                        OCFE369
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="yur-mail-rig">
+                                <i class="icon-status1 status"></i>
+                                <ul class="status-list">
+                                    <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit
+                                    </li>
+                                    <li><i class="icon-share"></i> Share</li>
+                                    <li class="delt" data-toggle="modal" data-target="#deletePopup"
+                                        data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>
+                                        Delete</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="user-detl">
+                            <li>Description <span>This is a perfect frameless glass shower for a larger washroom or
+                                    enquire. Enjoy the three corner views from your shower enclosure for years to
+                                    come.</span></li>
+                        </ul>
+                        <!-- start -->
+                        <div class="app-pad-box sale-fle50">
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-money"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Percentage / Dollar Value</p>
+                                    <h3>$ 5</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-calender"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Expiry Date</p>
+                                    <h3>25 Aug 2019</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-gird"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Services</p>
+                                    <h3>Hair Cut</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-package"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Products</p>
+                                    <h3>Shampoo
+                                        <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="right"
+                                            data-html="true"
+                                            title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
+                                    </h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                        </div>
+                        <!-- end -->
+                    </div>
+                    <!-- end -->
+                </div>
+                <div class="f-col">
+                    <!-- start -->
+                    <div class="app-grid-box">
+                        <div class="techi-top techi-top-qty">
+                            <div class="user-det">
+                                <i class="icon-coupon prodt-ico"></i>
+                                <div class="usr-name">
+                                    <h3><span>Coupon Code <b class="tech-badge active">Active</b></span>
+                                        OCFE369
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="yur-mail-rig">
+                                <i class="icon-status1 status"></i>
+                                <ul class="status-list">
+                                    <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit
+                                    </li>
+                                    <li><i class="icon-share"></i> Share</li>
+                                    <li class="delt" data-toggle="modal" data-target="#deletePopup"
+                                        data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>
+                                        Delete</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="user-detl">
+                            <li>Description <span>This is a perfect frameless glass shower for a larger washroom or
+                                    enquire. Enjoy the three corner views from your shower enclosure for years to
+                                    come.</span></li>
+                        </ul>
+                        <!-- start -->
+                        <div class="app-pad-box sale-fle50">
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-money"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Percentage / Dollar Value</p>
+                                    <h3>$ 5</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-calender"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Expiry Date</p>
+                                    <h3>25 Aug 2019</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-gird"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Services</p>
+                                    <h3>Hair Cut</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-package"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Products</p>
+                                    <h3>Shampoo
+                                        <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="right"
+                                            data-html="true"
+                                            title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
+                                    </h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                        </div>
+                        <!-- end -->
+                    </div>
+                    <!-- end -->
+                </div>
+                <div class="f-col">
+                    <!-- start -->
+                    <div class="app-grid-box">
+                        <div class="techi-top techi-top-qty">
+                            <div class="user-det">
+                                <i class="icon-coupon prodt-ico"></i>
+                                <div class="usr-name">
+                                    <h3><span>Coupon Code <b class="tech-badge active">Active</b></span>
+                                        OCFE369
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="yur-mail-rig">
+                                <i class="icon-status1 status"></i>
+                                <ul class="status-list">
+                                    <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit
+                                    </li>
+                                    <li><i class="icon-share"></i> Share</li>
+                                    <li class="delt" data-toggle="modal" data-target="#deletePopup"
+                                        data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>
+                                        Delete</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="user-detl">
+                            <li>Description <span>This is a perfect frameless glass shower for a larger washroom or
+                                    enquire. Enjoy the three corner views from your shower enclosure for years to
+                                    come.</span></li>
+                        </ul>
+                        <!-- start -->
+                        <div class="app-pad-box sale-fle50">
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-money"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Percentage / Dollar Value</p>
+                                    <h3>$ 5</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-calender"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Expiry Date</p>
+                                    <h3>25 Aug 2019</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-gird"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Services</p>
+                                    <h3>Hair Cut</h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class="techi-user">
+                                <i class="icon-package"></i>
+                                <div class="tech-usr-cont">
+                                    <p>Products</p>
+                                    <h3>Shampoo
+                                        <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="right"
+                                            data-html="true"
+                                            title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
+                                    </h3>
+                                </div>
+                            </div>
+                            <!-- end -->
+                        </div>
+                        <!-- end -->
+                    </div>
+                    <!-- end -->
+                </div>
+            </div>
+        </div>
+        <div id="listView">
+            <!-- Main App List Starts -->
+            <div class="table-bdy">
+                <!-- start -->
+                <div class="inv-top-head">
+                    <div class="user-det">
+                        <div class="usr-name">
+                            <h3>OCFE369</h3>
+                        </div>
+                    </div>
+                    <div class="inv-head-right">
+                        <b class="tech-badge active">Active</b>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-delete"></i>
+                                    Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+
+                <ul class="table-rw">
+                    <li>
+                        <span>Description</span>
+                        <b>Read</b>
+                    </li>
+                    <li>
+                        <span>Percentage</span>
+                        <b>-</b>
+                    </li>
+                    <li>
+                        <span>Dollar Value</span>
+                        <b>$9</b>
+                    </li>
+                    <li>
+                        <span>Expiry Date</span>
+                        <b>25 Aug 2019</b>
+                    </li>
+                    <li>
+                        <span>Services</span>
+                        <b>Haircut <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="bottom"
+                                data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i></b>
+                    </li>
+                    <li>
+                        <span>Products</span>
+                        <b>Shampoo <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="bottom"
+                                data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i></b>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main App List Ends -->
+            <!-- Main App List Starts -->
+            <div class="table-bdy">
+                <!-- start -->
+                <div class="inv-top-head">
+                    <div class="user-det">
+                        <div class="usr-name">
+                            <h3>OCFE369</h3>
+                        </div>
+                    </div>
+                    <div class="inv-head-right">
+                        <b class="tech-badge active">Active</b>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-delete"></i>
+                                    Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+
+                <ul class="table-rw">
+                    <li>
+                        <span>Description</span>
+                        <b>Read</b>
+                    </li>
+                    <li>
+                        <span>Percentage</span>
+                        <b>-</b>
+                    </li>
+                    <li>
+                        <span>Dollar Value</span>
+                        <b>$9</b>
+                    </li>
+                    <li>
+                        <span>Expiry Date</span>
+                        <b>25 Aug 2019</b>
+                    </li>
+                    <li>
+                        <span>Services</span>
+                        <b>Haircut <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="bottom"
+                                data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i></b>
+                    </li>
+                    <li>
+                        <span>Products</span>
+                        <b>Shampoo <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="bottom"
+                                data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i></b>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main App List Ends -->
+            <!-- Main App List Starts -->
+            <div class="table-bdy">
+                <!-- start -->
+                <div class="inv-top-head">
+                    <div class="user-det">
+                        <div class="usr-name">
+                            <h3>OCFE369</h3>
+                        </div>
+                    </div>
+                    <div class="inv-head-right">
+                        <b class="tech-badge active">Active</b>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-delete"></i>
+                                    Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+
+                <ul class="table-rw">
+                    <li>
+                        <span>Description</span>
+                        <b>Read</b>
+                    </li>
+                    <li>
+                        <span>Percentage</span>
+                        <b>-</b>
+                    </li>
+                    <li>
+                        <span>Dollar Value</span>
+                        <b>$9</b>
+                    </li>
+                    <li>
+                        <span>Expiry Date</span>
+                        <b>25 Aug 2019</b>
+                    </li>
+                    <li>
+                        <span>Services</span>
+                        <b>Haircut <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="bottom"
+                                data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i></b>
+                    </li>
+                    <li>
+                        <span>Products</span>
+                        <b>Shampoo <i class="icon-info coupon-info" data-toggle="tooltip" data-placement="bottom"
+                                data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i></b>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main App List Ends -->
+        </div>
+    </div>
+    <!-- Main Container Ends -->
+
+    <!-- Add/Edit Product -->
+    <div class="overlay"></div>
+    <addcoupon-modal></addcoupon-modal>
+    <!-- Add/Edit Product End -->
+    <!-- Delete Modal Starts -->
+    <div class="modal fade" id="deletePopup">
+        <div class="modal-dialog medium-window">
+            <div class="modal-content">
+                <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+                <h2 class="modal-title">Are you sure you want to delete this Product?</h2>
+
+                <div class="modal-btn">
+                    <button class="button line mr-2" data-dismiss="modal">No</button>
+                    <button class="button red" data-dismiss="modal">Yes</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal Ends -->
+</div>

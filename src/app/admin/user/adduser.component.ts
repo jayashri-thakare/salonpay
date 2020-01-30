@@ -22,16 +22,6 @@ import {MessageService} from '../../message.service';
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
     '                <div class="fill-box-in scrollbar">\n' +
-    // '                    <div class="avatar-upload inventory-image">\n' +
-    // '                        <div class="avatar-edit">\n' +
-    // '                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">\n' +
-    // '                            <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>\n' +
-    // '                        </div>\n' +
-    // '                        <div class="avatar-preview">\n' +
-    // '                            <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">\n' +
-    // '                            </div>\n' +
-    // '                        </div>\n' +
-    // '                    </div>\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="full-name" formControlName="FirstName" class="form-field" required />\n' +
     '                        <p class="form-label">Full Name</p>\n' +
@@ -103,16 +93,6 @@ import {MessageService} from '../../message.service';
     '            <div class="filBox" *ngFor="let userdetail of arrayofselectedobj">\n' +
     '                <!-- start -->\n' +
     '                <div class="fill-box-in scrollbar">\n' +
-    // '                    <div class="avatar-upload inventory-image">\n' +
-    // '                        <div class="avatar-edit">\n' +
-    // '                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">\n' +
-    // '                            <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>\n' +
-    // '                        </div>\n' +
-    // '                        <div class="avatar-preview">\n' +
-    // '                            <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">\n' +
-    // '                            </div>\n' +
-    // '                        </div>\n' +
-    // '                    </div>\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="full-name" ngModel="{{userdetail.firstName}}" formControlName="FirstName" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Full Name</p>\n' +

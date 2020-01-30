@@ -196,12 +196,59 @@ export class AdminService {
     return this.httpClient.delete('https://payziliapi3.azurewebsites.net/Users/DeleteUser?UserId=' + userid);
   }
 
-  GetCompanyRolesClaims() {
-    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Roles/GetCompanyRolesClaims?ParentCompanyId=' + this.ParentCompanyId;
+  GetCompanyRolesClaims(roleid) {
+    this.baseUrl = '  http://172.16.0.114:5555/api/Roles/GetRoleClaims?RoleId=' + roleid;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  addupdateclaims(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/Users/ManageUserClaim';
+  Admin.CreatedByUserId = localStorage.userId;
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  assign_Role_ToUser(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/Roles/AssignRoleToUser';
+  Admin.ParentCompanyId = parseInt(localStorage.companyId);
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  addUpdateRoleClaims(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/Roles/ManageRoleClaims';
+  Admin.CreatedByUserId = localStorage.userId;
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetSupplierList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/Inventory/GetSupplierList?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_inventory(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.99:8055/api/Inventory/AddProduct';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetProductList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = ' http://172.16.0.99:8055/api/Inventory/GetProductList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  deleteProduct(productid) {
+    debugger;
+    return this.httpClient.delete(' http://172.16.0.99:8055/api/Inventory/DeleteProduct?ProductId=' + productid);
+  }
 
   publish(eventName: string) {
     // ensure a subject for the event name exists
