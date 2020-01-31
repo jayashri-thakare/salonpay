@@ -35,7 +35,7 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label">Email</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="phone-no" formControlName="PhoneNumber" class="form-field" max-length="10"\n' +
+    '                        <input type="text" id="phone-no" internationaltelno formControlName="PhoneNumber" class="form-field" max-length="10"\n' +
     '                            required />\n' +
     '                        <p class="form-label">Phone Number</p>\n' +
     '                    </div>\n' +
@@ -118,7 +118,7 @@ import {MessageService} from '../../message.service';
     '                    <div class="form-group">\n' +
     '                        <select class="select-field form-field" ngModel="{{userdetail.levelType}}" formControlName="ExpLevelId" id="select-fld" required>\n' +
     '                            <option></option>\n' +
-    '                            <option *ngFor="let exp of userexp" [value]="exp.expLevelId">{{exp.levelType}}</option>\n' +
+    '                            <option *ngFor="let exp of userexp" value="exp.expLevelId">{{exp.levelType}}</option>\n' +
     '                        </select>\n' +
     '                        <p class="form-label sel-blk">Experience Level</p>\n' +
     '                    </div>\n' +

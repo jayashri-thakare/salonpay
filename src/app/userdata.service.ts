@@ -158,7 +158,7 @@ export class UserdataService {
     }
     // tslint:disable-next-line:indent
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:7894/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }

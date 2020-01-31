@@ -59,13 +59,13 @@ import {FormBuilder} from '@angular/forms';
     '                                        <!-- start -->\n' +
     '                                        <div class="tab-top-head" >\n' +
     '                                            <h4 class="gridhead mb-0">{{history.eventName}}</h4>\n' +
-    '                                            <div class="yur-mail-rig">\n' +
-    '                                                <i class="icon-status1 status"></i>\n' +
-    '                                                <ul class="status-list">\n' +
-    '                                                    <li><i class="icon-edit"></i> Edit</li>\n' +
-    '                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>\n' +
-    '                                                </ul>\n' +
-    '                                            </div>\n' +
+    // '                                            <div class="yur-mail-rig">\n' +
+    // '                                                <i class="icon-status1 status"></i>\n' +
+    // '                                                <ul class="status-list">\n' +
+    // '                                                    <li><i class="icon-edit"></i> Edit</li>\n' +
+    // '                                                    <li class="delt"><i class="icon-delete"></i> Delete</li>\n' +
+    // '                                                </ul>\n' +
+    // '                                            </div>\n' +
     '                                        </div>\n' +
     '                                        <!-- end -->\n' +
     '\n' +

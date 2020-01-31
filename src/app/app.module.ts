@@ -65,7 +65,18 @@ import {AddCouponComponent} from './admin/coupon/addcoupon.component'
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { AdminServiceComponent} from './admin/services/service.component';
 import {AddServiceComponent} from './admin/services/addservice.component';
-import {AdminRewardsComponent} from './admin/rewards/rewards.component'
+import {AdminRewardsComponent} from './admin/rewards/rewards.component';
+import {AddRewardsComponent} from './admin/rewards/addrewards.component';
+import {AdminBusinessSettingComponent} from './admin/business-setting/business.component';
+import {BusinessTipAdjustmentComponent} from './admin/business-setting/tipadjustment.component'
+import {BusinessStaffComponent} from './admin/business-setting/staff.component'
+import {BusinessReviewComponent} from './admin/business-setting/review.component'
+import {BusinessInventoryComponent} from './admin/business-setting/inventory.component'
+import {BusinessCustomerComponent} from './admin/business-setting/customer.component'
+import {BusinessCouponComponent} from './admin/business-setting/coupon.component'
+import {AddReviewComponent} from './admin/business-setting/addreview.component'
+import {AddTaxTableComponent} from './admin/business-setting/addtaxtable.component'
+import {BusinessTaxTableComponent} from './admin/business-setting/taxtable.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -98,8 +109,19 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     })
   ],
     declarations: [AppComponent,
+        AddReviewComponent,
+        AddTaxTableComponent,
+        BusinessTipAdjustmentComponent,
+        BusinessStaffComponent,
+        BusinessReviewComponent,
+        BusinessInventoryComponent,
+        BusinessCustomerComponent,
+        BusinessCouponComponent,
+        BusinessTaxTableComponent,
         AddUserComponent,
         AdminRewardsComponent,
+        AdminBusinessSettingComponent,
+        AddRewardsComponent,
         AdminCouponComponent,
         AddCouponComponent,
         AddInventoryComponent,

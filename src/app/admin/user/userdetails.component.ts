@@ -6,6 +6,7 @@ import {AdminService} from '../admin.service';
 
 @Component({
   selector: 'app-userdetail',
+  styleUrls: ['./user.component.css'],
   template: '<div id="inner-tab1" *ngIf="adminService.showTab == 1" > \n' +
     '                                <div *ngFor="let userdetail of userlist" >\n' +
     '                                    <div *ngIf="adminService.selecteduserid==userdetail.user.id">\n' +

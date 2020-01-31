@@ -5,7 +5,7 @@
             <h3 class="main-comm-head m-0">Rewards <span>Program</span></h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
-                    <button class="button flg-btn side-menu" data-name="add-reward">+ Add New</button>
+                    <button class="button flg-btn side-menu" (click)="modalService.open1('add-reward');addupdateform('add')">+ Add New</button>
                     <div class="form-group mb-0 mr-2">
                         <form>
                             <input class="form-field" type="text" name="filter-searh" required>
@@ -40,29 +40,29 @@
             </div>
         </div>
         <!-- Main App List Starts -->
-        <div class="table-bdy table-report-2">
+        <div class="table-bdy table-report-2" *ngFor="let reward of adminrewards">
             <ul class="table-rw">
                 <li>
                     <span>Program Name</span>
-                    <b>Rewards Program Name</b>
+                    <b>{{reward.programName}}</b>
                 </li>
                 <li>
                     <span>Description</span>
-                    <b>Rewards Program Name Description</b>
+                    <b>{{reward.description}}</b>
                 </li>
                 <li>
                     <span>Reward</span>
                     <div class="form-group input-w80 mb-0 mt-2">
-                        <input type="text" id="full-name" name="full-name" class="form-field" required value="1.50" />
+                        <input type="text" id="full-name" name="full-name" class="form-field" required ngModel="{{reward.rewardPercent}}" />
                     </div>
                 </li>
                 <li class="rew-radio-btn">
                     <span>Status</span>
                     <div class="switch switch--horizontal mb-0">
-                        <input id="deactive" type="radio" name="first-switch">
-                        <label for="deactive">Deativate</label>
-                        <input id="active" type="radio" name="first-switch" checked="checked">
-                        <label for="active">Activate</label><span class="toggle-outside"><span
+                        <input id="deactive_{{reward.programName}}" type="radio" value="false" name="{{reward.programName}}">
+                        <label for="deactive -{{reward.programName}}">Deativate</label>
+                        <input id="active_{{reward.programName}}" type="radio" value="true" name="{{reward.programName}}" checked="{{reward.isActive}}">
+                        <label for="active_{{reward.programName}}">Activate</label><span class="toggle-outside"><span
                                 class="toggle-inside"></span></span>
                     </div>
                 </li>
@@ -70,8 +70,8 @@
             <div class="yur-mail-rig">
                 <i class="icon-status1 status"></i>
                 <ul class="status-list">
-                    <li class="side-menu" data-name="edit-reward"><i class="icon-edit"></i> Edit</li>
-                    <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                    <li class="side-menu" (click)="modalService.open1('add-reward');selectproductobj(reward);addupdateform('update')"><i class="icon-edit"></i> Edit</li>
+                    <li class="delt" data-toggle="modal" data-target="#deletePopup" (click)="selectproductobj(reward)" data-backdrop="static"
                         data-keyboard="false"><i class="icon-delete"></i>
                         Delete</li>
                 </ul>
@@ -83,100 +83,7 @@
 
     <!-- Add/Edit Product -->
     <div class="overlay"></div>
-    <div class="mobile-side" id="add-reward">
-        <!-- common headline -->
-        <h3 class="close-btn main-comm-head">
-            <i class="icon-down-arrow com-arw"></i>Generate <span>Rewards Program</span>
-        </h3>
-        <!-- common headline end -->
-        <form id="serviceForm" class="popup-scrll">
-
-            <div class="filBox">
-                <!-- start -->
-                <div class="fill-box-in scrollbar">
-                    <!-- start -->
-                    <div class="form-group mt-2">
-                        <input type="text" id="prog-name" name="prog-name" class="form-field" required />
-                        <p class="form-label">Program Name</p>
-                    </div>
-                    <div class="form-textarea-group">
-                        <textarea type="text" class="form-field"></textarea>
-                        <p class="form-label">Message</p>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="rewd-prec" name="rewd-prec" class="form-field" required />
-                        <p class="form-label">Rewards Percentage</p>
-                    </div>
-                    <div class="form-group mt-2">
-                        <select id="service-name" class="select-field form-field" name="status-name" required>
-                            <option></option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <p class="form-label sel-blk">Status</p>
-                    </div>
-                </div>
-                <!-- end -->
-            </div>
-
-            <div class="popBtn">
-                <button class="button line close-btn" type="button">Cancel</button>
-                <button class="button" type="submit">Add</button>
-            </div>
-
-        </form>
-
-    </div>
-    <div class="mobile-side" id="edit-reward">
-        <!-- common headline -->
-        <h3 class="close-btn main-comm-head">
-            <i class="icon-down-arrow com-arw"></i>Edit <span>Rewards Program</span>
-        </h3>
-        <!-- common headline end -->
-        <form id="serviceForm" class="popup-scrll">
-
-            <div class="filBox">
-                <!-- start -->
-                <div class="fill-box-in scrollbar">
-                    <!-- start -->
-                    <div class="form-group mt-2">
-                        <input type="text" id="prog-name" name="prog-name" class="form-field" required />
-                        <p class="form-label">Program Name</p>
-                    </div>
-                    <div class="form-textarea-group">
-                        <textarea type="text" class="form-field"></textarea>
-                        <p class="form-label">Message</p>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="rewd-prec" name="rewd-prec" class="form-field" required />
-                        <p class="form-label">Rewards Percentage</p>
-                    </div>
-                    <div class="form-group mt-2">
-                        <select id="service-name" class="select-field form-field" name="status-name" required>
-                            <option></option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                        </select>
-                        <p class="form-label sel-blk">Status</p>
-                    </div>
-                </div>
-                <!-- end -->
-            </div>
-
-            <div class="popBtn">
-                <button class="button line close-btn" type="button">Cancel</button>
-                <button class="button" type="submit">Update</button>
-            </div>
-
-        </form>
-
-    </div>
+    <addrewards-modal [addreward]="addrewards" [updatereward]="updaterewards" [rewardsobj]="arrayofselectedobj"></addrewards-modal>
     <!-- Add/Edit Product End -->
     <!-- Delete Modal Starts -->
     <div class="modal fade" id="deletePopup">
@@ -184,11 +91,11 @@
             <div class="modal-content">
                 <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
 
-                <h2 class="modal-title">Are you sure you want to delete this Product?</h2>
+                <h2 class="modal-title">Are you sure you want to delete this Reward?</h2>
 
                 <div class="modal-btn">
                     <button class="button line mr-2" data-dismiss="modal">No</button>
-                    <button class="button red" data-dismiss="modal">Yes</button>
+                    <button class="button red" data-dismiss="modal" (click)="deleteRewards(arrayofselectedobj)">Yes</button>
                 </div>
 
             </div>
