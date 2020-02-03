@@ -12,3 +12,7 @@ element {
 .form-field{
   height: var(--form-field-height);
 }
+.scroll-padding{
+  padding-top: 15px;
+    padding-right: 15px;
+}

@@ -27,7 +27,7 @@ import {MessageService} from '../../message.service';
     '        <div class="form-group">\n' +
     '          <select class="select-field form-field" formControlName="TimezoneId">\n' +
     '             <option value="">Select Timezone...</option>\n' +
-    '             <option *ngFor="let timezone of timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 40}}</option>\n' +
+    '             <option *ngFor="let timezone of timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 35}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +

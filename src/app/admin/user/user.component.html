@@ -1,6 +1,5 @@
 <div *ngIf="AdminService.navTab==1">
     <div class="mainContainer main-container-flg">
-        <app-messages></app-messages>
         <div class="comm-headline-btn">
             <h3 class="main-comm-head m-0">
                 Users
@@ -147,3 +146,5 @@
     <!-- Delete Modal Ends -->
 </div>
 <adduser-modal [addAdmin]="addform" [updateAdmin]="updateform" [userobj]="arrayofselectedobj"></adduser-modal>
+
+<app-messages></app-messages>

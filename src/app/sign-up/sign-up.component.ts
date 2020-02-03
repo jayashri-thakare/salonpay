@@ -40,7 +40,7 @@ export class SignUpComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       Password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_+=!])(?=\S+$).{8,}$/)]],
       ConfirmPasssword: ['', [Validators.required, Validators.minLength(8)]],
-      BusinessName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]]
+      BusinessName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s]+$/)]]
     }, {
       validator: MustMatch('Password', 'ConfirmPasssword')
     });
@@ -52,7 +52,7 @@ export class SignUpComponent implements OnInit {
         this.messageService.add('Sign up succesfull');
         // this.router.navigate(['/profilesetting']);
         if (data['success'] === 0) {
-          this.signuperrormsg = data['result'];
+          this.signuperrormsg = data['message'];
           this.signupfail = true;
         }else{
           console.log(data);

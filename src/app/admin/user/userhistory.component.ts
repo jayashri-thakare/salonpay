@@ -89,7 +89,7 @@ import {FormBuilder} from '@angular/forms';
     '                                            <!-- start -->\n' +
     '                                            <li class="table-dta mr-0 w33 w-1440-50">\n' +
     '                                                <span>Date</span>\n' +
-    '                                                {{history.date}}\n' +
+    '                                                {{history.date | date: \'M/d/yyyy\'}}\n' +
     '                                            </li>\n' +
     '                                            <!-- end -->\n' +
     '                                            <!-- start -->\n' +

@@ -123,7 +123,8 @@
                         </div>
                     </div>
                     <div class="inv-head-right">
-                        <b class="tech-badge active">Stocked</b>
+                        <b *ngIf="product.status == true" class="tech-badge active">Active</b>
+                         <b *ngIf="product.status == false" class="tech-badge inactive">InActive</b>
                         <div class="yur-mail-rig">
                             <i class="icon-status1 status"></i>
                             <ul class="status-list">

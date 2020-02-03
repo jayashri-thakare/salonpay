@@ -10,6 +10,7 @@ import {MessageService} from '../../message.service';
 
 @Component({
   selector: 'profile-modal',
+  styleUrls: ['./profilesetting.component.css'],
   template: '<jw-modal id="side-menu-userprofile">\n' +
     '  <div class="mobile-side">\n' +
     '    <!-- common headline -->\n' +
@@ -34,8 +35,9 @@ import {MessageService} from '../../message.service';
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">Last Name</p>\n' +
     '        </div>\n' +
-    '        <div class="form-group">\n' +
-    '              <ejs-datetimepicker id=\'datetimepicker\' ngModel="{{ userdetail?.dateOfBirth | date: \'M/d/yyyy\' }}" formControlName="DateOfBirth" [max]="maxDate" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" placeholder=\'Birthday\' [value]=\'dateValue\' format =\'dd/MM/yyyy\'></ejs-datetimepicker>' +
+    '         <h6 class="poptile">Birthday</h6>\n' +
+    '        <div class="form-group form-field field--not-empty">\n' +
+    '              <ejs-datetimepicker id=\'datetimepicker\' ngModel="{{ userdetail?.dateOfBirth | date: \'M/d/yyyy\' }}" formControlName="DateOfBirth" [max]="maxDate" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" placeholder=\'Birthday\' [value]=\'dateValue\' format =\'M/dd/yyyy\'></ejs-datetimepicker>' +
     '        </div>\n' +
     '        <!-- end -->\n' +
     '        <!-- start -->\n' +
@@ -102,8 +104,8 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit() {
     this.userprofileForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       DateOfBirth: [''],
       Gender: ['']
     });

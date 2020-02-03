@@ -113,7 +113,7 @@ export class UserComponent implements OnInit {
   getuserList() {
     this.AdminService.getUserAdminList().subscribe((data) => {
       this.userlist = data;
-      this.userlist = this.userlist.result;
+      this.userlist = this.userlist.list;
       this.AdminService.setIndex(0,  this.userlist[0].user.id);
       this.pageviewemailfunc(this.userlist);
     });

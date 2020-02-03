@@ -21,7 +21,7 @@ import {MessageService} from '../../message.service';
     '    \n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="full-name" formControlName="FirstName" class="form-field" required />\n' +
     '                        <p class="form-label">Full Name</p>\n' +
@@ -92,7 +92,7 @@ import {MessageService} from '../../message.service';
     '    \n' +
     '            <div class="filBox" *ngFor="let userdetail of arrayofselectedobj">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="full-name" ngModel="{{userdetail.firstName}}" formControlName="FirstName" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Full Name</p>\n' +
@@ -118,7 +118,7 @@ import {MessageService} from '../../message.service';
     '                    <div class="form-group">\n' +
     '                        <select class="select-field form-field" ngModel="{{userdetail.levelType}}" formControlName="ExpLevelId" id="select-fld" required>\n' +
     '                            <option></option>\n' +
-    '                            <option *ngFor="let exp of userexp" value="exp.expLevelId">{{exp.levelType}}</option>\n' +
+    '                            <option *ngFor="let exp of userexp" value="{{exp.expLevelId}}">{{exp.levelType}}</option>\n' +
     '                        </select>\n' +
     '                        <p class="form-label sel-blk">Experience Level</p>\n' +
     '                    </div>\n' +
