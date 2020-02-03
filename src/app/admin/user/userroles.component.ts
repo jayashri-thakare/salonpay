@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-userrights',
+  styleUrls: ['./user.component.css'],
   template: ' <!-- user details start -->\n' +
     '                                <!-- start -->\n' +
     '                            <div id="inner-tab2" *ngIf="AdminService.showTab == 2">\n' +
@@ -21,7 +22,7 @@ import {Observable} from 'rxjs';
     '                                            title="Merge Sales"></i>\n' +
     '                                    </h3>\n' +
     '                                    <div class="filter-container">\n' +
-    '                                        <a (click)="assignRoleToUser(userroleForm.value, userdet)" class="button mr-2">Save</a>\n' +
+    '                                        <a (click)="assignRoleToUser(userroleForm.value, userdet)" class="button mr-2 addbtncol">Save</a>\n' +
     '                                        <a href="#" class="button line mr-2">Cancel</a>\n' +
     '                                        <a href="#" class="button line orange">Reset</a>\n' +
     '                                    </div>\n' +

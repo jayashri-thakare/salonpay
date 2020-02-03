@@ -50,6 +50,7 @@ export class AdminService {
   private subjects: Subject<any>[] = [];
   selecteduserid: any;
   public navTab = 1;
+  public business_settingnav = 1;
   editservice: boolean;
   serviceList: Observable<any>;
   productData: any;
@@ -87,7 +88,12 @@ export class AdminService {
     this.navTab = nav;
     console.log(this.navTab);
   }
-  public setIndex(index: number, userid) {
+
+  public showBusinessNav(nav) {
+    this.business_settingnav = nav;
+    console.log(this.business_settingnav);
+  }
+  public setIndex(index: number, userid){
     this.selectedIndex = index;
     this.selecteduserid = userid;
   }
@@ -161,10 +167,10 @@ export class AdminService {
 
   create_user_service(Admin) {
     debugger;
-    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Users/CreateUser';
-    Admin.ParentCompanyId = parseInt(localStorage.companyId);
-    Admin.CreatedByUserId = localStorage.userId;
-    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  this.baseUrl = 'http://172.16.0.114:5555/api/Users/CreateUser';
+  Admin.ParentCompanyId = parseInt(localStorage.companyId);
+  Admin.CreatedByUserId = localStorage.userId;
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
 
@@ -276,6 +282,90 @@ export class AdminService {
   deleteProduct(productid) {
     debugger;
     return this.httpClient.delete(' http://172.16.0.99:8055/api/Inventory/DeleteProduct?ProductId=' + productid);
+  }
+
+  add_rewards(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/Rewards/CreateReward';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  Admin.CreatedByUserId = localStorage.userId;
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_rewards(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/Rewards/UpdateReward';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  Admin.CreatedByUserId = localStorage.userId;
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetRewardsList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/Rewards/GetRewardsList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  deleteReward(rewardid) {
+    debugger;
+    return this.httpClient.delete('http://172.16.0.114:5555/api/Rewards/DeleteReward?RewardId=' + rewardid);
+  }
+
+  GetReviewList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetGoogleReviewURL?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_review(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/AddGoogleReviewURL';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_review(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/UpdateGoogleReviewURL';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  deleteReview() {
+    debugger;
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.delete('http://172.16.0.114:5555/api/BusinessSettings/DeleteGoogleReviewURL?ParentCompanyId=' + this.ParentCompanyId);
+  }
+
+  GetTaxTableList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetTaxTableDetails?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_taxtable(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/CreateTaxTable';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_taxtable(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/UpdateTaxTable';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  deleteTax(taxid) {
+    debugger;
+    return this.httpClient.delete('http://172.16.0.114:5555/api/BusinessSettings/DeleteTaxTable?TaxId=' + taxid);
   }
 
   publish(eventName: string) {

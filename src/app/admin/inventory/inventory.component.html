@@ -58,7 +58,7 @@
                                 <div class="user-det">
                                     <i class="icon-shampoo prodt-ico"></i>
                                     <div class="usr-name">
-                                        <h3>{{product.productName}} <b class="tech-badge inactive" [ngClass]="{ 'active': product.isActive }">open</b> <span>Product</span>
+                                        <h3>{{product.productName}} <b *ngIf="product.status == true" class="tech-badge active">Active</b> <b *ngIf="product.status == false" class="tech-badge inactive">InActive</b> <span>Product</span>
                                         </h3>
                                     </div>
                                 </div>
