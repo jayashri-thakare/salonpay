@@ -21,6 +21,11 @@ class Admindetail {
   providedIn: 'root'
 })
 export class AdminService {
+  private res: Object;
+  private result: {
+    serviceDetails: { serviceId: any };
+  };
+  constructor(private httpClient: HttpClient) { }
   ParentCompanyId: any;
   baseUrl: string;
   usernav: boolean;
@@ -39,13 +44,17 @@ export class AdminService {
   public serviceData: {
     serviceId: any;
   };
-  private result = {};
+  // private result: Object = {
+  //   result: any
+  // };
   private subjects: Subject<any>[] = [];
   selecteduserid: any;
   public navTab = 1;
   public business_settingnav = 1;
   editservice: boolean;
-  constructor(private httpClient: HttpClient) { }
+  serviceList: Observable<any>;
+  productData: any;
+    private coupon: {};
 
   create_role_service(Admin) {
     debugger;
@@ -66,8 +75,12 @@ export class AdminService {
     this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=' + id ;
     // return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
     this.httpClient.get(this.baseUrl).subscribe((data) => {
-    	this.result = data;
-    	this.serviceData = this.result["result"]["serviceDetails"];
+      // tslint:disable-next-line:indent
+    	this.res = data;
+      // tslint:disable-next-line:indent
+     // this.result = this.res.result;
+     // this.serviceData = this.result.serviceDetails;
+    	// this.serviceData = this.result.result.serviceDetails;
     });
 
   }
@@ -75,6 +88,7 @@ export class AdminService {
     this.navTab = nav;
     console.log(this.navTab);
   }
+
   public showBusinessNav(nav) {
     this.business_settingnav = nav;
     console.log(this.business_settingnav);
@@ -113,8 +127,13 @@ export class AdminService {
   }
 
   getAllServices() {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=0';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=0&PageNumber=1&PageSize=10';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+
+  deleteService(service) {
+    return this.httpClient.delete('http://172.16.0.114:5555/api/Services/DeleteService?ServiceId=' + service);
   }
 
   deleteUserRoles(roleid) {
@@ -126,13 +145,23 @@ export class AdminService {
     if (this.editservice === true) {
       servicedata.ServiceId = this.serviceData.serviceId ;
       this.baseUrl = 'http://172.16.0.114:5555/api/Services/UpdateService';
-    }
-    else {
+    } else {
       this.baseUrl = 'http://172.16.0.114:5555/api/Services/CreateService';
     }
     servicedata.ParentCompanyId = parseInt(localStorage.companyId);
     servicedata.CreatedByUserId = localStorage.userId;
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, servicedata, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  add_coupon(coupon) {
+    debugger;
+    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/AddCopuan';
+    coupon.ParentCompanyId = parseInt(localStorage.companyId);
+    coupon.Service = [coupon.Service];
+    coupon.Technician = [coupon.Technician];
+    coupon.ProductId = [coupon.ProductId];
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, coupon, httpOptions)
       .pipe(map( data => data));
   }
 
@@ -208,25 +237,25 @@ export class AdminService {
 
   addupdateclaims(Admin) {
     debugger;
-  this.baseUrl = 'http://172.16.0.114:5555/api/Users/ManageUserClaim';
-  Admin.CreatedByUserId = localStorage.userId;
-  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/ManageUserClaim';
+    Admin.CreatedByUserId = localStorage.userId;
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
 
   assign_Role_ToUser(Admin) {
     debugger;
-  this.baseUrl = 'http://172.16.0.114:5555/api/Roles/AssignRoleToUser';
-  Admin.ParentCompanyId = parseInt(localStorage.companyId);
-  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+    this.baseUrl = 'http://172.16.0.114:5555/api/Roles/AssignRoleToUser';
+    Admin.ParentCompanyId = parseInt(localStorage.companyId);
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
 
   addUpdateRoleClaims(Admin) {
     debugger;
-  this.baseUrl = 'http://172.16.0.114:5555/api/Roles/ManageRoleClaims';
-  Admin.CreatedByUserId = localStorage.userId;
-  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+    this.baseUrl = 'http://172.16.0.114:5555/api/Roles/ManageRoleClaims';
+    Admin.CreatedByUserId = localStorage.userId;
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
 
@@ -238,9 +267,9 @@ export class AdminService {
 
   add_inventory(Admin) {
     debugger;
-  this.baseUrl = 'http://172.16.0.99:8055/api/Inventory/AddProduct';
-  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+    this.baseUrl = 'http://172.16.0.99:8055/api/Inventory/AddProduct';
+    Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
 

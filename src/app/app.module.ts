@@ -62,7 +62,6 @@ import {AdminInventoryComponent} from './admin/inventory/inventory.component'
 import {AddInventoryComponent} from './admin/inventory/addinventory.component'
 import {AdminCouponComponent} from './admin/coupon/coupon.component'
 import {AddCouponComponent} from './admin/coupon/addcoupon.component'
-import { JwPaginationComponent } from 'jw-angular-pagination';
 import { AdminServiceComponent} from './admin/services/service.component';
 import {AddServiceComponent} from './admin/services/addservice.component';
 import {AdminRewardsComponent} from './admin/rewards/rewards.component';

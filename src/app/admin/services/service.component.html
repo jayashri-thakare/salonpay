@@ -56,7 +56,7 @@
               <ul class="status-list">
                 <li (click)="modalService.open('add-service',service?.serviceId ); adminService.getServiceObject(service?.serviceId);"><i class="icon-edit" ></i> Edit</li>
                 <li><i class="icon-share"></i> Share</li>
-                <li class="delt" (click)="deleteService(service?.serviceId)"><i class="icon-delete"></i> Delete</li>
+                <li class="delt" data-toggle="modal" data-target="#deletePopup" ><i class="icon-delete"></i> Delete</li>
               </ul>
             </div>
           </div>
@@ -73,7 +73,24 @@
           <!-- end -->
         </div>
         <!-- end -->
+        <div class="modal fade" id="deletePopup">
+          <div class="modal-dialog medium-window">
+            <div class="modal-content">
+              <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+              <h2 class="modal-title">Are you sure you want to delete this Service?</h2>
+
+              <div class="modal-btn">
+                <button class="button line mr-2" data-dismiss="modal">No</button>
+                <button class="button red" data-dismiss="modal" (click)="adminService.deleteService(service?.serviceId)">Yes</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="overlay"></div>
+
 <!--      <div class="f-col">-->
 <!--        &lt;!&ndash; start &ndash;&gt;-->
 <!--        <div class="app-grid-box">-->
@@ -244,7 +261,7 @@
   <!-- Main Container Ends -->
 
   <!-- Add Service -->
-  <div class="overlay"></div>
+
   <app-addservice></app-addservice>
   <!-- Add Service End -->
 
