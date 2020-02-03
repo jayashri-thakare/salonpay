@@ -95,7 +95,7 @@ export class ProfileEditComponent implements OnInit {
     this.userdataService.publish('call-parent');
     this.closeModal('side-menu-userprofile');
     this.messageService.clear();
-    this.messageService.add('User details updated succesfully.');
+    this.messageService.add('User details updated successfully.');
     // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
   }
 

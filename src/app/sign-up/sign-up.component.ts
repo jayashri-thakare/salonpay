@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit {
           console.log(data);
           this.signupfail = false;
           this.messageService.clear();
-          this.messageService.add("User register successfull, please check your mail for activation link.")
+          this.messageService.add("User registered successfully, please check your email for activation link.")
           this.router.navigate(['/login']);
         }
       });

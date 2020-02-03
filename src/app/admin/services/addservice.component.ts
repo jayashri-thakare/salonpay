@@ -31,10 +31,11 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label sel-blk">Service Categories</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                           <select class="select-field form-field" formControlName="AddOnServiceIds">\n' +
-    // '                             <option value="">Addon Services</option>\n' +
-    '                             <option *ngFor="let service of service" [ngValue]="service?.serviceId">{{service?.serviceName}}</option>\n' +
-    '                           </select>\n' +
+    '                    <ejs-multiselect formControlName="AddOnServiceIds" id=\'localData\' #local [dataSource]=\'service\' [fields]=\'multifields\' [mode]=\'box\' [popupHeight]=\'popHeight\' [showDropDownIcon]=\'true\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    // '                           <select class="select-field form-field" formControlName="AddOnServiceIds">\n' +
+    // // '                             <option value="">Addon Services</option>\n' +
+    // '                             <option *ngFor="let service of service" [ngValue]="service?.serviceId">{{service?.serviceName}}</option>\n' +
+    // '                           </select>\n' +
     '                        <p class="form-label sel-blk">Addon Services</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
@@ -52,9 +53,9 @@ import {MessageService} from '../../message.service';
     '\n' +
     '                    <h6 class="poptile">Service Pricing Structure</h6>\n' +
     '                    <div class="switch switch--horizontal">\n' +
-    '                        <input id="serv-level-1" type="radio" name="PricingBit" [(ngModel)]="adminService.serviceData.pricingBit" [value]="false" formControlName="PricingBit"/>\n' +
+    '                        <input id="serv-level-1" type="radio" name="PricingBit" ngModel="{{adminService.serviceData?.pricingBit}}" [value]="false" formControlName="PricingBit"/>\n' +
     '                        <label for="serv-level-1">Single Level</label>\n' +
-    '                        <input id="serv-level-2" type="radio" name="PricingBit" [(ngModel)]="adminService.serviceData.pricingBit" [value]="true" formControlName="PricingBit" />\n' +
+    '                        <input id="serv-level-2" type="radio" name="PricingBit" ngModel="{{adminService.serviceData?.pricingBit}}" [value]="true" formControlName="PricingBit" />\n' +
     '                        <label for="serv-level-2">Multi Level</label><span class="toggle-outside"><span\n' +
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
@@ -88,9 +89,10 @@ import {MessageService} from '../../message.service';
     '\n' +
     '                    <h6 class="poptile">Turn Count Override</h6>\n' +
     '                    <div class="switch switch--horizontal">\n' +
-    '                        <input id="turn-count-1" type="radio" name="TurnCountOverride" [(ngModel)]="adminService.serviceData.turnCountOn"  [value]="false"  formControlName="TurnCountOverride"/>\n' +
+    // '                        <input id="turn-count-1" type="radio" name="TurnCountOverride" [(ngModel)]="adminService.serviceData.turnCountOn"  [value]="false"  formControlName="TurnCountOverride"/>\n' +
+    '                        <input id="turn-count-1" type="radio" name="TurnCountOverride" ngModel="{{adminService.serviceData?.turnCountOn}}"  [value]="false"  formControlName="TurnCountOverride"/>\n' +
     '                        <label for="turn-count-1">Off</label>\n' +
-    '                        <input id="turn-count-2" type="radio" name="TurnCountOverride" [(ngModel)]="adminService.serviceData.turnCountOn" [value]="true" formControlName="TurnCountOverride" />\n' +
+    '                        <input id="turn-count-2" type="radio" name="TurnCountOverride" ngModel="{{adminService.serviceData?.turnCountOn}}" [value]="true" formControlName="TurnCountOverride" />\n' +
     '                        <label for="turn-count-2">On</label><span class="toggle-outside"><span\n' +
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
@@ -130,6 +132,8 @@ export class AddServiceComponent implements OnInit {
   private turn_countlist: {};
   public servicedetail: {};
   service: {};
+  serviceName: string
+  public multifields: Object = { text: 'serviceName', value: 'serviceId'};
 
   constructor(public adminService: AdminService, public modalService: ModalService, private formBuilder: FormBuilder,
               private messageService: MessageService) {
@@ -212,7 +216,6 @@ export class AddServiceComponent implements OnInit {
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
-    userdata.AddOnServiceIds = [+(userdata.AddOnServiceIds)];
     this.adminService.add_service(userdata).subscribe((data) => {
       // this.userdataService.publish('call-parent');
       this.adminService.editservice = false;

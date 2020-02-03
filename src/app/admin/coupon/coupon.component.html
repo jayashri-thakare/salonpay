@@ -65,8 +65,7 @@
                             <div class="yur-mail-rig">
                                 <i class="icon-status1 status"></i>
                                 <ul class="status-list">
-                                    <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit
-                                    </li>
+                                  <li (click)="modalService.open('add-coupon',1222 ); adminService.getServiceObject(service?.serviceId);"><i class="icon-edit" ></i> Edit</li>
                                     <li><i class="icon-share"></i> Share</li>
                                     <li class="delt" data-toggle="modal" data-target="#deletePopup"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>

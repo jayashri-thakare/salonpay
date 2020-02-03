@@ -1,0 +1,10 @@
+.e-multiselect, e-input-focus{
+  border-color: transparent !Important;
+}
+.e-input-group::before{
+  background: transparent !Important;
+}
+.e-input-group::after{
+  background: transparent !Important;
+}
+

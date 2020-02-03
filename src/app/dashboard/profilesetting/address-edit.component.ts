@@ -145,7 +145,7 @@ export class AddressEditComponent implements OnInit {
       userdata.ParentCompanyId = + userdata.ParentCompanyId;
       this.userdataService.update_user_address(userdata).subscribe((data) => {
         this.messageService.clear();
-        this.messageService.add('Address updated successful.');
+        this.messageService.add('Address updated successfully!.');
         this.userdataService.publish('call-parent');
       });
     } else {

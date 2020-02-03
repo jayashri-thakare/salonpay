@@ -49,6 +49,7 @@ export class AdminInventoryComponent implements OnInit {
   getProduct() {
     this.AdminService.GetProductList().subscribe((data) => {
       this.adminproduct = data;
+      this.AdminService.productData = this.adminproduct ;
     //   this.getsuppliers = this.userroles.result;
       console.log(this.adminproduct)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
@@ -67,7 +68,7 @@ export class AdminInventoryComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updateProductForm = false;
-      this.addProductForm = true; 
+      this.addProductForm = true;
     }else if(type == 'update'){
       this.updateProductForm = true;
       this.addProductForm = false;

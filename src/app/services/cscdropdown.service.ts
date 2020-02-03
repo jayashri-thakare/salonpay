@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class CscService {
 
-  apiBaseUrl = 'http://172.16.0.99:7894/';
+  apiBaseUrl = 'https://payzliapi1.azurewebsites.net/';
 
   constructor(private http: HttpClient) { }
 
