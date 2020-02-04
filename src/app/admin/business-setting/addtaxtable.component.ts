@@ -79,7 +79,7 @@ export class AddTaxTableComponent implements OnInit {
     @Input('updateTax') updateTax: any;
     @Input('Taxobj') arrayofselectedobj: Array<any>=[];
 
-  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
   get f() {
     return this.addTaxForm.controls;
   }

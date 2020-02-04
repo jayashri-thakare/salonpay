@@ -13,7 +13,6 @@ export class AdminCouponComponent implements OnInit {
   constructor(public AdminService: AdminService, public modalService: ModalService) { }
 
   ngOnInit() {
-    this.AdminService.couponsnav = false;
   }
 
   openModal(id: string) {

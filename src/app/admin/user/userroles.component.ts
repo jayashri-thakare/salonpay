@@ -55,10 +55,10 @@ import {Observable} from 'rxjs';
     '                                                            <h6 class="promo-head">{{moduleright.moduleName}}</h6>\n' +
     '                                                            <div class="switch switch--horizontal only-switch"\n' +
     '                                                                data-name="customer-switch">\n' +
-    '                                                                <input class="notif-radio" ngModel="{{options}}" (click)="moduleonoff($event, false, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"\n' +
+    '                                                                <input class="notif-radio" (click)="moduleonoff($event, false, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"\n' +
     '                                                                    name="{{moduleright.moduleName}}" [value]="false" />\n' +
     '                                                                <label for="{{moduleright.moduleName}}"></label>\n' +
-    '                                                                <input class="notif-radio" ngModel="{{options}}" (click)="moduleonoff($event, true, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"\n' +
+    '                                                                <input class="notif-radio" (click)="moduleonoff($event, true, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"\n' +
     '                                                                    name="{{moduleright.moduleName}}" [value]="true" />\n' +
     '                                                                <label for="{{moduleright.moduleName}}"></label><span class="toggle-outside"><span\n' +
     '                                                                        class="toggle-inside"></span></span>\n' +
@@ -115,19 +115,19 @@ export class UserRightsComponent implements OnInit {
   userroleForm: FormGroup;
   control: FormControl;
   submitted = false;
-  private userroles: Observable<any>;
-  private rolesindividualrights: Observable<any>;
-  private rolesmodulerights: Observable<any>;
-  private ModuleRightsobj= {};
+  public userroles: Observable<any>;
+  public rolesindividualrights: Observable<any>;
+  public rolesmodulerights: Observable<any>;
+  public ModuleRightsobj= {};
   Customers_var: any;
   Appointments_var: any;
   Sales_var: any;
   arrayofselectedmoduleobj: Array<any> = [];
-  private individualRightsobj= {};
+  public individualRightsobj= {};
   arrayofselectedindividualobj: Array<any> = [];
-  private claims= {};
+  public claims= {};
 
-  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
+  constructor(public modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
   ngOnInit() {
     this.getuserRoles();

@@ -5,7 +5,7 @@
 // import {AdminService} from '../admin.service';
 // import {MessageService} from '../../message.service';
 // import { Subscription } from 'rxjs';
-//
+
 // @Component({
 //   selector: 'addcoupon-modal',
 //   styleUrls: ['./coupon.component.css'],
@@ -64,7 +64,7 @@
 //     '                    </div>\n' +
 //     '                    <div class="form-group select2-selection select2-selection--multiple">\n' +
 //     '              <ejs-datetimepicker id=\'datetimepicker\' formControlName="ExpiryDate" [max]="maxDate"  [value]=\'dateValue\' format =\'MM/dd/yyyy\'></ejs-datetimepicker>' +
-//
+
 //     // '                        <input type="text" class="form-field datetimepicker-input" id="date1" name="date1"\n' +
 //     // '                            autocomplete="off" />\n' +
 //     // '                        <i class="icon-calender"></i>\n' +
@@ -72,7 +72,7 @@
 //     '                    </div>\n' +
 //     '                    <div class="form-group mt-2 form-field">\n' +
 //     '                    <ejs-multiselect class="form-field" formControlName="Service" id=\'localData\' #local [dataSource]=\'adminService.serviceList\' [fields]=\'multifields\' [mode]=\'box\' [popupHeight]=\'popHeight\' [showDropDownIcon]=\'true\' ></ejs-multiselect>\n'+
-//
+
 //     // '                        <select id="add-service-select" class="select-field-2 form-field" name="multiSelect[]"\n' +
 //     // '                            multiple="multiple">\n' +
 //     // '                            <option value="1">Option 1</option>\n' +
@@ -86,7 +86,7 @@
 //     '\n' +
 //     '                    <div class="form-group form-field">\n' +
 //     '                    <ejs-multiselect formControlName="ProductId" id=\'localData\' #local [dataSource]=\'adminService.productData.list\' [fields]=\'prodfields\' [mode]=\'box\' [popupHeight]=\'popHeight\' [showDropDownIcon]=\'true\' ></ejs-multiselect>\n'+
-//
+
 //     // '                        <select id="addon-services" class="select-field form-field" name="addon-services" required>\n' +
 //     // '                            <option></option>\n' +
 //     // '                            <option>Option 1</option>\n' +
@@ -135,7 +135,7 @@
 //     public multifields: Object = { text: 'serviceName', value: 'serviceId'};
 //     public prodfields: Object = { text: 'productName', value: 'productId'};
 //   constructor(public adminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
-//
+
 //   get f() {
 //     return this.addcouponForm.controls;
 //   }
@@ -153,11 +153,11 @@
 //       Technician: ['']
 //     });
 //   }
-//
+
 //   closeModal(id: string) {
 //     this.modalService.close(id);
 //   }
-//
+
 //   updateCoupon(userdata) {
 //     debugger;
 //     userdata.Service = String ([userdata.Service])
@@ -175,5 +175,5 @@
 //       // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
 //     });
 //   }
-//
+
 // }

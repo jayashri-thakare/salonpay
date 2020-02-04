@@ -43,7 +43,7 @@ import { Subscription } from 'rxjs';
     '                    <div class="pro-comm-fle">\n' +
     '                        <h6>Tax Detail</h6>\n' +
     '                        <i class="icon-edit grd-icon side-menu delpadding1" (click)="modalService.open1(\'add-taxtable\');addupdateform(\'update\');selectproductobj(businesstaxtable)"></i>\n' +
-    '                        <i class="icon-delete grd-icon side-menu" data-toggle="modal" data-target="#deletePopup" (click)="selectproductobj(businesstaxtable)"></i>\n' +
+    '                        <i class="icon-delete grd-icon side-menu" data-toggle="modal" data-target="#deletePopuptaxtable" (click)="selectproductobj(businesstaxtable)"></i>\n' +
     '                    </div>\n' +
     '\n' +
     '                    <!-- start -->\n' +
@@ -89,7 +89,7 @@ import { Subscription } from 'rxjs';
     '    <addtaxtable-modal [addTax]="addTax" [updateTax]="updateTax" [Taxobj]="arrayofselectedobj"></addtaxtable-modal>\n' +
     '    <!-- Main Container Ends -->\n' +
     '        <!-- Delete Modal Starts -->\n' +
-    '        <div class="modal fade" id="deletePopup">\n' +
+    '        <div class="modal fade" id="deletePopuptaxtable">\n' +
     '            <div class="modal-dialog medium-window">\n' +
     '                <div class="modal-content">\n' +
     '                    <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>\n' +

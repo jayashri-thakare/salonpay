@@ -55,7 +55,7 @@ import { UserdataService } from 'src/app/userdata.service';
   '                                        <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>\n' +
   '                                    </div>\n' +
   '                                    <div class="avatar-preview">\n' +
-  '                                        <div id="imagePreview" style="background-image: url(img/usr-profile.svg);">\n' +
+  '                                        <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">\n' +
   '                                        </div>\n' +
   '                                    </div>\n' +
   '                                </div>\n' +
