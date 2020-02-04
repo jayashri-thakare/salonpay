@@ -368,6 +368,27 @@ export class AdminService {
     return this.httpClient.delete('http://172.16.0.114:5555/api/BusinessSettings/DeleteTaxTable?TaxId=' + taxid);
   }
 
+  add_new_email(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.99:8055/api/Communication/AddEmailTemplate';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  add_new_sms(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.99:8055/api/Communication/AddSMSTemplate';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetEmailAndSmsTemplateList() {
+    this.baseUrl = 'http://172.16.0.99:8055/api/Communication/GetEmailAndSmsTemplateList';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
   publish(eventName: string) {
     // ensure a subject for the event name exists
         this.subjects[eventName] = this.subjects[eventName] || new Subject();

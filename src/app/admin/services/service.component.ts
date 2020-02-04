@@ -12,8 +12,8 @@ import {MessageService} from '../../message.service';
 export class AdminServiceComponent implements OnInit {
   subscription: Subscription;
   // tslint:disable-next-line:no-shadowed-variable
-  private serviceList: Observable<any>;
-  private result: Observable<any>;
+  public serviceList: Observable<any>;
+  public result: Observable<any>;
   constructor(public adminService: AdminService, public modalService: ModalService, public messageService: MessageService) {
   }
 

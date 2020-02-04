@@ -1,0 +1,182 @@
+<!-- Main Container Starts -->
+<div *ngIf="AdminService.navTab==5">
+    <div *ngIf="emailtemp && smstemp" class="mainContainer main-container-flg">
+        <div class="comm-headline-btn">
+            <h3 class="main-comm-head m-0">Communication</h3>
+            <div class="filter-container-up filter-container-grid">
+                <div class="filter-container">
+                    <a *ngIf="emailvar" (click) ="addnewemail('addemail')"  class="button addbtncol flg-btn">+ Add New</a>
+                    <a *ngIf="smsvar" (click) ="addnewemail('addsms')"  class="button addbtncol flg-btn">+ Add New</a>
+
+                    <button *ngIf="emailvar" class="button dashed-button org-border side-menu customerGrp" data-name="add-tax-table">
+                        <i class="icon-cir-plus"></i><span>Create Customer Group </span>
+                    </button>
+
+                    <div class="form-group mb-0 mr-2">
+                        <form>
+                            <input class="form-field" type="text" name="filter-searh" required>
+                            <p class="form-label">Search</p>
+                            <button class="search icon-search" type="submit"></button>
+                        </form>
+                    </div>
+                    <div class="yur-mail-rig filtdrp-status">
+                        <button type="button" class="button line grey status mr-2">
+                            <i class="icon-fliter-list"></i>
+                            <span>Sort by</span>
+                        </button>
+                        <ul class="status-list center">
+                            <li class="drpFil">Sort by</li>
+                            <li><a href="#">Ascending</a></li>
+                            <li><a href="#">Descending</a></li>
+                        </ul>
+                    </div>
+                    <div class="yur-mail-rig filtdrp-status">
+                        <button type="button" class="button line grey status">
+                            <i class="icon-filter"></i>
+                            <span>Fliters</span>
+                        </button>
+                        <ul class="status-list center">
+                            <li class="drpFil">Filters</li>
+                            <li><a href="#">Upcoming</a></li>
+                            <li><a href="#">Cancelled</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- tab start -->
+        <div class="admin-comm-tab">
+            <a class="admi-btn" [ngClass]="{ 'active addbtncol': emailvar }" (click)="emailsms();addupdateform('add')">Email</a>
+            <a class="admi-btn" [ngClass]="{ 'active addbtncol': smsvar }" (click)="emailsms();addupdateform('add')">SMS</a>
+        </div>
+        <!-- tab end -->
+
+        <!-- start -->
+        <div *ngIf="emailvar" class="email-temp">
+            <h6 class="comm-subhdn">Email Templates</h6>
+            <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1">
+                <div class="f-col" *ngFor="let email of adminemail">
+                    <!-- start -->
+                    <div class="admin-mail-box">
+                        <h6 class="promo-head">{{email.emailTemplateName}}</h6>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><a (click)="addnewemail('addemail');addupdateform('update');selectproductobj(email)"><i class="icon-edit"></i>
+                                        Edit</a></li>
+                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-delete"></i> Delete
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+         <!-- start -->
+         <div *ngIf="smsvar" class="email-temp">
+            <h6 class="comm-subhdn">SMS Templates</h6>
+            <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1">
+                <div class="f-col" *ngFor="let sms of adminsms">
+                    <!-- start -->
+                    <div class="admin-mail-box">
+                        <h6 class="promo-head">{{sms.smsTemplateName}}</h6>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><a (click)="addnewemail('addsms');addupdateform('update');selectproductobj(sms)"><i class="icon-edit"></i>
+                                        Edit</a></li>
+                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-delete"></i> Delete
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+
+    </div>
+    <app-addnewmail [addEmail]="addemail" [addAdmin]="addemailvar" [updateAdmin]="updateemail" [emailobj]="arrayofselectedobj"></app-addnewmail>
+    <app-addnewsms [addSMS]="addsms" [addAdmin]="addemailvar" [updateAdmin]="updateemail" [emailobj]="arrayofselectedobj"></app-addnewsms>
+    <!-- Main Container Ends -->
+
+    <!-- Add/Edit Product -->
+    <div class="overlay"></div>
+    <div class="mobile-side" id="add-tax-table">
+        <!-- common headline -->
+        <h3 class="close-btn main-comm-head">
+            <i class="icon-down-arrow com-arw"></i>Create <span>Customer Group</span>
+        </h3>
+        <!-- common headline end -->
+        <form class="popup-scrll">
+
+            <div class="filBox">
+                <!-- start -->
+                <div class="fill-box-in scrollbar">
+                    <!-- start -->
+                    <div class="form-group mt-2">
+                        <select id="service-select" class="select-field-2 form-field" name="multiSelect[]"
+                            multiple="multiple">
+                            <option value="1">Rob Rock</option>
+                            <option value="2">Bob Cook</option>
+                            <option value="3">Maya Didas</option>
+                            <option value="4">Option 4</option>
+                            <option value="5">Option 5</option>
+                        </select>
+                        <p class="form-label sel-blk">Customers</p>
+                    </div>
+                    <!-- end -->
+                    <div class="emil-mass-list">
+                        <h6 class="poptile">Choose Customers</h6>
+                        <div class="checkbox-box">
+                            <input class="select2-chk" type="checkbox" id="1" name="checkbox1" value="1" required="">
+                            <label for="1">Rob Rock</label>
+                        </div>
+                        <div class="checkbox-box">
+                            <input class="select2-chk" type="checkbox" id="2" name="checkbox2" value="2" required="">
+                            <label for="2">Bob Cook</label>
+                        </div>
+                        <div class="checkbox-box">
+                            <input class="select2-chk" type="checkbox" id="3" name="checkbox3" value="3" required="">
+                            <label for="3">Maya Didas</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+
+            <div class="popBtn">
+                <button class="button line close-btn" type="button">Cancel</button>
+                <button class="button" type="submit">Create</button>
+            </div>
+
+        </form>
+
+    </div>
+    <!-- Add/Edit Product End -->
+    <!-- Delete Modal Starts -->
+    <div class="modal fade" id="deletePopup">
+        <div class="modal-dialog medium-window">
+            <div class="modal-content">
+                <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+                <h2 class="modal-title">Are you sure you want to delete this Template?</h2>
+
+                <div class="modal-btn">
+                    <button class="button line mr-2" data-dismiss="modal">No</button>
+                    <button class="button red" data-dismiss="modal">Yes</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete Modal Ends -->

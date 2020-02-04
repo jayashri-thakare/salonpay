@@ -68,7 +68,7 @@ import { Subscription } from 'rxjs';
   '                        <li><a (click)="AdminService.showBusinessNav(4)">Customer</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(5)">Coupon</a></li>\n' +
   '                        <li class="active"><a (click)="AdminService.showBusinessNav(6)">Review</a></li>\n' +
-  '                        <li ><a (click)="AdminService.showBusinessNav(7)">Tax Table</a></li>\n' +  
+  '                        <li ><a (click)="AdminService.showBusinessNav(7)">Tax Table</a></li>\n' +
   '                    </ul>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -92,7 +92,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '                    <div class="modal-btn">\n' +
     '                        <button class="button line mr-2" data-dismiss="modal">No</button>\n' +
-    '                        <button class="button red" data-dismiss="modal" (click)="deleteReviews(arrayofselectedobj)">Yes</button>\n' +
+    '                        <button class="button red" data-dismiss="modal" (click)="deleteReviews()">Yes</button>\n' +
     '                    </div>\n' +
     '\n' +
     '                </div>\n' +
@@ -102,13 +102,13 @@ import { Subscription } from 'rxjs';
 })
 export class BusinessReviewComponent implements OnInit {
   businessreview: any;
-  arrayofselectedobj: Array<any>=[];
+  public arrayofselectedobj: Array<any>=[];
   updateReview: boolean;
   addReview: boolean;
   addbtn: boolean;
   updatebtn: boolean;
   subscription: Subscription;
-  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getReview();
@@ -137,7 +137,7 @@ export class BusinessReviewComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updateReview = false;
-      this.addReview = true; 
+      this.addReview = true;
     }else if(type == 'update'){
       this.updateReview = true;
       this.addReview = false;
@@ -148,11 +148,9 @@ export class BusinessReviewComponent implements OnInit {
     if(businessreview){
         this.addbtn = false;
         this.updatebtn = true;
-        console.log(businessreview, "update")
     }else{
         this.addbtn = true;
         this.updatebtn = false;
-        console.log(businessreview, "add")
     }
   }
 

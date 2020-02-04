@@ -117,7 +117,7 @@ export class UserDetailsComponent implements OnInit {
   private addform: boolean;
   arrayofselectedobj: Array<any>=[];
 
-  constructor(private modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
+  constructor(public modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
   ngOnInit() {
   }

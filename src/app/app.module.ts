@@ -61,9 +61,9 @@ import {UserHistoryComponent} from './admin/user/userhistory.component';
 import {AdminInventoryComponent} from './admin/inventory/inventory.component'
 import {AddInventoryComponent} from './admin/inventory/addinventory.component'
 import {AdminCouponComponent} from './admin/coupon/coupon.component'
-import {AddCouponComponent} from './admin/coupon/addcoupon.component'
+// import {AddCouponComponent} from './admin/coupon/addcoupon.component'
 import { AdminServiceComponent} from './admin/services/service.component';
-import {AddServiceComponent} from './admin/services/addservice.component';
+// import {AddServiceComponent} from './admin/services/addservice.component';
 import {AdminRewardsComponent} from './admin/rewards/rewards.component';
 import {AddRewardsComponent} from './admin/rewards/addrewards.component';
 import {AdminBusinessSettingComponent} from './admin/business-setting/business.component';
@@ -76,6 +76,9 @@ import {BusinessCouponComponent} from './admin/business-setting/coupon.component
 import {AddReviewComponent} from './admin/business-setting/addreview.component'
 import {AddTaxTableComponent} from './admin/business-setting/addtaxtable.component'
 import {BusinessTaxTableComponent} from './admin/business-setting/taxtable.component'
+import {AdminCommunicationComponent} from './admin/communication/communication.component'
+import {AddNewEmailCommunicationComponent} from './admin/communication/addnewemail.component'
+import {AddNewSmsCommunicationComponent} from './admin/communication/addnewsms.component' 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -117,12 +120,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         BusinessCustomerComponent,
         BusinessCouponComponent,
         BusinessTaxTableComponent,
+        AdminCommunicationComponent,
+        AddNewEmailCommunicationComponent,
+        AddNewSmsCommunicationComponent,
         AddUserComponent,
         AdminRewardsComponent,
         AdminBusinessSettingComponent,
         AddRewardsComponent,
         AdminCouponComponent,
-        AddCouponComponent,
+        // AddCouponComponent,
         AddInventoryComponent,
         AdminInventoryComponent,
         DeleteComponent,
@@ -154,7 +160,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         CscComponent,
         InternationalTelNoDirective,
         AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, UserDetailsComponent,
-        UserRightsComponent, UserHistoryComponent, AdminServiceComponent, AddServiceComponent],
+        UserRightsComponent, UserHistoryComponent, AdminServiceComponent
+        //  AddServiceComponent
+        ],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]

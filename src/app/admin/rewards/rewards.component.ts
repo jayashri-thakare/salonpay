@@ -16,7 +16,7 @@ export class AdminRewardsComponent implements OnInit {
   subscription: any;
   adminrewards: any;
 
-  constructor(private messageService: MessageService, private AdminService: AdminService, private modalService: ModalService) { }
+  constructor(private messageService: MessageService, public AdminService: AdminService, public modalService: ModalService) { }
 
   ngOnInit() {
     this.getRewards();
