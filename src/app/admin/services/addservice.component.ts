@@ -181,6 +181,9 @@ export class AddServiceComponent implements OnInit {
     this.levelList.removeAt(index);
   }
 
+  clearLevel() {
+    this.levelList.clear();
+  }
   getLevelsFormGroup(index): FormGroup {
     // this.levelList = this.addserviceForm.get('ServicePriceSt') as FormArray;
     const formGroup = this.levelList.controls[index] as FormGroup;

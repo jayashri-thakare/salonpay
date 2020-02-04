@@ -114,7 +114,7 @@ export class BusinessTaxTableComponent implements OnInit {
     addTax: boolean;
     addbtn: boolean;
     updatebtn: boolean;
-  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getTaxTable();
@@ -147,7 +147,7 @@ export class BusinessTaxTableComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updateTax = false;
-      this.addTax = true; 
+      this.addTax = true;
     }else if(type == 'update'){
       this.updateTax = true;
       this.addTax = false;

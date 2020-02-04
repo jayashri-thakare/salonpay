@@ -19,7 +19,7 @@ export class AdminInventoryComponent implements OnInit {
   updateProductForm: boolean;
   addProductForm: boolean;
 
-  constructor(private messageService: MessageService, private AdminService: AdminService, private modalService: ModalService) { }
+  constructor(private messageService: MessageService, public AdminService: AdminService, public modalService: ModalService) { }
 
   ngOnInit() {
     this.gridview = true;

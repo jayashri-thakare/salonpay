@@ -37,7 +37,7 @@ export class UserdataService {
  	constructor(private httpClient: HttpClient) {
  	  // let url = environment.apiUrl;
     this.url = environment.apiUrl; }
-  baseUrl = 'http://172.16.0.114:5555/api/Account/SignUp';
+  baseUrl = 'https://payziliapi3.azurewebsites.net/api/Account/SignUp';
 
   private obj: {};
   private userdetail: {};
@@ -86,7 +86,7 @@ export class UserdataService {
   }
 
   getLogin(userdata) {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Account/Login';
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Account/Login';
     return this.httpClient.post(this.baseUrl, userdata, httpOptions )
       .pipe(map(data => data));
   }
@@ -251,7 +251,7 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
-	   this.baseUrl = 'http://172.16.0.114:5555/api/Profile/UploadProfilePicture?';
+	   this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture?';
 	   const input = new FormData();
 	   input.append('file', userdata[0]);
 	   input.append('id', this.userId);

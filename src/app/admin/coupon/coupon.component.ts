@@ -10,7 +10,7 @@ import { ModalService } from 'src/app/_modal/modal.service';
 
 export class AdminCouponComponent implements OnInit {
 
-  constructor(private AdminService: AdminService, private modalService: ModalService) { }
+  constructor(public AdminService: AdminService, public modalService: ModalService) { }
 
   ngOnInit() {
     this.AdminService.couponsnav = false;

@@ -72,16 +72,17 @@ export class AdminService {
   getServiceObject(id) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.editservice = true;
-    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=' + id ;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=' + id;
     // return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
     this.httpClient.get(this.baseUrl).subscribe((data) => {
       // tslint:disable-next-line:indent
-    	this.res = data;
+      this.res = data;
       // tslint:disable-next-line:indent
-     // this.result = this.res.result;
-     // this.serviceData = this.result.serviceDetails;
-    	// this.serviceData = this.result.result.serviceDetails;
+      this.result = this.res['result'];
+      this.serviceData = this.result.serviceDetails;
+      // this.serviceData = this.result.result.serviceDetails;
     });
+
 
   }
   public showNav(nav) {
