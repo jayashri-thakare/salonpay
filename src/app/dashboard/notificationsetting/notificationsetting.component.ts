@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { Router } from '@angular/router';
 import {UserdataService} from '../../userdata.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
@@ -28,6 +28,7 @@ export class NotificationsettingComponent implements OnInit {
   private note1 = {};
   private a1: any[];
   private a2: {};
+  private masternotifications: Observable<userdetail>;
   constructor(private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
 
   get f() {
@@ -48,7 +49,7 @@ export class NotificationsettingComponent implements OnInit {
       // Notification: this.notificationobject
     });
     // this.getNotifications();
-    // this.getMasterNotification();
+    this.getMasterNotification();
     this.getNotifications();
   }
 
@@ -56,7 +57,7 @@ export class NotificationsettingComponent implements OnInit {
   getMasterNotification() {
     this.userdataService.getMasterNotification().subscribe((data) => {
       console.log(data)
-      this.notifications = data;
+      this.masternotifications = data;
     });
   }
   getNotifications() {
