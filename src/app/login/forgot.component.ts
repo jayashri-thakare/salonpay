@@ -17,7 +17,7 @@ import {MessageService} from '../message.service';
     '      {{\'CRM and all the features you need to run your salon with ease and simplicity.\'| translate}}</p>\n' +
     '  </div>\n' +
     '  <div class="login-right">\n' +
-    '<div class="forgot-box">\n' +
+    '<div class="forgetActive">\n' +
     '      <h3>{{\'Forgot\' | translate}} {{\'Password\' | translate}}</h3>\n' +
     '   <form id="forgotForm" [formGroup]="forgotForm" (ngSubmit)="forgot(forgotForm.value)">\n' +
     '        <div class="login-box-in">\n' +
