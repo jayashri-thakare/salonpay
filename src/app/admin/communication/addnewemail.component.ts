@@ -93,6 +93,8 @@ export class AddNewEmailCommunicationComponent implements OnInit {
         this.AdminService.publish('call-email');
         this.addNewEmailForm.reset();
         this.AdminService.publish('back-email');
+        this.messageService.clear();
+        this.messageService.add('Email Template Created Successfully.');
       });
     } else {
       console.log(Admin, this.addNewEmailForm.status);
@@ -111,6 +113,8 @@ export class AddNewEmailCommunicationComponent implements OnInit {
       this.AdminService.add_new_email(Admin).subscribe((data) => {
         this.AdminService.publish('call-email');
         this.AdminService.publish('back-email');
+        this.messageService.clear();
+        this.messageService.add('Email Template Updated Successfully.');
       });
     } else {
       console.log(Admin, this.updateNewEmailForm.status);

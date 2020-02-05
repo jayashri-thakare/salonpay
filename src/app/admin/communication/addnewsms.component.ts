@@ -95,6 +95,8 @@ export class AddNewSmsCommunicationComponent implements OnInit {
         this.AdminService.publish('call-email');
         this.addNewSMSForm.reset();
         this.AdminService.publish('back-email');
+        this.messageService.clear();
+        this.messageService.add('SMS Template Created Successfully.');
       });
     } else {
       console.log(Admin, this.addNewSMSForm.status);
@@ -113,6 +115,8 @@ export class AddNewSmsCommunicationComponent implements OnInit {
       this.AdminService.add_new_sms(Admin).subscribe((data) => {
         this.AdminService.publish('call-email');
         this.AdminService.publish('back-email');
+        this.messageService.clear();
+        this.messageService.add('SMS Template Updated Successfully.');
       });
     } else {
       console.log(Admin, this.updateNewSMSForm.status);

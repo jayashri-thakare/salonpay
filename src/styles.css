@@ -16,3 +16,12 @@ element {
   padding-top: 15px;
     padding-right: 15px;
 }
+.button.line.orange:hover{
+  background-color: #fff !important;
+}
+.button.line:hover{
+  background-color: #fff !important;
+}
+.button.line.whitelin{
+  background-color: transparent !important;
+}

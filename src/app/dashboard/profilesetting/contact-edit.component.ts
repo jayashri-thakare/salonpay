@@ -66,9 +66,9 @@ export class ContactEditComponent implements OnInit {
 
   ngOnInit() {
     this.usercontactForm = this.formBuilder.group({
-      PhoneNumber: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-      WorkContact: ['', [Validators.maxLength(10), Validators.minLength(10)]],
-      HomeConatct: ['', [Validators.maxLength(10), Validators.minLength(10)]]
+      PhoneNumber: ['', [Validators.maxLength(12)]],
+      WorkContact: ['', [Validators.maxLength(12)]],
+      HomeConatct: ['', [Validators.maxLength(12)]]
     });
   }
 

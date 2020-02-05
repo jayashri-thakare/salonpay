@@ -42,7 +42,7 @@ export class EmailEditComponent implements OnInit {
       'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
       'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
       'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
-      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
+      'Formats', 'Alignments', '|', 'OrderedList', '|',
       'Indent', 'Outdent', '|', 'CreateLink','CreateTable',
       'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen']
   };

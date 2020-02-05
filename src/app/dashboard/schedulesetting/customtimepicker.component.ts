@@ -11,17 +11,19 @@ import { FormGroup } from '@angular/forms';
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
     '            <select class="select-field form-field" (change)="datechange(hour)" formControlName="StartTimeHour">\n' +
-    '              <option value="">HH</option> '+
+    '              <option value=""></option> '+
     '              <option *ngFor="\let hour of arrayofhours" [value]="hour">{{hour}}</option>\n' +
     '            </select>\n' +
+    '            <p class="form-label sel-blk">Hr.</p>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
     '            <select class="select-field form-field" formControlName="StartTimeMinute" [(ngModel)]="minute" (change)="datechange(minute)">\n' +
-    '              <option value="">MM</option> '+
+    '              <option value=""></option> '+
     '              <option *ngFor="let minute of arrayofminute">{{minute}}</option>\n' +
     '            </select>\n' +
+    '            <p class="form-label sel-blk">Min.</p>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
@@ -42,17 +44,19 @@ import { FormGroup } from '@angular/forms';
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
     '            <select class="select-field form-field"  (change)="datechange(hour1)" formControlName="EndTimeHour" >\n' +
-    '              <option value="">HH</option> '+
+    '              <option value=""></option> '+
     '              <option *ngFor="\let hour1 of arrayofhours">{{hour1}}</option>\n' +
     '            </select>\n' +
+    '            <p class="form-label sel-blk">Hr.</p>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
     '            <select class="select-field form-field" formControlName="EndTimeMinute" [(ngModel)]="minute1" (change)="datechange(minute1)" >\n' +
-    '              <option value="">MM</option> '+
+    '              <option value=""></option> '+
     '              <option *ngFor="\let minute1 of arrayofminute">{{minute1}}</option>\n' +
     '            </select>\n' +
+    '            <p class="form-label sel-blk">Min.</p>\n' +
     '          </div>\n' +
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +

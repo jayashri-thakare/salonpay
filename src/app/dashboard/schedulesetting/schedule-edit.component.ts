@@ -25,12 +25,12 @@ import {MessageService} from '../../message.service';
        ' <div class="">'+
           '<!-- start -->'+
          ' <div class="radio-box radio-box-2" *ngFor="let weekdays of arrayofselectedobj">'+
-           ' <input type="checkbox" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="editedDayName" (click)="selectedWeekDays(weekdays)">'+
+           ' <input type="checkbox" id="edit_{{weekdays.dayName}}" [checked]="weekdays.dayName" value="arrayofselecteddays" formControlName="DayName" (click)="selectedWeekDays(weekdays)">'+
            ' <label for="edit_{{weekdays.dayName}}">{{weekdays.dayName}}</label>'+
           '</div>'+
          ' <!-- end -->'+
        ' </div>'+
-       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" userdata="{{arrayofselectedobj}}" addchildAMMessage="edit"></app-customTimePicker>'+
+       ' <app-customTimePicker [customTimePicker]= "scheduleeditForm" [userdata]="arrayofselectedobj" addchildAMMessage="edit"></app-customTimePicker>'+
         // '<button class="button" type="submit">Update</button>'+
       '</div>'+
     '</div>'+
@@ -64,7 +64,7 @@ export class ScheduleEditComponent implements OnInit {
   ngOnInit() {
     console.log(this.arrayofselectedobj)
     this.scheduleeditForm = this.formBuilder.group({
-        editedDayName: [''],
+        DayName: [''],
         StartTimeHour: [''],
         StartTimeMinute: [''],
         StartTimeMeridian: [''],
@@ -91,14 +91,14 @@ export class ScheduleEditComponent implements OnInit {
 
   updateSchedule(userdata) {
     console.log(userdata, this.scheduleeditForm)
-    userdata.editedDayName = [this.arrayofselectedobj[0]['dayName']];
+    userdata.DayName = [this.arrayofselectedobj[0]['dayName']];
     // tslint:disable-next-line:triple-equals
     if (this.scheduleeditForm.status == 'VALID') {
       this.userdataService.update_schedule(userdata).subscribe((data) => {
-        this.userdataService.publish('call-parent');
+        this.userdataService.publish('call-schedule');
         this.closeModal('schedule-edit');
         this.messageService.clear();
-        this.messageService.add('Schedule Updated succesfully.');
+        this.messageService.add('Schedule Updated successfully.');
       });
     } else {
       console.log(userdata, this.scheduleeditForm.status);

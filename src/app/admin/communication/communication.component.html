@@ -67,7 +67,7 @@
                             <ul class="status-list">
                                 <li><a (click)="addnewemail('addemail');addupdateform('update');selectproductobj(email)"><i class="icon-edit"></i>
                                         Edit</a></li>
-                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                <li class="delt" data-toggle="modal" data-target="#deletePopupEmail" (click)="selectproductobj(email)" data-backdrop="static"
                                     data-keyboard="false"><i class="icon-delete"></i> Delete
                                 </li>
                             </ul>
@@ -91,7 +91,7 @@
                             <ul class="status-list">
                                 <li><a (click)="addnewemail('addsms');addupdateform('update');selectproductobj(sms)"><i class="icon-edit"></i>
                                         Edit</a></li>
-                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                <li class="delt" data-toggle="modal" data-target="#deletePopupSms" (click)="selectproductobj(sms)" data-backdrop="static"
                                     data-keyboard="false"><i class="icon-delete"></i> Delete
                                 </li>
                             </ul>
@@ -163,16 +163,31 @@
     </div>
     <!-- Add/Edit Product End -->
     <!-- Delete Modal Starts -->
-    <div class="modal fade" id="deletePopup">
+    <div class="modal fade" id="deletePopupEmail">
         <div class="modal-dialog medium-window">
             <div class="modal-content">
                 <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
 
-                <h2 class="modal-title">Are you sure you want to delete this Template?</h2>
+                <h2 class="modal-title">Are you sure you want to delete this Email Template?</h2>
 
                 <div class="modal-btn">
                     <button class="button line mr-2" data-dismiss="modal">No</button>
-                    <button class="button red" data-dismiss="modal">Yes</button>
+                    <button class="button red" data-dismiss="modal" (click)="deleteEmailSmsCom(arrayofselectedobj, 'Email')">Yes</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deletePopupSms">
+        <div class="modal-dialog medium-window">
+            <div class="modal-content">
+                <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+                <h2 class="modal-title">Are you sure you want to delete this SMS Template?</h2>
+
+                <div class="modal-btn">
+                    <button class="button line mr-2" data-dismiss="modal">No</button>
+                    <button class="button red" data-dismiss="modal" (click)="deleteEmailSmsCom(arrayofselectedobj, 'Sms')">Yes</button>
                 </div>
 
             </div>

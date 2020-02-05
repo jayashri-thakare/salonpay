@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('companyId', response['parentCompanyId']);
           localStorage.setItem('Token', response["token"]);
           this.router.navigate(['/dashboard']);
+          this.messageService.clear();
+          this.messageService.add("Logged In Successfully.")
         }
       });
     } else {

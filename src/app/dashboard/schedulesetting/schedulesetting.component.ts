@@ -28,6 +28,7 @@ export class SchedulesettingComponent implements OnInit {
   customday: boolean;
   @Input('userdata') arrayofselectedobj: Array<string> = [];
   userdelschedule: any;
+  subscription: any;
 
   constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
 
@@ -60,6 +61,7 @@ export class SchedulesettingComponent implements OnInit {
       EndTimeMeridian: [''],
       EndDate: ['']
     });
+    this.subscription = this.userdataService.on('call-schedule').subscribe(() => this.getuserSchedule());
   }
 
   requesttimefunction(){
@@ -114,7 +116,7 @@ export class SchedulesettingComponent implements OnInit {
         this.getuserSchedule();
         this.scheduleForm.reset();
         this.messageService.clear();
-        this.messageService.add('Schedule added succesfully.');
+        this.messageService.add('Schedule added successfully.');
       });
     } else {
       console.log(userdata, this.scheduleForm.status);
@@ -126,16 +128,20 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateTimeoff(userdata, date) {
+    debugger;
     console.log(userdata, this.timeoffForm)
     if(date){
-      userdata.StartDate = date[0];
-      userdata.EndDate = date[1];
+      userdata.StartDate = date[0].toDateString();
+      userdata.EndDate = date[1].toDateString();
+    }else{
+      userdata.StartDate = userdata.StartDate.toDateString();
     }
     // tslint:disable-next-line:triple-equals
     if (this.timeoffForm.status == 'VALID') {
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
+        this.timeoffForm.reset();
         this.messageService.clear();
-        this.messageService.add('Time Off added succesfully.');
+        this.messageService.add('Time Off added successfully.');
       });
     } else {
       console.log(userdata, this.timeoffForm.status);

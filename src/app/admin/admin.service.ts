@@ -183,7 +183,7 @@ export class AdminService {
 
   getUserAdminRoles() {
     this.CreatedByUserId = localStorage.userId;
-    this.baseUrl = 'http://172.16.0.114:5555/api/Roles/GetUserRoles?UserId=' + this.CreatedByUserId;
+    this.baseUrl = '	http://172.16.0.114:5555/api/Users/GetUserRoles?UserId=' + this.CreatedByUserId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -246,7 +246,7 @@ export class AdminService {
 
   assign_Role_ToUser(Admin) {
     debugger;
-    this.baseUrl = 'http://172.16.0.114:5555/api/Roles/AssignRoleToUser';
+    this.baseUrl = 'http://172.16.0.114:5555/api/User/AssignRoleToUser';
     Admin.ParentCompanyId = parseInt(localStorage.companyId);
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
@@ -387,6 +387,25 @@ export class AdminService {
 
   GetEmailAndSmsTemplateList() {
     this.baseUrl = 'http://172.16.0.99:8055/api/Communication/GetEmailAndSmsTemplateList';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  deleteEmailSmsCom(templateid, type) {
+    debugger;
+    return this.httpClient.delete(' http://172.16.0.99:8055/api/Communication/DeleteEmailAndSmsTemplate?id=' + templateid + '&type=' + type);
+  }
+
+  addEmailSmsNotification(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.99:8055/api/Communication/AddEmailTemplate';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  getCustNotification() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetCustNotifSettings?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 

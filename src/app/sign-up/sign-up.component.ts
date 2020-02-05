@@ -49,7 +49,6 @@ export class SignUpComponent implements OnInit {
     console.log(userdata, this.registerForm);
     if (this.registerForm.status == 'VALID') {
       this.userdataService.registerUsers(userdata).subscribe((data) => {
-        this.messageService.add('Sign up succesfull');
         // this.router.navigate(['/profilesetting']);
         if (data['success'] === 0) {
           this.signuperrormsg = data['message'];

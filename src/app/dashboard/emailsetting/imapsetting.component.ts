@@ -13,7 +13,7 @@ import {MessageService} from '../../message.service';
   '<div class="mobile-side">\n' +
   '<!-- common headline -->\n'+
   '<h3 class="close-btn main-comm-head" (click)="closeModal(\'other-edit\');">\n'+
-     ' <i class="icon-down-arrow com-arw"></i>Add IMAP<span>settings</span>\n'+
+     ' <i class="icon-down-arrow com-arw"></i>Add IMAP<span> settings</span>\n'+
   '</h3>\n'+
   '<!-- common headline end -->\n'+
   '<form id="edit-imap" [formGroup]="IMAPForm" class="popup-scrll">\n'+

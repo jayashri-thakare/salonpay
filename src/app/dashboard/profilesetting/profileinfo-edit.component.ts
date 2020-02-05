@@ -4,6 +4,7 @@ import { ModalService } from '../../_modal/modal.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserdataService} from '../../userdata.service';
 import {ProfilesettingComponent} from './profilesetting.component';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'profileinfo-modal',
@@ -59,7 +60,7 @@ export class ProfileinfoEditComponent implements OnInit {
   submitted = false;
   // tslint:disable-next-line:ban-types
   @Input('userdata') userdetail: any;
-  constructor(private userdataService: UserdataService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private userdataservice: UserdataService) { }
+  constructor(public messageService:MessageService, private userdataService: UserdataService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private userdataservice: UserdataService) { }
   get f() {
     return this.userinfoForm.controls;
   }
@@ -82,8 +83,14 @@ export class ProfileinfoEditComponent implements OnInit {
     if (this.userinfoForm.status == 'VALID') {
       userdata.id = localStorage.getItem('userId')
       this.userdataservice.update_user_password(userdata).subscribe((data) => {
-        this.closeModal('side-menu-logininfo')
-        this.router.navigate(['/profilesetting']);
+        if (data['success'] == 0){
+          this.messageService.clear();
+          this.messageService.add(data['result']);
+        }else if(data['success'] == 1){
+          this.closeModal('side-menu-logininfo');
+          this.messageService.clear();
+          this.messageService.add(data['result']);
+        }
       });
     } else {
       console.log(userdata, this.userinfoForm.status);

@@ -28,7 +28,7 @@ export class NotificationsettingComponent implements OnInit {
   private note1 = {};
   private a1: any[];
   private a2: {};
-  private masternotifications: Observable<userdetail>;
+  public masternotifications: Observable<userdetail>;
   constructor(private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
 
   get f() {

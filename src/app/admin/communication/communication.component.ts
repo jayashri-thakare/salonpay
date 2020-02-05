@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-communication',
@@ -22,7 +23,7 @@ export class AdminCommunicationComponent implements OnInit {
   updateemail: boolean;
   addemailvar: boolean;
 
-  constructor(public AdminService: AdminService) { }
+  constructor(public AdminService: AdminService, public messageService: MessageService) { }
 
   ngOnInit() {
     this.emailvar = true;
@@ -87,6 +88,26 @@ export class AdminCommunicationComponent implements OnInit {
       console.log(this.adminemailandsms, this.adminemail, this.adminsms)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  deleteEmailSmsCom(selected_obj, type) {
+    debugger;
+    // tslint:disable-next-line:triple-equals
+    if (type == 'Email') {
+      this.AdminService.deleteEmailSmsCom(selected_obj[0].emailTemplateId, type).subscribe((data) => {
+        console.log(data)
+        this.getEmailAndSmsTemplateList();
+        this.messageService.clear();
+        this.messageService.add(data['result']);
+      });
+    }else if(type == 'Sms'){
+      this.AdminService.deleteEmailSmsCom(selected_obj[0].smsTemplateId, type).subscribe((data) => {
+        console.log(data)
+        this.getEmailAndSmsTemplateList();
+        this.messageService.clear();
+        this.messageService.add(data['result']);
+      });
+    }
   }
 
 }
