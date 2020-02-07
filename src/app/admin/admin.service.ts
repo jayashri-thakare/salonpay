@@ -69,6 +69,10 @@ export class AdminService {
     this.showTab = tab;
   }
 
+  getCoupon(coupon){
+    debugger;
+    this.coupon = coupon;
+  }
   getServiceObject(id) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.editservice = true;
@@ -159,9 +163,9 @@ export class AdminService {
     debugger;
     this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/AddCopuan';
     coupon.ParentCompanyId = parseInt(localStorage.companyId);
-    coupon.Service = [coupon.Service];
+    // coupon.Service = [coupon.Service];
     coupon.Technician = [coupon.Technician];
-    coupon.ProductId = [coupon.ProductId];
+    // coupon.ProductId = [coupon.ProductId];
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, coupon, httpOptions)
       .pipe(map( data => data));
   }
@@ -178,6 +182,18 @@ export class AdminService {
   getUserHistory(user) {
     this.CreatedByUserId = user.user.id;
     this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetUsersHistory?UserId=' + this.CreatedByUserId + '&PageNumber=1&PageSize=10';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getCouponList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/GetCouponsList?ParentCompanyId=' + this.ParentCompanyId+'&PageNumber=1&PageSize=5';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getTechnician() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/GetTechnicianList?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 

@@ -1,11 +1,11 @@
 <!-- Main Container Starts -->
-<div *ngIf="AdminService.navTab==7">
+<div *ngIf="adminService.navTab==7">
     <div class="mainContainer main-container-flg">
         <div class="comm-headline-btn">
             <h3 class="main-comm-head m-0">Coupons</h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
-                    <button class="button flg-btn side-menu" (click)="openModal('add-coupon')">+ Add New</button>
+                    <button class="button flg-btn side-menu" (click)="modalService.close('add-coupon');modalService.open1('add-coupon')">+ Add New</button>
                     <div class="form-group mb-0 mr-2">
                         <form>
                             <input class="form-field" type="text" name="filter-searh" required>
@@ -49,8 +49,8 @@
             </div>
         </div>
         <div id="gridView">
-            <div class="f-row f-3 f-1440-2 f-768-1">
-                <div class="f-col">
+            <div class="f-row f-3 f-1440-2 f-768-1" >
+                <div class="f-col" *ngFor="let coupon of couponList">
                     <!-- start -->
                     <div class="app-grid-box">
                         <div class="techi-top techi-top-qty">
@@ -58,14 +58,14 @@
                                 <i class="icon-coupon prodt-ico"></i>
                                 <div class="usr-name">
                                     <h3><span>Coupon Code <b class="tech-badge active">Active</b></span>
-                                        OCFE369
+                                        {{coupon.couponCode}}
                                     </h3>
                                 </div>
                             </div>
                             <div class="yur-mail-rig">
                                 <i class="icon-status1 status"></i>
                                 <ul class="status-list">
-                                  <!-- <li (click)="modalService.open('add-coupon',1222 ); adminService.getServiceObject(service?.serviceId);"><i class="icon-edit" ></i> Edit</li> -->
+                                   <li (click)="modalService.open('add-coupon',coupon.couponId ); adminService.getCoupon(coupon);"><i class="icon-edit" ></i> Edit</li>
                                     <li><i class="icon-share"></i> Share</li>
                                     <li class="delt" data-toggle="modal" data-target="#deletePopup"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>
@@ -74,9 +74,7 @@
                             </div>
                         </div>
                         <ul class="user-detl">
-                            <li>Description <span>This is a perfect frameless glass shower for a larger washroom or
-                                    enquire. Enjoy the three corner views from your shower enclosure for years to
-                                    come.</span></li>
+                            <li>Description <span>{{coupon.description}}</span></li>
                         </ul>
                         <!-- start -->
                         <div class="app-pad-box sale-fle50">
@@ -85,7 +83,7 @@
                                 <i class="icon-money"></i>
                                 <div class="tech-usr-cont">
                                     <p>Percentage / Dollar Value</p>
-                                    <h3>$ 5</h3>
+                                    <h3>$ {{coupon.value}}</h3>
                                 </div>
                             </div>
                             <!-- end -->
@@ -94,7 +92,7 @@
                                 <i class="icon-calender"></i>
                                 <div class="tech-usr-cont">
                                     <p>Expiry Date</p>
-                                    <h3>25 Aug 2019</h3>
+                                    <h3>{{coupon.expiryDate}}</h3>
                                 </div>
                             </div>
                             <!-- end -->
@@ -103,7 +101,9 @@
                                 <i class="icon-gird"></i>
                                 <div class="tech-usr-cont">
                                     <p>Services</p>
-                                    <h3>Hair Cut</h3>
+                                  <div *ngFor="let service of coupon.couponServiceMapp">
+                                    <h3>{{service.serviceId}}</h3>
+                                  </div>
                                 </div>
                             </div>
                             <!-- end -->
@@ -457,7 +457,7 @@
 
     <!-- Add/Edit Product -->
     <div class="overlay"></div>
-    <!-- <addcoupon-modal></addcoupon-modal> -->
+     <addcoupon-modal></addcoupon-modal>
     <!-- Add/Edit Product End -->
     <!-- Delete Modal Starts -->
     <div class="modal fade" id="deletePopup">

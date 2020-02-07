@@ -92,25 +92,25 @@
                             <!-- end -->
 
                             <!-- start -->
-                            <h6 class="comm-subhdn">Module Rights</h6>
+                            <h6 class="comm-subhdn">Module Rights22</h6>
                             <div class="row" >
-                                <div class="w100" *ngFor="let moduleright of rolesmodulerights">
+                                <div class="w100" *ngFor="let moduleright of rolesmodulerights; let i = index;">
                                     <!-- start -->
                                     <div class="module-role-box">
                                         <div class="module-rig">
                                             <h6 class="promo-head">{{moduleright.moduleName}}</h6>
                                             <div class="switch switch--horizontal only-switch"
                                                 data-name="customer-switch">
-                                                <input class="notif-radio" (click)="moduleonoff($event, false, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"
-                                                    name="{{moduleright.moduleName}}" [value]="false" />
+                                                <input class="notif-radio" (click)="moduleonoff($event, false, moduleright.moduleName, i);showr=moduleright.moduleName+false; removeRights(moduleright.moduleName);" type="radio"
+                                                       name="{{moduleright.moduleName}}" [value]="false" />
                                                 <label for="{{moduleright.moduleName}}"></label>
-                                                <input class="notif-radio"  (click)="moduleonoff($event, true, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"
-                                                    name="{{moduleright.moduleName}}" [value]="true" />
+                                                <input class="notif-radio" (click)="moduleonoff($event, true, moduleright.moduleName, i);showr=moduleright.moduleName+true; checkRights(moduleright.moduleName, true)" id="{{moduleright.moduleName}}_{{i}}_true" type="radio"
+                                                       name="{{moduleright.moduleName}}" [value]="true" />
                                                 <label for="{{moduleright.moduleName}}"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
-                                        <div class="module-btm customer-switch">
+                                        <div class="module-btm customer-switch" *ngIf="enableCheckbox[i]==moduleright.moduleName">
                                             <div class="checkbox-box" *ngFor="let permission of moduleright.permissions">
                                                 <div id="{{moduleright.moduleName}}">
                                                     <input type="checkbox" id="{{permission.permission}}_{{moduleright.moduleName}}" (click)="modulepermission($event, permission.permission, moduleright.moduleName)" name="{{permission.permission}}" required="">
@@ -196,7 +196,7 @@
                                                 <input class="notif-radio"  id="module1" (click)="rightsupdate('Customers', false, '')" type="radio"
                                                     name="module-radio1" [value]="false" />
                                                 <label for="module1"></label>
-                                                <input class="notif-radio" id="module12" type="radio" 
+                                                <input class="notif-radio" id="module12" type="radio"
                                                     name="module-radio1" [value]="true" (click)="rightsupdate('Customers', true, '')" [checked]="getrolesmodclaim[0].isSelected" />
                                                 <label for="module12"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
@@ -233,7 +233,7 @@
                                                 <input class="notif-radio" (click)="rightsupdate('Appointments', false, '')" id="module2" type="radio"
                                                     name="module-radio2" value="off" />
                                                 <label for="module2"></label>
-                                                <input class="notif-radio" id="module12" (click)="rightsupdate('Appointments', true, '')" type="radio" 
+                                                <input class="notif-radio" id="module12" (click)="rightsupdate('Appointments', true, '')" type="radio"
                                                     name="module-radio2" [value]="true" [checked]="getrolesmodclaim[1].isSelected" />
                                                 <label for="module22"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
@@ -270,7 +270,7 @@
                                                 <input class="notif-radio" (click)="rightsupdate('Sales', false, '')" id="module3" type="radio"
                                                     name="module-radio3" value="off" />
                                                 <label for="module1"></label>
-                                                <input class="notif-radio" (click)="rightsupdate('Sales', true, '')" id="module32" type="radio" 
+                                                <input class="notif-radio" (click)="rightsupdate('Sales', true, '')" id="module32" type="radio"
                                                     name="module-radio3" [value]="true" [checked]="getrolesmodclaim[2].isSelected" />
                                                 <label for="module32"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>

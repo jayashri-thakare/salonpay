@@ -59,10 +59,10 @@ import {UserRightsComponent} from './admin/user/userroles.component';
 import {UserHistoryComponent} from './admin/user/userhistory.component';
 import {AdminInventoryComponent} from './admin/inventory/inventory.component'
 import {AddInventoryComponent} from './admin/inventory/addinventory.component'
-import {AdminCouponComponent} from './admin/coupon/coupon.component'
-// import {AddCouponComponent} from './admin/coupon/addcoupon.component'
+import {AdminCouponComponent} from './admin/coupon/coupon.component';
+import {AddCouponComponent} from './admin/coupon/addcoupon.component';
 import { AdminServiceComponent} from './admin/services/service.component';
-// import {AddServiceComponent} from './admin/services/addservice.component';
+import {AddServiceComponent} from './admin/services/addservice.component';
 import {AdminRewardsComponent} from './admin/rewards/rewards.component';
 import {AddRewardsComponent} from './admin/rewards/addrewards.component';
 import {AdminBusinessSettingComponent} from './admin/business-setting/business.component';
@@ -128,7 +128,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AdminBusinessSettingComponent,
     AddRewardsComponent,
     AdminCouponComponent,
-    // AddCouponComponent,
+    AddCouponComponent,
     AddInventoryComponent,
     AdminInventoryComponent,
     DeleteComponent,
@@ -161,7 +161,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InternationalTelNoDirective,
     AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, UserDetailsComponent,
     UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
-    //  AddServiceComponent
+     AddServiceComponent
   ],
   providers: [UserdataService, DatePipe, AdminService],
   entryComponents: [ControlErrorComponent, ModalComponent],

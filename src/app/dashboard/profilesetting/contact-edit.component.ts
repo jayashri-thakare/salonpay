@@ -66,14 +66,15 @@ export class ContactEditComponent implements OnInit {
 
   ngOnInit() {
     this.usercontactForm = this.formBuilder.group({
-      PhoneNumber: ['', [Validators.maxLength(12)]],
-      WorkContact: ['', [Validators.maxLength(12)]],
-      HomeConatct: ['', [Validators.maxLength(12)]]
+      PhoneNumber: ['', [Validators.required]],
+      WorkContact: ['', [Validators.required]],
+      HomeConatct: ['', [Validators.required]]
     });
   }
 
   updateDetail(userdata) {
     // userdata.Email = this.email;
+    debugger;
     this.userdataService.update_profile_service(this.usercontactForm, this.usercontactForm.value);
     this.userdataService.publish('call-parent');
     this.closeModal('side-menu-contact');

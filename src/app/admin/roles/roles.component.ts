@@ -43,6 +43,7 @@ export class AdminRolesComponent implements OnInit {
   claimsuccess: any;
   getrolesindclaim: any;
   getrolesmodclaim: any;
+  public enableCheckbox = [];
 
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -92,6 +93,7 @@ export class AdminRolesComponent implements OnInit {
   //   this.Rights = this.rolesRightForm.get('Rights') as FormArray;
   //   this.Rights.push(this.moduleRightItem());
   // }
+  showr: string;
 
   selectroleobj(selected_obj){
     var index = this.arrayofselectedobj.indexOf(selected_obj);
@@ -120,7 +122,27 @@ export class AdminRolesComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  moduleonoff(event, checkvalue, moduleright){
+  checkRights(modulename, value) {
+    debugger;
+    this.enableCheckbox.push(modulename);
+  }
+
+  removeRights(modulename) {
+    debugger;
+    const index: number = this.enableCheckbox.indexOf(modulename);
+    if (index !== -1) {
+      this.enableCheckbox.splice(index, 1);
+    }
+    // this.enableCheckbox.splice({modulename: modulename, value: value});
+  }
+  moduleonoff(event, checkvalue, moduleright, i){
+    // if(checkvalue===true){
+    //   this.showr = moduleright;
+    // }
+    // else{
+    //   this.showr = 'checkvalue_false';
+    // }
+    console.log(this.showr);
     console.log(event, moduleright)
     if(moduleright == "Customers"){
       this.Customers_var = checkvalue;
@@ -310,7 +332,7 @@ export class AdminRolesComponent implements OnInit {
 
   pageviewrolefunc(userrole){
     if(userrole){
-      this.pageinitrole = userrole[0].email; 
+      this.pageinitrole = userrole[0].email;
       this.onloadvar = true;
     }
   }

@@ -46,7 +46,7 @@ import {Observable} from 'rxjs';
     '                                    <!-- end -->\n' +
     // '                                    <form [formGroup]="userrightForm" (ngSubmit)="createuser(userrightForm.value)">\n' +
     '                                        <!-- start -->\n' +
-    '                                         <h6 class="comm-subhdn">Module Rights</h6>\n' +
+    '                                         <h6 class="comm-subhdn">Module Rights122</h6>\n' +
     '                                            <div class="row">\n' +
     '                                                <div class="w100" *ngFor="let moduleright of rolesmodulerights">\n' +
     '                                                    <!-- start -->\n' +
