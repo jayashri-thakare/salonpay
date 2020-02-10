@@ -40,7 +40,7 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label">Phone Number</p>\n' +
     '                    </div>\n' +
     '                    <!-- start -->\n' +
-    '                    <div class="form-group popup-select2">\n' +
+    '                    <div class="form-group form-field multi-height">\n' +
     '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
@@ -111,7 +111,7 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label">Phone Number</p>\n' +
     '                    </div>\n' +
     '                    <!-- start -->\n' +
-    '                    <div class="form-group popup-select2">\n' +
+    '                    <div class="form-group form-field multi-height">\n' +
     '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
@@ -232,7 +232,7 @@ export class AddUserComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.adduserForm.status == 'VALID') {
       this.AdminService.create_user_service(Admin).subscribe((data) => {
-        // this.AdminService.publish('call-user');
+        this.AdminService.publish('call-user');
         this.messageService.clear();
         this.messageService.add('User Created successfully.')
         this.closeModal('add-tax-table1');
@@ -255,7 +255,7 @@ export class AddUserComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.updateuserForm.status == 'VALID') {
       this.AdminService.update_user_service(Admin).subscribe((data) => {
-        // this.AdminService.publish('call-user');
+        this.AdminService.publish('call-user');
         this.messageService.clear();
         this.messageService.add('User updated successfully.')
         this.closeModal('add-tax-table1');

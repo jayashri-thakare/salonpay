@@ -45,7 +45,7 @@
         <div class="admin-comm-box">
             <div class="admin-comm-lef">
                 <ul class="clearfix tabs user-detail-lef-tab" data-tabgroup="first-tab-group">
-                    <li *ngFor="let user of userlist;  let i = index" (click)="getemailfunc(user);getuserHistory(user); AdminService.setIndex(i, user.user.id)" [class.active]="AdminService.selectedIndex === i"  id="{{user.user.id}}">
+                    <li *ngFor="let user of userlist;  let i = index" (click)="getemailfunc(user);getuserHistory(user);getuserRoles(user); AdminService.setIndex(i, user.user.id)" [class.active]="AdminService.selectedIndex === i"  id="{{user.user.id}}">
                         <a class="admin-comm-rig-btn" >
                             <!-- start -->
                             <div class="table-bdy">
@@ -109,7 +109,7 @@
                             <li><a (click)="AdminService.showSubtab(3);getuserHistory(userlist[AdminService.selectedIndex])" [ngClass]="{'active': AdminService.showTab==3}" id="history">History</a></li>
                         </ul>
                       <app-userdetail [userdetail]="userlist"></app-userdetail>
-                      <app-userrights [userdetail]="userlist"></app-userrights>
+                      <app-userrights [userdetail]="userlist" [userrole]="userroles"></app-userrights>
                       <app-userhistory [userdetail]="userlist" [userhistory]="userhistory"></app-userhistory>
                         <!-- end -->
                     </div>

@@ -31,13 +31,13 @@ import {Observable} from 'rxjs';
     '                                <div class="admin-comm-rig-scroll scrollbar">\n' +
     '                                    <!-- start -->\n' +
     '                                    <h6 class="comm-subhdn">{{userdet.user.firstName}}\'s Role</h6>\n' +
-    '                                    <div class="row" *ngFor="let roles of userroles">\n' +
+    '                                    <div class="row">\n' +
     '                                        <form class="popup-scrll" [formGroup]="userroleForm">\n' +
-      '                                        <div class="w50 w-1200-100">\n' +
+      '                                        <div class="w50 w-1200-100" *ngFor="let roles of userroles;let i = index">\n' +
       '                                            <!-- start -->\n' +
       '                                             <div class="radio-box">\n' +
-                                                      '<input id="{{roles.name}}" type="radio" [value]="roles.name" formControlName="RoleList" />\n' +
-                                                          '<label for="{{roles.name}}">{{roles.name}}</label>\n' +
+                                                      '<input id="{{roles}}" type="radio" [value]="roles" name="RoleList" formControlName="RoleList" />\n' +
+                                                          '<label for="{{roles}}">{{roles}}</label>\n' +
       '                                              </div>\n' +
       '                                            <!-- end -->\n' +
       '                                        </div>\n' +
@@ -46,25 +46,25 @@ import {Observable} from 'rxjs';
     '                                    <!-- end -->\n' +
     // '                                    <form [formGroup]="userrightForm" (ngSubmit)="createuser(userrightForm.value)">\n' +
     '                                        <!-- start -->\n' +
-    '                                         <h6 class="comm-subhdn">Module Rights122</h6>\n' +
+    '                                         <h6 class="comm-subhdn">Module Rights</h6>\n' +
     '                                            <div class="row">\n' +
-    '                                                <div class="w100" *ngFor="let moduleright of rolesmodulerights">\n' +
+    '                                                <div class="w100" *ngFor="let moduleright of rolesmodulerights;let i = index;">\n' +
     '                                                    <!-- start -->\n' +
     '                                                    <div class="module-role-box">\n' +
     '                                                        <div class="module-rig">\n' +
     '                                                            <h6 class="promo-head">{{moduleright.moduleName}}</h6>\n' +
     '                                                            <div class="switch switch--horizontal only-switch"\n' +
     '                                                                data-name="customer-switch">\n' +
-    '                                                                <input class="notif-radio" (click)="moduleonoff($event, false, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"\n' +
+    '                                                                <input class="notif-radio" (click)="moduleonoff($event, false, moduleright.moduleName, i); removeRights(moduleright.moduleName); showDiv(moduleright.moduleName, i, false)" id="{{moduleright.moduleName}}" type="radio"\n' +
     '                                                                    name="{{moduleright.moduleName}}" [value]="false" />\n' +
     '                                                                <label for="{{moduleright.moduleName}}"></label>\n' +
-    '                                                                <input class="notif-radio" (click)="moduleonoff($event, true, moduleright.moduleName)" id="{{moduleright.moduleName}}" type="radio"\n' +
+    '                                                                <input class="notif-radio" (click)="moduleonoff($event, true, moduleright.moduleName, i); checkRights(moduleright.moduleName, true);showDiv(moduleright.moduleName, i, true)" id="{{moduleright.moduleName}}" type="radio"\n' +
     '                                                                    name="{{moduleright.moduleName}}" [value]="true" />\n' +
     '                                                                <label for="{{moduleright.moduleName}}"></label><span class="toggle-outside"><span\n' +
     '                                                                        class="toggle-inside"></span></span>\n' +
     '                                                            </div>\n' +
     '                                                        </div>\n' +
-    '                                                        <div class="module-btm customer-switch">\n' +
+    '                                                        <div id="{{moduleright.moduleName}}{{i}}" class="module-btm customer-switch role-class-display-none">\n' +
     '                                                            <div class="checkbox-box" *ngFor="let permission of moduleright.permissions">\n' +
     '                                                                <div id="{{moduleright.moduleName}}">\n' +
     '                                                                    <input type="checkbox" id="{{permission.permission}}_{{moduleright.moduleName}}" (click)="modulepermission($event, permission.permission, moduleright.moduleName)" name="{{permission.permission}}" required="">\n' +
@@ -115,7 +115,6 @@ export class UserRightsComponent implements OnInit {
   userroleForm: FormGroup;
   control: FormControl;
   submitted = false;
-  public userroles: Observable<any>;
   public rolesindividualrights: Observable<any>;
   public rolesmodulerights: Observable<any>;
   public ModuleRightsobj= {};
@@ -126,50 +125,50 @@ export class UserRightsComponent implements OnInit {
   public individualRightsobj= {};
   arrayofselectedindividualobj: Array<any> = [];
   public claims= {};
+  public enableCheckbox = [];
 
   constructor(public modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
+  @Input('userrole') userroles: any;
   ngOnInit() {
-    this.getuserRoles();
-    this.getusrRoles();
     this.getrolesModuleRights();
     this.getrolesIndividualRights();
     this.userroleForm = this.formBuilder.group({
         RoleList : ['']
     });
   }
-  moduleonoff(event, checkvalue, moduleright){
+  moduleonoff(event, checkvalue, moduleright, i){
     console.log(event, moduleright)
     if(moduleright == "Customers"){
       this.Customers_var = checkvalue;
       this.ModuleRightsobj['ModuleName'] = moduleright;
       this.ModuleRightsobj['IsSelected'] = checkvalue;
-      this.ModuleRightsobj['Rights'] = {
+      this.ModuleRightsobj['Rights'] = [{
         "View": false,
         "Update": false,
         "Create": false,
         "Delete": false
-      }
+      }]
     }else if(moduleright == "Appointments"){
       this.Appointments_var = checkvalue;
       this.ModuleRightsobj['ModuleName'] = moduleright;
       this.ModuleRightsobj['IsSelected'] = checkvalue;
-      this.ModuleRightsobj['Rights'] = {
+      this.ModuleRightsobj['Rights'] = [{
         "View": false,
         "Update": false,
         "Create": false,
         "Delete": false
-      }
+      }]
     }else if(moduleright == "Sales"){
       this.Sales_var = checkvalue;
       this.ModuleRightsobj['ModuleName'] = moduleright;
       this.ModuleRightsobj['IsSelected'] = event.currentTarget.checked;
-      this.ModuleRightsobj['Rights'] = {
+      this.ModuleRightsobj['Rights'] = [{
         "View": false,
         "Update": false,
         "Create": false,
         "Delete": false
-      }
+      }]
     }
     console.log(this.ModuleRightsobj)
     var index = this.arrayofselectedmoduleobj.indexOf(this.ModuleRightsobj);
@@ -185,12 +184,35 @@ export class UserRightsComponent implements OnInit {
     }
   }
 
+  showDiv(modulename, ind, val) {
+    let divn = modulename + ind;
+    if (this.enableCheckbox.includes(modulename) && val ===true){
+      document.querySelector('#'+divn).classList.remove('role-class-display-none')
+      document.querySelector('#'+divn).classList.add('role-class-display')
+    }else{
+      document.querySelector('#'+divn).classList.remove('role-class-display')
+      document.querySelector('#'+divn).classList.add('role-class-display-none')
+    }
+  }
+  removeRights(modulename) {
+    const index: number = this.enableCheckbox.indexOf(modulename);
+    if (index !== -1) {
+      this.enableCheckbox.splice(index, 1);
+    }
+  }
+
+  checkRights(modulename, value) {
+    this.enableCheckbox.push(modulename);
+  }
+
   modulepermission(event, type, moduleright){
     console.log(event, type)
     for(let i=0; i < this.arrayofselectedmoduleobj.length; i++){
       if(this.arrayofselectedmoduleobj[i]['ModuleName'] == moduleright){
         if(type){
-          this.arrayofselectedmoduleobj[i]['Rights'][type] = event.currentTarget.checked
+          for(let j=0; j < this.arrayofselectedmoduleobj[i]['Rights'].length; j++){
+            this.arrayofselectedmoduleobj[i]['Rights'][j][type] = event.currentTarget.checked
+          }
         }
       }
     }
@@ -253,22 +275,6 @@ export class UserRightsComponent implements OnInit {
         this.messageService.add('Claims Created successfully.')
       });
     }
-  }
-
-  getuserRoles() {
-    this.AdminService.getUserAdminRoles().subscribe((data) => {
-      this.userroles = data;
-      this.userroles = this.userroles['result'];
-      console.log(this.userroles, "role");
-    });
-  }
-
-  getusrRoles() {
-    this.AdminService.getUserRoles().subscribe((data) => {
-      this.userroles = data;
-      this.userroles = this.userroles['result'];
-      console.log(this.userroles, "rolesofuser")
-    });
   }
 
   getrolesModuleRights() {

@@ -44,7 +44,6 @@ export class UserComponent implements OnInit {
     // this.userdetailvar = true;
     // this.rolesvar = false;
     // this.historyvar = false;
-    this.getuserRoles();
     this.getuserList();
 
     this.subscription = this.AdminService.on('call-user').subscribe(() => this.getuserList());
@@ -102,8 +101,9 @@ export class UserComponent implements OnInit {
     });
   }
 
-  getuserRoles() {
-    this.AdminService.getUserAdminRoles().subscribe((data) => {
+  getuserRoles(user) {
+    debugger;
+    this.AdminService.getUserAdminRoles(user).subscribe((data) => {
       this.userroles = data;
       this.userroles = this.userroles.result;
       console.log(this.userroles, "role")

@@ -187,7 +187,7 @@ export class AdminService {
 
   getCouponList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/GetCouponsList?ParentCompanyId=' + this.ParentCompanyId+'&PageNumber=1&PageSize=5';
+    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/GetCouponsList?ParentCompanyId=' + this.ParentCompanyId+'&PageNumber=1&PageSize=10';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -197,8 +197,8 @@ export class AdminService {
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
-  getUserAdminRoles() {
-    this.CreatedByUserId = localStorage.userId;
+  getUserAdminRoles(user) {
+    this.CreatedByUserId = user.user.id;
     this.baseUrl = '	http://172.16.0.114:5555/api/Users/GetUserRoles?UserId=' + this.CreatedByUserId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
@@ -462,7 +462,7 @@ export class AdminService {
 
   GetServicesList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetServiceCategoryList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=5';
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetServiceCategoryList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
