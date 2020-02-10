@@ -18,14 +18,14 @@ import {MessageService} from '../../message.service';
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group mt-2">\n' +
     '                        <input type="text" name="serv-code" class="form-field" formControlName="ServiceName" ngModel="{{adminService.serviceData?.serviceName}}" required />\n' +
     '                        <p class="form-label sel-blk">Service Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                           <select class="select-field form-field" formControlName="ServiceCategoryId" ngModel="{{adminService.serviceData?.serviceName}}">\n' +
+    '                           <select class="select-field form-field field--not-empty" formControlName="ServiceCategoryId" ngModel="{{adminService.serviceData?.serviceName}}">\n' +
     '                             <option value="">Select Category</option>\n' +
     '                             <option *ngFor="let category of service_category" [ngValue]="category?.serviceCategoryId">{{category?.categoryType}}</option>\n' +
     '                           </select>\n' +
@@ -84,7 +84,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    </div>\n' +
     '\n' +
-    '                    <button class="button dashed-button mb-4" >\n' +
+    '                    <button type="button" class="button dashed-button mb-4" >\n' +
     '                        <i class="icon-cir-plus mr-2" (click)="addLevel()"></i>Add\n' +
     '                    </button>\n' +
     '\n' +
@@ -98,7 +98,7 @@ import {MessageService} from '../../message.service';
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <select class="select-field form-field" formControlName="TurnCountValue" ngModel="{{adminService.serviceData?.turnCountId}}">\n' +
+    '                        <select class="select-field form-field  field--not-empty" formControlName="TurnCountValue" ngModel="{{adminService.serviceData?.turnCountId}}">\n' +
     '                             <option value="">Select Turn</option>\n' +
     '                             <option *ngFor="let turn of turn_countlist" [ngValue]="turn?.turnCountId">{{turn.value}}</option>\n' +
     '                           </select>\n' +

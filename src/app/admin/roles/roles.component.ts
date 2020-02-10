@@ -7,6 +7,8 @@ import { UserdataService } from 'src/app/userdata.service';
 import { MessageService } from 'src/app/message.service';
 import { AdminService } from '../admin.service';
 import { Subscription } from 'rxjs';
+import {style} from '@angular/animations';
+// import {$} from 'protractor';
 
 @Component({
   selector: 'app-roles',
@@ -123,17 +125,24 @@ export class AdminRolesComponent implements OnInit {
   }
 
   checkRights(modulename, value) {
-    debugger;
     this.enableCheckbox.push(modulename);
   }
 
+  showDiv(modulename, ind, val) {
+    let divn = modulename + ind;
+    if (this.enableCheckbox.includes(modulename) && val ===true){
+      document.querySelector('#'+divn).classList.remove('role-class-display-none')
+      document.querySelector('#'+divn).classList.add('role-class-display')
+    }else{
+      document.querySelector('#'+divn).classList.remove('role-class-display')
+      document.querySelector('#'+divn).classList.add('role-class-display-none')
+    }
+  }
   removeRights(modulename) {
-    debugger;
     const index: number = this.enableCheckbox.indexOf(modulename);
     if (index !== -1) {
       this.enableCheckbox.splice(index, 1);
     }
-    // this.enableCheckbox.splice({modulename: modulename, value: value});
   }
   moduleonoff(event, checkvalue, moduleright, i){
     // if(checkvalue===true){
