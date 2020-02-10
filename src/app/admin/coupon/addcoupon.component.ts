@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <!-- start -->\n' +
     '                    <h6 class="poptile">Taken From</h6>\n' +
     '                    <div class="switch switch--horizontal">\n' +

@@ -277,14 +277,12 @@ export class UserdataService {
 // };
 
     this.httpClient.post(this.baseUrl, input, httpOptions).subscribe((val) => {
-    	debugger;
       this.imagepath = val['profilePicPath'];
     });
   }
 
   add_time_tracker(statusflag) {
-  	debugger;
-    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/TrackTimer/SavetrackTimer';
+    this.baseUrl = 'http://172.16.0.99:8089/api/TrackTimer/SavetrackTimer';
     let userdata = {};
     userdata['UserId'] = this.userId;
     userdata['ParentCompanyId'] = this.ParentCompanyId;
@@ -295,23 +293,8 @@ export class UserdataService {
   }
 
   get_time_difference() {
-  	debugger;
-  	this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/trackTimer/TimeDiffrence';
-  //  	    let userdata = {};
-	// userdata['UserId'] = this.userId;
-	// userdata['ParentCompanyId'] = this.ParentCompanyId;
-	// userdata['StatusFlag'] = false;
-    let userdata = {
-      "UserId":"0caf29b2-eeb8-436d-8213-f31042ceea6a",
-      "ParentCompanyId":4,
-      "StatusFlag":false
-      }
-  	// @ts-ignore
+  	this.baseUrl = 'http://172.16.0.99:8089/api/trackTimer/TimeDiffrence?StatusFlag=false&UserId='+ this.userId + '&ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
-
-    // this.httpClient.get(this.baseUrl, userdata).subscribe((data) => {
-    // 	debugger;
-    // });
   }
 
   update_schedule(userdata) {

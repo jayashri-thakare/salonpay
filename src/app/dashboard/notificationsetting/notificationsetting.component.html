@@ -50,10 +50,10 @@
 <!--          </div>-->
         </div>
       </div>
-        <div *ngIf="notifications==null">
+        <div *ngIf="notifications==null || notifications=='' ">
         <div class="notif-body"   *ngFor="let notification of masternotifications;trackBy:notification?.typeCode">
 
-          <h6>{{notification.typeName}}</h6>
+          <h6>{{notification.typeName.split('_').join(' ')}}</h6>
           <div class="notif-switch-left">
             <div class="switch switch--horizontal only-switch">
               <input id="email1" type="checkbox"  (change)="notificationsetting($event, 'email', notification.typeName)" formControlName="NotificationTypeEmail" />
