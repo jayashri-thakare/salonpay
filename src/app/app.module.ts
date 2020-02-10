@@ -79,6 +79,9 @@ import {AdminCommunicationComponent} from './admin/communication/communication.c
 import {AddNewEmailCommunicationComponent} from './admin/communication/addnewemail.component'
 import {AddNewSmsCommunicationComponent} from './admin/communication/addnewsms.component'
 import {NotificationsettingComponent} from './dashboard/notificationsetting/notificationsetting.component';
+import {ButtonsComponent} from './buttons.component';
+import {TimerService} from './timer.service';
+import {TimerComponent1} from './timer.component';
 import {BusinessServicesCategoryComponent} from './admin/business-setting/servicecategory.component'
 import {AddServicesComponent} from './admin/business-setting/addservices.component'
 import {BusinessTurnCountComponent} from './admin/business-setting/turncount.component'
@@ -175,11 +178,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent, ProfileEditComponent, AddressEditComponent, ContactEditComponent, ProfileinfoEditComponent,
     CscComponent,
     InternationalTelNoDirective,
-    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, UserDetailsComponent,
+    AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, TimerComponent1, UserDetailsComponent,
     UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
-     AddServiceComponent
+    AddServiceComponent, ButtonsComponent
   ],
-  providers: [UserdataService, DatePipe, AdminService],
+  providers: [UserdataService, DatePipe, AdminService, TimerService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
 })
