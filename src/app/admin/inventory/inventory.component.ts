@@ -23,7 +23,6 @@ export class AdminInventoryComponent implements OnInit {
 
   ngOnInit() {
     this.gridview = true;
-    this.AdminService.inventorynav = false;
     this.getProduct();
     this.subscription = this.AdminService.on('call-product').subscribe(() => this.getProduct());
   }

@@ -197,26 +197,26 @@
                                                     name="module-radio1" [value]="false" />
                                                 <label for="module1"></label>
                                                 <input class="notif-radio" id="module12" type="radio"
-                                                    name="module-radio1" [value]="true" (click)="rightsupdate('Customers', true, '')" [checked]="getrolesmodclaim[0].isSelected" />
+                                                    name="module-radio1" [value]="true" (click)="rightsupdate('Customers', true, '')" [checked]="getcustomerobj?.isSelected" />
                                                 <label for="module12"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
                                         <div class="module-btm customer-switch">
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="mod-chk1" (click)="rightsupdate('Customers', $event, 'view')" [checked]="getrolesmodclaim[0].rights[0].view" name="mod-chk1" required="">
+                                                <input type="checkbox" id="mod-chk1" (click)="rightsupdate('Customers', $event, 'view')" [checked]="getcustomerobj?.rights[0].view" name="mod-chk1" required="">
                                                 <label for="mod-chk1">View</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="mod-chk2" (click)="rightsupdate('Customers', $event, 'create')" [checked]="getrolesmodclaim[0].rights[0].create" name="mod-chk2" required="">
+                                                <input type="checkbox" id="mod-chk2" (click)="rightsupdate('Customers', $event, 'create')" [checked]="getcustomerobj?.rights[0].create" name="mod-chk2" required="">
                                                 <label for="mod-chk2">Create</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="mod-chk3" (click)="rightsupdate('Customers', $event, 'update')" [checked]="getrolesmodclaim[0].rights[0].update" name="mod-chk3" required="">
+                                                <input type="checkbox" id="mod-chk3" (click)="rightsupdate('Customers', $event, 'update')" [checked]="getcustomerobj?.rights[0].update" name="mod-chk3" required="">
                                                 <label for="mod-chk3">Update</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="mod-chk4" (click)="rightsupdate('Customers', $event, 'delete')" [checked]="getrolesmodclaim[0].rights[0].delete" name="mod-chk4" required="">
+                                                <input type="checkbox" id="mod-chk4" (click)="rightsupdate('Customers', $event, 'delete')" [checked]="getcustomerobj?.rights[0].delete" name="mod-chk4" required="">
                                                 <label for="mod-chk4">Delete</label>
                                             </div>
                                         </div>
@@ -234,26 +234,26 @@
                                                     name="module-radio2" value="off" />
                                                 <label for="module2"></label>
                                                 <input class="notif-radio" id="module12" (click)="rightsupdate('Appointments', true, '')" type="radio"
-                                                    name="module-radio2" [value]="true" [checked]="getrolesmodclaim[1].isSelected" />
+                                                    name="module-radio2" [value]="true" [checked]="getappointmentobj?.isSelected" />
                                                 <label for="module22"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
                                         <div class="module-btm customer-switch">
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="appointment-chk1" (click)="rightsupdate('Appointments', $event, 'view')" [checked]="getrolesmodclaim[1].rights[0].view" name="mod-chk1" required="">
+                                                <input type="checkbox" id="appointment-chk1" (click)="rightsupdate('Appointments', $event, 'view')" [checked]="getappointmentobj?.rights[0].view" name="mod-chk1" required="">
                                                 <label for="appointment-chk1">View</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="appointment-chk2" (click)="rightsupdate('Appointments', $event, 'create')" [checked]="getrolesmodclaim[1].rights[0].create" name="mod-chk2" required="">
+                                                <input type="checkbox" id="appointment-chk2" (click)="rightsupdate('Appointments', $event, 'create')" [checked]="getappointmentobj?.rights[0].create" name="mod-chk2" required="">
                                                 <label for="appointment-chk2">Create</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="appointment-chk3" (click)="rightsupdate('Appointments', $event, 'update')" [checked]="getrolesmodclaim[1].rights[0].update" name="mod-chk3" required="">
+                                                <input type="checkbox" id="appointment-chk3" (click)="rightsupdate('Appointments', $event, 'update')" [checked]="getappointmentobj?.rights[0].update" name="mod-chk3" required="">
                                                 <label for="appointment-chk3">Update</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="appointment-chk4" (click)="rightsupdate('Appointments', $event, 'delete')" [checked]="getrolesmodclaim[1].rights[0].delete" name="mod-chk4" required="">
+                                                <input type="checkbox" id="appointment-chk4" (click)="rightsupdate('Appointments', $event, 'delete')" [checked]="getappointmentobj?.rights[0].delete" name="mod-chk4" required="">
                                                 <label for="appointment-chk4">Delete</label>
                                             </div>
                                         </div>
@@ -271,26 +271,26 @@
                                                     name="module-radio3" value="off" />
                                                 <label for="module1"></label>
                                                 <input class="notif-radio" (click)="rightsupdate('Sales', true, '')" id="module32" type="radio"
-                                                    name="module-radio3" [value]="true" [checked]="getrolesmodclaim[2].isSelected" />
+                                                    name="module-radio3" [value]="true" [checked]="getsalesobj?.isSelected" />
                                                 <label for="module32"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
                                         <div class="module-btm customer-switch">
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk1" (click)="rightsupdate('Sales', $event, 'view')" [checked]="getrolesmodclaim[2].rights[0].view" name="mod-chk1" required="">
+                                                <input type="checkbox" id="sale-chk1" (click)="rightsupdate('Sales', $event, 'view')" [checked]="getsalesobj?.rights[0].view" name="mod-chk1" required="">
                                                 <label for="sale-chk1">View</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk2" (click)="rightsupdate('Sales', $event, 'create')" [checked]="getrolesmodclaim[2].rights[0].create" name="mod-chk2" required="">
+                                                <input type="checkbox" id="sale-chk2" (click)="rightsupdate('Sales', $event, 'create')" [checked]="getsalesobj?.rights[0].create" name="mod-chk2" required="">
                                                 <label for="sale-chk2">Create</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk3" (click)="rightsupdate('Sales', $event, 'update')" [checked]="getrolesmodclaim[2].rights[0].update" name="mod-chk3" required="">
+                                                <input type="checkbox" id="sale-chk3" (click)="rightsupdate('Sales', $event, 'update')" [checked]="getsalesobj?.rights[0].update" name="mod-chk3" required="">
                                                 <label for="sale-chk3">Update</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk4" (click)="rightsupdate('Sales', $event, 'delete')" [checked]="getrolesmodclaim[2].rights[0].delete" name="mod-chk4" required="">
+                                                <input type="checkbox" id="sale-chk4" (click)="rightsupdate('Sales', $event, 'delete')" [checked]="getsalesobj?.rights[0].delete" name="mod-chk4" required="">
                                                 <label for="sale-chk4">Delete</label>
                                             </div>
                                         </div>

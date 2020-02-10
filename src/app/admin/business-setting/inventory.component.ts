@@ -42,7 +42,7 @@ import { Subscription } from 'rxjs';
     '                <div class="inven-box">\n' +
     '\n' +
     '                    <!-- start -->\n' +
-    '                    <div class="">\n' +
+    '                    <div class="" *ngIf="addshow">\n' +
     '                        <h6 class="poptile">Pay Period</h6>\n' +
     '\n' +
     '                        <!-- start -->\n' +
@@ -67,9 +67,9 @@ import { Subscription } from 'rxjs';
     '                            </div>\n' +
     '                        </div>\n' +
     '                        <!-- end -->\n' +
+    '                    <button class="button w30" type="submit">Add</button>\n' +
     '                    </div>\n' +
     '                    <!-- end -->\n' +
-    '                    <button class="button w30" type="submit">Add</button>\n' +
     '\n' +
     '                </div>\n' +
     '                </form>\n' +
@@ -77,7 +77,7 @@ import { Subscription } from 'rxjs';
     '                <div class="inven-box">\n' +
     '\n' +
     '                    <!-- start -->\n' +
-    '                    <div class="">\n' +
+    '                    <div class="" *ngIf="editshow">\n' +
     '                        <h6 class="poptile">Pay Period</h6>\n' +
     '\n' +
     '                        <!-- start -->\n' +
@@ -86,7 +86,7 @@ import { Subscription } from 'rxjs';
     '                            <div class="switch switch--horizontal mb-0" data-name="stock-switch">\n' +
     '                                <input class="notif-radio" id="off"  type="radio" formControlName="ManageStock" value="false">\n' +
     '                                <label for="off">Off</label>\n' +
-    '                                <input class="notif-radio" id="on" type="radio" formControlName="ManageStock" value="true"\n' +
+    '                                <input class="notif-radio" id="on" type="radio" [checked]="businessinventory.manageStock" formControlName="ManageStock" value="true"\n' +
     '                                    checked="checked">\n' +
     '                                <label for="on">On</label><span class="toggle-outside"><span\n' +
     '                                        class="toggle-inside"></span></span>\n' +
@@ -97,14 +97,14 @@ import { Subscription } from 'rxjs';
     '                        <div class="stock-switch">\n' +
     '                            <p class="sub-sml">Inventory Low Threshold</p>\n' +
     '                            <div class="form-group">\n' +
-    '                                <input type="text" id="thrs-low" formControlName="LowThreshold" class="form-field" required=""\n' +
+    '                                <input type="text" id="thrs-low" ngModel="{{businessinventory.lowThreshold}}" formControlName="LowThreshold" class="form-field" required=""\n' +
     '                                    value="10">\n' +
     '                            </div>\n' +
     '                        </div>\n' +
     '                        <!-- end -->\n' +
+    '                    <button class="button w30" type="submit">Update</button>\n' +
     '                    </div>\n' +
     '                    <!-- end -->\n' +
-    '                    <button class="button w30" type="submit">Update</button>\n' +
     '\n' +
     '                </div>\n' +
     '                </form>\n' +
@@ -144,6 +144,8 @@ export class BusinessInventoryComponent implements OnInit {
   submitted = false;
   businessinventory: any;
   businessinventorysuccess: any;
+  editshow: boolean;
+  addshow: boolean;
 
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
   get f() {
@@ -153,6 +155,7 @@ export class BusinessInventoryComponent implements OnInit {
     return this.updateinventoryForm.controls;
   }
   ngOnInit() {
+    this.addshow = true;
     this.getBusinessInventory();
     this.addinventoryForm = this.formBuilder.group({
       ManageStock: [''],
@@ -186,9 +189,20 @@ export class BusinessInventoryComponent implements OnInit {
     }
   }
 
+  showhide(){
+    if(this.businessinventory){
+      this.editshow = true;
+      this.addshow = false;
+    }else{
+      this.editshow = false;
+      this.addshow = true;
+    }
+  }
+
   getBusinessInventory() {
     this.AdminService.GetBusinessInventory().subscribe((data) => {
       this.businessinventory = data;
+      this.showhide();
       // this.businessinventory = this.businessinventory.result;
       console.log(this.businessinventory)
       // localStorage.setItem('companyId', data['ParentCompanyID']);

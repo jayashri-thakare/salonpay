@@ -46,6 +46,9 @@ export class AdminRolesComponent implements OnInit {
   getrolesindclaim: any;
   getrolesmodclaim: any;
   public enableCheckbox = [];
+  getcustomerobj: any;
+  getappointmentobj: any;
+  getsalesobj: any;
 
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -157,32 +160,32 @@ export class AdminRolesComponent implements OnInit {
       this.Customers_var = checkvalue;
       this.ModuleRightsobj['ModuleName'] = moduleright;
       this.ModuleRightsobj['IsSelected'] = checkvalue;
-      this.ModuleRightsobj['Rights'] = {
+      this.ModuleRightsobj['Rights'] = [{
         "View": false,
         "Update": false,
         "Create": false,
         "Delete": false
-      }
+      }]
     }else if(moduleright == "Appointments"){
       this.Appointments_var = checkvalue;
       this.ModuleRightsobj['ModuleName'] = moduleright;
       this.ModuleRightsobj['IsSelected'] = checkvalue;
-      this.ModuleRightsobj['Rights'] = {
+      this.ModuleRightsobj['Rights'] = [{
         "View": false,
         "Update": false,
         "Create": false,
         "Delete": false
-      }
+      }]
     }else if(moduleright == "Sales"){
       this.Sales_var = checkvalue;
       this.ModuleRightsobj['ModuleName'] = moduleright;
       this.ModuleRightsobj['IsSelected'] = event.currentTarget.checked;
-      this.ModuleRightsobj['Rights'] = {
+      this.ModuleRightsobj['Rights'] = [{
         "View": false,
         "Update": false,
         "Create": false,
         "Delete": false
-      }
+      }]
     }
     console.log(this.ModuleRightsobj)
     var index = this.arrayofselectedmoduleobj.indexOf(this.ModuleRightsobj);
@@ -204,7 +207,9 @@ export class AdminRolesComponent implements OnInit {
     for(let i=0; i < this.arrayofselectedmoduleobj.length; i++){
       if(this.arrayofselectedmoduleobj[i]['ModuleName'] == moduleright){
         if(type){
-          this.arrayofselectedmoduleobj[i]['Rights'][type] = event.currentTarget.checked
+          for(let j=0; j < this.arrayofselectedmoduleobj[i]['Rights'].length; j++){
+            this.arrayofselectedmoduleobj[i]['Rights'][j][type] = event.currentTarget.checked
+          }
         }
       }
     }
@@ -213,15 +218,17 @@ export class AdminRolesComponent implements OnInit {
 
   rightsupdate(mirights, event, type){
     debugger;
+    if(type){
+      event = event.currentTarget.checked;
+    }
     for(let i=0; i < this.getrolesmodclaim.length; i++){
       if(this.getrolesmodclaim[i]['moduleName'] == mirights){
-        if(mirights){
-          this.getrolesmodclaim[i]['isSelected'] = event;
-          if(type){
-            for(let j=0; j < this.getrolesmodclaim[i]['rights'].length; j++){
-              this.getrolesmodclaim[i]['rights'][j][type] = event.currentTarget.checked;
-            }
+        if(type){
+          for(let j=0; j < this.getrolesmodclaim[i]['rights'].length; j++){
+            this.getrolesmodclaim[i]['rights'][j][type] = event;
           }
+        }else{
+          this.getrolesmodclaim[i]['isSelected'] = event;
         }
       }
     }
@@ -322,13 +329,28 @@ export class AdminRolesComponent implements OnInit {
   }
 
   GetCompanyRolesClaims(roleid) {
+    this.getcustomerobj = {};
+    this.getappointmentobj = {};
+    this.getsalesobj = {};
+    debugger;
     this.AdminService.GetCompanyRolesClaims(roleid).subscribe((data) => {
       this.getrolesclaim = data;
       console.log(this.getrolesclaim)
       this.claimsuccess = this.getrolesclaim.success;
       this.getrolesmodclaim = this.getrolesclaim.result[0].claim.moduleRights;
+      for(let i =0; i< this.getrolesmodclaim.length; i++){
+        if(this.getrolesmodclaim[i]['moduleName'] == 'Customers'){
+          this.getcustomerobj = this.getrolesmodclaim[i];
+        } 
+        if(this.getrolesmodclaim[i]['moduleName'] == 'Appointments'){
+          this.getappointmentobj = this.getrolesmodclaim[i];
+        } 
+        if(this.getrolesmodclaim[i]['moduleName'] == 'Sales'){
+          this.getsalesobj = this.getrolesmodclaim[i];
+        } 
+      }
       this.getrolesindclaim = this.getrolesclaim.result[0].claim.individualRights;
-      console.log(this.claimsuccess, this.getrolesmodclaim, this.getrolesindclaim)
+      console.log(this.getcustomerobj, this.getappointmentobj, this.getsalesobj)
     });
   }
 
