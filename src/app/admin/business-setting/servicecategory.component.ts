@@ -7,17 +7,20 @@ import {MessageService} from '../../message.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-review',
+  selector: 'app-services',
   styleUrls: ['./business.component.css'],
   template: '<!-- Main Container Starts -->\n' +
   '  <div *ngIf="AdminService.navTab==9">\n' +
-    '  <div *ngIf="AdminService.business_settingnav==6">\n' +
+    '  <div *ngIf="AdminService.business_settingnav==8">\n' +
     '    <div class="mainContainer">\n' +
     '\n' +
     '        <div class="busi-set">\n' +
     '\n' +
     '            <div class="busi-set-lef">\n' +
-    '                <h3 class="main-comm-head">Business Settings</h3>\n' +
+    '                    <div class="pro-comm-fle">\n' +
+    '                       <h3 class="main-comm-head">Business Settings</h3>\n' +
+    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-services\');addupdateform(\'add\')">+ Add New</button>\n' +
+    '                    </div>\n' +
     '\n' +
     '                <!-- business nav start -->\n' +
     '                <div class="busi-lis-swipe">\n' +
@@ -36,21 +39,21 @@ import { Subscription } from 'rxjs';
     '                </div>\n' +
     '                <!-- business nav end -->\n' +
     '\n' +
-    '                <h6 class="comm-subhdn">Review</h6>\n' +
+    '                <h6 class="comm-subhdn">Services Category</h6>\n' +
     '                <!-- start -->\n' +
-    '                <button *ngIf="addbtn" class="button flg-btn side-menu" (click)="modalService.open1(\'add-review\');addupdateform(\'add\')">+ Add New</button>\n' +
     '                <div *ngIf="updatebtn" class="busi-rewv">\n' +
-    '                    <div class="pro-comm-fle">\n' +
-    '                        <h6>Google Review URL</h6>\n' +
-    '                        <i class="icon-edit grd-icon side-menu delpadding" (click)="modalService.open1(\'add-review\');addupdateform(\'update\');selectproductobj(businessreview)"></i>\n' +
-    '                        <i class="icon-delete grd-icon side-menu" data-toggle="modal" data-target="#deletePopup" (click)="selectproductobj(businessreview)"></i>\n' +
-    '                    </div>\n' +
     '\n' +
     '                    <!-- start -->\n' +
-    '                    <div class="prof-comm-shad">\n' +
-    '                        <div class="comm-cont w100 p-0">\n' +
-    '                            <p>Link</p>\n' +
-    '                            <h6>{{businessreview.link}}</h6>\n' +
+    '                       <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1">\n' +
+    '                           <div class="f-col f-col-width" *ngFor="let CategoryType of businessservices">\n' +
+    '                           <!-- start -->\n' +
+    '                               <div class="admin-mail-box">\n' +
+    '                               <h6 class="promo-head">{{CategoryType.categoryType}}</h6>\n' +
+    '                               <div class="yur-mail-rig">\n' +
+    '                                   <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'add-services\');addupdateform(\'update\');selectproductobj(CategoryType)"></i>\n' +
+    '                               </div>\n' +
+    '                           </div>\n' +
+    '                           <!-- end -->\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                    <!-- end -->\n' +
@@ -67,9 +70,9 @@ import { Subscription } from 'rxjs';
   '                        <li><a (click)="AdminService.showBusinessNav(3)">Inventory</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(4)">Customer</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(5)">Coupon</a></li>\n' +
-  '                        <li class="active"><a (click)="AdminService.showBusinessNav(6)">Review</a></li>\n' +
+  '                        <li ><a (click)="AdminService.showBusinessNav(6)">Review</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(7)">Tax Table</a></li>\n' +
-  '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
+  '                        <li class="active"><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
   '                    </ul>\n' +
@@ -83,47 +86,30 @@ import { Subscription } from 'rxjs';
     '    </div>\n' +
     '    </div>\n' +
     '    <div class="overlay"></div>\n' +
-    '    <addreview-modal [addReview]="addReview" [updateReview]="updateReview" [Reviewobj]="arrayofselectedobj"></addreview-modal>\n' +
-    '    <!-- Main Container Ends -->\n' +
-    '        <!-- Delete Modal Starts -->\n' +
-    '        <div class="modal fade" id="deletePopup">\n' +
-    '            <div class="modal-dialog medium-window">\n' +
-    '                <div class="modal-content">\n' +
-    '                    <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>\n' +
-    '\n' +
-    '                    <h2 class="modal-title">Are you sure you want to delete this Review?</h2>\n' +
-    '\n' +
-    '                    <div class="modal-btn">\n' +
-    '                        <button class="button line mr-2" data-dismiss="modal">No</button>\n' +
-    '                        <button class="button red" data-dismiss="modal" (click)="deleteReviews()">Yes</button>\n' +
-    '                    </div>\n' +
-    '\n' +
-    '                </div>\n' +
-    '            </div>\n' +
-    '        </div>\n' +
-    '        <!-- Delete Modal Ends -->'
+    '    <addservices-modal [addServices]="addServices" [updateServices]="updateServices" [Servicesobj]="arrayofselectedobj"></addservices-modal>\n' +
+    '    <!-- Main Container Ends -->\n'
 })
-export class BusinessReviewComponent implements OnInit {
-  businessreview: any;
+export class BusinessServicesCategoryComponent implements OnInit {
+  businessservices: any;
   public arrayofselectedobj: Array<any>=[];
-  updateReview: boolean;
-  addReview: boolean;
+  updateServices: boolean;
+  addServices: boolean;
   addbtn: boolean;
   updatebtn: boolean;
   subscription: Subscription;
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getReview();
-    this.subscription = this.AdminService.on('call-review').subscribe(() => this.getReview());
+    this.getServices();
+    this.subscription = this.AdminService.on('call-services').subscribe(() => this.getServices());
   }
 
-  getReview() {
-    this.AdminService.GetReviewList().subscribe((data) => {
-      this.businessreview = data;
-      this.businessreview = this.businessreview.result;
-      console.log(this.businessreview)
-      this.addupdatefuc(this.businessreview)
+  getServices() {
+    this.AdminService.GetServicesList().subscribe((data) => {
+      this.businessservices = data;
+      this.businessservices = this.businessservices.list;
+      console.log(this.businessservices)
+      this.addupdatefuc(this.businessservices)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
@@ -139,33 +125,22 @@ export class BusinessReviewComponent implements OnInit {
 
   addupdateform(type){
     if(type == 'add'){
-      this.updateReview = false;
-      this.addReview = true;
+      this.updateServices = false;
+      this.addServices = true;
     }else if(type == 'update'){
-      this.updateReview = true;
-      this.addReview = false;
+      this.updateServices = true;
+      this.addServices = false;
     }
   }
 
-  addupdatefuc(businessreview){
-    if(businessreview){
+  addupdatefuc(businessServices){
+    if(businessServices){
         this.addbtn = false;
         this.updatebtn = true;
     }else{
         this.addbtn = true;
         this.updatebtn = false;
     }
-  }
-
-  deleteReviews() {
-    debugger;
-    // tslint:disable-next-line:triple-equals
-      this.AdminService.deleteReview().subscribe((data) => {
-        console.log(data)
-        this.getReview();
-        this.messageService.clear();
-        this.messageService.add(data['result']);
-      });
   }
 
 }

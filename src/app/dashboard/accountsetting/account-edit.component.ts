@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import {Router} from '@angular/router';
 import { ModalService } from '../../_modal/modal.service';
 import {UserdataService} from '../..//userdata.service';
@@ -6,6 +6,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {Observable} from 'rxjs';
 import {MessageService} from '../../message.service';
+import {AdminService} from '../../admin/admin.service'
 
 @Component({
   selector: 'account-modal',
@@ -17,7 +18,7 @@ import {MessageService} from '../../message.service';
     '    <i class="icon-down-arrow com-arw"></i>{{\'Account\' | translate}} <span>{{\'Settings\' | translate}}</span>\n' +
     '  </h3>\n' +
     '  <!-- common headline end -->\n' +
-    ' <form id="edit-timezone" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)" class="popup-scrll">\n' +
+    ' <form *ngIf="router.url === \'/dashboard\'" id="edit-timezone" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)" class="popup-scrll">\n' +
     '\n' +
     '    <div class="filBox">\n' +
     '      <!-- start -->\n' +
@@ -50,6 +51,30 @@ import {MessageService} from '../../message.service';
     '    </div>\n' +
     '\n' +
     ' </form>\n' +
+    ' <form *ngIf="router.url === \'/admin\'" id="edit-timezone-admin" [formGroup]="timezoneForm" (ngSubmit)="update_profile(timezoneForm.value)" class="popup-scrll">\n' +
+    '\n' +
+    '    <div class="filBox">\n' +
+    '      <!-- start -->\n' +
+    '      <div class="fill-box-in scrollbar">\n' +
+    '        <!-- start -->\n' +
+    '        <h6 class="poptile">{{\'Timezone\' | translate}}</h6>\n' +
+    '        <div class="form-group">\n' +
+    '          <select class="select-field form-field" ngModel="{{businesstipadjustment.timezoneId}}" formControlName="timezoneId">\n' +
+    '             <option value="">Select Timezone...</option>\n' +
+    '             <option *ngFor="let timezone of timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 35}}</option>\n' +
+    '          </select>\n' +
+    '        </div>\n' +
+    '        <!-- end -->\n' +
+    '      </div>\n' +
+    '      <!-- end -->\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="popBtn">\n' +
+    '      <button class="button line close-btn" type="button" (click)="closeModal(\'account-setting\');">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Update\' | translate}}</button>\n' +
+    '    </div>\n' +
+    '\n' +
+    ' </form>\n' +
     '\n' +
     '</div>\n' +
     '</jw-modal>\n' +
@@ -57,6 +82,7 @@ import {MessageService} from '../../message.service';
 })
 export class AccountEditComponent implements OnInit {
   accountForm: FormGroup;
+  timezoneForm: FormGroup;
   control: FormControl;
   submitted = false;
   public userdetail: Observable< object >;
@@ -64,18 +90,25 @@ export class AccountEditComponent implements OnInit {
   public userLanguageList: Observable< object >;
   useraccountdetail: any;
   @Output() accountdetail = new EventEmitter<object>();
+  @Input('businesstipadjustment') businesstipadjustment: any;
 
-  constructor(public translate: TranslateService, public userdataService: UserdataService,
+  constructor(public AdminService: AdminService, public translate: TranslateService, public userdataService: UserdataService,
               private formBuilder: FormBuilder, private modalService: ModalService, private router: Router,
               private userdataservice: UserdataService, private messageService: MessageService) {
   }
   get f() {
     return this.accountForm.controls;
   }
+  get f1() {
+    return this.timezoneForm.controls;
+  }
   ngOnInit() {
     this.accountForm = this.formBuilder.group({
       TimezoneId: ['', [Validators.required]],
       LanguageId: ['',  [Validators.required]],
+    });
+    this.timezoneForm = this.formBuilder.group({
+      timezoneId: ['', [Validators.required]],
     });
     this.getUserAccount();
     this.getuserAccountdetail();
@@ -109,6 +142,26 @@ export class AccountEditComponent implements OnInit {
       console.log(userdata, this.accountForm.status);
       this.submitted = true;
       if (this.accountForm.invalid) {
+        return;
+      }
+    }
+  }
+
+  update_profile(admin) {
+    console.log(admin, this.accountForm)
+    // tslint:disable-next-line:triple-equals
+    admin.timezoneId = parseInt(admin.timezoneId)
+    if (this.timezoneForm.status == 'VALID') {
+      this.AdminService.update_profiledetail(admin).subscribe((data) => {
+        this.AdminService.publish('call-profiledetail');
+        this.messageService.clear();
+        this.messageService.add('Profile updated successfully.')
+        this.closeModal('account-setting');
+      });
+    } else {
+      console.log(admin, this.timezoneForm.status);
+      this.submitted = true;
+      if (this.timezoneForm.invalid) {
         return;
       }
     }
