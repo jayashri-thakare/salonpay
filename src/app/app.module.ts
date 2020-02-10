@@ -79,6 +79,14 @@ import {AdminCommunicationComponent} from './admin/communication/communication.c
 import {AddNewEmailCommunicationComponent} from './admin/communication/addnewemail.component'
 import {AddNewSmsCommunicationComponent} from './admin/communication/addnewsms.component'
 import {NotificationsettingComponent} from './dashboard/notificationsetting/notificationsetting.component';
+import {BusinessServicesCategoryComponent} from './admin/business-setting/servicecategory.component'
+import {AddServicesComponent} from './admin/business-setting/addservices.component'
+import {BusinessTurnCountComponent} from './admin/business-setting/turncount.component'
+import {AddTurnCountComponent} from './admin/business-setting/addturncount.component'
+import {BusinessExpLevelComponent} from './admin/business-setting/explevel.component'
+import {AddExpLevelComponent} from './admin/business-setting/addexplevel.component'
+import {EditBusinessProfileContactComponent} from './admin/business-setting/editcontact.component'
+import {EditBusinessProfileNameComponent} from './admin/business-setting/editbusinessname.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -120,6 +128,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BusinessCustomerComponent,
     BusinessCouponComponent,
     BusinessTaxTableComponent,
+    BusinessServicesCategoryComponent,
+    AddServicesComponent,
+    BusinessTurnCountComponent,
+    AddTurnCountComponent,
+    BusinessExpLevelComponent,
+    AddExpLevelComponent,
+    EditBusinessProfileContactComponent,
+    EditBusinessProfileNameComponent,
     AdminCommunicationComponent,
     AddNewEmailCommunicationComponent,
     AddNewSmsCommunicationComponent,

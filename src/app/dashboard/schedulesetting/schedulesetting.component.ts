@@ -75,12 +75,14 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   selectedDays(selected_day){
+    debugger;
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
     }else{
       this.arrayofselecteddays.splice(index, 1);
     }
+    console.log(this.arrayofselecteddays)
   }
 
   selectdayobj(selected_obj){
@@ -108,11 +110,13 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
+    debugger;
     console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
     // tslint:disable-next-line:triple-equals
     if (this.scheduleForm.status == 'VALID') {
       this.userdataService.add_schedule(userdata).subscribe((data) => {
+        this.arrayofselecteddays = [];
         this.getuserSchedule();
         this.scheduleForm.reset();
         this.messageService.clear();

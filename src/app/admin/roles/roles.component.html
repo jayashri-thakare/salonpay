@@ -94,7 +94,7 @@
                             <!-- start -->
                             <h6 class="comm-subhdn">Module Rights</h6>
                             <div class="row" >
-                                <div class="w100" *ngFor="let moduleright of rolesmodulerights">
+                                <div class="w100" *ngFor="let moduleright of rolesmodulerights;let i = index;">
                                     <!-- start -->
                                     <div class="module-role-box">
                                         <div class="module-rig">
@@ -111,7 +111,7 @@
                                             </div>
                                         </div>
                                         <div class="module-btm customer-switch">
-                                            <div class="checkbox-box" *ngFor="let permission of moduleright.permissions">
+                                            <div class="checkbox-box" *ngFor="let permission of moduleright.permissions;let j = index;">
                                                 <div id="{{moduleright.moduleName}}">
                                                     <input type="checkbox" id="{{permission.permission}}_{{moduleright.moduleName}}" (click)="modulepermission($event, permission.permission, moduleright.moduleName)" name="{{permission.permission}}" required="">
                                                     <label for="{{permission.permission}}_{{moduleright.moduleName}}">{{permission.permission}}</label>

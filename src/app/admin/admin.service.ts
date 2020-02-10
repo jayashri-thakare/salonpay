@@ -398,7 +398,7 @@ export class AdminService {
   addEmailSmsNotification(Admin) {
     debugger;
   Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-  this.baseUrl = 'http://172.16.0.99:8055/api/Communication/AddEmailTemplate';
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/AddCustNotifSettings';
   return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
@@ -407,6 +407,144 @@ export class AdminService {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetCustNotifSettings?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  updateEmailSmsNotification(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/UpdateCustNotifSettings';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  add_business_coupon(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/AddCouponSettings';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetBusinessCoupons() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetCouponSettings?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  update_business_coupon(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/UpdateCouponSettings';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  deleteBusinessCoupon() {
+    debugger;
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.delete('http://172.16.0.114:5555/api/BusinessSettings/DeleteCouponSettings?ParentCompanyId=' + this.ParentCompanyId);
+  }
+
+  GetServicesList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetServiceCategoryList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=5';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_services(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/CreateServiceCategory';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_services(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/UpdateServiceCategory';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetTurnCountList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = ' http://172.16.0.114:5555/api/BusinessSettings/GetTurnCountList?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_turncount(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/CreateTurnCount';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_turncount(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/UpdateTurnCount';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetExpLevelList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = ' http://172.16.0.114:5555/api/BusinessSettings/GetExperienceLevel?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_explevel(Admin) {
+    debugger;
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/CreateExperienceLevel';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_explevel(Admin) {
+    debugger;
+  this.baseUrl = ' http://172.16.0.114:5555/api/BusinessSettings/UpdateExperienceLevel';
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  toggle_business_coupon(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/ToggleUpdateCouponsStng';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetTipAdjustmentList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/GetCompanyProfile?ParentCompanyId=' + '32';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_business_inventory(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/InventoryManageStock';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetBusinessInventory() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/GetInventoryStock?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  update_profiledetail(Admin) {
+    debugger;
+  // Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  Admin.ParentCompanyId = parseInt('32');
+  this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/UpdateCompanyInfo';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
   }
 
   publish(eventName: string) {

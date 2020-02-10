@@ -98,7 +98,7 @@ export class UserComponent implements OnInit {
   getuserHistory(user) {
     this.AdminService.getUserHistory(user).subscribe((data) => {
       this.userhistory = data;
-      this.userhistory = this.userhistory.result;
+      this.userhistory = this.userhistory.list;
     });
   }
 

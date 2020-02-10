@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserdataService} from '../../userdata.service';
 import {CscService} from '../../services/cscdropdown.service';
 import {MessageService} from '../../message.service';
+import {AdminService} from '../../admin/admin.service';
 
 @Component({
   selector: 'address-modal',
@@ -15,7 +16,7 @@ import {MessageService} from '../../message.service';
     '      <i class="icon-down-arrow com-arw"></i>{{\'Edit\' | translate}}<span> {{\'Address\' | translate}}</span>\n' +
     '    </h3>\n' +
     '    <!-- common headline end -->\n' +
-    '     <form id="editAddress" [formGroup]="useraddressForm" (ngSubmit)="updateDetail(useraddressForm.value)" class="popup-scrll"> \n' +
+    '     <form *ngIf="router.url === \'/dashboard\'" id="editAddress" [formGroup]="useraddressForm" (ngSubmit)="updateDetail(useraddressForm.value)" class="popup-scrll"> \n' +
     '\n' +
     '    <div class="filBox">\n' +
     '      <!-- start -->\n' +
@@ -76,6 +77,67 @@ import {MessageService} from '../../message.service';
     '    </div>\n' +
     '\n' +
     '     </form>\n' +
+    '     <form *ngIf="router.url === \'/admin\'" id="editAddressadmin" [formGroup]="profileaddressForm" (ngSubmit)="updateProfile(profileaddressForm.value)" class="popup-scrll"> \n' +
+    '\n' +
+    '    <div class="filBox">\n' +
+    '      <!-- start -->\n' +
+    '      <div class="fill-box-in">\n' +
+    '        <!-- start -->\n' +
+    '        <h6 class="poptile">{{\'Address\' | translate}}</h6>\n' +
+    '        <div class="form-group">\n' +
+    '          <input type="text" id="add-line1" name="add-line1" ngModel="{{businesstipadjustment?.addressLine1}}" formControlName="addressLine1" class="form-field field--not-empty" \n' +
+    '                 aria-invalid="false" />\n' +
+    '          <p class="form-label">{{\'Address Line 1\' | translate}}</p>\n' +
+    '        </div>\n' +
+    '        <div class="form-group">\n' +
+    '          <input type="text" id="add-line2" name="add-line2" ngModel="{{businesstipadjustment?.addressLine2}}" formControlName="addressLine2" class="form-field field--not-empty" \n' +
+    '                 aria-invalid="false" />\n' +
+    '          <p class="form-label">{{\'Address Line 2\' | translate}}</p>\n' +
+    '        </div>\n' +
+    '        <div class="form-group">\n' +
+    '        <select formControlName="countryId" ngModel="{{businesstipadjustment?.countryId}}" class="select-field form-field" (change)="onChangeCountry($event.target.value)">\n' +
+    '            <option value="">Select country...</option>\n' +
+    '            <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>\n' +
+    '          </select>\n' +
+    '        </div>\n' +
+    '        <div class="form-group">\n' +
+    '          <select formControlName="stateId" ngModel="{{businesstipadjustment?.stateid}}" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
+    '            <option value="">Select state...</option>\n' +
+    '            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>\n' +
+    '          </select>\n' +
+    '        </div>\n' +
+    '        <div class="form-group">\n' +
+    '          <select formControlName="cityId" ngModel="{{businesstipadjustment?.cityid}}" class="select-field form-field">\n' +
+    '            <option value="">Select city...</option>\n' +
+    '            <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>\n' +
+    '          </select>\n' +
+    '        </div>\n' +
+    // '        <div class="form-group">\n' +
+    // '          <input type="text" id="add-city" name="add-city" ngModel="{{userdetail?.city}}" formControlName="CityId" class="form-field" \n' +
+    // '                 aria-invalid="false" />\n' +
+    // '          <p class="form-label">City</p>\n' +
+    // '        </div>\n' +
+    // '        <div class="form-group">\n' +
+    // '          <input type="text" id="add-state" name="add-state" ngModel="{{userdetail?.state}}" formControlName="StateId"  class="form-field" \n' +
+    // '                 aria-invalid="false" />\n' +
+    // '          <p class="form-label">State</p>\n' +
+    // '        </div>\n' +
+    '        <div class="form-group">\n' +
+    '          <input type="text" id="add-code" name="add-code" ngModel="{{businesstipadjustment?.zipcode}}" formControlName="zipcode" class="form-field field--not-empty" \n' +
+    '                 aria-invalid="false" />\n' +
+    '          <p class="form-label">Zip Code</p>\n' +
+    '        </div>\n' +
+    '        <!-- end -->\n' +
+    '      </div>\n' +
+    '      <!-- end -->\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="popBtn">\n' +
+    '      <button class="button line close-btn" type="button" (click)="closeModal(\'side-menu-address\');">{{\'Cancel\' | translate}}</button>\n' +
+    '      <button class="button" type="submit">{{\'Update\' | translate}}</button>\n' +
+    '    </div>\n' +
+    '\n' +
+    '     </form>\n' +
     '\n' +
     '  </div>\n' +
     '  <!-- Edit Address Menu End -->\n' +
@@ -84,6 +146,7 @@ import {MessageService} from '../../message.service';
 })
 export class AddressEditComponent implements OnInit {
   useraddressForm: FormGroup;
+  profileaddressForm: FormGroup;
   control: FormControl;
   submitted = false;
   private userdata: any;
@@ -91,12 +154,16 @@ export class AddressEditComponent implements OnInit {
   states: {};
   cities: {};
   @Input('userdata') userdetail: any;
-  constructor(private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
+  @Input('businesstipadjustment') businesstipadjustment: any;
+  constructor(public AdminService: AdminService, private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
               private userdataService: UserdataService, private cscService: CscService,
               private messageService: MessageService) { }
 
   get f() {
     return this.useraddressForm.controls;
+  }
+  get f1() {
+    return this.profileaddressForm.controls;
   }
 
   ngOnInit() {
@@ -107,6 +174,14 @@ export class AddressEditComponent implements OnInit {
       CityId: [''],
       StateId: [''],
       ZipCode: ['', [Validators.pattern(/^[0-9]{1,6}$/)]]
+    });
+    this.profileaddressForm = this.formBuilder.group({
+      addressLine1: [''],
+      addressLine2: [''],
+      countryId: [''],
+      cityId: [''],
+      stateId: [''],
+      zipcode: ['', [Validators.pattern(/^[0-9]{1,6}$/)]]
     });
     this.cscService.getCountries().subscribe((data) => {
       this.countries = data;
@@ -157,6 +232,29 @@ export class AddressEditComponent implements OnInit {
     }
     // this.userdataService.update_profile_service(this.useraddressForm, this.useraddressForm.value);
     this.userdataService.publish('call-parent');
+    this.closeModal('side-menu-address');
+    // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
+  }
+
+  updateProfile(admin) {
+    if (this.profileaddressForm.status === 'VALID') {
+      admin.countryId = parseInt(admin.countryId)
+      admin.stateId = parseInt(admin.stateId)
+      admin.cityId = parseInt(admin.cityId)
+      this.AdminService.update_profiledetail(admin).subscribe((data) => {
+        this.messageService.clear();
+        this.messageService.add('Address updated successfully!.');
+        this.userdataService.publish('call-parent');
+      });
+    } else {
+      console.log(admin);
+      // this.submitted = true;
+      // if (this.userprofileForm.invalid) {
+      //   return;
+      // }
+    }
+    // this.userdataService.update_profile_service(this.useraddressForm, this.useraddressForm.value);
+    this.AdminService.publish('call-profiledetail');
     this.closeModal('side-menu-address');
     // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
   }

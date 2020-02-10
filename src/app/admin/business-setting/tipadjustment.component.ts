@@ -42,25 +42,14 @@ import { UserdataService } from 'src/app/userdata.service';
   '                    <div class="admin-busi w30 w-1660-50 w-990-40 w-480-100">\n' +
   '                        <div class="pro-comm-fle">\n' +
   '                            <h6>Business Profile</h6>\n' +
-  '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-userprofile"></i>\n' +
+  '                            <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'edit-name\')"></i>\n' +
   '                        </div>\n' +
   '                        <!-- start -->\n' +
   '                        <div class="usr-pro-box">\n' +
   '                            <!-- start -->\n' +
   '                            <div class="usr-pro-top busi-pro">\n' +
-  '                                <!-- upload start -->\n' +
-  '                                <div class="avatar-upload">\n' +
-  '                                    <div class="avatar-edit">\n' +
-  '                                        <input type=\'file\' id="imageUpload" accept=".png, .jpg, .jpeg" />\n' +
-  '                                        <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>\n' +
-  '                                    </div>\n' +
-  '                                    <div class="avatar-preview">\n' +
-  '                                        <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">\n' +
-  '                                        </div>\n' +
-  '                                    </div>\n' +
-  '                                </div>\n' +
   '                                <!-- upload end -->\n' +
-  '                                <h6>Salon Pay</h6>\n' +
+  '                                <h6>{{businesstipadjustment.businessName}} Salon Pay</h6>\n' +
   '                            </div>\n' +
   '                            <!-- end -->\n' +
   '                        </div>\n' +
@@ -69,18 +58,18 @@ import { UserdataService } from 'src/app/userdata.service';
   '                    <div class="admin-busi w30 w-1660-50 w-990-60 w-480-100">\n' +
   '                        <div class="pro-comm-fle">\n' +
   '                            <h6>Contact</h6>\n' +
-  '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-contact"></i>\n' +
+  '                            <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'edit-contact\')"></i>\n' +
   '                        </div>\n' +
   '\n' +
   '                        <!-- start -->\n' +
   '                        <div class="prof-comm-shad">\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Work</p>\n' +
-  '                                <h6>1-541-754-3010</h6>\n' +
+  '                                <h6>{{businesstipadjustment.workContact}}</h6>\n' +
   '                            </div>\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Work Email</p>\n' +
-  '                                <h6>nickbocker@salescorp.com</h6>\n' +
+  '                                <h6>{{businesstipadjustment.email}}</h6>\n' +
   '                            </div>\n' +
   '                        </div>\n' +
   '                        <!-- end -->\n' +
@@ -89,32 +78,32 @@ import { UserdataService } from 'src/app/userdata.service';
   '                    <div class="admin-busi w40 w-1660-60 w-768-100">\n' +
   '                        <div class="pro-comm-fle">\n' +
   '                            <h6>Address</h6>\n' +
-  '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-address"></i>\n' +
+  '                            <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'side-menu-address\')"></i>\n' +
   '                        </div>\n' +
   '\n' +
   '                        <!-- start -->\n' +
   '                        <div class="prof-comm-shad">\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Address Line 1</p>\n' +
-  '                                <h6>2142 Westwood Avenue</h6>\n' +
+  '                                <h6>{{businesstipadjustment.addressLine1}}</h6>\n' +
   '                            </div>\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Address Line 2</p>\n' +
-  '                                <h6>2142 Westwood Avenue, Park Center</h6>\n' +
+  '                                <h6>{{businesstipadjustment.addressLine2}}</h6>\n' +
   '                            </div>\n' +
   '                            <div\n' +
   '                                class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
   '                                <p>City</p>\n' +
-  '                                <h6>Hicksville</h6>\n' +
+  '                                <h6>{{businesstipadjustment.cityName}}</h6>\n' +
   '                            </div>\n' +
   '                            <div\n' +
   '                                class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
   '                                <p>State</p>\n' +
-  '                                <h6>New York</h6>\n' +
+  '                                <h6>{{businesstipadjustment.stateName}}</h6>\n' +
   '                            </div>\n' +
   '                            <div class="comm-cont w33 w-1200-50 w-990-33 w-480-50 p-0">\n' +
   '                                <p>Zip Code</p>\n' +
-  '                                <h6>11612</h6>\n' +
+  '                                <h6>{{businesstipadjustment.zipcode}}</h6>\n' +
   '                            </div>\n' +
   '                        </div>\n' +
   '                        <!-- end -->\n' +
@@ -123,63 +112,34 @@ import { UserdataService } from 'src/app/userdata.service';
   '                    <div class="admin-busi w40 w-768-100">\n' +
   '                        <div class="pro-comm-fle">\n' +
   '                            <h6>Timezone</h6>\n' +
-  '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-timezone"></i>\n' +
+  '                            <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'account-setting\')"></i>\n' +
   '                        </div>\n' +
   '\n' +
   '                        <!-- start -->\n' +
   '                        <div class="prof-comm-shad">\n' +
   '                            <div class="comm-cont w100 p-0">\n' +
   '                                <p>Timezone</p>\n' +
-  '                                <h6>Washington, DC, USA (GMT-4)</h6>\n' +
+  '                                <h6>{{businesstipadjustment.timeZoneName}}</h6>\n' +
   '                            </div>\n' +
   '                        </div>\n' +
   '                        <!-- end -->\n' +
   '                    </div>\n' +
   '\n' +
-  '                    <div class="admin-busi w50 w-1660-60 w-768-100">\n' +
-  '                        <div class="pro-comm-fle">\n' +
-  '                            <h6>Salon Timing</h6>\n' +
-  '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-timing"></i>\n' +
-  '                        </div>\n' +
-  '\n' +
-  '                        <!-- start -->\n' +
-  '                        <div class="prof-comm-shad">\n' +
-  '                            <div\n' +
-  '                                class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
-  '                                <p>Working Days</p>\n' +
-  '                                <h6>Mon - Fri</h6>\n' +
-  '                            </div>\n' +
-  '                            <div\n' +
-  '                                class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
-  '                                <p>Working Hours</p>\n' +
-  '                                <h6>10 AM - 6 PM</h6>\n' +
-  '                            </div>\n' +
-  '                            <div class="comm-cont w33 w-1200-50 w-990-33 w-480-50 p-0">\n' +
-  '                                <p>Closed <i class="icon-info coupon-info ml-1 mr-0" data-toggle="tooltip"\n' +
-  '                                        data-html="true"\n' +
-  '                                        title="<ul class=\'tooltip-list\'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>\n' +
-  '                                </p>\n' +
-  '                                <h6>Sat - Sun</h6>\n' +
-  '                            </div>\n' +
-  '                        </div>\n' +
-  '                        <!-- end -->\n' +
-  '                    </div>\n' +
-  '\n' +
-  '                    <div class="admin-busi w25 w-1660-40 w-768-100">\n' +
-  '                        <div class="pro-comm-fle">\n' +
-  '                            <h6>Salon Management Fee</h6>\n' +
-  '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-management"></i>\n' +
-  '                        </div>\n' +
-  '\n' +
-  '                        <!-- start -->\n' +
-  '                        <div class="prof-comm-shad">\n' +
-  '                            <div class="comm-cont w100 p-0">\n' +
-  '                                <p>Value</p>\n' +
-  '                                <h6>$ 750</h6>\n' +
-  '                            </div>\n' +
-  '                        </div>\n' +
-  '                        <!-- end -->\n' +
-  '                    </div>\n' +
+  // '                    <div class="admin-busi w25 w-1660-40 w-768-100">\n' +
+  // '                        <div class="pro-comm-fle">\n' +
+  // '                            <h6>Salon Management Fee</h6>\n' +
+  // '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-management"></i>\n' +
+  // '                        </div>\n' +
+  // '\n' +
+  // '                        <!-- start -->\n' +
+  // '                        <div class="prof-comm-shad">\n' +
+  // '                            <div class="comm-cont w100 p-0">\n' +
+  // '                                <p>Value</p>\n' +
+  // '                                <h6>$ 750</h6>\n' +
+  // '                            </div>\n' +
+  // '                        </div>\n' +
+  // '                        <!-- end -->\n' +
+  // '                    </div>\n' +
   '\n' +
   '                </div>\n' +
   '                <!-- end -->\n' +
@@ -196,6 +156,9 @@ import { UserdataService } from 'src/app/userdata.service';
   '                        <li><a (click)="AdminService.showBusinessNav(5)">Coupon</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(6)">Review</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(7)">Tax Table</a></li>\n' +
+  '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
+  '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
+  '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
   '                    </ul>\n' +
   '                </div>\n' +
   '                <!-- end -->\n' +
@@ -206,13 +169,29 @@ import { UserdataService } from 'src/app/userdata.service';
   '    </div>\n' +
   '   </div>\n' +
   '   </div>\n' +
-  '    <!-- Main Container Ends -->\n' 
+  '    <!-- Main Container Ends -->\n' +
+  '    <address-modal [businesstipadjustment]="businesstipadjustment"></address-modal>\n' +
+  '    <account-modal [businesstipadjustment]="businesstipadjustment"></account-modal>' +
+  '    <editcontact-modal [businesstipadjustment]="businesstipadjustment"></editcontact-modal>\n' +
+  '    <editname-modal [businesstipadjustment]="businesstipadjustment"></editname-modal>\n'
 })
 export class BusinessTipAdjustmentComponent implements OnInit {
+  businesstipadjustment: any;
+  subscription: Subscription;
   constructor(public userdataService: UserdataService, public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.userdataService.getUserUpdated();
+    this.getTipAdjustment();
+    this.subscription = this.AdminService.on('call-profiledetail').subscribe(() => this.getTipAdjustment());
+  }
+
+  getTipAdjustment() {
+    this.AdminService.GetTipAdjustmentList().subscribe((data) => {
+      this.businesstipadjustment = data;
+      // this.businesstipadjustment = this.businesstipadjustment.result;
+      console.log(this.businesstipadjustment)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 
 }
