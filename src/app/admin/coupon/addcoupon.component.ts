@@ -56,9 +56,9 @@ import { Subscription } from 'rxjs';
     '                            <p class="form-label">Value</p>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
-    '                    <div class="form-group select2-selection select2-selection--multiple">\n' +
+    '                        <h6 class="poptile">Expiry Date</h6>\n' +
+    '                    <div class="form-group form-field select2-selection select2-selection--multiple">\n' +
     '              <ejs-datetimepicker id=\'datetimepicker\' formControlName="ExpiryDate" [max]="maxDate" ngModel="{{adminService.coupon?.expiryDate}}" [value]=\'dateValue\' format =\'MM/dd/yyyy\'></ejs-datetimepicker>' +
-    '                        <p class="form-label">Expiry Date</p>\n' +
     '                    </div>\n' +
     '                        <h6 class="poptile">Service</h6>\n' +
     '                    <div class="form-group mt-2 form-field">\n' +

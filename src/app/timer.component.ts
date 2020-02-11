@@ -41,7 +41,7 @@ import {UserdataService} from './userdata.service';
     .trk-prof h6{
       margin: 0;
       font-family: "bold";
-      font-size: 32px;
+      font-size: 30px;
       color: #1c2d41;
     }
 

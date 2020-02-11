@@ -21,7 +21,7 @@ import {MessageService} from '../../message.service';
     '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group mt-2">\n' +
-    '                        <input type="text" name="serv-code" class="form-field" formControlName="ServiceName" ngModel="{{adminService.serviceData?.serviceName}}" required />\n' +
+    '                        <input type="text" name="serv-code" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceName}" formControlName="ServiceName" ngModel="{{adminService.serviceData?.serviceName}}" required />\n' +
     '                        <p class="form-label sel-blk">Service Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
@@ -40,15 +40,15 @@ import {MessageService} from '../../message.service';
     // '                           </select>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="serv-code" name="serv-code" class="form-field" formControlName="ServiceCode" ngModel="{{adminService.serviceData?.serviceCode}}" required />\n' +
+    '                        <input type="text" id="serv-code" name="serv-code" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceCode}" formControlName="ServiceCode" ngModel="{{adminService.serviceData?.serviceCode}}" required />\n' +
     '                        <p class="form-label">Service Code/Number</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="def-time" name="def-time" class="form-field" formControlName="DefaultTime" ngModel="{{adminService.serviceData?.serviceTime}}" required />\n' +
+    '                        <input type="text" id="def-time" name="def-time" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceTime}" formControlName="DefaultTime" ngModel="{{adminService.serviceData?.serviceTime}}" required />\n' +
     '                        <p class="form-label">Default Time</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="number" id="serv-cost" name="serv-cost" class="form-field" ngModel="{{adminService.serviceData?.serviceCost}}" formControlName="ServiceCost" required />\n' +
+    '                        <input type="number" id="serv-cost" name="serv-cost" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceCost}" ngModel="{{adminService.serviceData?.serviceCost}}" formControlName="ServiceCost" required />\n' +
     '                        <p class="form-label">Service Cost</p>\n' +
     '                    </div>\n' +
     '\n' +
@@ -85,7 +85,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    </div>\n' +
     '\n' +
-    '                    <button type="button" class="button dashed-button mb-4" >\n' +
+    '                    <button type="button" class="button dashed-button mb-4" *ngIf="multi===true" >\n' +
     '                        <i class="icon-cir-plus mr-2" (click)="addLevel()"></i>Add\n' +
     '                    </button>\n' +
     '\n' +
@@ -172,12 +172,12 @@ export class AddServiceComponent implements OnInit {
     this.levelList = this.addserviceForm.get('ServicePriceSt') as FormArray;
     this.getServiceCategories();
     this.getAddonService();
+    // this.adminService.serviceData.pricingBit = false;
     this.servicedetail = this.adminService.serviceData;
     // this.getServiceDetails();
   }
 
   addLevel() {
-    debugger;
     this.levelList.push(this.createLevel());
   }
 
@@ -222,14 +222,12 @@ export class AddServiceComponent implements OnInit {
 
   }
   updateDetail(userdata) {
-    debugger;
     // userdata.Email = this.email;
-
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_service(userdata).subscribe((data) => {
-      // this.userdataService.publish('call-parent');
+      this.adminService.publish('service-list');
       this.adminService.editservice = false;
       this.modalService.close('add-service');
       this.messageService.clear();

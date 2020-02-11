@@ -127,12 +127,12 @@ export class AdminService {
   }
 
   getServiceDetails() {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=18';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=' + this.ParentCompanyId +'&ServiceId=8';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getAllServices() {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=0&PageNumber=1&PageSize=10';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=' + this.ParentCompanyId +'&ServiceId=0&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -146,6 +146,10 @@ export class AdminService {
     return this.httpClient.delete('http://172.16.0.114:5555/api/Roles/DeleteRole?RoleId=' + roleid);
   }
 
+  deleteCoupon(coupon) {
+    debugger;
+    return this.httpClient.delete('http://172.16.0.99:8055/api/Coupan/DeleteCoupon?CouponId=' + coupon);
+  }
   add_service(servicedata) {
     if (this.editservice === true) {
       servicedata.ServiceId = this.serviceData.serviceId ;
@@ -181,13 +185,13 @@ export class AdminService {
 
   getUserHistory(user) {
     this.CreatedByUserId = user.user.id;
-    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetUsersHistory?UserId=' + this.CreatedByUserId + '&PageNumber=1&PageSize=10';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetUsersHistory?UserId=' + this.CreatedByUserId + '&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getCouponList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/GetCouponsList?ParentCompanyId=' + this.ParentCompanyId+'&PageNumber=1&PageSize=10';
+    this.baseUrl = 'http://172.16.0.99:8055/api/Coupan/GetCouponsList?ParentCompanyId=' + this.ParentCompanyId+'&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -205,7 +209,7 @@ export class AdminService {
 
   getUserAdminList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetCompanyUsersList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetCompanyUsersList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -292,7 +296,7 @@ export class AdminService {
 
   GetProductList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = ' http://172.16.0.99:8055/api/Inventory/GetProductList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
+    this.baseUrl = ' http://172.16.0.99:8055/api/Inventory/GetProductList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -321,7 +325,7 @@ export class AdminService {
 
   GetRewardsList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5555/api/Rewards/GetRewardsList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Rewards/GetRewardsList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -462,7 +466,7 @@ export class AdminService {
 
   GetServicesList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetServiceCategoryList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=10';
+    this.baseUrl = 'http://172.16.0.114:5555/api/BusinessSettings/GetServiceCategoryList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
