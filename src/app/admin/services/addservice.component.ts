@@ -21,7 +21,7 @@ import {MessageService} from '../../message.service';
     '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group mt-2">\n' +
-    '                        <input type="text" name="serv-code" class="form-field" formControlName="ServiceName" ngModel="{{adminService.serviceData?.serviceName}}" required />\n' +
+    '                        <input type="text" name="serv-code" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceName}" formControlName="ServiceName" ngModel="{{adminService.serviceData?.serviceName}}" required />\n' +
     '                        <p class="form-label sel-blk">Service Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
@@ -40,31 +40,31 @@ import {MessageService} from '../../message.service';
     // '                           </select>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="serv-code" name="serv-code" class="form-field" formControlName="ServiceCode" ngModel="{{adminService.serviceData?.serviceCode}}" required />\n' +
+    '                        <input type="text" id="serv-code" name="serv-code" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceCode}" formControlName="ServiceCode" ngModel="{{adminService.serviceData?.serviceCode}}" required />\n' +
     '                        <p class="form-label">Service Code/Number</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="def-time" name="def-time" class="form-field" formControlName="DefaultTime" ngModel="{{adminService.serviceData?.serviceTime}}" required />\n' +
+    '                        <input type="text" id="def-time" name="def-time" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceTime}" formControlName="DefaultTime" ngModel="{{adminService.serviceData?.serviceTime}}" required />\n' +
     '                        <p class="form-label">Default Time</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="number" id="serv-cost" name="serv-cost" class="form-field" ngModel="{{adminService.serviceData?.serviceCost}}" formControlName="ServiceCost" required />\n' +
+    '                        <input type="number" id="serv-cost" name="serv-cost" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceCost}" ngModel="{{adminService.serviceData?.serviceCost}}" formControlName="ServiceCost" required />\n' +
     '                        <p class="form-label">Service Cost</p>\n' +
     '                    </div>\n' +
     '\n' +
     '                    <h6 class="poptile">Service Pricing Structure</h6>\n' +
     '                    <div class="switch switch--horizontal">\n' +
-    '                        <input id="serv-level-1" type="radio" name="PricingBit" ngModel="{{adminService.serviceData?.pricingBit}}" [value]="false" formControlName="PricingBit"/>\n' +
+    '                        <input id="serv-level-1" type="radio" name="PricingBit" (click)="showLevel(false)" ngModel="{{adminService.serviceData?.pricingBit}}" [value]="false" formControlName="PricingBit"/>\n' +
     '                        <label for="serv-level-1">Single Level</label>\n' +
-    '                        <input id="serv-level-2" type="radio" name="PricingBit" ngModel="{{adminService.serviceData?.pricingBit}}" [value]="true" formControlName="PricingBit" />\n' +
+    '                        <input id="serv-level-2" type="radio" name="PricingBit" (click)="showLevel(true)" ngModel="{{adminService.serviceData?.pricingBit}}" [value]="true" formControlName="PricingBit" />\n' +
     '                        <label for="serv-level-2">Multi Level</label><span class="toggle-outside"><span\n' +
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
     '                    <div formArrayName="ServicePriceSt"> \n' +
     '                    <div *ngFor="let level of levelFormGroup.controls; let i = index;">\n' +
     '                    <div  [formGroupName]="i">\n' +
-    '                    <div class="level-price-box" >\n' +
-    '                        <div class="form-group w60 w-768-100 pl-0">\n' +
+    '                    <div class="level-price-box" *ngIf="multi===true">\n' +
+    '                        <div class="form-group w60 w-768-100 pl-0" >\n' +
     '                           <select class="select-field form-field" formControlName="ServiceLevelId" >\n' +
     '                             <option value="">Select Level</option>\n' +
     '                             <option *ngFor="let level of service_level" [ngValue]="level?.serviceLevelId">{{level.serviceLevelName}}</option>\n' +
@@ -80,24 +80,25 @@ import {MessageService} from '../../message.service';
     '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent" required />\n' +
     '                        <p class="form-label">Commission Split %</p>\n' +
     '                    </div>\n' +
+    '                        <i class="icon-cir-plus mr-2" (click)="removeLevel(i)"></i>remove\n' +
     '                    </div>\n' +
     '                    </div>\n' +
     '                    </div>\n' +
     '\n' +
-    '                    <button type="button" class="button dashed-button mb-4" >\n' +
+    '                    <button type="button" class="button dashed-button mb-4" *ngIf="multi===true" >\n' +
     '                        <i class="icon-cir-plus mr-2" (click)="addLevel()"></i>Add\n' +
     '                    </button>\n' +
     '\n' +
     '                    <h6 class="poptile">Turn Count Override</h6>\n' +
     '                    <div class="switch switch--horizontal">\n' +
     // '                        <input id="turn-count-1" type="radio" name="TurnCountOverride" [(ngModel)]="adminService.serviceData.turnCountOn"  [value]="false"  formControlName="TurnCountOverride"/>\n' +
-    '                        <input id="turn-count-1" type="radio" name="TurnCountOverride" ngModel="{{adminService.serviceData?.turnCountOn}}"  [value]="false"  formControlName="TurnCountOverride"/>\n' +
+    '                        <input id="turn-count-1" type="radio" name="TurnCountOverride" (click)="showTurn(false)" ngModel="{{adminService.serviceData?.turnCountOn}}"  [value]="false"  formControlName="TurnCountOverride"/>\n' +
     '                        <label for="turn-count-1">Off</label>\n' +
-    '                        <input id="turn-count-2" type="radio" name="TurnCountOverride" ngModel="{{adminService.serviceData?.turnCountOn}}" [value]="true" formControlName="TurnCountOverride" />\n' +
+    '                        <input id="turn-count-2" type="radio" name="TurnCountOverride" (click)="showTurn(true)" ngModel="{{adminService.serviceData?.turnCountOn}}" [value]="true" formControlName="TurnCountOverride" />\n' +
     '                        <label for="turn-count-2">On</label><span class="toggle-outside"><span\n' +
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
-    '                    <div class="form-group">\n' +
+    '                    <div class="form-group" *ngIf="turn===true">\n' +
     '                        <select class="select-field form-field  field--not-empty" formControlName="TurnCountValue" ngModel="{{adminService.serviceData?.turnCountId}}">\n' +
     '                             <option value="">Select Turn</option>\n' +
     '                             <option *ngFor="let turn of turn_countlist" [ngValue]="turn?.turnCountId">{{turn.value}}</option>\n' +
@@ -135,6 +136,8 @@ export class AddServiceComponent implements OnInit {
   service: {};
   serviceName: string
   public multifields: Object = { text: 'serviceName', value: 'serviceId'};
+  private multi: boolean;
+  private turn: boolean;
 
   constructor(public adminService: AdminService, public modalService: ModalService, private formBuilder: FormBuilder,
               private messageService: MessageService) {
@@ -169,13 +172,21 @@ export class AddServiceComponent implements OnInit {
     this.levelList = this.addserviceForm.get('ServicePriceSt') as FormArray;
     this.getServiceCategories();
     this.getAddonService();
+    // this.adminService.serviceData.pricingBit = false;
     this.servicedetail = this.adminService.serviceData;
     // this.getServiceDetails();
   }
 
   addLevel() {
-    debugger;
     this.levelList.push(this.createLevel());
+  }
+
+  showLevel(val) {
+    this.multi = !this.multi;
+  }
+
+  showTurn(val) {
+    this.turn = !this.turn;
   }
 
   removeLevel(index) {
@@ -211,14 +222,12 @@ export class AddServiceComponent implements OnInit {
 
   }
   updateDetail(userdata) {
-    debugger;
     // userdata.Email = this.email;
-
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_service(userdata).subscribe((data) => {
-      // this.userdataService.publish('call-parent');
+      this.adminService.publish('service-list');
       this.adminService.editservice = false;
       this.modalService.close('add-service');
       this.messageService.clear();

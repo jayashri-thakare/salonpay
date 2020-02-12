@@ -19,6 +19,8 @@ export class AdminServiceComponent implements OnInit {
 
   ngOnInit() {
     this.getServiceList();
+    this.subscription = this.adminService.on('service-list').subscribe(() => this.getServiceList());
+
   }
 
   getServiceList() {

@@ -137,57 +137,16 @@
 <!-- Main Container Ends -->
 
 <!-- start -->
-<div class="time-track">
-  <div class="time-hed">
-    <h6>Time Tracker</h6>
-    <i class="icon-minus"></i>
-  </div>
 
-  <div class="trak-sld">
-
-    <div class="trk-prof">
-      <div class="trk-det">
-        <div class="user-img"><img src="img/profile.svg" alt=""></div>
-        <div class="trk-name">
-          <h3>Maya Didas<span>Technician</span></h3>
-        </div>
-      </div>
-      <div id="stopWatch">
-        <h6 id="time">00:00</h6>
-      </div>
-    </div>
-
-    <div class="trk-btn">
-      <button class="button" id="start">Start</button>
-      <button class="button blue" id="stop">Stop</button>
-    </div>
-
-    <div class="form-group">
-      <select class="select-field form-field valid" name="select-fld" id="select-fld" required=""
-              aria-invalid="false">
-        <option></option>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-        <option>Option 5</option>
-      </select>
-      <p class="form-label sel-blk">Task</p>
-    </div>
-
-  </div>
-</div>
-<div class="time-track-btn"><i class="icon-clock"></i></div>
-<!-- end -->
 <!-- Edit Profile Menu -->
 
 <profile-modal [userdata]="userdetail"></profile-modal>
 <address-modal [userdata]="userdetail"></address-modal>
 <contact-modal [userdata]="userdetail"></contact-modal>
-<timer [userdata]="userdetail"></timer>
+<!--<timer [userdata]="userdetail"></timer>-->
 
   <profileinfo-modal [userdata]="userdetail"></profileinfo-modal>
-<!--  <timer1></timer1>-->
+  <timer1 [userdata]="userdetail"></timer1>
 <!--  <buttons></buttons>-->
 
 

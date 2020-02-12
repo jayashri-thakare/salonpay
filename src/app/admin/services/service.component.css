@@ -10,3 +10,6 @@
 .multi-height{
   height: auto !Important;
 }
+.form-with-field {
+  border: 1px solid #a7b3c4;
+}

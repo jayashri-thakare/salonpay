@@ -12,21 +12,36 @@ import {Subscription} from 'rxjs';
 export class AdminCouponComponent implements OnInit {
   private couponList: any;
   private subscription: Subscription;
+  private grid: boolean;
+  private gridview: boolean;
+  private listview: boolean;
 
   constructor(public adminService: AdminService, public modalService: ModalService) { }
 
   ngOnInit() {
     this.getCouponList();
+    this.grid = true;
+    this.gridview = true;
     this.subscription = this.adminService.on('call-coupon').subscribe(() => this.getCouponList());
   }
-
+  gridlistview(type) {
+    if (type == 'grid') {
+      this.gridview = true;
+      this.listview = false;
+    } else if (type == 'list') {
+      this.gridview = false;
+      this.listview = true;
+    }
+  }
+    showGrid() {
+    this.grid = !this.grid;
+  }
   getCouponList() {
     this.adminService.getCouponList().subscribe((data) => {
       this.couponList = data['list'];
     });
   }
   openModal(id: string) {
-    debugger
     this.modalService.open1(id);
   }
 

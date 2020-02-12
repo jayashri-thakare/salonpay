@@ -31,19 +31,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
                 <button class="button" id="start" (click)="startTimer(StatusFlag=false);">Start</button>
                 <button class="button blue" id="stop"  (click)="stopTimer(StatusFlag=true);">Stop</button>
               </div>
-              <div class="form-group">
-                <select class="select-field form-field valid" name="select-fld" id="select-fld" required=""
-                        aria-invalid="false">
-                  <option></option>
-                  <option>Option 1</option>
-                  <option>Option 2</option>
-                  <option>Option 3</option>
-                  <option>Option 4</option>
-                  <option>Option 5</option>
-                </select>
-                <p class="form-label sel-blk">Task</p>
-              </div>
-            </div>
+             </div>
           </div>
 <!--            {{hoursDisplay ? hoursDisplay : '00'}} : {{(minutesDisplay) && (minutesDisplay <= 59) ? minutesDisplay : '00'}} : {{(secondsDisplay) && (secondsDisplay <= 59) ? secondsDisplay : '00'}} <br/>-->
 <!--            <button class="button line close-btn" type="button" (click)="startTimer();">Start</button>-->
@@ -71,7 +59,7 @@ export class TimerComponent implements OnInit {
               private formBuilder: FormBuilder) { }
     ngOnInit() {
         // this.startTimer();
-        // this.getTimeDifference();
+        this.getTimeDifference();
         // this.userdataService.get_time_difference();
     }
 
@@ -81,11 +69,12 @@ export class TimerComponent implements OnInit {
       var splitted = this.totalTime.split(":");
       console.log(splitted);
       this.hoursDisplay = splitted[0];
+      this.minutesDisplay = splitted[1];
       this.secondsDisplay = splitted[2];
       // let timer = Observable.timer(1, 1000);
       // this.sub = timer.subscribe(this.totalTime);
 
-      let timer = Observable.timer(2000,1000);
+      let timer = Observable.timer(1,1000);
       // timer.subscribe(t=>this.ticks = t);
         this.sub = timer.subscribe(
             t => {
