@@ -38,175 +38,21 @@ import { Subscription } from 'rxjs';
     '                <h6 class="comm-subhdn">Staff</h6>\n' +
     '                <!-- start -->\n' +
     '                <h6 class="poptile">Staff Settings</h6>\n' +
-    '                <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1">\n' +
-    '                    <div class="f-col">\n' +
+    '                <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1" >\n' +
+    '                    <div class="f-col" *ngFor=" let day of days; let i = index">\n' +
     '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-1" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Monday</p>\n' +
+    '                        <div class="form-group" >\n' +
+    '                         <select  id="service-select-{{i+1}}"  class="select-field-2 weeks form-field" name="emp" (change)="saveObj(day, $event)">\n' +
+    '                          <option [value]="emp" *ngFor="let emp of employee" >{{emp}}</option>\n' +
+  '                                 </select>\n' +
+    '                            <p class="form-label sel-blk">{{day}}</p>\n' +
     '                        </div>\n' +
     '                        <!-- end -->\n' +
     '                    </div>\n' +
-    '                    <div class="f-col">\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-2" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Tuesday</p>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                    <div class="f-col">\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-3" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Wednesday</p>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                    <div class="f-col">\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-4" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Thursday</p>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                    <div class="f-col">\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-5" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Friday</p>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                    <div class="f-col">\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-6" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Saturday</p>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                    <div class="f-col">\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="form-group">\n' +
-    '                            <select id="service-select-7" class="select-field-2 weeks form-field" name="singleSelect">\n' +
-    '                                <option disabled selected></option>\n' +
-    '                                <option class="selectNo" disabled>Select Number</option>\n' +
-    '                                <option value="1">1</option>\n' +
-    '                                <option value="2">2</option>\n' +
-    '                                <option value="3">3</option>\n' +
-    '                                <option value="4">4</option>\n' +
-    '                                <option value="5">5</option>\n' +
-    '                                <option value="6">6</option>\n' +
-    '                                <option value="7">7</option>\n' +
-    '                            </select>\n' +
-    '                            <p class="form-label sel-blk">Sunday</p>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
+
     '\n' +
     '                </div>\n' +
     '\n' +
-    '                <div class="row">\n' +
-    '                    <div class="admin-busi w33 w-1300-45 w-768-50 w-640-100">\n' +
-    '                        <div class="pro-comm-fle">\n' +
-    '                            <h6>Pay Period</h6>\n' +
-    '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-timing"></i>\n' +
-    '                        </div>\n' +
-    '\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="prof-comm-shad">\n' +
-    '                            <div class="comm-cont w50 p-0">\n' +
-    '                                <p>Pay Period</p>\n' +
-    '                                <h6>Weekly</h6>\n' +
-    '                            </div>\n' +
-    '                            <div class="comm-cont w50 p-0">\n' +
-    '                                <p>Cash\\Cheque Split</p>\n' +
-    '                                <h6>$ 45</h6>\n' +
-    '                            </div>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                </div>\n' +
-    '\n' +
-    '                <div class="row">\n' +
-    '                    <div class="admin-busi w20 w-1300-33 w-768-50 w-480-100">\n' +
-    '                        <div class="pro-comm-fle">\n' +
-    '                            <h6>Turn System</h6>\n' +
-    '                            <i class="icon-edit grd-icon side-menu" data-name="side-menu-management"></i>\n' +
-    '                        </div>\n' +
-    '\n' +
-    '                        <!-- start -->\n' +
-    '                        <div class="prof-comm-shad">\n' +
-    '                            <div class="comm-cont w100 p-0">\n' +
-    '                                <p>Number</p>\n' +
-    '                                <h6>Quarter Turn</h6>\n' +
-    '                            </div>\n' +
-    '                        </div>\n' +
-    '                        <!-- end -->\n' +
-    '                    </div>\n' +
-    '                </div>\n' +
     '                <!-- end -->\n' +
     '            </div>\n' +
     '\n' +
@@ -238,9 +84,26 @@ import { Subscription } from 'rxjs';
     '    <!-- Main Container Ends -->'
 })
 export class BusinessStaffComponent implements OnInit {
+  private staff: any[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  employee = [ 1, 2, 3, 4, 5, 6, 7]
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  // public staff: [];
+  // staff: Array<any>;
 
   ngOnInit() {
+    this.staff = [];
   }
 
+  saveObj(day, event) {
+    debugger;
+    let x = {}
+    // const index: number = this.enableCheckbox.indexOf(modulename);
+    // if (index !== -1) {
+    //   this.enableCheckbox.splice(index, 1);
+    // }
+    x[day] = day
+    x[day] = event.target.value;
+    this.staff.push(x);
+  }
 }

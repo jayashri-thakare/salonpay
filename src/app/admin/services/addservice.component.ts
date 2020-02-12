@@ -63,7 +63,7 @@ import {MessageService} from '../../message.service';
     '                    <div formArrayName="ServicePriceSt"> \n' +
     '                    <div *ngFor="let level of levelFormGroup.controls; let i = index;">\n' +
     '                    <div  [formGroupName]="i">\n' +
-    '                    <div class="level-price-box" *ngIf="multi===true">\n' +
+    '                    <div class="level-price-box" *ngIf="multi===true || adminService.serviceData?.pricingBit==true">\n' +
     '                        <div class="form-group w60 w-768-100 pl-0" >\n' +
     '                           <select class="select-field form-field" formControlName="ServiceLevelId" >\n' +
     '                             <option value="">Select Level</option>\n' +
@@ -71,16 +71,16 @@ import {MessageService} from '../../message.service';
     '                           </select>\n' +
     '                        </div>\n' +
     '                        <div class="form-group w40 w-768-100 p-0">\n' +
-    '                            <input type="number" id="price" name="price" class="form-field" formControlName="Price" required />\n' +
+    '                            <input type="number" id="price" name="price" class="form-field" formControlName="Price"  />\n' +
     '                            <p class="form-label">Price</p>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent" required />\n' +
+    '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent"  required />\n' +
     '                        <p class="form-label">Commission Split %</p>\n' +
     '                    </div>\n' +
-    '                        <i class="icon-cir-plus mr-2" (click)="removeLevel(i)"></i>remove\n' +
+    '                        <i class="icon-cir-plus mr-2" *ngIf="multi===true" (click)="removeLevel(i)"></i>remove\n' +
     '                    </div>\n' +
     '                    </div>\n' +
     '                    </div>\n' +
@@ -98,7 +98,7 @@ import {MessageService} from '../../message.service';
     '                        <label for="turn-count-2">On</label><span class="toggle-outside"><span\n' +
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
-    '                    <div class="form-group" *ngIf="turn===true">\n' +
+    '                    <div class="form-group" *ngIf="turn===true || adminService.serviceData?.turnCountId">\n' +
     '                        <select class="select-field form-field  field--not-empty" formControlName="TurnCountValue" ngModel="{{adminService.serviceData?.turnCountId}}">\n' +
     '                             <option value="">Select Turn</option>\n' +
     '                             <option *ngFor="let turn of turn_countlist" [ngValue]="turn?.turnCountId">{{turn.value}}</option>\n' +
@@ -222,12 +222,22 @@ export class AddServiceComponent implements OnInit {
 
   }
   updateDetail(userdata) {
+    debugger;
     // userdata.Email = this.email;
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
-    if(userdata.PricingBit==''){
+    if(userdata.PricingBit=='' || userdata.ServicePriceSt[0].ServiceLevelId==''){
       userdata.PricingBit = false;
+      userdata.ServicePriceSt[0].ServiceLevelId = 0;
+      userdata.ServicePriceSt[0].Price = 0;
     }
+    if(userdata.TurnCountOverride==''){
+      userdata.TurnCountOverride = false;
+      userdata.TurnCountValue = 0;
+    }
+    userdata.PricingBit = Boolean(userdata.PricingBit);
+    userdata.TurnCountValue = + (userdata.TurnCountValue)
+    userdata.TurnCountOverride = Boolean(userdata.TurnCountOverride)
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_service(userdata).subscribe((data) => {
       this.adminService.publish('service-list');

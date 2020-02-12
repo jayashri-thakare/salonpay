@@ -157,6 +157,14 @@ export class AddCouponComponent implements OnInit {
     userdata.Technician = String ([userdata.Technician])
     // userdata.ProductId = String ([userdata.ProductId])
     userdata.ExpiryDate = String (userdata.ExpiryDate)
+    if (userdata.CouponTakenFrom=='' || userdata.CouponTakenFrom==undefined){
+      userdata.CouponTakenFrom = false;
+    }
+    if(userdata.ValueBit == '' || userdata.ValueBit==undefined){
+      userdata.ValueBit = false;
+    }
+    userdata.Value = parseInt(userdata.Value)
+    userdata.ValueBit = Boolean(userdata.ValueBit)
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_coupon(userdata).subscribe((data) => {
       debugger;
