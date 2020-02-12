@@ -225,6 +225,9 @@ export class AddServiceComponent implements OnInit {
     // userdata.Email = this.email;
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
+    if(userdata.PricingBit==''){
+      userdata.PricingBit = false;
+    }
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_service(userdata).subscribe((data) => {
       this.adminService.publish('service-list');

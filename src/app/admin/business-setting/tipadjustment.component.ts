@@ -159,7 +159,9 @@ import { UserdataService } from 'src/app/userdata.service';
   '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
   '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
-  '                    </ul>\n' +
+  '                        <li ><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
+
+    '                    </ul>\n' +
   '                </div>\n' +
   '                <!-- end -->\n' +
   '            </div>\n' +

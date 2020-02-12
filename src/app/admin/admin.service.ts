@@ -76,7 +76,7 @@ export class AdminService {
   getServiceObject(id) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.editservice = true;
-    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=6&ServiceId=' + id;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesList?ParentCompanyId=' + this.ParentCompanyId + '&ServiceId=' + id;
     // return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
     this.httpClient.get(this.baseUrl).subscribe((data) => {
       // tslint:disable-next-line:indent
@@ -117,12 +117,12 @@ export class AdminService {
   }
 
   getServiceCategories() {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesDDL?ParentCompanyId=6';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Services/GetServicesDDL?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getAddonServices() {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetServiceDDL?ParentCompanyId=5';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/GetServiceDDL?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
