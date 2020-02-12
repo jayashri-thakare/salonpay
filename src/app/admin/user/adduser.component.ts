@@ -266,7 +266,7 @@ export class AddUserComponent implements OnInit {
   getuserServices() {
     this.AdminService.getUserServiceList().subscribe((data) => {
       this.userservice = data;
-      this.userservice = this.userservice.result.list;
+      this.userservice = this.userservice.result;
     });
   }
 
