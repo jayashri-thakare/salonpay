@@ -75,6 +75,7 @@ import { Subscription } from 'rxjs';
   '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
   '                        <li class="active"><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
+  '                         <li ><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
   '                    </ul>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -85,7 +86,6 @@ import { Subscription } from 'rxjs';
     '    </div>\n' +
     '    </div>\n' +
     '    </div>\n' +
-    '    <div class="overlay"></div>\n' +
     '    <addexplevel-modal [addexplevel]="addexplevel" [updateexplevel]="updateexplevel" [explevelobj]="arrayofselectedobj"></addexplevel-modal>\n' +
     '    <!-- Main Container Ends -->\n'
 })

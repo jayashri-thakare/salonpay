@@ -41,7 +41,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group form-field multi-height">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'userservice\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -173,14 +173,8 @@ export class AddUserComponent implements OnInit {
   @Input('userobj') arrayofselectedobj: any;
   userservice: any;
   userexp: any;
-  public services: { [key: string]: Object; }[] = [
-    { Name: 'Haircut', Id: '1' },
-        { Name: 'Shampoo', Id: '2' }
-    ];
-    // maps the local data column to fields property
-    public localFields: Object = { text: 'Name', value: 'Id' };
-    // set the placeholder to MultiSelect Dropdown input element
-    public localWaterMark: string = 'Select services';
+  public localFields: Object = { text: 'serviceName', value: 'serviceId' };
+  public localWaterMark: string = 'Select services';
   userlist: any;
 
   constructor(private AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
@@ -272,7 +266,7 @@ export class AddUserComponent implements OnInit {
   getuserServices() {
     this.AdminService.getUserServiceList().subscribe((data) => {
       this.userservice = data;
-      this.userservice = this.userservice.result;
+      this.userservice = this.userservice.result.list;
     });
   }
 

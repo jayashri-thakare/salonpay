@@ -91,6 +91,8 @@ import {AddExpLevelComponent} from './admin/business-setting/addexplevel.compone
 import {EditBusinessProfileContactComponent} from './admin/business-setting/editcontact.component'
 import {EditBusinessProfileNameComponent} from './admin/business-setting/editbusinessname.component'
 import {PayperiodComponent} from './admin/business-setting/payperiod.component';
+import {BusinessScheduleComponent} from './admin/business-setting/schedule.component'
+import {AddScheduleComponent} from './admin/business-setting/addschedule.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -136,6 +138,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AddServicesComponent,
     BusinessTurnCountComponent,
     AddTurnCountComponent,
+    BusinessScheduleComponent,
+    AddScheduleComponent,
     BusinessExpLevelComponent,
     AddExpLevelComponent,
     EditBusinessProfileContactComponent,

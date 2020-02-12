@@ -49,10 +49,10 @@
             </div>
         </div>
         <div id="gridView" [ngStyle]="{'display': gridview ? 'block' : 'none' }">
-            <div class="f-row f-3 f-1440-2 f-768-1">
+            <div class="f-row f-3 f-1440-2 f-768-1" *ngFor="let product of adminproduct.list; let i = index;">
                 <div class="f-col">
                     <!-- start -->
-                    <div class="app-grid-box" *ngFor="let product of adminproduct.list; let i = index;">
+                    <div class="app-grid-box">
                         <div class="techi-top techi-top-qty">
                             <a href="./admin-inventory-detail.html">
                                 <div class="user-det">
@@ -168,7 +168,6 @@
     <!-- Main Container Ends -->
 
     <!-- Add/Edit Product -->
-    <div class="overlay"></div>
     <addproduct-modal [addAdmin]="addProductForm" [updateAdmin]="updateProductForm" [productobj]="arrayofselectedobj"></addproduct-modal>
     <!-- Add/Edit Product End -->
     <!-- Delete Modal Starts -->
