@@ -242,7 +242,7 @@ export class AdminService {
     debugger;
   this.baseUrl = 'http://172.16.0.114:5555/api/Users/UpdateUser';
   Admin.ParentCompanyId = parseInt(localStorage.companyId);
-  Admin.CreatedByUserId = localStorage.userId;
+  Admin.LastModifiedByUserId = localStorage.userId;
   return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }

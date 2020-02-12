@@ -33,11 +33,11 @@ import {Observable} from 'rxjs';
     '                                    <h6 class="comm-subhdn">{{userdet.user.firstName}}\'s Role</h6>\n' +
     '                                    <div class="row">\n' +
     '                                        <form class="popup-scrll" [formGroup]="userroleForm">\n' +
-      '                                        <div class="w50 w-1200-100" *ngFor="let roles of userroles;let i = index">\n' +
+      '                                        <div class="w50 w-1200-100" *ngFor="let roles of userroleslist;let i = index">\n' +
       '                                            <!-- start -->\n' +
-      '                                             <div class="radio-box">\n' +
-                                                      '<input id="{{roles}}" type="radio" [value]="roles" name="RoleList" formControlName="RoleList" />\n' +
-                                                          '<label for="{{roles}}">{{roles}}</label>\n' +
+      '                                             <div class="radio-box" *ngFor="let assignroles of userroles">\n' +
+                                                      '<input id="{{roles.name}}" type="radio" [value]="roles.name" ngModel="{{assignroles}}" name="RoleList" formControlName="RoleList" />\n' +
+                                                          '<label for="{{roles.name}}">{{roles.name}}</label>\n' +
       '                                              </div>\n' +
       '                                            <!-- end -->\n' +
       '                                        </div>\n' +
@@ -126,6 +126,7 @@ export class UserRightsComponent implements OnInit {
   arrayofselectedindividualobj: Array<any> = [];
   public claims= {};
   public enableCheckbox = [];
+  userroleslist: any;
 
   constructor(public modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
@@ -133,10 +134,21 @@ export class UserRightsComponent implements OnInit {
   ngOnInit() {
     this.getrolesModuleRights();
     this.getrolesIndividualRights();
+    this.getuserRoles();
     this.userroleForm = this.formBuilder.group({
         RoleList : ['']
     });
   }
+
+  getuserRoles() {
+    this.AdminService.getUserRoles().subscribe((data) => {
+      this.userroleslist = data;
+      console.log(this.userroleslist)
+      this.userroleslist = this.userroleslist.result;
+      console.log(this.userroleslist)
+    });
+  }
+
   moduleonoff(event, checkvalue, moduleright, i){
     console.log(event, moduleright)
     if(moduleright == "Customers"){

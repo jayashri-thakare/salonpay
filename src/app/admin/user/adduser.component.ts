@@ -41,7 +41,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group form-field multi-height">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'userservice\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'userservice\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\' [mode]=\'box\' [popupHeight]=\'popHeight\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -112,7 +112,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group form-field multi-height">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'services\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'userservice\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -245,6 +245,7 @@ export class AddUserComponent implements OnInit {
     Admin.ExpLevelId = parseInt(Admin.ExpLevelId);
     Admin.ServiceIds = parseInt(Admin.ServiceIds);
     Admin.ServiceIds = [Admin.ServiceIds];
+    Admin.Id = this.arrayofselectedobj[0]['id']
     Admin.Password = "Leo@123";
     // tslint:disable-next-line:triple-equals
     if (this.updateuserForm.status == 'VALID') {
@@ -266,7 +267,7 @@ export class AddUserComponent implements OnInit {
   getuserServices() {
     this.AdminService.getUserServiceList().subscribe((data) => {
       this.userservice = data;
-      this.userservice = this.userservice.result.list;
+      this.userservice = this.userservice.result;
     });
   }
 
