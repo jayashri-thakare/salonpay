@@ -242,7 +242,7 @@ export class AdminService {
     debugger;
   this.baseUrl = 'http://172.16.0.114:5555/api/Users/UpdateUser';
   Admin.ParentCompanyId = parseInt(localStorage.companyId);
-  Admin.CreatedByUserId = localStorage.userId;
+  Admin.LastModifiedByUserId = localStorage.userId;
   return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }
@@ -268,6 +268,14 @@ export class AdminService {
   assign_Role_ToUser(Admin) {
     debugger;
     this.baseUrl = 'http://172.16.0.114:5555/api/Users/AssignRoleToUser';
+    Admin.ParentCompanyId = parseInt(localStorage.companyId);
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_assign_Role_ToUser(Admin) {
+    debugger;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/UpdateUserRole';
     Admin.ParentCompanyId = parseInt(localStorage.companyId);
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
@@ -541,7 +549,7 @@ export class AdminService {
 
   GetTipAdjustmentList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/GetCompanyProfile?ParentCompanyId=' + '32';
+    this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/GetCompanyProfile?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -562,7 +570,7 @@ export class AdminService {
   update_profiledetail(Admin) {
     debugger;
   // Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-  Admin.ParentCompanyId = parseInt('32');
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
   this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/UpdateCompanyInfo';
   return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
@@ -580,6 +588,20 @@ export class AdminService {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = ' http://172.16.0.99:8055/api/BusinessProfile/GetBusinessSchedule?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  GetPayPeriodList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/GetPayPeriod?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  add_payperiod(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/savePayPeriod ';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
   }
 
   publish(eventName: string) {

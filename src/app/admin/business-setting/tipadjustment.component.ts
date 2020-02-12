@@ -49,7 +49,7 @@ import { UserdataService } from 'src/app/userdata.service';
   '                            <!-- start -->\n' +
   '                            <div class="usr-pro-top busi-pro">\n' +
   '                                <!-- upload end -->\n' +
-  '                                <h6>{{businesstipadjustment.businessName}} Salon Pay</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.businessName}}</h6>\n' +
   '                            </div>\n' +
   '                            <!-- end -->\n' +
   '                        </div>\n' +
@@ -65,11 +65,11 @@ import { UserdataService } from 'src/app/userdata.service';
   '                        <div class="prof-comm-shad">\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Work</p>\n' +
-  '                                <h6>{{businesstipadjustment.workContact}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.workContact}}</h6>\n' +
   '                            </div>\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Work Email</p>\n' +
-  '                                <h6>{{businesstipadjustment.email}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.email}}</h6>\n' +
   '                            </div>\n' +
   '                        </div>\n' +
   '                        <!-- end -->\n' +
@@ -85,25 +85,25 @@ import { UserdataService } from 'src/app/userdata.service';
   '                        <div class="prof-comm-shad">\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Address Line 1</p>\n' +
-  '                                <h6>{{businesstipadjustment.addressLine1}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.addressLine1}}</h6>\n' +
   '                            </div>\n' +
   '                            <div class="comm-cont w100 mb-4 p-0">\n' +
   '                                <p>Address Line 2</p>\n' +
-  '                                <h6>{{businesstipadjustment.addressLine2}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.addressLine2}}</h6>\n' +
   '                            </div>\n' +
   '                            <div\n' +
   '                                class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
   '                                <p>City</p>\n' +
-  '                                <h6>{{businesstipadjustment.cityName}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.cityName}}</h6>\n' +
   '                            </div>\n' +
   '                            <div\n' +
   '                                class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
   '                                <p>State</p>\n' +
-  '                                <h6>{{businesstipadjustment.stateName}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.stateName}}</h6>\n' +
   '                            </div>\n' +
   '                            <div class="comm-cont w33 w-1200-50 w-990-33 w-480-50 p-0">\n' +
   '                                <p>Zip Code</p>\n' +
-  '                                <h6>{{businesstipadjustment.zipcode}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.zipcode}}</h6>\n' +
   '                            </div>\n' +
   '                        </div>\n' +
   '                        <!-- end -->\n' +
@@ -119,7 +119,7 @@ import { UserdataService } from 'src/app/userdata.service';
   '                        <div class="prof-comm-shad">\n' +
   '                            <div class="comm-cont w100 p-0">\n' +
   '                                <p>Timezone</p>\n' +
-  '                                <h6>{{businesstipadjustment.timeZoneName}}</h6>\n' +
+  '                                <h6>{{businesstipadjustment?.timeZoneName}}</h6>\n' +
   '                            </div>\n' +
   '                        </div>\n' +
   '                        <!-- end -->\n' +
@@ -160,7 +160,7 @@ import { UserdataService } from 'src/app/userdata.service';
   '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
-  '                         <li ><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
+  '                         <li ><a (click)="AdminService.showBusinessNav(12)">Schedule</a></li>\n' +
   '                    </ul>\n' +
   '                </div>\n' +
   '                <!-- end -->\n' +

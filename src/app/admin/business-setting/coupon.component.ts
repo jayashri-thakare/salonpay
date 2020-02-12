@@ -39,7 +39,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '                    <div class="pro-comm-fle">\n' +
     '                        <h6 class="comm-subhdn">Coupon</h6>\n' +
-    '                        <i *ngIf="businesscouponsuccess == 1 && showform == true" class="icon-delete grd-icon side-menu" data-toggle="modal" data-target="#deletePopupbusinesscoupon"></i>\n' +
+    '                        <i *ngIf="businesscouponsuccess == 1 || showform == true" class="icon-delete grd-icon side-menu" data-toggle="modal" data-target="#deletePopupbusinesscoupon"></i>\n' +
     '                    </div>\n' +
     '                <!-- start -->\n' +
     '                <form *ngIf="businesscouponsuccess == 0" [formGroup]="addcouponForm" (ngSubmit)="createBusinessCoupon(addcouponForm.value)" id="addCoupon" class="popup-scrll">\n' +
@@ -108,7 +108,7 @@ import { Subscription } from 'rxjs';
     '                        </div>\n' +
     '                    </div>\n' +
     '                    <!-- start -->\n' +
-    '                    <div class="coupon-switch" *ngIf="showform">\n' +
+    '                    <div class="coupon-switch" *ngIf="showform || businesscouponsuccess == 1">\n' +
     '                        <p class="sub-sml">Days Before</p>\n' +
     '                        <div class="form-group">\n' +
     '                            <input type="text" id="thrs-low" formControlName="DaysBefore" ngModel="{{businesscoupons?.daysBefore}}" class="form-field field--not-empty" required="" value="25">\n' +
@@ -138,7 +138,7 @@ import { Subscription } from 'rxjs';
     '                    </div>\n' +
     '\n' +
     '                </div>\n' +
-    '                <button *ngIf="showform" class="button w15" type="submit">Update</button>\n' +
+    '                <button *ngIf="showform || businesscouponsuccess == 1" class="button w15" type="submit">Update</button>\n' +
     '                </form>\n' +
     '                <!-- end -->\n' +
     '            </div>\n' +
@@ -157,7 +157,8 @@ import { Subscription } from 'rxjs';
     '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
     '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
     '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
-    '                         <li ><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
+    '                         <li ><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
+    '                         <li ><a (click)="AdminService.showBusinessNav(12)">Schedule</a></li>\n' +
     '                    </ul>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +

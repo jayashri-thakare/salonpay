@@ -70,6 +70,7 @@ export class EditBusinessProfileContactComponent implements OnInit {
   updateProfieContact(Admin) {
     debugger;
     console.log(Admin)
+    Admin.businessName = this.businesstipadjustment.businessName;
     // tslint:disable-next-line:triple-equals
     if (this.updatecontactForm.status == 'VALID') {
       this.AdminService.update_profiledetail(Admin).subscribe((data) => {
