@@ -90,6 +90,7 @@ import {BusinessExpLevelComponent} from './admin/business-setting/explevel.compo
 import {AddExpLevelComponent} from './admin/business-setting/addexplevel.component'
 import {EditBusinessProfileContactComponent} from './admin/business-setting/editcontact.component'
 import {EditBusinessProfileNameComponent} from './admin/business-setting/editbusinessname.component'
+import {PayperiodComponent} from './admin/business-setting/payperiod.component';
 import {BusinessScheduleComponent} from './admin/business-setting/schedule.component'
 import {AddScheduleComponent} from './admin/business-setting/addschedule.component'
 
@@ -184,7 +185,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InternationalTelNoDirective,
     AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, TimerComponent1, UserDetailsComponent,
     UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
-    AddServiceComponent, ButtonsComponent
+    AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent
   ],
   providers: [UserdataService, DatePipe, AdminService, TimerService],
   entryComponents: [ControlErrorComponent, ModalComponent],
