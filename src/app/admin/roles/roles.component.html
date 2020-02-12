@@ -193,16 +193,16 @@
                                             <h6 class="promo-head">Customers</h6>
                                             <div class="switch switch--horizontal only-switch"
                                                 data-name="customer-switch">
-                                                <input class="notif-radio"  id="module1" (click)="rightsupdate('Customers', false, '')" type="radio"
+                                                <input class="notif-radio"  id="module1" (click)="rightsupdate('Customers', false, '');onofffunc(false, 'customer')" type="radio"
                                                     name="module-radio1" [value]="false" />
                                                 <label for="module1"></label>
                                                 <input class="notif-radio" id="module12" type="radio"
-                                                    name="module-radio1" [value]="true" (click)="rightsupdate('Customers', true, '')" [checked]="getcustomerobj?.isSelected" />
+                                                    name="module-radio1" [value]="true" (click)="rightsupdate('Customers', true, '');onofffunc(true, 'customer')" [checked]="getcustomerobj?.isSelected" />
                                                 <label for="module12"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
-                                        <div class="module-btm customer-switch">
+                                        <div class="module-btm customer-switch" *ngIf="getrolesmodclaim[0]?.isSelected && getrolesmodclaim[0]?.moduleName == 'Customers' || getrolesmodclaim[1]?.isSelected && getrolesmodclaim[1]?.moduleName == 'Customers' || getrolesmodclaim[2]?.isSelected && getrolesmodclaim[2]?.moduleName == 'Customers' || customer">
                                             <div class="checkbox-box">
                                                 <input type="checkbox" id="mod-chk1" (click)="rightsupdate('Customers', $event, 'view')" [checked]="getcustomerobj?.rights[0].view" name="mod-chk1" required="">
                                                 <label for="mod-chk1">View</label>
@@ -230,16 +230,16 @@
                                             <h6 class="promo-head">Appointments</h6>
                                             <div class="switch switch--horizontal only-switch"
                                                 data-name="appointment-switch">
-                                                <input class="notif-radio" (click)="rightsupdate('Appointments', false, '')" id="module2" type="radio"
+                                                <input class="notif-radio" (click)="rightsupdate('Appointments', false, '');onofffunc(false, 'appointment')" id="module2" type="radio"
                                                     name="module-radio2" value="off" />
                                                 <label for="module2"></label>
-                                                <input class="notif-radio" id="module12" (click)="rightsupdate('Appointments', true, '')" type="radio"
+                                                <input class="notif-radio" id="module12" (click)="rightsupdate('Appointments', true, '');onofffunc(true, 'appointment')" type="radio"
                                                     name="module-radio2" [value]="true" [checked]="getappointmentobj?.isSelected" />
                                                 <label for="module22"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
-                                        <div class="module-btm customer-switch">
+                                        <div class="module-btm customer-switch" *ngIf="getrolesmodclaim[0]?.isSelected && getrolesmodclaim[0]?.moduleName == 'Appointments' || getrolesmodclaim[1]?.isSelected && getrolesmodclaim[1]?.moduleName == 'Appointments' || getrolesmodclaim[2]?.isSelected && getrolesmodclaim[2]?.moduleName == 'Appointments' || appointment">
                                             <div class="checkbox-box">
                                                 <input type="checkbox" id="appointment-chk1" (click)="rightsupdate('Appointments', $event, 'view')" [checked]="getappointmentobj?.rights[0].view" name="mod-chk1" required="">
                                                 <label for="appointment-chk1">View</label>
@@ -267,30 +267,30 @@
                                             <h6 class="promo-head">Sales</h6>
                                             <div class="switch switch--horizontal only-switch"
                                                 data-name="customer-switch">
-                                                <input class="notif-radio" (click)="rightsupdate('Sales', false, '')" id="module3" type="radio"
+                                                <input class="notif-radio" (click)="rightsupdate('Sales', false, '');onofffunc(false, 'sales')" id="module3" type="radio"
                                                     name="module-radio3" value="off" />
                                                 <label for="module1"></label>
-                                                <input class="notif-radio" (click)="rightsupdate('Sales', true, '')" id="module32" type="radio"
+                                                <input class="notif-radio" (click)="rightsupdate('Sales', true, '');onofffunc(true, 'sales')" id="module32" type="radio"
                                                     name="module-radio3" [value]="true" [checked]="getsalesobj?.isSelected" />
                                                 <label for="module32"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>
                                         </div>
-                                        <div class="module-btm customer-switch">
+                                        <div class="module-btm customer-switch" *ngIf="getrolesmodclaim[0]?.isSelected && getrolesmodclaim[0]?.moduleName == 'Sales' || getrolesmodclaim[1]?.isSelected && getrolesmodclaim[1]?.moduleName == 'Sales' || getrolesmodclaim[2]?.isSelected && getrolesmodclaim[2]?.moduleName == 'Sales' || sales">
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk1" (click)="rightsupdate('Sales', $event, 'view')" [checked]="getsalesobj?.rights[0].view" name="mod-chk1" required="">
+                                                <input type="checkbox" id="sale-chk1" (click)="rightsupdate('Sales', $event, 'view')" [checked]="getsalesobj?.rights.view" name="mod-chk1" required="">
                                                 <label for="sale-chk1">View</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk2" (click)="rightsupdate('Sales', $event, 'create')" [checked]="getsalesobj?.rights[0].create" name="mod-chk2" required="">
+                                                <input type="checkbox" id="sale-chk2" (click)="rightsupdate('Sales', $event, 'create')" [checked]="getsalesobj?.rights.create" name="mod-chk2" required="">
                                                 <label for="sale-chk2">Create</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk3" (click)="rightsupdate('Sales', $event, 'update')" [checked]="getsalesobj?.rights[0].update" name="mod-chk3" required="">
+                                                <input type="checkbox" id="sale-chk3" (click)="rightsupdate('Sales', $event, 'update')" [checked]="getsalesobj?.rights.update" name="mod-chk3" required="">
                                                 <label for="sale-chk3">Update</label>
                                             </div>
                                             <div class="checkbox-box">
-                                                <input type="checkbox" id="sale-chk4" (click)="rightsupdate('Sales', $event, 'delete')" [checked]="getsalesobj?.rights[0].delete" name="mod-chk4" required="">
+                                                <input type="checkbox" id="sale-chk4" (click)="rightsupdate('Sales', $event, 'delete')" [checked]="getsalesobj?.rights.delete" name="mod-chk4" required="">
                                                 <label for="sale-chk4">Delete</label>
                                             </div>
                                         </div>

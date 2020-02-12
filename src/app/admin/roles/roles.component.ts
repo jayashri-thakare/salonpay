@@ -49,6 +49,9 @@ export class AdminRolesComponent implements OnInit {
   getcustomerobj: any;
   getappointmentobj: any;
   getsalesobj: any;
+  sales: any;
+  customer: any;
+  appointment: any;
 
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -412,6 +415,24 @@ export class AdminRolesComponent implements OnInit {
         this.messageService.clear();
         this.messageService.add('Claims Created successfully.')
       });
+    }
+  }
+
+  onofffunc(bool,type){
+    if(type=='sales' && bool){
+      this.sales = bool
+    }else{
+      this.sales = bool
+    }
+    if(type=='customer' && bool){
+      this.customer = bool
+    }else{
+      this.customer = bool
+    }
+    if(type=='appointment' && bool){
+      this.appointment = bool
+    }else{
+      this.appointment = bool
     }
   }
 

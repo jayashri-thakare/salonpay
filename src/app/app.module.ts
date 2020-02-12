@@ -93,6 +93,7 @@ import {EditBusinessProfileNameComponent} from './admin/business-setting/editbus
 import {PayperiodComponent} from './admin/business-setting/payperiod.component';
 import {BusinessScheduleComponent} from './admin/business-setting/schedule.component'
 import {AddScheduleComponent} from './admin/business-setting/addschedule.component'
+import {AddPayPeriodComponent} from './admin/business-setting/addpayperiod.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -136,6 +137,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BusinessTaxTableComponent,
     BusinessServicesCategoryComponent,
     AddServicesComponent,
+    AddPayPeriodComponent,
     BusinessTurnCountComponent,
     AddTurnCountComponent,
     BusinessScheduleComponent,

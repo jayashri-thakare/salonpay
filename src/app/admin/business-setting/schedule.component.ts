@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./business.component.css'],
   template: '<!-- Main Container Starts -->\n' +
   '  <div *ngIf="AdminService.navTab==9">\n' +
-    '  <div *ngIf="AdminService.business_settingnav==11">\n' +
+    '  <div *ngIf="AdminService.business_settingnav==12">\n' +
     '    <div class="mainContainer">\n' +
     '\n' +
     '        <div class="busi-set">\n' +
@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
     '            <div class="busi-set-lef">\n' +
     '                    <div class="pro-comm-fle">\n' +
     '                       <h3 class="main-comm-head">Business Settings</h3>\n' +
-    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-schedule\')">+ Add New</button>\n' +
+    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-schedule\');addupdateform(\'add\')">+ Add New</button>\n' +
     '                    </div>\n' +
     '\n' +
     '                <!-- business nav start -->\n' +
@@ -43,18 +43,17 @@ import { Subscription } from 'rxjs';
     '                <!-- start -->\n' +
     '                <div class="busi-rewv">\n' +
     '\n' +
-     '                             <!-- start -->\n' +
-    '                              <div class="prof-comm-shad" *ngFor="let schedule of businessschedule">\n' +
-     '                                 <div class="comm-cont w33 f-col-width w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
-    '                                      <p>Working Day</p>\n' +
-    '                                      <h6>{{schedule.dayName}}</h6>\n' +
-    '                                  </div>\n' +
-    '                                  <div class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
-    '                                      <p>Working Hours</p>\n' +
-    '                                      <h6>{{schedule.startTimeHour}}:{{schedule.startTimeMinute}} {{schedule.startTimeMeridian}} - {{schedule.endTimeHour}}:{{schedule.endTimeMinute}} {{schedule.endTimeMeridian}}</h6>\n' +
-     '                                 </div>\n' +
-     '                             </div>\n' +
-    '                              <!-- end -->\n' +
+    '                    <!-- start -->\n' +
+     '                   <div class="com-shad" *ngFor="let schedule of businessschedule">\n' +
+    '                      <div class="edit-cont">\n' +
+     '                       <h6>{{schedule.dayName}}</h6>\n' +
+    '                        <p>{{schedule.startTimeHour}} : {{schedule.startTimeMinute}} {{schedule.startTimeMeridian}} - {{schedule.endTimeHour}} : {{schedule.endTimeMinute}} {{schedule.endTimeMeridian}}</p>\n' +
+    '                      </div>\n' +
+    '                      <div class="">\n' +
+    '                        <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'add-schedule\');addupdateform(\'update\');selectdayobj(schedule)"></i>\n' +
+     '                     </div>\n' +
+    '                    </div>\n' +
+    '                    <!-- end -->\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
     '            </div>\n' +
@@ -73,7 +72,8 @@ import { Subscription } from 'rxjs';
   '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
-  '                         <li class="active"><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
+  '                         <li ><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
+  '                         <li class="active"><a (click)="AdminService.showBusinessNav(12)">Schedule</a></li>\n' +
   '                    </ul>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -84,17 +84,21 @@ import { Subscription } from 'rxjs';
     '    </div>\n' +
     '    </div>\n' +
     '    </div>\n' +
-    '    <addschedule-modal></addschedule-modal>\n' +
+    '    <addschedule-modal [addSchedule]="addSchedule" [updateSchedule]="updateSchedule" [Schedulesobj]="arrayofselectedobj"></addschedule-modal>\n' +
     '    <!-- Main Container Ends -->\n'
 })
 export class BusinessScheduleComponent implements OnInit {
 
   subscription: Subscription;
   businessschedule: any;
+  arrayofselectedobj: Array<any>=[];
+  updateSchedule: boolean;
+  addSchedule: boolean;
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getSchedule();
+    this.subscription = this.AdminService.on('call-schedule').subscribe(() => this.getSchedule());
   }
 
   getSchedule() {
@@ -105,5 +109,25 @@ export class BusinessScheduleComponent implements OnInit {
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
+
+  selectdayobj(selected_obj){
+    var index = this.arrayofselectedobj.indexOf(selected_obj);
+    if(index<0){
+      this.arrayofselectedobj.splice(index, 1);
+      this.arrayofselectedobj.push(selected_obj);
+    }
+    console.log(this.arrayofselectedobj)
+  }
+
+  addupdateform(type){
+    if(type == 'add'){
+      this.updateSchedule = false;
+      this.addSchedule = true;
+    }else if(type == 'update'){
+      this.updateSchedule = true;
+      this.addSchedule = false;
+    }
+  }
+
 
 }

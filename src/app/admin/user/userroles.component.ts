@@ -22,7 +22,8 @@ import {Observable} from 'rxjs';
     '                                            title="Merge Sales"></i>\n' +
     '                                    </h3>\n' +
     '                                    <div class="filter-container">\n' +
-    '                                        <a (click)="assignRoleToUser(userroleForm.value, userdet)" class="button mr-2 addbtncol">Save</a>\n' +
+    '                                        <a *ngIf="userrolesuccess == 0" (click)="assignRoleToUser(userroleForm.value, userdet)" class="button mr-2 addbtncol">Save</a>\n' +
+    '                                        <a *ngIf="userrolesuccess == 1" (click)="updateassignRoleToUser(userroleForm.value, userdet)" class="button mr-2 addbtncol">Update</a>\n' +
     '                                        <a href="#" class="button line mr-2">Cancel</a>\n' +
     '                                        <a href="#" class="button line orange">Reset</a>\n' +
     '                                    </div>\n' +
@@ -35,8 +36,8 @@ import {Observable} from 'rxjs';
     '                                        <form class="popup-scrll" [formGroup]="userroleForm">\n' +
       '                                        <div class="w50 w-1200-100" *ngFor="let roles of userroleslist;let i = index">\n' +
       '                                            <!-- start -->\n' +
-      '                                             <div class="radio-box" *ngFor="let assignroles of userroles">\n' +
-                                                      '<input id="{{roles.name}}" type="radio" [value]="roles.name" ngModel="{{assignroles}}" name="RoleList" formControlName="RoleList" />\n' +
+      '                                             <div class="radio-box">\n' +
+                                                      '<input id="{{roles.name}}" type="radio" [value]="roles.name" name="RoleList" formControlName="RoleList" />\n' +
                                                           '<label for="{{roles.name}}">{{roles.name}}</label>\n' +
       '                                              </div>\n' +
       '                                            <!-- end -->\n' +
@@ -131,6 +132,7 @@ export class UserRightsComponent implements OnInit {
   constructor(public modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
   @Input('userrole') userroles: any;
+  @Input('userrolesuccess') userrolesuccess:any;
   ngOnInit() {
     this.getrolesModuleRights();
     this.getrolesIndividualRights();
@@ -316,6 +318,30 @@ export class UserRightsComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.userroleForm.status == 'VALID') {
       this.AdminService.assign_Role_ToUser(Admin).subscribe((data) => {
+        // this.AdminService.publish('call-user');
+        this.messageService.clear();
+        this.messageService.add('User Role created successfully.')
+      });
+    } else {
+      console.log(Admin, this.userroleForm.status);
+      this.submitted = true;
+      if (this.userroleForm.invalid) {
+        return;
+      }
+    }
+  }
+
+  updateassignRoleToUser(Admin, user) {
+    debugger;
+    Admin.User = {
+      "UserName": user.user.email,
+      "Email": user.user.email,
+      "Id": user.user.id
+    }
+    Admin.RoleList = [Admin.RoleList];
+    // tslint:disable-next-line:triple-equals
+    if (this.userroleForm.status == 'VALID') {
+      this.AdminService.update_assign_Role_ToUser(Admin).subscribe((data) => {
         // this.AdminService.publish('call-user');
         this.messageService.clear();
         this.messageService.add('User Role updated successfully.')

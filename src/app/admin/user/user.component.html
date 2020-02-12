@@ -109,7 +109,7 @@
                             <li><a (click)="AdminService.showSubtab(3);getuserHistory(userlist[AdminService.selectedIndex])" [ngClass]="{'active': AdminService.showTab==3}" id="history">History</a></li>
                         </ul>
                       <app-userdetail [userdetail]="userlist"></app-userdetail>
-                      <app-userrights [userdetail]="userlist" [userrole]="userroles"></app-userrights>
+                      <app-userrights [userrolesuccess]="userrolesuccess" [userdetail]="userlist" [userrole]="userroles"></app-userrights>
                       <app-userhistory [userdetail]="userlist" [userhistory]="userhistory"></app-userhistory>
                         <!-- end -->
                     </div>

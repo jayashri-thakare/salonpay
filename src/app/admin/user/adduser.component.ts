@@ -220,8 +220,6 @@ export class AddUserComponent implements OnInit {
   createuser(Admin) {
     Admin.TimeTrack = Boolean(Admin.TimeTrack)
     Admin.ExpLevelId = parseInt(Admin.ExpLevelId);
-    Admin.ServiceIds = parseInt(Admin.ServiceIds);
-    Admin.ServiceIds = [Admin.ServiceIds];
     Admin.Password = "Leo@123";
     // tslint:disable-next-line:triple-equals
     if (this.adduserForm.status == 'VALID') {
@@ -243,8 +241,6 @@ export class AddUserComponent implements OnInit {
   updateuser(Admin) {
     Admin.TimeTrack = Boolean(Admin.TimeTrack)
     Admin.ExpLevelId = parseInt(Admin.ExpLevelId);
-    Admin.ServiceIds = parseInt(Admin.ServiceIds);
-    Admin.ServiceIds = [Admin.ServiceIds];
     Admin.Id = this.arrayofselectedobj[0]['id']
     Admin.Password = "Leo@123";
     // tslint:disable-next-line:triple-equals

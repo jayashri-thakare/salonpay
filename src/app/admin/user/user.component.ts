@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 
 export class UserComponent implements OnInit {
+  userrolesuccess: any;
 
   // tslint:disable-next-line:no-shadowed-variable
   constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
@@ -105,6 +106,7 @@ export class UserComponent implements OnInit {
   getuserRoles(user) {
     this.AdminService.getUserAdminRoles(user).subscribe((data) => {
       this.userroles = data;
+      this.userrolesuccess = this.userroles['success']
       this.userroles = this.userroles.result;
       console.log(this.userroles, "role")
     });

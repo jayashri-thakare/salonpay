@@ -43,7 +43,6 @@ import { Subscription } from 'rxjs';
     '\n' +
     '                    <!-- start -->\n' +
     '                    <div class="" *ngIf="addshow">\n' +
-    '                        <h6 class="poptile">Pay Period</h6>\n' +
     '\n' +
     '                        <!-- start -->\n' +
     '                        <div class="pay-switch">\n' +
@@ -78,7 +77,6 @@ import { Subscription } from 'rxjs';
     '\n' +
     '                    <!-- start -->\n' +
     '                    <div class="" *ngIf="editshow">\n' +
-    '                        <h6 class="poptile">Pay Period</h6>\n' +
     '\n' +
     '                        <!-- start -->\n' +
     '                        <div class="pay-switch">\n' +
@@ -125,7 +123,8 @@ import { Subscription } from 'rxjs';
     '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
     '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
     '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
-    '                         <li ><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
+    '                         <li ><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
+    '                         <li ><a (click)="AdminService.showBusinessNav(12)">Schedule</a></li>\n' +
     '                    </ul>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -215,6 +214,9 @@ export class BusinessInventoryComponent implements OnInit {
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     Admin.LowThreshold = parseInt(Admin.LowThreshold)
+    if(this.businessinventory.manageStock){
+      Admin.ManageStock = this.businessinventory.manageStock
+    }
     Admin.ManageStock = JSON.parse(Admin.ManageStock)
     if (this.updateinventoryForm.status == 'VALID') {
       this.AdminService.add_business_inventory(Admin).subscribe((data) => {

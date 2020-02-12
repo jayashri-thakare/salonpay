@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="number" formControlName="ProductTaxRate" id="tax-collected" name="tax-collected" class="form-field" required />\n' +
@@ -46,7 +46,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar" *ngFor="let tax of arrayofselectedobj">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding" *ngFor="let tax of arrayofselectedobj">\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="number" formControlName="ProductTaxRate" ngModel="{{tax.productTaxRate}}" id="tax-collected" name="tax-collected" class="form-field field--not-empty" required />\n' +
