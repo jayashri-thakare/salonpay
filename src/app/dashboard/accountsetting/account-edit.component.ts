@@ -59,7 +59,7 @@ import {AdminService} from '../../admin/admin.service'
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Timezone\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <select class="select-field form-field" ngModel="{{businesstipadjustment.timezoneId}}" formControlName="timezoneId">\n' +
+    '          <select class="select-field form-field" ngModel="{{businesstipadjustment?.timezoneId}}" formControlName="timezoneId">\n' +
     '             <option value="">Select Timezone...</option>\n' +
     '             <option *ngFor="let timezone of timeZonesList" [value]="timezone.id">{{timezone.name | slice: 0: 35}}</option>\n' +
     '          </select>\n' +

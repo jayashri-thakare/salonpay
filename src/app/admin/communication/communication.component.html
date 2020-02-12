@@ -5,8 +5,8 @@
             <h3 class="main-comm-head m-0">Communication</h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
-                    <a *ngIf="emailvar" (click) ="addnewemail('addemail')"  class="button addbtncol flg-btn">+ Add New</a>
-                    <a *ngIf="smsvar" (click) ="addnewemail('addsms')"  class="button addbtncol flg-btn">+ Add New</a>
+                    <a *ngIf="emailvar" (click) ="addnewemail('addemail');addupdateform('add')"  class="button addbtncol flg-btn">+ Add New</a>
+                    <a *ngIf="smsvar" (click) ="addnewemail('addsms');addupdateform('add')"  class="button addbtncol flg-btn">+ Add New</a>
 
                     <button *ngIf="emailvar" class="button dashed-button org-border side-menu customerGrp" data-name="add-tax-table">
                         <i class="icon-cir-plus"></i><span>Create Customer Group </span>
@@ -109,7 +109,6 @@
     <!-- Main Container Ends -->
 
     <!-- Add/Edit Product -->
-    <div class="overlay"></div>
     <div class="mobile-side" id="add-tax-table">
         <!-- common headline -->
         <h3 class="close-btn main-comm-head">

@@ -47,7 +47,7 @@
     <div class="admin-comm-box">
         <div class="admin-comm-lef">
             <ul class="clearfix tabs role-detail-tab" data-tabgroup="first-tab-group">
-                <li *ngFor="let roles of userroles;let i = index" (click)="getrolefunc(roles);GetCompanyRolesClaims(roles.id);AdminService.setIndex(i, roles.name)" [class.active]="AdminService.selectedIndex === i"  id="{{roles.name}}">
+                <li *ngFor="let roles of userroles;let i = index" (click)="getrolefunc(roles.id);GetCompanyRolesClaims(roles.id);AdminService.setIndex(i, roles.name)" [class.active]="AdminService.selectedIndex === i"  id="{{roles.name}}">
                     <a id="admin" class="admin-comm-rig-btn">
                         <!-- start -->
                         <div class="module-role-box">
@@ -479,7 +479,6 @@
 <!-- Main Container Ends -->
 
 <!-- Add/Edit Product -->
-<div class="overlay"></div>
 
 <!-- Add/Edit Product End -->
 <!-- Delete Modal Starts -->

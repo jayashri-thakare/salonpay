@@ -125,6 +125,7 @@ export class UserDetailsComponent implements OnInit {
   selectroleobj(selected_obj){
     console.log(selected_obj)
     var index = this.arrayofselectedobj.indexOf(selected_obj.user);
+    this.adminService.arrayofselectedobj = this.arrayofselectedobj
     if(index<0){
       this.arrayofselectedobj.splice(index, 1);
       this.arrayofselectedobj.push(selected_obj);

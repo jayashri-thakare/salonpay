@@ -85,6 +85,7 @@ export class UserComponent implements OnInit {
   }
 
   addupdateform(type){
+    debugger;
     if(type == 'add'){
       this.updateform = false;
       this.addform = true;
@@ -102,7 +103,6 @@ export class UserComponent implements OnInit {
   }
 
   getuserRoles(user) {
-    debugger;
     this.AdminService.getUserAdminRoles(user).subscribe((data) => {
       this.userroles = data;
       this.userroles = this.userroles.result;
@@ -115,6 +115,7 @@ export class UserComponent implements OnInit {
       this.userlist = data;
       this.userlist = this.userlist.list;
       this.AdminService.setIndex(0,  this.userlist[0].user.id);
+      this.getuserRoles(this.userlist[0])
       this.pageviewemailfunc(this.userlist);
     });
   }
@@ -134,6 +135,7 @@ export class UserComponent implements OnInit {
     if (selected_user) {
       this.AdminService.deleteUser(selected_user[0].id).subscribe((data) => {
         console.log(data)
+        this.getuserList();
         this.messageService.clear();
         this.messageService.add(data['result']);
       });

@@ -292,8 +292,10 @@ export class AdminRolesComponent implements OnInit {
   getuserRoles() {
     this.AdminService.getUserRoles().subscribe((data) => {
       this.userroles = data;
+      console.log(this.userroles)
       this.userroles = this.userroles.result;
-      this.pageviewrolefunc(this.userroles);
+      this.GetCompanyRolesClaims(this.userroles[0]['id'])
+      this.getrolefunc(this.userroles[0]['id']);
       console.log(this.userroles)
     });
   }
@@ -355,8 +357,9 @@ export class AdminRolesComponent implements OnInit {
   }
 
   getrolefunc(userrole){
+    debugger;
     if(userrole){
-      this.rolevar = userrole.id;
+      this.rolevar = userrole;
       this.onloadvar = false;
     }
   }

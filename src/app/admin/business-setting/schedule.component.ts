@@ -7,11 +7,11 @@ import {MessageService} from '../../message.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-turncount',
+  selector: 'app-busischedule',
   styleUrls: ['./business.component.css'],
   template: '<!-- Main Container Starts -->\n' +
   '  <div *ngIf="AdminService.navTab==9">\n' +
-    '  <div *ngIf="AdminService.business_settingnav==9">\n' +
+    '  <div *ngIf="AdminService.business_settingnav==11">\n' +
     '    <div class="mainContainer">\n' +
     '\n' +
     '        <div class="busi-set">\n' +
@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
     '            <div class="busi-set-lef">\n' +
     '                    <div class="pro-comm-fle">\n' +
     '                       <h3 class="main-comm-head">Business Settings</h3>\n' +
-    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-turncount\');addupdateform(\'add\')">+ Add New</button>\n' +
+    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-schedule\')">+ Add New</button>\n' +
     '                    </div>\n' +
     '\n' +
     '                <!-- business nav start -->\n' +
@@ -39,24 +39,22 @@ import { Subscription } from 'rxjs';
     '                </div>\n' +
     '                <!-- business nav end -->\n' +
     '\n' +
-    '                <h6 class="comm-subhdn">Turn Count</h6>\n' +
+    '                <h6 class="comm-subhdn">Schedule Setting</h6>\n' +
     '                <!-- start -->\n' +
-    '                <div *ngIf="updatebtn" class="busi-rewv">\n' +
+    '                <div class="busi-rewv">\n' +
     '\n' +
-    '                    <!-- start -->\n' +
-    '                       <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1">\n' +
-    '                           <div class="f-col f-col-width" *ngFor="let turncount of businessturncount">\n' +
-    '                           <!-- start -->\n' +
-    '                               <div class="admin-mail-box">\n' +
-    '                               <h6 class="promo-head">{{turncount?.value}}</h6>\n' +
-    '                               <div class="yur-mail-rig">\n' +
-    '                                   <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'add-turncount\');addupdateform(\'update\');selectproductobj(turncount)"></i>\n' +
-    '                               </div>\n' +
-    '                           </div>\n' +
-    '                           <!-- end -->\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <!-- end -->\n' +
+     '                             <!-- start -->\n' +
+    '                              <div class="prof-comm-shad" *ngFor="let schedule of businessschedule">\n' +
+     '                                 <div class="comm-cont w33 f-col-width w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
+    '                                      <p>Working Day</p>\n' +
+    '                                      <h6>{{schedule.dayName}}</h6>\n' +
+    '                                  </div>\n' +
+    '                                  <div class="comm-cont w33 w-1200-50 mb-1200-20 w33 w-990-33 mb-990-0 w-480-50 mb-480-20 p-0">\n' +
+    '                                      <p>Working Hours</p>\n' +
+    '                                      <h6>{{schedule.startTimeHour}}:{{schedule.startTimeMinute}} {{schedule.startTimeMeridian}} - {{schedule.endTimeHour}}:{{schedule.endTimeMinute}} {{schedule.endTimeMeridian}}</h6>\n' +
+     '                                 </div>\n' +
+     '                             </div>\n' +
+    '                              <!-- end -->\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
     '            </div>\n' +
@@ -73,9 +71,9 @@ import { Subscription } from 'rxjs';
   '                        <li ><a (click)="AdminService.showBusinessNav(6)">Review</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(7)">Tax Table</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
-  '                        <li class="active"><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
+  '                        <li ><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
   '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
-  '                         <li ><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
+  '                         <li class="active"><a (click)="AdminService.showBusinessNav(11)">Schedule</a></li>\n' +
   '                    </ul>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -86,61 +84,26 @@ import { Subscription } from 'rxjs';
     '    </div>\n' +
     '    </div>\n' +
     '    </div>\n' +
-    '    <addturncount-modal [addturncount]="addturncount" [updateturncount]="updateturncount" [turncountsobj]="arrayofselectedobj"></addturncount-modal>\n' +
+    '    <addschedule-modal></addschedule-modal>\n' +
     '    <!-- Main Container Ends -->\n'
 })
-export class BusinessTurnCountComponent implements OnInit {
-  businessturncount: any;
-  public arrayofselectedobj: Array<any>=[];
-  updateturncount: boolean;
-  addturncount: boolean;
-  addbtn: boolean;
-  updatebtn: boolean;
+export class BusinessScheduleComponent implements OnInit {
+
   subscription: Subscription;
+  businessschedule: any;
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getTurnCount();
-    this.subscription = this.AdminService.on('call-turncount').subscribe(() => this.getTurnCount());
+    this.getSchedule();
   }
 
-  getTurnCount() {
-    this.AdminService.GetTurnCountList().subscribe((data) => {
-      this.businessturncount = data;
-      this.businessturncount = this.businessturncount.result;
-      console.log(this.businessturncount)
-      this.addupdatefuc(this.businessturncount)
+  getSchedule() {
+    this.AdminService.GetScheduleList().subscribe((data) => {
+      this.businessschedule = data;
+      // this.businessschedule = this.businessschedule.result;
+      console.log(this.businessschedule)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
-  }
-
-  selectproductobj(selected_obj){
-    var index = this.arrayofselectedobj.indexOf(selected_obj);
-    if(index<0){
-      this.arrayofselectedobj.splice(index, 1);
-      this.arrayofselectedobj.push(selected_obj);
-    }
-    console.log(this.arrayofselectedobj)
-  }
-
-  addupdateform(type){
-    if(type == 'add'){
-      this.updateturncount = false;
-      this.addturncount = true;
-    }else if(type == 'update'){
-      this.updateturncount = true;
-      this.addturncount = false;
-    }
-  }
-
-  addupdatefuc(businessServices){
-    if(businessServices){
-        this.addbtn = false;
-        this.updatebtn = true;
-    }else{
-        this.addbtn = true;
-        this.updatebtn = false;
-    }
   }
 
 }

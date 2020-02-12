@@ -21,7 +21,6 @@ export class AdminCouponComponent implements OnInit {
   }
 
   getCouponList() {
-    debugger;
     this.adminService.getCouponList().subscribe((data) => {
       this.couponList = data['list'];
     });

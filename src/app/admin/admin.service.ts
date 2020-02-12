@@ -44,6 +44,7 @@ export class AdminService {
   public serviceData: {
     serviceId: any;
   };
+  public arrayofselectedobj: Array<any>=[];
   // private result: Object = {
   //   result: any
   // };
@@ -244,7 +245,7 @@ export class AdminService {
 
   deleteUser(userid) {
     debugger;
-    return this.httpClient.delete('http://172.16.0.114:5555/Users/DeleteUser?UserId=' + userid);
+    return this.httpClient.delete('http://172.16.0.114:5555/api/Users/DeleteUser?UserId=' + userid);
   }
 
   GetCompanyRolesClaims(roleid) {
@@ -262,7 +263,7 @@ export class AdminService {
 
   assign_Role_ToUser(Admin) {
     debugger;
-    this.baseUrl = 'http://172.16.0.114:5555/api/User/AssignRoleToUser';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Users/AssignRoleToUser';
     Admin.ParentCompanyId = parseInt(localStorage.companyId);
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
@@ -561,6 +562,20 @@ export class AdminService {
   this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/UpdateCompanyInfo';
   return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
+  }
+
+  add_schedulebusiness(Admin) {
+    debugger;
+  Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+  this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/saveBusinessSchedule';
+  return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  GetScheduleList() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = ' http://172.16.0.99:8055/api/BusinessProfile/GetBusinessSchedule?ParentCompanyId=' + this.ParentCompanyId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   publish(eventName: string) {
