@@ -35,13 +35,13 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label">Email</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="phone-no" internationaltelno formControlName="PhoneNumber" class="form-field" max-length="10"\n' +
+    '                        <input type="text" id="phone-no" internationalTelNo formControlName="PhoneNumber" class="form-field" max-length="10"\n' +
     '                            required />\n' +
     '                        <p class="form-label">Phone Number</p>\n' +
     '                    </div>\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group form-field multi-height">\n' +
-    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'userservice\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\' [mode]=\'box\' [popupHeight]=\'popHeight\'></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="ServiceIds" id=\'localData\' #local [dataSource]=\'userservice\' [fields]=\'localFields\' [placeholder]=\'localWaterMark\'></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
@@ -94,19 +94,19 @@ import {MessageService} from '../../message.service';
     '                <!-- start -->\n' +
     '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="full-name" ngModel="{{userdetail.firstName}}" formControlName="FirstName" class="form-field field--not-empty" required />\n' +
+    '                        <input type="text" id="full-name" ngModel="{{userdetail.user.firstName}}" formControlName="FirstName" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Full Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="last-name" ngModel="{{userdetail.lastName}}" formControlName="LastName" class="form-field field--not-empty" required />\n' +
+    '                        <input type="text" id="last-name" ngModel="{{userdetail.user.lastName}}" formControlName="LastName" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Last Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="email" id="email" ngModel="{{userdetail.email}}" formControlName="Email" class="form-field field--not-empty" required />\n' +
+    '                        <input type="email" id="email" ngModel="{{userdetail.user.email}}" formControlName="Email" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Email</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="phone-no" internationalTelNo ngModel="{{userdetail.phoneNumber}}" formControlName="PhoneNumber" class="form-field field--not-empty" max-length="10"\n' +
+    '                        <input type="text" id="phone-no" internationalTelNo ngModel="{{userdetail.user.phoneNumber}}" formControlName="PhoneNumber" class="form-field field--not-empty" max-length="10"\n' +
     '                            required />\n' +
     '                        <p class="form-label">Phone Number</p>\n' +
     '                    </div>\n' +
@@ -116,7 +116,7 @@ import {MessageService} from '../../message.service';
     '                    </div>\n' +
     '                    <!-- end -->\n' +
     '                    <div class="form-group">\n' +
-    '                        <select class="select-field form-field" ngModel="{{userdetail.levelType}}" formControlName="ExpLevelId" id="select-fld" required>\n' +
+    '                        <select class="select-field form-field field--not-empty" ngModel="{{userdetail.user.expLevelId}}" formControlName="ExpLevelId" id="select-fld" required>\n' +
     '                            <option></option>\n' +
     '                            <option *ngFor="let exp of userexp" value="{{exp.expLevelId}}">{{exp.levelType}}</option>\n' +
     '                        </select>\n' +
@@ -126,9 +126,9 @@ import {MessageService} from '../../message.service';
     '                    <div class="form-group">\n' +
     '                        <h6 class="poptile">Track Hours</h6>\n' +
     '                        <div class="switch switch--horizontal m-0">\n' +
-    '                            <input id="trk-hrs-no" type="radio" ngModel="{{userdetail.timeTrack}}" formControlName="TimeTrack" value="false">\n' +
+    '                            <input id="trk-hrs-no" type="radio" formControlName="TimeTrack" value="false">\n' +
     '                            <label for="trk-hrs-no">No</label>\n' +
-    '                            <input id="trk-hrs-yes" type="radio" ngModel="{{userdetail.timeTrack}}" formControlName="TimeTrack" value="true">\n' +
+    '                            <input id="trk-hrs-yes" type="radio" [checked]="userdetail.user.timeTrack" formControlName="TimeTrack" value="true">\n' +
     '                            <label for="trk-hrs-yes">Yes</label><span class="toggle-outside"><span\n' +
     '                                    class="toggle-inside"></span></span>\n' +
     '                        </div>\n' +
@@ -137,15 +137,15 @@ import {MessageService} from '../../message.service';
     '                    <!-- start -->\n' +
     '                    <h6 class="poptile">Gender</h6>\n' +
     '                    <div class="radio-box">\n' +
-    '                        <input type="radio" id="radio1" ngModel="{{userdetail.gender}}" formControlName="Gender" value="Male" />\n' +
+    '                        <input type="radio" id="radio1" ngModel="{{userdetail.user.gender}}" formControlName="Gender" value="Male" />\n' +
     '                        <label for="radio1">Male</label>\n' +
     '                    </div>\n' +
     '                    <div class="radio-box">\n' +
-    '                        <input type="radio" id="radio2" ngModel="{{userdetail.gender}}" formControlName="Gender" value="Female" />\n' +
+    '                        <input type="radio" id="radio2" ngModel="{{userdetail.user.gender}}" formControlName="Gender" value="Female" />\n' +
     '                        <label for="radio2">Female</label>\n' +
     '                    </div>\n' +
     '                    <div class="radio-box">\n' +
-    '                        <input type="radio" id="radio3" ngModel="{{userdetail.gender}}" formControlName="Gender" value="Others" />\n' +
+    '                        <input type="radio" id="radio3" ngModel="{{userdetail.user.gender}}" formControlName="Gender" value="Others" />\n' +
     '                        <label for="radio3">Others</label>\n' +
     '                    </div>\n' +
     '                    <!-- end -->\n' +

@@ -145,26 +145,7 @@ import { UserdataService } from 'src/app/userdata.service';
   '                <!-- end -->\n' +
   '            </div>\n' +
   '\n' +
-  '            <div class="busi-set-rig">\n' +
-  '                <!-- start -->\n' +
-  '                <div class="busi-affix">\n' +
-  '                    <ul>\n' +
-  '                        <li class="active"><a (click)="AdminService.showBusinessNav(1)">Tip Adjustment</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(2)">Staff</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(3)">Inventory</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(4)">Customer</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(5)">Coupon</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(6)">Review</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(7)">Tax Table</a></li>\n' +
-  '                        <li ><a (click)="AdminService.showBusinessNav(8)">Services Category</a></li>\n' +
-  '                        <li><a (click)="AdminService.showBusinessNav(9)">Turn Count</a></li>\n' +
-  '                        <li ><a (click)="AdminService.showBusinessNav(10)">Experience Level</a></li>\n' +
-  '                        <li ><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
-  '                         <li ><a (click)="AdminService.showBusinessNav(12)">Schedule</a></li>\n' +
-  '                    </ul>\n' +
-  '                </div>\n' +
-  '                <!-- end -->\n' +
-  '            </div>\n' +
+  '            <app-settingsidebar></app-settingsidebar>\n' +
   '\n' +
   '        </div>\n' +
   '\n' +
@@ -180,7 +161,7 @@ import { UserdataService } from 'src/app/userdata.service';
 export class BusinessTipAdjustmentComponent implements OnInit {
   businesstipadjustment: any;
   subscription: Subscription;
-  constructor(public userdataService: UserdataService, public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public userdataService: UserdataService, public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getTipAdjustment();

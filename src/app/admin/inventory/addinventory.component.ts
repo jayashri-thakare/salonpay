@@ -65,6 +65,14 @@ import { parse } from 'querystring';
     '                    <p class="form-label">Product Cost</p>\n' +
     '                </div>\n' +
     '                <div class="form-group">\n' +
+    '                    <input type="number" id="def-time" formControlName="QtyBought" name="def-time" class="form-field" [ngClass]="{ \'error\': submitted && f.ProductCost.errors }" />\n' +
+    '                    <p class="form-label">Quantity Bought</p>\n' +
+    '                </div>\n' +
+    '                <div class="form-group">\n' +
+    '                    <input type="number" id="def-time" formControlName="QtyInstock" name="def-time" class="form-field" [ngClass]="{ \'error\': submitted && f.ProductCost.errors }" />\n' +
+    '                    <p class="form-label">Quantity InStock</p>\n' +
+    '                </div>\n' +
+    '                <div class="form-group">\n' +
     '                    <input type="number" id="serv-cost" name="serv-cost" formControlName="SalePrice" class="form-field" [ngClass]="{ \'error\': submitted && f.SalePrice.errors }" />\n' +
     '                    <p class="form-label">Sale Price</p>\n' +
     '                </div>\n' +
@@ -136,6 +144,14 @@ import { parse } from 'querystring';
     '                    <p class="form-label">Product Cost</p>\n' +
     '                </div>\n' +
     '                <div class="form-group">\n' +
+    '                    <input type="number" id="def-time" formControlName="QtyBought" name="def-time" ngModel="{{product?.qtyBought}}" class="form-field" [ngClass]="{ \'error\': submitted && f.ProductCost.errors }" />\n' +
+    '                    <p class="form-label">Quantity Bought</p>\n' +
+    '                </div>\n' +
+    '                <div class="form-group">\n' +
+    '                    <input type="number" id="def-time" formControlName="QtyInstock" name="def-time" ngModel="{{product?.qtyInstock}}" class="form-field" [ngClass]="{ \'error\': submitted && f.ProductCost.errors }" />\n' +
+    '                    <p class="form-label">Quantity InStock</p>\n' +
+    '                </div>\n' +
+    '                <div class="form-group">\n' +
     '                    <input type="number" id="serv-cost" name="serv-cost" ngModel="{{product?.salePrice}}" formControlName="SalePrice" class="form-field field--not-empty" />\n' +
     '                    <p class="form-label">Sale Price</p>\n' +
     '                </div>\n' +
@@ -194,7 +210,9 @@ export class AddInventoryComponent implements OnInit {
         ProductCost: ['', [Validators.required]],
         SalePrice: ['', [Validators.required]],
         ReOrderMin: ['', [Validators.required]],
-        Status: ['', [Validators.required]]
+        Status: ['', [Validators.required]],
+        QtyBought: ['', [Validators.required]],
+        QtyInstock: ['', [Validators.required]]
     });
     this.updateinventoryForm = this.formBuilder.group({
       ProductName: [''],
@@ -205,7 +223,9 @@ export class AddInventoryComponent implements OnInit {
       ProductCost: [''],
       SalePrice: [''],
       ReOrderMin: [''],
-      Status: ['']
+      Status: [''],
+      QtyBought: [''],
+      QtyInstock: ['']
   });
   }
 

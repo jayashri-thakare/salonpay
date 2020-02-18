@@ -13,3 +13,9 @@
 .form-with-field {
   border: 1px solid #a7b3c4;
 }
+.form-rem-icon{
+  transform: rotate(45deg);
+}
+.form-width{
+  width: 40%;
+}

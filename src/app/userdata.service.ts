@@ -251,6 +251,7 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
+    debugger;
 	   this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture?';
 	   const input = new FormData();
 	   input.append('file', userdata[0]);
@@ -276,7 +277,7 @@ export class UserdataService {
 //   })
 // };
 
-    this.httpClient.post(this.baseUrl, input, httpOptions).subscribe((val) => {
+    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
       this.imagepath = val['profilePicPath'];
     });
   }

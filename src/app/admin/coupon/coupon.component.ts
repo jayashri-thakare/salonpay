@@ -10,11 +10,11 @@ import {Subscription} from 'rxjs';
 })
 
 export class AdminCouponComponent implements OnInit {
-  private couponList: any;
+  public couponList: any;
   private subscription: Subscription;
-  private grid: boolean;
-  private gridview: boolean;
-  private listview: boolean;
+  public grid: boolean;
+  public gridview: boolean;
+  public listview: boolean;
 
   constructor(public adminService: AdminService, public modalService: ModalService) { }
 

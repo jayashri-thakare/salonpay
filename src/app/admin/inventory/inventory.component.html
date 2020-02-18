@@ -49,8 +49,8 @@
             </div>
         </div>
         <div id="gridView" [ngStyle]="{'display': gridview ? 'block' : 'none' }">
-            <div class="f-row f-3 f-1440-2 f-768-1" *ngFor="let product of adminproduct.list; let i = index;">
-                <div class="f-col">
+            <div class="f-row f-3 f-1440-2 f-768-1">
+                <div class="f-col" *ngFor="let product of adminproduct.list; let i = index;">
                     <!-- start -->
                     <div class="app-grid-box">
                         <div class="techi-top techi-top-qty">
@@ -85,7 +85,7 @@
                                 <i class="icon-stock"></i>
                                 <div class="tech-usr-cont">
                                     <p>Stock</p>
-                                    <h3>25/40</h3>
+                                    <h3>{{product.qtyInstock}}/{{product.qtyBought}}</h3>
                                 </div>
                             </div>
                             <div class="techi-user">
@@ -150,7 +150,7 @@
                     </li>
                     <li>
                         <span>Stock</span>
-                        <b>25/40</b>
+                        <b>{{product.qtyInstock}}/{{product.qtyBought}}</b>
                     </li>
                     <li>
                         <span>Total Sales</span>

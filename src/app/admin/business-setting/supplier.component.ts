@@ -7,11 +7,11 @@ import {MessageService} from '../../message.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-explevel',
+  selector: 'app-supplier',
   styleUrls: ['./business.component.css'],
   template: '<!-- Main Container Starts -->\n' +
   '  <div *ngIf="AdminService.navTab==9">\n' +
-    '  <div *ngIf="AdminService.business_settingnav==10">\n' +
+    '  <div *ngIf="AdminService.business_settingnav==13">\n' +
     '    <div class="mainContainer">\n' +
     '\n' +
     '        <div class="busi-set">\n' +
@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
     '            <div class="busi-set-lef">\n' +
     '                    <div class="pro-comm-fle">\n' +
     '                       <h3 class="main-comm-head">Business Settings</h3>\n' +
-    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-explevel\');addupdateform(\'add\')">+ Add New</button>\n' +
+    '                       <button class="button flg-btn side-menu" (click)="modalService.open1(\'add-supplier\');addupdateform(\'add\')">+ Add New</button>\n' +
     '                    </div>\n' +
     '\n' +
     '                <!-- business nav start -->\n' +
@@ -39,18 +39,18 @@ import { Subscription } from 'rxjs';
     '                </div>\n' +
     '                <!-- business nav end -->\n' +
     '\n' +
-    '                <h6 class="comm-subhdn">Experience Level</h6>\n' +
+    '                <h6 class="comm-subhdn">Supplier</h6>\n' +
     '                <!-- start -->\n' +
     '                <div *ngIf="updatebtn" class="busi-rewv">\n' +
     '\n' +
     '                    <!-- start -->\n' +
     '                       <div class="f-row f-6 f-1440-5 f-1200-4 f-768-3 f-640-2 f-400-1">\n' +
-    '                           <div class="f-col f-col-width" *ngFor="let explevel of businessexplevel">\n' +
+    '                           <div class="f-col f-col-width" *ngFor="let supplier of businesssupplier">\n' +
     '                           <!-- start -->\n' +
     '                               <div class="admin-mail-box">\n' +
-    '                               <h6 class="promo-head">{{explevel?.serviceLevelName}}</h6>\n' +
+    '                               <h6 class="promo-head">{{supplier?.supplierName}}</h6>\n' +
     '                               <div class="yur-mail-rig">\n' +
-    '                                   <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'add-explevel\');addupdateform(\'update\');selectproductobj(explevel)"></i>\n' +
+    '                                   <i class="icon-edit grd-icon side-menu" (click)="modalService.open1(\'add-supplier\');addupdateform(\'update\');selectproductobj(supplier)"></i>\n' +
     '                               </div>\n' +
     '                           </div>\n' +
     '                           <!-- end -->\n' +
@@ -68,30 +68,30 @@ import { Subscription } from 'rxjs';
     '    </div>\n' +
     '    </div>\n' +
     '    </div>\n' +
-    '    <addexplevel-modal [addexplevel]="addexplevel" [updateexplevel]="updateexplevel" [explevelobj]="arrayofselectedobj"></addexplevel-modal>\n' +
+    '    <addsupplier-modal [addsup]="addsup" [updatesup]="updatesup" [turncountsobj]="arrayofselectedobj"></addsupplier-modal>\n' +
     '    <!-- Main Container Ends -->\n'
 })
-export class BusinessExpLevelComponent implements OnInit {
-  businessexplevel: any;
+export class SupplierComponent implements OnInit {
+  businesssupplier: any;
   public arrayofselectedobj: Array<any>=[];
-  updateexplevel: boolean;
-  addexplevel: boolean;
+  updatesup: boolean;
+  addsup: boolean;
   addbtn: boolean;
   updatebtn: boolean;
   subscription: Subscription;
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getExpLevel();
-    this.subscription = this.AdminService.on('call-explevel').subscribe(() => this.getExpLevel());
+    this.getSupplier();
+    this.subscription = this.AdminService.on('call-supplier').subscribe(() => this.getSupplier());
   }
 
-  getExpLevel() {
-    this.AdminService.GetExpLevelList().subscribe((data) => {
-      this.businessexplevel = data;
-      this.businessexplevel = this.businessexplevel.result;
-      console.log(this.businessexplevel)
-      this.addupdatefuc(this.businessexplevel)
+  getSupplier() {
+    this.AdminService.GetSupplierList().subscribe((data) => {
+      this.businesssupplier = data;
+    //   this.businesssupplier = this.businesssupplier.result;
+      console.log(this.businesssupplier)
+      this.addupdatefuc(this.businesssupplier)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
@@ -107,11 +107,11 @@ export class BusinessExpLevelComponent implements OnInit {
 
   addupdateform(type){
     if(type == 'add'){
-      this.updateexplevel = false;
-      this.addexplevel = true;
+      this.updatesup = false;
+      this.addsup = true;
     }else if(type == 'update'){
-      this.updateexplevel = true;
-      this.addexplevel = false;
+      this.updatesup = true;
+      this.addsup = false;
     }
   }
 
