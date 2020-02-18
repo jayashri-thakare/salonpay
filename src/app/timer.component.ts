@@ -118,13 +118,15 @@ export class TimerComponent1 implements OnInit, OnDestroy {
     this.userdataService.get_time_difference().subscribe((data) => {
       // this.userdetail = data;
       debugger;
-      var hms = data['totalTime'];
-      var a = hms.split(':'); // split it at the colons
+      if(data['totalTime']) {
+        var hms = data['totalTime'];
+        var a = hms.split(':'); // split it at the colons
 
-      // minutes are worth 60 seconds. Hours are worth 60 minutes.
-      var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
-      this.start = seconds;
-      this.startTimer();
+        // minutes are worth 60 seconds. Hours are worth 60 minutes.
+        var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+        this.start = seconds;
+        this.startTimer();
+      }
     });
   }
   private stopTimer() {

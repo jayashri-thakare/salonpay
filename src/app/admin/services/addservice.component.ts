@@ -25,7 +25,7 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label sel-blk">Service Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                           <select class="select-field form-field field--not-empty" formControlName="ServiceCategoryId" ngModel="{{adminService.serviceData?.serviceName}}">\n' +
+    '                           <select class="select-field form-field field--not-empty" formControlName="ServiceCategoryId" ngModel="{{adminService.serviceData?.serviceCategoryId}}">\n' +
     '                             <option value="">Select Category</option>\n' +
     '                             <option *ngFor="let category of service_category" [ngValue]="category?.serviceCategoryId">{{category?.categoryType}}</option>\n' +
     '                           </select>\n' +
@@ -63,7 +63,7 @@ import {MessageService} from '../../message.service';
     '                    <div formArrayName="ServicePriceSt"> \n' +
     '                    <div *ngFor="let level of levelFormGroup.controls; let i = index;">\n' +
     '                    <div  [formGroupName]="i">\n' +
-    '                    <div class="level-price-box" *ngIf="multi===true || adminService.serviceData?.pricingBit==true">\n' +
+    '                    <div class="level-price-box" *ngIf="multi===true">\n' +
     '                        <div class="form-group w60 w-768-100 pl-0" >\n' +
     '                           <select class="select-field form-field" formControlName="ServiceLevelId" >\n' +
     '                             <option value="">Select Level</option>\n' +
@@ -80,7 +80,7 @@ import {MessageService} from '../../message.service';
     '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent"  required />\n' +
     '                        <p class="form-label">Commission Split %</p>\n' +
     '                    </div>\n' +
-    '                        <i class="icon-cir-plus mr-2" *ngIf="multi===true" (click)="removeLevel(i)"></i>remove\n' +
+    // '                        <i class="icon-cir-plus mr-2" *ngIf="multi===true" (click)="removeLevel(i)"></i>remove\n' +
     '                    </div>\n' +
     '                    </div>\n' +
     '                    </div>\n' +

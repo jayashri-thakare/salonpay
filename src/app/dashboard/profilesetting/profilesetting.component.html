@@ -14,15 +14,15 @@
           <div class="avatar-upload">
             <div class="avatar-edit">
               <label class="hoverable" for="fileInput">
-                <img [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'">
+                <img [src]="userdataService.imagepath!=null ? userdataService.imagepath : 'https://www.w3schools.com/howto/img_avatar.png'">
                 <div class="hover-text">Choose file</div>
                 <div class="background"></div>
-              </label>
+
               <input id="fileInput" type='file' (change)="userdataService.upload_profile_image($event.target.files)">
 
 <!--              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />-->
               <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>
-              {{userdataService.imagepath}}
+              </label>
             </div>
 <!--            <div class="avatar-preview">-->
 <!--              <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">-->

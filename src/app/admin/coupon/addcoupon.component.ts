@@ -37,7 +37,7 @@ import { Subscription } from 'rxjs';
     '                    </div>\n' +
     '                    </div>\n' +
     '                    <div class="form-textarea-group">\n' +
-    '                        <textarea type="text" class="form-field" ngModel="{{adminService.coupon?.description}}" formControlName="Description"></textarea>\n' +
+    '                        <textarea type="text" class="form-field" [ngClass]="{\'field--not-empty\': adminService.coupon?.description}" ngModel="{{adminService.coupon?.description}}" formControlName="Description"></textarea>\n' +
     '                        <p class="form-label">Description</p>\n' +
     '                    </div>\n' +
     '\n' +
@@ -79,7 +79,7 @@ import { Subscription } from 'rxjs';
     // '                        </select>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" formControlName="CouponCode" ngModel="{{adminService.coupon?.couponCode}}" id="CouponCode" name="serv-code" class="form-field" required />\n' +
+    '                        <input type="text" formControlName="CouponCode" [ngClass]="{\'field--not-empty\': adminService.coupon?.couponCode}"  ngModel="{{adminService.coupon?.couponCode}}" id="CouponCode" name="serv-code" class="form-field" required />\n' +
     '                        <p class="form-label">Coupon Code</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
@@ -164,6 +164,7 @@ export class AddCouponComponent implements OnInit {
       userdata.ValueBit = false;
     }
     userdata.Value = parseInt(userdata.Value)
+    userdata.MaxUses = parseInt(userdata.MaxUses);
     userdata.ValueBit = Boolean(userdata.ValueBit)
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_coupon(userdata).subscribe((data) => {
