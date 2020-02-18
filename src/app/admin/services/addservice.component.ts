@@ -25,7 +25,7 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label sel-blk">Service Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                           <select class="select-field form-field field--not-empty" formControlName="ServiceCategoryId" ngModel="{{adminService.serviceData?.serviceName}}">\n' +
+    '                           <select class="select-field form-field field--not-empty" formControlName="ServiceCategoryId" ngModel="{{adminService.serviceData?.serviceCategoryId}}">\n' +
     '                             <option value="">Select Category</option>\n' +
     '                             <option *ngFor="let category of service_category" [ngValue]="category?.serviceCategoryId">{{category?.categoryType}}</option>\n' +
     '                           </select>\n' +
@@ -71,13 +71,13 @@ import {MessageService} from '../../message.service';
     '                           </select>\n' +
     '                        </div>\n' +
     '                        <div class="form-group w40 w-768-100 p-0">\n' +
-    '                            <input type="number" id="price" name="price" class="form-field" formControlName="Price" required />\n' +
+    '                            <input type="number" id="price" name="price" class="form-field" formControlName="Price"  />\n' +
     '                            <p class="form-label">Price</p>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent" required />\n' +
+    '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent"  required />\n' +
     '                        <p class="form-label">Commission Split %</p>\n' +
     '                    </div>\n' +
     '                    <button type="button" class="button dashed-button mb-4">\n' +
@@ -100,7 +100,7 @@ import {MessageService} from '../../message.service';
     '                        <label for="turn-count-2">On</label><span class="toggle-outside"><span\n' +
     '                                class="toggle-inside"></span></span>\n' +
     '                    </div>\n' +
-    '                    <div class="form-group" *ngIf="turn===true">\n' +
+    '                    <div class="form-group" *ngIf="turn===true || adminService.serviceData?.turnCountId">\n' +
     '                        <select class="select-field form-field  field--not-empty" formControlName="TurnCountValue" ngModel="{{adminService.serviceData?.turnCountId}}">\n' +
     '                             <option value="">Select Turn</option>\n' +
     '                             <option *ngFor="let turn of turn_countlist" [ngValue]="turn?.turnCountId">{{turn.value}}</option>\n' +
@@ -224,12 +224,22 @@ export class AddServiceComponent implements OnInit {
 
   }
   updateDetail(userdata) {
+    debugger;
     // userdata.Email = this.email;
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
-    if(userdata.PricingBit==''){
+    if(userdata.PricingBit=='' || userdata.ServicePriceSt[0].ServiceLevelId==''){
       userdata.PricingBit = false;
+      userdata.ServicePriceSt[0].ServiceLevelId = 0;
+      userdata.ServicePriceSt[0].Price = 0;
     }
+    if(userdata.TurnCountOverride==''){
+      userdata.TurnCountOverride = false;
+      userdata.TurnCountValue = 0;
+    }
+    userdata.PricingBit = Boolean(userdata.PricingBit);
+    userdata.TurnCountValue = + (userdata.TurnCountValue)
+    userdata.TurnCountOverride = Boolean(userdata.TurnCountOverride)
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_service(userdata).subscribe((data) => {
       this.adminService.publish('service-list');

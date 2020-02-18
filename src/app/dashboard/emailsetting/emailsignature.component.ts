@@ -18,7 +18,7 @@ import {parseJsonSchemaToCommandDescription} from '@angular/cli/utilities/json-s
     '    <i class="icon-down-arrow com-arw"></i>{{\'Email\' | translate}}  <span>{{\'Signature\' | translate}}</span>\n' +
     '  </h3>\n' +
     '<form class="popup-scrll" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)">\n' +
-    '<ejs-richtexteditor formControlName="EmailSignature" ngModel="{{userdetail.emailSignature}}"></ejs-richtexteditor>\n' +
+    '<ejs-richtexteditor formControlName="EmailSignature" ngModel="{{userdetail?.emailSignature}}"></ejs-richtexteditor>\n' +
     // '   <ejs-richtexteditor id=\'iframeRTE\' [(value)]=\'value\' [toolbarSettings]=\'tools\'></ejs-richtexteditor>\n' +
     '\n' +
     '    <div class="popBtn">\n' +

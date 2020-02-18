@@ -82,6 +82,7 @@ export class AdminService {
     this.httpClient.get(this.baseUrl).subscribe((data) => {
       // tslint:disable-next-line:indent
       this.res = data;
+      debugger;
       // tslint:disable-next-line:indent
       this.result = this.res['result'];
       this.serviceData = this.result.serviceDetails;
@@ -89,6 +90,11 @@ export class AdminService {
     });
 
 
+  }
+
+  getStaff() {
+    this.baseUrl = ' http://172.16.0.99:8055/api/BusinessProfile/GetStaffSetting?ParentCompanyId=5';
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
   public showNav(nav) {
     this.navTab = nav;
@@ -172,6 +178,17 @@ export class AdminService {
     coupon.Technician = [coupon.Technician];
     // coupon.ProductId = [coupon.ProductId];
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, coupon, httpOptions)
+      .pipe(map( data => data));
+  }
+
+  createStaff(staff) {
+    this.baseUrl = 'http://172.16.0.99:8055/api/BusinessProfile/SaveStaffSetting';
+    let userdata = {}
+    userdata['ParentCompanyId'] = parseInt(localStorage.companyId);
+    userdata['staff'] = staff
+    // coupon.Service = [coupon.Service];
+    // coupon.ProductId = [coupon.ProductId];
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, userdata, httpOptions)
       .pipe(map( data => data));
   }
 

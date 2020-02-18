@@ -26,7 +26,9 @@ export class ProfilesettingComponent implements OnInit {
 
   ngOnInit() {
     this.userdataService.profilenav = true;
+    this.userdataService.imagepath = '';
     this.getUserDetails();
+    this.userdataService.getProfilePic(localStorage.getItem('userId'));
     this.subscription = this.userdataService.on('call-parent').subscribe(() => this.getUserDetails());
   }
 
