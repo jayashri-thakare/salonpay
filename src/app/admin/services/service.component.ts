@@ -14,6 +14,7 @@ export class AdminServiceComponent implements OnInit {
   // tslint:disable-next-line:no-shadowed-variable
   public serviceList: Observable<any>;
   public result: Observable<any>;
+  arrayofselectedobj: Array<any> = [];
   constructor(public adminService: AdminService, public modalService: ModalService, public messageService: MessageService) {
   }
 
@@ -35,11 +36,20 @@ export class AdminServiceComponent implements OnInit {
     this.adminService.serviceData = service;
   }
 
+  selectproductobj(selected_obj){
+    var index = this.arrayofselectedobj.indexOf(selected_obj);
+    if(index<0){
+      this.arrayofselectedobj.splice(index, 1);
+      this.arrayofselectedobj.push(selected_obj);
+    }
+    console.log(this.arrayofselectedobj)
+  }
+
   deleteService(service) {
-    this.adminService.deleteService(service).subscribe((data) => {
+    this.adminService.deleteService(service[0].serviceId).subscribe((data) => {
       this.getServiceList();
       this.messageService.clear();
-      this.messageService.add(data['result']);
+      this.messageService.add('Service deleted successfully.');
     });
   }
 }
