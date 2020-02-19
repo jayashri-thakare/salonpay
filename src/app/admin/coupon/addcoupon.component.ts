@@ -33,7 +33,7 @@ import { Subscription } from 'rxjs';
     '                    <div *ngIf="hidetech===true">\n' +
     '                     <h6 class="poptile">Technicians</h6>\n' +
     '                    <div class="form-group mt-2 form-field multi-height" >\n' +
-    '                    <ejs-multiselect formControlName="Technician" id=\'localData\' #local [dataSource]=\'technician\' [fields]=\'techfields\' [mode]=\'box\' [popupHeight]=\'popHeight\' [placeholder]=\'Technician\' ></ejs-multiselect>\n'+
+    '                    <ejs-multiselect formControlName="Technician" id=\'localData\' #local [dataSource]=\'technician\' [fields]=\'techfields\' [placeholder]=\'Technician\' ></ejs-multiselect>\n'+
     '                    </div>\n' +
     '                    </div>\n' +
     '                    <div class="form-textarea-group">\n' +
@@ -58,7 +58,7 @@ import { Subscription } from 'rxjs';
     '                    </div>\n' +
     '                        <h6 class="poptile">Expiry Date</h6>\n' +
     '                    <div class="form-group form-field select2-selection select2-selection--multiple">\n' +
-    '              <ejs-datetimepicker id=\'datetimepicker\' formControlName="ExpiryDate" [max]="maxDate" ngModel="{{adminService.coupon?.expiryDate}}" [value]=\'dateValue\' format =\'MM/dd/yyyy\'></ejs-datetimepicker>' +
+    '              <ejs-datetimepicker id=\'datetimepicker\' formControlName="ExpiryDate" ngModel="{{adminService.coupon?.expiryDate}}" format =\'MM/dd/yyyy\'></ejs-datetimepicker>' +
     '                    </div>\n' +
     '                        <h6 class="poptile">Service</h6>\n' +
     '                    <div class="form-group mt-2 form-field">\n' +
@@ -117,8 +117,8 @@ export class AddCouponComponent implements OnInit {
     public multifields: Object = { text: 'serviceName', value: 'serviceId'};
     public techfields: Object = { text: 'fullName', value: 'id'};
     public prodfields: Object = { text: 'productName', value: 'productId'};
-  private technician: any;
-  constructor(public adminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  public technician: any;
+  constructor(public adminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   get f() {
     return this.addcouponForm.controls;

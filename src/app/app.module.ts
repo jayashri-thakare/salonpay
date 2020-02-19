@@ -94,6 +94,9 @@ import {PayperiodComponent} from './admin/business-setting/payperiod.component';
 import {BusinessScheduleComponent} from './admin/business-setting/schedule.component'
 import {AddScheduleComponent} from './admin/business-setting/addschedule.component'
 import {AddPayPeriodComponent} from './admin/business-setting/addpayperiod.component'
+import {BusinessSidebarComponent} from './admin/business-setting/businesssettingsidebar.component'
+import {AddSupplierComponent} from './admin/business-setting/addsupplier.component'
+import {SupplierComponent} from './admin/business-setting/supplier.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -138,6 +141,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BusinessServicesCategoryComponent,
     AddServicesComponent,
     AddPayPeriodComponent,
+    BusinessSidebarComponent,
+    AddSupplierComponent,
+    SupplierComponent,
     BusinessTurnCountComponent,
     AddTurnCountComponent,
     BusinessScheduleComponent,

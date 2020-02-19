@@ -11,12 +11,12 @@ import {MessageService} from '../../message.service';
 })
 
 export class AdminCouponComponent implements OnInit {
-  private couponList: any;
+  public couponList: any;
   private subscription: Subscription;
-  private grid: boolean;
-  private gridview: boolean;
-  private listview: boolean;
   arrayofselectedobj: Array<any> = [];
+  public grid: boolean;
+  public gridview: boolean;
+  public listview: boolean;
 
   constructor(public adminService: AdminService, public modalService: ModalService, public messageService: MessageService) { }
 

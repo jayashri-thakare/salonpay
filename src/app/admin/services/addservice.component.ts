@@ -80,7 +80,9 @@ import {MessageService} from '../../message.service';
     '                        <input type="number" id="com-split" name="com-split" class="form-field" formControlName="CommissionSplitPercent"  required />\n' +
     '                        <p class="form-label">Commission Split %</p>\n' +
     '                    </div>\n' +
-    // '                        <i class="icon-cir-plus mr-2" *ngIf="multi===true" (click)="removeLevel(i)"></i>remove\n' +
+    '                    <button type="button" class="button dashed-button mb-4">\n' +
+    '                        <i class="icon-cir-plus form-rem-icon mr-2" (click)="removeLevel(i)"></i>remove\n' +
+    '                    </button>\n' +
     '                    </div>\n' +
     '                    </div>\n' +
     '                    </div>\n' +
@@ -127,17 +129,17 @@ export class AddServiceComponent implements OnInit {
 
   submitted = false;
   // tslint:disable-next-line:no-shadowed-variable
-  private result: {};
-  private service_category: {};
-  private service_level: {};
+  public result: {};
+  public service_category: {};
+  public service_level: {};
   // tslint:disable-next-line:variable-name
-  private turn_countlist: {};
+  public turn_countlist: {};
   public servicedetail: {};
   service: {};
   serviceName: string
   public multifields: Object = { text: 'serviceName', value: 'serviceId'};
-  private multi: boolean;
-  private turn: boolean;
+  public multi: boolean;
+  public turn: boolean;
 
   constructor(public adminService: AdminService, public modalService: ModalService, private formBuilder: FormBuilder,
               private messageService: MessageService) {

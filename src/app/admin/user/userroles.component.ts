@@ -36,9 +36,13 @@ import {Observable} from 'rxjs';
     '                                        <form class="popup-scrll" [formGroup]="userroleForm">\n' +
       '                                        <div class="w50 w-1200-100" *ngFor="let roles of userroleslist;let i = index">\n' +
       '                                            <!-- start -->\n' +
-      '                                             <div class="radio-box">\n' +
-                                                      '<input id="{{roles.name}}" type="radio" [value]="roles.name" name="RoleList" formControlName="RoleList" />\n' +
+      '                                             <div *ngIf="userrolesuccess == 1" class="radio-box">\n' +
+                                                      '<input id="{{roles.name}}" type="radio" [value]="roles.name" ngModel="{{userroles[0]}}" name="RoleList" formControlName="RoleList" />\n' +
                                                           '<label for="{{roles.name}}">{{roles.name}}</label>\n' +
+      '                                              </div>\n' +
+      '                                             <div *ngIf="userrolesuccess == 0" class="radio-box">\n' +
+      '                                               <input id="{{roles.name}}" type="radio" [value]="roles.name" name="RoleList" formControlName="RoleList" />\n' +
+          '                                             <label for="{{roles.name}}">{{roles.name}}</label>\n' +
       '                                              </div>\n' +
       '                                            <!-- end -->\n' +
       '                                        </div>\n' +
@@ -318,7 +322,7 @@ export class UserRightsComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.userroleForm.status == 'VALID') {
       this.AdminService.assign_Role_ToUser(Admin).subscribe((data) => {
-        // this.AdminService.publish('call-user');
+        this.AdminService.publish('call-user');
         this.messageService.clear();
         this.messageService.add('User Role created successfully.')
       });
@@ -342,7 +346,7 @@ export class UserRightsComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.userroleForm.status == 'VALID') {
       this.AdminService.update_assign_Role_ToUser(Admin).subscribe((data) => {
-        // this.AdminService.publish('call-user');
+        this.AdminService.publish('call-user');
         this.messageService.clear();
         this.messageService.add('User Role updated successfully.')
       });

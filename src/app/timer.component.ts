@@ -10,7 +10,8 @@ import {UserdataService} from './userdata.service';
       <div class="time-track" >
         <div class="time-hed" (click)="timetrack= !timetrack">
           <h6>Time Tracker</h6>
-          <i ng-class="{ timetrack ? 'icon-cross' : 'icon-minus'}" ></i>
+          <i class="icon-cross trk-plus" [ngStyle]="{'display': timetrack ? 'block' : 'none' }"></i>
+          <i class="icon-minus trk-minus" [ngStyle]="{'display': !timetrack ? 'block' : 'none' }"></i>
         </div>
         <div class="trak-sld">
           <div class="trk-prof">

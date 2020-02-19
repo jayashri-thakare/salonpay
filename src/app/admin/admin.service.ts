@@ -300,6 +300,14 @@ export class AdminService {
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  add_supplier(Admin) {
+    debugger;
+    Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8055/api/Inventory/AddSupplier';
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+  .pipe(map( data => data));
+  }
+
   add_inventory(Admin) {
     this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Inventory/AddProduct';
     Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));

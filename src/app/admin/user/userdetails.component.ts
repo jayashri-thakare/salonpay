@@ -3,6 +3,7 @@ import {ModalService} from '../../_modal/modal.service';
 import {MessageService} from '../../message.service';
 import {FormBuilder} from '@angular/forms';
 import {AdminService} from '../admin.service';
+import { UserdataService } from 'src/app/userdata.service';
 
 @Component({
   selector: 'app-userdetail',
@@ -23,16 +24,18 @@ import {AdminService} from '../admin.service';
     '                                <!-- end -->\n' +
     '                                <div class="admin-comm-rig-scroll scrollbar" >\n' +
     '                                    <!-- start -->\n' +
-    '                                    <div class="avatar-upload inventory-image">\n' +
+    '                                      <div class="avatar-upload">\n' +
     '                                        <div class="avatar-edit">\n' +
-    '                                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">\n' +
-    '                                            <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>\n' +
+    '                                          <label class="hoverable" for="fileInput">\n' +
+    '                                            <img [src]="url ? url : \'https://www.w3schools.com/howto/img_avatar.png\'">\n' +
+    '                                            <div class="hover-text">Choose file</div>\n' +
+    '                                            <div class="background"></div>\n' +
+    '                                          </label>\n' +
+    '                                          <input id="fileInput" type=\'file\' (change)="userdataService.upload_profile_image($event.target.files)">\n' +
+    '                                          <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>\n' +
+    // '                                          {{userdataService.imagepath}}\n' +
     '                                        </div>\n' +
-    '                                        <div class="avatar-preview">\n' +
-    '                                            <div id="imagePreview" style="background-image: url(../../../assets/img/usr-profile.svg);">\n' +
-    '                                            </div>\n' +
-    '                                        </div>\n' +
-    '                                    </div>\n' +
+    '                                      </div>\n' +
     '                                    <!-- end -->\n' +
     '\n' +
     '                                    <!-- start -->\n' +
@@ -116,8 +119,9 @@ import {AdminService} from '../admin.service';
 export class UserDetailsComponent implements OnInit {
   private addform: boolean;
   arrayofselectedobj: Array<any>=[];
+  public url;
 
-  constructor(public modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
+  constructor(public userdataService: UserdataService,public modalService: ModalService,private messageService: MessageService, public adminService: AdminService,  private formBuilder: FormBuilder) { }
   @Input('userdetail') userlist: any;
   ngOnInit() {
   }
@@ -131,5 +135,26 @@ export class UserDetailsComponent implements OnInit {
       this.arrayofselectedobj.push(selected_obj);
     }
     // this.arrayofselectedobj.push(selected_obj.user);
+  }
+
+  upload_profile_image(event) {
+    debugger;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      // this.userdataService.upload_profile_image(event.target.files).subscribe((data) => {
+      //   this.userdetail.profilePicPath = data['profilePicPath'];
+      // });
+      // tslint:disable-next-line:no-shadowed-variable
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        if (!event.target) {
+          console.log("in if");
+        } else {
+          // @ts-ignore
+          const {result} = event.target;
+          this.url = result;
+        }
+      };
+    }
   }
 }
