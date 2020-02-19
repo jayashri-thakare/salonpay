@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '\n' +
     '                    <!-- Tab panes -->\n' +
     '                    <div class="tab-content">\n' +
@@ -69,7 +69,7 @@ import { Subscription } from 'rxjs';
     '\n' +
     '            <div class="filBox">\n' +
     '                <!-- start -->\n' +
-    '                <div class="fill-box-in scrollbar">\n' +
+    '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '\n' +
     '                    <!-- Tab panes -->\n' +
     '                    <div class="tab-content">\n' +

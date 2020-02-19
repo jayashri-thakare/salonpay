@@ -36,6 +36,9 @@ import { Subscription } from 'rxjs';
   '                 <div class="form-group form-field field--not-empty">\n' +
   '                      <ejs-datetimepicker id=\'datetimepicker\' formControlName="PayPeriodDate" placeholder=\'PayPeriod Date\' format =\'M/dd/yyyy\'></ejs-datetimepicker>' +
   '                 </div>\n' +
+  '                 <div class="form-group form-field field--not-empty">\n' +
+  '                        <ejs-daterangepicker id=\'DateRangePicker\' placeholder=\'Select Date Range\' [(ngModel)]="DateRangePicker" formControlName="StartDate" format="M/dd/yyyy"></ejs-daterangepicker>\n' +
+  '                 </div>\n' +         
   '                    <div class="form-group mt-2">\n' +
   '                        <input type="text" id="first-name" formControlName="Value" name="first-name" class="form-field field--not-empty"\n' +
   '                            required value="shorturl.at/bgxEY" />\n' +
@@ -72,6 +75,9 @@ import { Subscription } from 'rxjs';
   '                 <div class="form-group form-field field--not-empty">\n' +
   '                      <ejs-datetimepicker id=\'datetimepicker\' ngModel="{{payperiod.payPeriodDate}}" formControlName="PayPeriodDate" placeholder=\'PayPeriod Date\' format =\'M/dd/yyyy\'></ejs-datetimepicker>' +
   '                 </div>\n' +
+  '                 <div class="form-group form-field field--not-empty">\n' +
+  '                        <ejs-daterangepicker id=\'DateRangePicker\' placeholder=\'Select Date Range\' [(ngModel)]="DateRangePicker" formControlName="StartDate" format="M/dd/yyyy"></ejs-daterangepicker>\n' +
+  '                 </div>\n' + 
   '                    <div class="form-group mt-2">\n' +
   '                        <input type="text" id="first-name" ngModel="{{payperiod.value}}" formControlName="Value" name="first-name" class="form-field"\n' +
   '                            required />\n' +

@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" (change)="datechange(hour)" formControlName="StartTimeHour">\n' +
+    '            <select class="select-field form-field form-height-schedule" (change)="datechange(hour)" formControlName="StartTimeHour">\n' +
     '              <option value=""></option> '+
     '              <option *ngFor="\let hour of arrayofhours" [value]="hour">{{hour}}</option>\n' +
     '            </select>\n' +
@@ -19,7 +19,7 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" formControlName="StartTimeMinute" [(ngModel)]="minute" (change)="datechange(minute)">\n' +
+    '            <select class="select-field form-field form-height-schedule" formControlName="StartTimeMinute" [(ngModel)]="minute" (change)="datechange(minute)">\n' +
     '              <option value=""></option> '+
     '              <option *ngFor="let minute of arrayofminute">{{minute}}</option>\n' +
     '            </select>\n' +
@@ -43,7 +43,7 @@ import { FormGroup } from '@angular/forms';
     '        <div class="start-time-input">\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field"  (change)="datechange(hour1)" formControlName="EndTimeHour" >\n' +
+    '            <select class="select-field form-field form-height-schedule"  (change)="datechange(hour1)" formControlName="EndTimeHour" >\n' +
     '              <option value=""></option> '+
     '              <option *ngFor="\let hour1 of arrayofhours">{{hour1}}</option>\n' +
     '            </select>\n' +
@@ -52,7 +52,7 @@ import { FormGroup } from '@angular/forms';
     '          <!-- end -->\n' +
     '          <!-- start -->\n' +
     '          <div class="form-group">\n' +
-    '            <select class="select-field form-field" formControlName="EndTimeMinute" [(ngModel)]="minute1" (change)="datechange(minute1)" >\n' +
+    '            <select class="select-field form-field form-height-schedule" formControlName="EndTimeMinute" [(ngModel)]="minute1" (change)="datechange(minute1)" >\n' +
     '              <option value=""></option> '+
     '              <option *ngFor="\let minute1 of arrayofminute">{{minute1}}</option>\n' +
     '            </select>\n' +
