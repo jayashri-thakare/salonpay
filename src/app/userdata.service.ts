@@ -43,7 +43,7 @@ export class UserdataService {
  	constructor(private httpClient: HttpClient) {
  	  // let url = environment.apiUrl;
     this.url = environment.apiUrl; }
-  baseUrl = 'http://172.16.0.114:5555/api/Account/SignUp';
+  baseUrl = 'https://payziliapi3.azurewebsites.net/api/Account/SignUp';
 
   private obj: {};
   private userdetail: {};
@@ -92,7 +92,7 @@ export class UserdataService {
   }
 
   getLogin(userdata) {
-    this.baseUrl = 'http://172.16.0.114:5555/api/Account/Login';
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Account/Login';
     return this.httpClient.post(this.baseUrl, userdata, httpOptions )
       .pipe(map(data => data));
   }
@@ -154,7 +154,7 @@ export class UserdataService {
 
   getUserSignature() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:7894/api/Email/GetEmailSignature?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Email/GetEmailSignature?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -164,19 +164,19 @@ export class UserdataService {
     }
     // tslint:disable-next-line:indent
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:7894/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/profile/getuserdetails?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
 
   getMasterNotification() {
-    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/GetNotificationTypes';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/GetNotificationTypes';
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
   getNotification() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/GetNotifcationSetting?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/GetNotifcationSetting?id=' + this.userId + '&parentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data)
     );
   }
@@ -216,7 +216,7 @@ export class UserdataService {
   }
 
   update_signature(userdata) {
-    this.baseUrl = 'http://172.16.0.99:7894/api/Email/SaveEmailSignature?';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Email/SaveEmailSignature?';
     userdata.UserId = localStorage.getItem('userId');
     userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
@@ -238,7 +238,7 @@ export class UserdataService {
 
   update_notification(userdata) {
     debugger;
-    this.baseUrl = 'http://172.16.0.99:7894/api/notificationsetting/NotoficationOnOff? ';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/NotoficationOnOff? ';
     userdata.UserId = localStorage.getItem('userId');
     userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));
     // userdata["NotificationType"] = [{"Custom_notification": {"EnableEmailNotification": true}}]
@@ -257,28 +257,28 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
-	  this.baseUrl = 'http://172.16.0.99:7894/api/Profile/UploadProfilePicture';
+	  this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture';
 	  const input = new FormData();
     input.append('id', this.userId);
 	  input.append('file', userdata[0]);
    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
       this.imagepath = '';
-      this.imagepath = 'http://172.16.0.99:7894/' + val['profilePicPath'] ;
+      this.imagepath = 'https://payzliapi1.azurewebsites.net/' + val['profilePicPath'] ;
     });
   }
 
   getProfilePic(userId) {
-    this.baseUrl = ' http://172.16.0.99:7894/api/Profile/GetProfilePicture?id=' + userId;
+    this.baseUrl = ' https://payzliapi1.azurewebsites.net/api/Profile/GetProfilePicture?id=' + userId;
     // this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data =>
     //   this.imagepath = data['path']));
     this.httpClient.get<Observable<imagepath>>(this.baseUrl).subscribe((data) => {
       // tslint:disable-next-line:indent
       this.imagepath = '';
-      this.imagepath =  'http://172.16.0.99:7894/' + data['path'];
+      this.imagepath =  'https://payzliapi1.azurewebsites.net/' + data['path'];
     });
   }
   add_time_tracker(statusflag) {
-    this.baseUrl = 'http://172.16.0.99:8089/api/TrackTimer/SavetrackTimer';
+    this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/TrackTimer/SavetrackTimer';
     const userdata = {};
     userdata['UserId'] = this.userId;
     userdata['ParentCompanyId'] = this.ParentCompanyId;
@@ -289,7 +289,7 @@ export class UserdataService {
   }
 
   get_time_difference() {
-  	this.baseUrl = 'http://172.16.0.99:8089/api/trackTimer/TimeDiffrence?StatusFlag=false&UserId=' + this.userId + '&ParentCompanyId=' + this.ParentCompanyId;
+  	this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/trackTimer/TimeDiffrence?StatusFlag=false&UserId=' + this.userId + '&ParentCompanyId=' + this.ParentCompanyId;
    return this.httpClient.get<Observable<userdetail>>(this.baseUrl, httpOptions).pipe(map( data => data));
   }
 
@@ -327,7 +327,6 @@ export class UserdataService {
     });
   }
   update_profile_service(form, userdata) {
-	  debugger;
    if (form.status == 'VALID') {
       userdata.id = this.userId;
       this.update_profile_Users(userdata).subscribe((data) => {
