@@ -7,7 +7,7 @@ import {MessageService} from '../../message.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-customer',
+  selector: 'app-businesscustomer',
   template: ' <!-- Main Container Starts -->\n' +
   '  <div *ngIf="AdminService.navTab==9">\n' +
     '  <div *ngIf="AdminService.business_settingnav==4">\n' +

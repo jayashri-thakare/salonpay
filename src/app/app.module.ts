@@ -97,6 +97,23 @@ import {AddPayPeriodComponent} from './admin/business-setting/addpayperiod.compo
 import {BusinessSidebarComponent} from './admin/business-setting/businesssettingsidebar.component'
 import {AddSupplierComponent} from './admin/business-setting/addsupplier.component'
 import {SupplierComponent} from './admin/business-setting/supplier.component'
+import {CustomerService} from './customer/customer.service'
+import {CustomerComponent} from './customer/customer.component'
+import {AddCustomerComponent} from './customer/addcustomer.component'
+import {UpdateCustomerComponent} from './customer/updatecustomer.component'
+import {CustomerStatusBarComponent} from './customer/statusbar.component'
+import {EditBulkCustomerComponent} from './customer/editbulk.component'
+import {CustomerDashboardComponent} from './customer/customer-dashboard/customerdashboard.component'
+import {CustDashboardComponent} from './customer/customer-dashboard/dashboard/customer-dashboard.component'
+import {CustomerCommunicationComponent} from './customer/customer-dashboard/communications/communication.component'
+import {CustomerHistoryComponent} from './customer/customer-dashboard/history/history.component'
+import {CustomerNotesComponent} from './customer/customer-dashboard/notes/notes.component'
+import {CustomerProfileComponent} from './customer/customer-dashboard/profile/profile.component'
+import {CustomerSalesComponent} from './customer/customer-dashboard/sales/sales.component'
+import {CustomerProfileEditComponent} from './customer/customer-dashboard/profile/customerprofile-edit.component'
+import {CustomerContactEditComponent} from './customer/customer-dashboard/profile/customercontact-edit.component'
+import {CustomerAddressEditComponent} from './customer/customer-dashboard/profile/customeraddress-edit.component'
+import {CustomerProfileinfoEditComponent} from './customer/customer-dashboard/profile/customerlogininfo-edit.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -129,6 +146,22 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     })
   ],
   declarations: [AppComponent,
+    CustomerComponent,
+    AddCustomerComponent,
+    UpdateCustomerComponent,
+    CustomerStatusBarComponent,
+    EditBulkCustomerComponent,
+    CustomerDashboardComponent,
+    CustDashboardComponent,
+    CustomerCommunicationComponent,
+    CustomerHistoryComponent,
+    CustomerNotesComponent,
+    CustomerProfileComponent,
+    CustomerSalesComponent,
+    CustomerProfileEditComponent,
+    CustomerContactEditComponent,
+    CustomerAddressEditComponent,
+    CustomerProfileinfoEditComponent,
     AddReviewComponent,
     AddTaxTableComponent,
     BusinessTipAdjustmentComponent,
@@ -195,7 +228,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
     AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent
   ],
-  providers: [UserdataService, DatePipe, AdminService, TimerService],
+  providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
 })

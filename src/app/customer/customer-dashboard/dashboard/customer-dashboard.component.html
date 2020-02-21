@@ -1,0 +1,539 @@
+ <!-- Main Container Starts -->
+ <div *ngIf="customerService.navTab==1">
+    <div class="mainContainer main-container-flg">
+
+        <div class="comm-headline-btn">
+            <h3 class="main-comm-head main-head-colr-pur m-0">
+                <a href="customer-grid-view.html"><i class="icon-down-arrow com-arw"></i></a>Maya <span>Didas</span>
+            </h3>
+            <div class="filter-container-up filter-container-grid">
+                <div class="filter-container">
+                    <a href="transaction-customer-type.html" class="button flg-btn">New Sale</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="comm-headline-btn">
+            <h3 class="main-comm-head m-0">
+                Recent <span>Sales</span>
+                <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Internet experience without having one."></i>
+            </h3>
+        </div>
+        <div class="table-reward">
+            <!-- start -->
+            <div class="table-bdy table-report-2">
+                <ul class="table-rw">
+                    <!-- start -->
+                    <li class="table-dta">
+                        <span>Last Visit</span>
+                        5 Aug 2019, Saturday
+                    </li>
+                    <!-- end -->
+                    <!-- start -->
+                    <li class="table-dta">
+                        <span>Last Technician(s)</span>
+                        Sam Cook
+                    </li>
+                    <!-- end -->
+                    <!-- start -->
+                    <li class="table-dta">
+                        <span>Average Sale</span>
+                        $17
+                    </li>
+                    <!-- end -->
+                    <!-- start -->
+                    <li class="table-dta">
+                        <span>Average Tip</span>
+                        $3
+                    </li>
+                    <!-- end -->
+                    <!-- start -->
+                    <li class="table-dta">
+                        <span>Favorite Products</span>
+                        <div class="table-prodt-list">
+                            <p>Face Cream, Skin Toner, Hair Lotion</p> <i class="icon-info" data-toggle="tooltip"
+                                data-placement="bottom" data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
+                        </div>
+                    </li>
+                    <!-- end -->
+                    <!-- start -->
+                    <li class="table-dta">
+                        <span>Favorite Services</span>
+                        <div class="table-prodt-list">
+                            <p>Hair Cut, Hair Spa, Body Waxing</p> <i class="icon-info" data-toggle="tooltip"
+                                data-placement="bottom" data-html="true"
+                                title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
+                        </div>
+                    </li>
+                    <!-- end -->
+                </ul>
+                <div class="yur-mail-rig">
+                    <i class="icon-share status"></i>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- start -->
+            <div class="sale-tot-box">
+                <div class="sale-tot">
+                    <i class="icon-cart"></i>
+                    <div class="sale-tot-rig">
+                        <p>Sales</p>
+                        <h6>$7500</h6>
+                    </div>
+                </div>
+                <div class="sale-tot">
+                    <i class="icon-reward"></i>
+                    <div class="sale-tot-rig">
+                        <p>Rewards</p>
+                        <h6>800</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- end -->
+        </div>
+
+        <div class="comm-headline-btn">
+            <h3 class="main-comm-head m-0">
+                Recent <span>Appointments</span>
+                <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="These days everyone has an email address,
+                    as it’s virtually impossible to have adequate
+                    Internet experience without having one."></i>
+            </h3>
+            <div class="filter-container-up">
+                <div class="filter-container">
+                    <div class="form-group mb-0 mr-2">
+                        <form>
+                            <input class="form-field" type="text" name="filter-searh" required>
+                            <p class="form-label">Search</p>
+                            <button class="search icon-search" type="submit"></button>
+                        </form>
+                    </div>
+                    <div class="yur-mail-rig filtdrp-status">
+                        <button type="button" class="button line grey status mr-2">
+                            <i class="icon-fliter-list"></i>
+                            <span>Sort by</span>
+                        </button>
+                        <ul class="status-list">
+                            <li class="drpFil">Sort by</li>
+                            <li><a href="#">Ascending</a></li>
+                            <li><a href="#">Descending</a></li>
+                        </ul>
+                    </div>
+                    <div class="yur-mail-rig filtdrp-status">
+                        <button type="button" class="button line grey status">
+                            <i class="icon-filter"></i>
+                            <span>Fliters</span>
+                        </button>
+                        <ul class="status-list">
+                            <li class="drpFil">Filters</li>
+                            <li><a href="#">Upcoming</a></li>
+                            <li><a href="#">Cancelled</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="f-row f-4 f-1660-3 f-900-2 f-640-1">
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box app-pad-date-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box app-pad-date-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+
+        <div class="comm-headline-btn">
+            <h3 class="main-comm-head m-0">
+                Recent <span>Sales</span>
+                <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right" title=""
+                    data-original-title="Internet experience without having one."></i>
+            </h3>
+        </div>
+        <div class="f-row f-4 f-1660-3 f-900-2 f-640-1">
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+            <div class="f-col">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="app-pad-top">
+                            <h4 class="gridhead">Haircut</h4>
+                            <div class="techi-user">
+                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-usr-cont">
+                                    <h3>Ira Membrit</h3>
+                                    <p>Technician</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="yur-mail-rig">
+                            <i class="icon-status1 status"></i>
+                            <ul class="status-list">
+                                <li><i class="icon-envelope"></i> Email</li>
+                                <li><i class="icon-sms"></i> SMS</li>
+                                <li><i class="icon-edit"></i> Edit</li>
+                                <li><i class="icon-share"></i> Share</li>
+                                <li class="delt"><i class="icon-delete"></i> Delete</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <i class="icon-calender"></i>
+                            <div class="tech-usr-cont">
+                                <p>Date</p>
+                                <h3>29 Oct, 2019</h3>
+                            </div>
+                        </div>
+                        <div class="techi-user">
+                            <i class="icon-clock"></i>
+                            <div class="tech-usr-cont">
+                                <p>Time</p>
+                                <h3>5:00 - 5:30 PM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Main Container Ends -->

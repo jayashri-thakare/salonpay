@@ -12,6 +12,10 @@ import {SchedulesettingComponent} from './dashboard/schedulesetting/schedulesett
 import {ForgotComponent } from './login/forgot.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AdminComponent} from './admin/admin.component'
+import { CustomerComponent } from './customer/customer.component';
+import { AddCustomerComponent } from './customer/addcustomer.component';
+import { UpdateCustomerComponent } from './customer/updatecustomer.component';
+import { CustomerDashboardComponent } from './customer/customer-dashboard/customerdashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +23,11 @@ const routes: Routes = [
   { path: 'resetpassword/:id', component: ResetpasswordComponent , pathMatch: 'full'},
   { path: 'forgot', component: ForgotComponent },
   { path: 'dashboard', component: DashboardComponent},
-  { path: 'admin', component: AdminComponent}
+  { path: 'admin', component: AdminComponent},
+  { path: 'customer', component: CustomerComponent},
+  { path: 'addcustomer', component: AddCustomerComponent},
+  { path: 'updatecustomer', component: UpdateCustomerComponent},
+  { path: 'customerdashboard', component: CustomerDashboardComponent}
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { MessageService } from 'src/app/message.service';
 import { Subscription } from 'rxjs';
+import { UserdataService } from 'src/app/userdata.service';
 
 @Component({
   selector: 'app-user',
@@ -15,7 +16,7 @@ export class UserComponent implements OnInit {
   userrolesuccess: any;
 
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
+  constructor(public userdataService: UserdataService, private modalService: ModalService,private messageService: MessageService, public AdminService: AdminService,  private formBuilder: FormBuilder) { }
   userrightForm: FormGroup;
   control: FormControl;
   submitted = false;
@@ -117,6 +118,7 @@ export class UserComponent implements OnInit {
       this.userlist = data;
       this.userlist = this.userlist.list;
       this.AdminService.setIndex(0,  this.userlist[0].user.id);
+      this.userdataService.getProfilePic(this.userlist[0].user.id);
       this.getuserRoles(this.userlist[0])
       this.pageviewemailfunc(this.userlist);
     });

@@ -1,0 +1,181 @@
+ <!-- Main Container Starts -->
+ <div class="mainContainer m-0 main-container-flg">
+    <div class="comm-headline-btn customer-headline">
+        <h3 class="main-comm-head m-0">Customers<i class="icon-question rig-icn" data-toggle="tooltip"
+                title="Merge Sales"></i>
+        </h3>
+        <app-statusbar></app-statusbar>
+    </div>
+
+    <div id="gridView" [ngStyle]="{'display': gridview ? 'block' : 'none' }">
+        <!-- start -->
+        <div class="f-row f-3 f-1440-2 f-640-1">
+            <div class="f-col" *ngFor="let customer of customerlist">
+                <!-- start -->
+                <div class="app-grid-box">
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="cust-rig">
+                            <a href="customerdashboard">
+                                <h6>{{customer.firstName}} {{customer.lastName}}</h6>
+                            </a>
+
+                            <div class="cust-ctry-phon">
+                                <div class="usr-pho">
+                                    <div class="flag-img"><img src="../../assets/img/usa.svg" alt=""></div>
+                                    <p>+1-818-269-1084</p>
+                                </div>
+                                <div class="usr-pho">
+                                    <i class="icon-envelope"></i>
+                                    <p>{{customer.email}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box app-pad-box-brk">
+                        <div class="cust-reward">
+                            <a href="customerdashboard">
+                                <div class="techi-user">
+                                    <i class="icon-calender"></i>
+                                    <div class="tech-usr-cont">
+                                        <p>Appointments</p>
+                                        <h3>5</h3>
+                                    </div>
+                                </div>
+                            </a>
+                            <i class="icon-right-arrow nxt"></i>
+                        </div>
+                        <div class="cust-reward">
+                            <a href="customerdashboard">
+                                <div class="techi-user">
+                                    <i class="icon-cart"></i>
+                                    <div class="tech-usr-cont">
+                                        <p>Sales Amount</p>
+                                        <h3>$ 150</h3>
+                                    </div>
+                                </div>
+                            </a>
+                            <i class="icon-right-arrow nxt"></i>
+                        </div>
+                        <div class="cust-reward">
+                            <a href="customerdashboard">
+                                <div class="techi-user">
+                                    <i class="icon-reward"></i>
+                                    <div class="tech-usr-cont">
+                                        <p>Rewards</p>
+                                        <h3>45</h3>
+                                    </div>
+                                </div>
+                            </a>
+                            <i class="icon-right-arrow nxt"></i>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="app-pad-box">
+                        <div class="techi-user">
+                            <div class="tech-user-img"><img src="../../assets/img/profile.svg" alt=""></div>
+                            <div class="tech-usr-cont">
+                                <p>Favorite Technician</p>
+                                <h3>Ira Membrit</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+
+                    <div class="cust-share-detail">
+                        <a href="appointment-date.html"><i class="icon-calender"></i></a>
+                        <i class="icon-share" data-toggle="modal" data-target="#copylinkPopup"></i>
+                    </div>
+                </div>
+                <!-- end -->
+            </div>
+        </div>
+        <!-- end -->
+    </div>
+
+    <div id="listView" [ngStyle]="{'display': listview ? 'block' : 'none' }">
+        <!-- start -->
+        <div class="table-bdy">
+            <!-- start -->
+            <div class="tab-top-head">
+                <h4 class="gridhead">David Shnader</h4>
+                <div class="cust-cald-arrw">
+                    <a href="appointment-date.html"><i class="icon-calender"></i></a>
+                    <a href="customerdashboard"><i class="icon-right-arrow"></i></a>
+                </div>
+            </div>
+            <!-- end -->
+
+            <ul class="table-rw">
+                <!-- start -->
+                <li class="table-dta">
+                    <span>Mobile</span>
+                    +1-818-269-1084
+                </li>
+                <!-- end -->
+                <!-- start -->
+                <li class="table-dta">
+                    <span>Email</span>
+                    nickbocker@salescorp.com
+                </li>
+                <!-- end -->
+                <!-- start -->
+                <li class="table-dta">
+                    <span>Appointments</span>
+                    5
+                </li>
+                <!-- end -->
+                <!-- start -->
+                <li class="table-dta">
+                    <span>Sales Amount</span>
+                    $324
+                </li>
+                <!-- end -->
+                <!-- start -->
+                <li class="table-dta">
+                    <span>Rewards</span>
+                    56
+                </li>
+                <!-- end -->
+                <!-- start -->
+                <li class="table-dta">
+                    <span>Favorite Technician</span>
+                    Maya Didas
+                </li>
+                <!-- end -->
+            </ul>
+        </div>
+        <!-- end -->
+    </div>
+</div>
+<!-- Main Container Ends -->
+
+<!--  Modal Starts -->
+<div class="modal fade" id="copylinkPopup">
+    <!-- [big-window] [modal-lg] [modal-md] [modal-sm] -->
+    <div class="modal-dialog modal-dialog-centered medium-window">
+        <div class="modal-content">
+            <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+            <h2 class="modal-title">Share</h2>
+            <p class="modal-subtitle">Copy and paste below link where ever you want to share it</p>
+
+            <div class="copyInput">
+                <!-- start -->
+                <input type="text" value="https://trello.com/c/D1Vw4LhA/17-salon-pay-ux" id="myInput">
+                <div class="copy-tooltip">
+                    <button onclick="copyFunction()" onmouseout="copyoutFunc()">
+                        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                        Copy
+                    </button>
+                </div>
+                <!-- end -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--  Modal Ends -->

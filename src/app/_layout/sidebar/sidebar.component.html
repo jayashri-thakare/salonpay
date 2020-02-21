@@ -96,3 +96,43 @@
   </li>
 </ul>
 </div>
+<div *ngIf="router.url === '/customerdashboard'" class="salon-side-bar side-bar-common menu-sid{{customerService.navTab}}-box scrollbar mCustomScrollbar _mCS_1 mCS_no_scrollbar">
+  <ul>
+    <li>
+        <a (click)="customerService.showNav(1)" class="menu-sid1">
+            <i class="icon-gird"></i>
+            <p>Dashboard</p>
+        </a>
+    </li>
+    <li>
+        <a (click)="customerService.showNav(2)" class="menu-sid2">
+            <i class="icon-chat"></i>
+            <p>Communications</p>
+        </a>
+    </li>
+    <li>
+        <a (click)="customerService.showNav(3)" class="menu-sid3">
+            <i class="icon-note"></i>
+            <p>Notes</p>
+        </a>
+    </li>
+    <li>
+        <a (click)="customerService.showNav(4)" class="menu-sid4">
+            <i class="icon-cart"></i>
+            <p>Sales</p>
+        </a>
+    </li>
+    <li>
+        <a (click)="customerService.showNav(5)" class="menu-sid5">
+            <i class="icon-history"></i>
+            <p>History</p>
+        </a>
+    </li>
+    <li>
+        <a (click)="customerService.showNav(6)" class="menu-sid6">
+            <i class="icon-profile"></i>
+            <p>Profile</p>
+        </a>
+    </li>
+</ul>
+</div>

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {element} from 'protractor';
 import {UserdataService} from '../../userdata.service';
 import { AdminService } from 'src/app/admin/admin.service';
+import { CustomerService } from 'src/app/customer/customer.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,7 @@ export class SidebarComponent implements OnInit {
   private element: any;
   classvar: any;
   classvar1: string;
-  constructor(public AdminService: AdminService, public router: Router, private el: ElementRef, private userdataService: UserdataService) {
+  constructor(public customerService: CustomerService, public AdminService: AdminService, public router: Router, private el: ElementRef, private userdataService: UserdataService) {
     this.element = el.nativeElement;
   }
 

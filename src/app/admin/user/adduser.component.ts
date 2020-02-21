@@ -188,23 +188,23 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.adduserForm = this.formBuilder.group({
-      FirstName: [''],
-      LastName: [''],
+      FirstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+      LastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
       Gender: [''],
-      Email: [''],
+      Email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       Password: [''],
-      PhoneNumber: [''],
+      PhoneNumber: ['', [Validators.required, Validators.pattern(/^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/)]],
       ServiceIds: [''],
       ExpLevelId: [''],
       TimeTrack: ['']
     });
     this.updateuserForm = this.formBuilder.group({
-      FirstName: [''],
-      LastName: [''],
+      FirstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+      LastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
       Gender: [''],
-      Email: [''],
+      Email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       Password: [''],
-      PhoneNumber: [''],
+      PhoneNumber: ['', [Validators.required, Validators.pattern(/^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/)]],
       ServiceIds: [''],
       ExpLevelId: [''],
       TimeTrack: ['']
@@ -225,6 +225,7 @@ export class AddUserComponent implements OnInit {
     if (this.adduserForm.status == 'VALID') {
       this.AdminService.create_user_service(Admin).subscribe((data) => {
         this.AdminService.publish('call-user');
+        this.adduserForm.reset();
         this.messageService.clear();
         this.messageService.add('User Created successfully.')
         this.closeModal('add-tax-table1');
