@@ -86,7 +86,6 @@ export class AddNewEmailCommunicationComponent implements OnInit {
   }
 
   addNewEmail(Admin) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (this.addNewEmailForm.status == 'VALID') {
       this.AdminService.add_new_email(Admin).subscribe((data) => {
@@ -106,7 +105,6 @@ export class AddNewEmailCommunicationComponent implements OnInit {
   }
 
   updateNewEmail(Admin) {
-    debugger;
     Admin.EmailTemplateId = this.arrayofselectedobj[0].emailTemplateId
     // tslint:disable-next-line:triple-equals
     if (this.updateNewEmailForm.status == 'VALID') {

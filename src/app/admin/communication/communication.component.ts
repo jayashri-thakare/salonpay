@@ -91,7 +91,6 @@ export class AdminCommunicationComponent implements OnInit {
   }
 
   deleteEmailSmsCom(selected_obj, type) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (type == 'Email') {
       this.AdminService.deleteEmailSmsCom(selected_obj[0].emailTemplateId, type).subscribe((data) => {

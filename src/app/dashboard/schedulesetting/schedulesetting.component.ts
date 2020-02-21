@@ -75,7 +75,6 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   selectedDays(selected_day){
-    debugger;
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
@@ -110,7 +109,6 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateSchedule(userdata) {
-    debugger;
     console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
     // tslint:disable-next-line:triple-equals
@@ -132,7 +130,6 @@ export class SchedulesettingComponent implements OnInit {
   }
 
   updateTimeoff(userdata, date) {
-    debugger;
     console.log(userdata, this.timeoffForm)
     if(date){
       userdata.StartDate = date[0].toDateString();

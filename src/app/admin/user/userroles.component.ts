@@ -275,7 +275,6 @@ export class UserRightsComponent implements OnInit {
   }
 
   addupdateclaims(Admin) {
-    debugger;
     this.claims['ModuleRights'] = this.arrayofselectedmoduleobj;
     this.claims['IndividualRights'] = this.arrayofselectedindividualobj;
     this.claims['Email'] = Admin.user.email;
@@ -312,7 +311,6 @@ export class UserRightsComponent implements OnInit {
   }
 
   assignRoleToUser(Admin, user) {
-    debugger;
     Admin.User = {
       "UserName": user.user.email,
       "Email": user.user.email,
@@ -336,7 +334,6 @@ export class UserRightsComponent implements OnInit {
   }
 
   updateassignRoleToUser(Admin, user) {
-    debugger;
     Admin.User = {
       "UserName": user.user.email,
       "Email": user.user.email,

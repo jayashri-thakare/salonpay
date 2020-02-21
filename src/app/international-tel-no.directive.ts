@@ -20,7 +20,6 @@ export class InternationalTelNoDirective {
 
 
   onInputChange(event, backspace) {
-    debugger;
     let newVal = event.replace(/\D/g, '');
     if (backspace && newVal.length <= 6) {
       newVal = newVal.substring(0, newVal.length - 1);

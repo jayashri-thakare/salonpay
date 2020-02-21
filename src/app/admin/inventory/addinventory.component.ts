@@ -9,7 +9,7 @@ import { parse } from 'querystring';
 
 @Component({
   selector: 'addproduct-modal',
-  template: '<jw-modal id="add-product">\n' + 
+  template: '<jw-modal id="add-product">\n' +
     '    <div class="mobile-side" >\n' +
     '    <!-- common headline -->\n' +
     '    <h3 *ngIf="addProductForm" class="close-btn main-comm-head">\n' +
@@ -243,7 +243,6 @@ export class AddInventoryComponent implements OnInit {
   }
 
   addProduct(Admin) {
-    debugger;
     console.log(Admin)
     Admin.SupplierId = parseInt(Admin.SupplierId)
     Admin.Status = JSON.parse(Admin.Status)
@@ -265,7 +264,6 @@ export class AddInventoryComponent implements OnInit {
   }
 
   updateProduct(Admin) {
-    debugger;
     console.log(Admin)
     Admin.SupplierId = parseInt(Admin.SupplierId)
     Admin.ProductCost = parseInt(Admin.ProductCost)

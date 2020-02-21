@@ -58,7 +58,7 @@ export class EditBusinessProfileContactComponent implements OnInit {
 
   get f() {
     return this.updatecontactForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.updatecontactForm = this.formBuilder.group({
@@ -68,7 +68,6 @@ export class EditBusinessProfileContactComponent implements OnInit {
   }
 
   updateProfieContact(Admin) {
-    debugger;
     console.log(Admin)
     Admin.businessName = this.businesstipadjustment.businessName;
     // tslint:disable-next-line:triple-equals

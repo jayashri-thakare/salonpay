@@ -188,7 +188,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   rightsupdate(mirights, event, type){
-    debugger;
     if(type){
       event = event.currentTarget.checked;
     }else{
@@ -228,7 +227,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   irightsupdate(mirights, event){
-    debugger;
     if(event){
       this.individualRightsobj['moduleName'] = mirights;
       this.individualRightsobj['isSelected'] = event;
@@ -296,7 +294,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   getuserRoles() {
-    debugger;
     this.AdminService.getUserRoles().subscribe((data) => {
       this.userroles = data;
       console.log(this.userroles)
@@ -310,7 +307,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   deleteRole(selected_role) {
-    debugger;
     selected_role.RoleId = selected_role[0]['id'];
     // tslint:disable-next-line:triple-equals
     if (selected_role) {
@@ -340,7 +336,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   GetCompanyRolesClaims(roleid) {
-    debugger;
     this.getcustomerobj = {};
     this.getappointmentobj = {};
     this.getsalesobj = {};
@@ -370,19 +365,19 @@ export class AdminRolesComponent implements OnInit {
             if(this.getcustomerobj){
               this.getcustomerobjright = this.getrolesmodclaim[i]['rights'][0];
             }
-          } 
+          }
           if(this.getrolesmodclaim[i]['moduleName'] == 'Appointments'){
             this.getappointmentobj = this.getrolesmodclaim[i];
             if(this.getappointmentobj){
               this.getappointmentobjright = this.getrolesmodclaim[i]['rights'][0];
             }
-          } 
+          }
           if(this.getrolesmodclaim[i]['moduleName'] == 'Sales'){
             this.getsalesobj = this.getrolesmodclaim[i];
             if(this.getsalesobj){
               this.getsalesobjright = this.getrolesmodclaim[i]['rights'][0];
             }
-          } 
+          }
         }
         this.getrolesindclaim = this.getrolesclaim.result
         this.getrolesindclaim = this.getrolesclaim.result[0].claim.individualRights;
@@ -409,7 +404,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   getrolefunc(userrole){
-    debugger;
     if(userrole){
       this.rolevar = userrole;
       this.onloadvar = false;
@@ -424,7 +418,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   addupdateroleclaims(Admin) {
-    debugger;
     this.claims['ModuleRights'] = this.arrayofselectedmoduleobj;
     this.claims['IndividualRights'] = this.arrayofselectedindividualobj;
     this.claims['RoleName'] = Admin.name;
@@ -453,7 +446,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   updateroleclaims(Admin) {
-    debugger;
     this.claims['ModuleRights'] = this.getrolesmodclaim;
     this.claims['IndividualRights'] = this.getrolesindclaim;
     this.claims['RoleName'] = Admin.name;
@@ -479,7 +471,6 @@ export class AdminRolesComponent implements OnInit {
   }
 
   onofffunc(bool,type){
-    debugger;
     if(type=='sales'){
       this.sales = bool
     }

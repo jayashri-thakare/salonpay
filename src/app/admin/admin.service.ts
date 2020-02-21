@@ -26,6 +26,7 @@ export class AdminService {
   private result: {
     serviceDetails: { serviceId: any };
   };
+  couponName: string;
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
   ParentCompanyId: any;
   baseUrl: string;
@@ -56,7 +57,7 @@ export class AdminService {
   editservice: boolean;
   serviceList: Observable<any>;
   productData: any;
-    private coupon: {};
+    coupon: {};
 
   create_role_service(Admin) {
     this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Roles/CreateRole';
@@ -91,7 +92,7 @@ export class AdminService {
   }
 
   getStaff() {
-    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/BusinessSetting/GetStaffSetting?ParentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/BusinessSettings/GetStaffSetting?ParentCompanyId=' + this.ParentCompanyId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
   public showNav(nav) {
@@ -301,9 +302,8 @@ export class AdminService {
   }
 
   add_supplier(Admin) {
-    debugger;
     Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8055/api/Inventory/AddSupplier';
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Inventory/AddSupplier';
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
   .pipe(map( data => data));
   }

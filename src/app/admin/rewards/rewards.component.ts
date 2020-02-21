@@ -35,7 +35,7 @@ export class AdminRewardsComponent implements OnInit {
   addupdateform(type){
     if(type == 'add'){
       this.updaterewards = false;
-      this.addrewards = true; 
+      this.addrewards = true;
     }else if(type == 'update'){
       this.updaterewards = true;
       this.addrewards = false;
@@ -52,7 +52,6 @@ export class AdminRewardsComponent implements OnInit {
   }
 
   deleteRewards(selected_product) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (selected_product) {
       this.AdminService.deleteReward(selected_product[0].rewardId).subscribe((data) => {

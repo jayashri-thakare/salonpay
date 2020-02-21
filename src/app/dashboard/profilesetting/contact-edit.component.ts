@@ -74,7 +74,6 @@ export class ContactEditComponent implements OnInit {
 
   updateDetail(userdata) {
     // userdata.Email = this.email;
-    debugger;
     this.userdataService.update_profile_service(this.usercontactForm, this.usercontactForm.value);
     this.userdataService.publish('call-parent');
     this.closeModal('side-menu-contact');

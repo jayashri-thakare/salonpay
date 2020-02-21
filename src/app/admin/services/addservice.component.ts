@@ -224,7 +224,6 @@ export class AddServiceComponent implements OnInit {
 
   }
   updateDetail(userdata) {
-    debugger;
     // userdata.Email = this.email;
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);

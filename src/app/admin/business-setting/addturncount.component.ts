@@ -76,13 +76,13 @@ export class AddTurnCountComponent implements OnInit {
   @Input('turncountsobj') arrayofselectedobj: Array<any>=[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
-  
+
   get f() {
     return this.addturncountForm.controls;
   }
   get f1() {
     return this.updateturncountForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.addturncountForm = this.formBuilder.group({
@@ -94,7 +94,6 @@ export class AddTurnCountComponent implements OnInit {
   }
 
   createTurnCount(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.addturncountForm.status == 'VALID') {
@@ -114,7 +113,6 @@ export class AddTurnCountComponent implements OnInit {
   }
 
   updateTurnCount(Admin) {
-    debugger;
     console.log(Admin)
     Admin.TurnCountId = this.arrayofselectedobj[0].turnCountId;
     // tslint:disable-next-line:triple-equals

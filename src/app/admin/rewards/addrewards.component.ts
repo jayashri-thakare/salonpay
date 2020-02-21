@@ -118,7 +118,6 @@ export class AddRewardsComponent implements OnInit {
   }
 
   addRewards(Admin) {
-    debugger;
     Admin.RewardPercentage = parseFloat(Admin.RewardPercentage)
     // tslint:disable-next-line:triple-equals
     if (this.addrewardsForm.status == 'VALID') {
@@ -138,7 +137,6 @@ export class AddRewardsComponent implements OnInit {
   }
 
   updateRewards(Admin) {
-    debugger;
     Admin.RewardId = parseInt(this.arrayofselectedobj[0].rewardId)
     Admin.RewardPercentage = parseFloat(Admin.RewardPercentage)
     Admin.IsActive = Boolean(Admin.IsActive)

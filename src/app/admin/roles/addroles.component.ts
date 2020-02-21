@@ -127,7 +127,7 @@ export class AddRolesComponent implements OnInit {
   @Input('userroleobj') arrayofselectedobj: any;
   userroles: any;
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
-  
+
   get f() {
     return this.addrolesForm.controls;
     return this.updaterolesForm.controls;
@@ -152,7 +152,6 @@ export class AddRolesComponent implements OnInit {
   }
 
   createroles(Admin) {
-    debugger;
     console.log(Admin, this.addrolesForm)
     // tslint:disable-next-line:triple-equals
     if (this.addrolesForm.status == 'VALID') {
@@ -172,7 +171,6 @@ export class AddRolesComponent implements OnInit {
   }
 
   updateroles(Admin, selectedobj) {
-    debugger;
     Admin.RoleId = selectedobj[0].id
     console.log(Admin, this.updaterolesForm)
     // tslint:disable-next-line:triple-equals

@@ -88,7 +88,6 @@ export class AddNewSmsCommunicationComponent implements OnInit {
   }
 
   addNewSMS(Admin) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (this.addNewSMSForm.status == 'VALID') {
       this.AdminService.add_new_sms(Admin).subscribe((data) => {
@@ -108,7 +107,6 @@ export class AddNewSmsCommunicationComponent implements OnInit {
   }
 
   updateNewSMS(Admin) {
-    debugger;
     Admin.SmsTemplateId = this.arrayofselectedobj[0].smsTemplateId
     // tslint:disable-next-line:triple-equals
     if (this.updateNewSMSForm.status == 'VALID') {

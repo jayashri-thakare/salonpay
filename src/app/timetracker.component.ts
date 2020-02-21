@@ -86,7 +86,6 @@ export class TimerComponent implements OnInit {
         );
 
       this.userdataService.get_time_difference().subscribe((data) => {
-        debugger;
       // this.userdetail = data;
 
       });
@@ -108,9 +107,7 @@ export class TimerComponent implements OnInit {
     }
 
     saveTimer(statusflag) {
-      debugger;
       this.userdataService.add_time_tracker(statusflag).subscribe((data) => {
-        debugger;
         console.log("save")
       });
     }

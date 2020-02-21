@@ -102,13 +102,13 @@ export class AddPayPeriodComponent implements OnInit {
   @Input('payperiodobj') arrayofselectedobj: Array<any>=[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
-  
+
   get f() {
     return this.addpayperiodForm.controls;
   }
   get f1() {
     return this.updatepayperiodForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.addpayperiodForm = this.formBuilder.group({
@@ -124,7 +124,6 @@ export class AddPayPeriodComponent implements OnInit {
   }
 
   createpayperiod(Admin) {
-    debugger;
     console.log(Admin)
     Admin.PayPeriodDate = Admin.PayPeriodDate.toDateString();
     Admin.PayPeriodId = parseInt(Admin.PayPeriodId);
@@ -146,7 +145,6 @@ export class AddPayPeriodComponent implements OnInit {
   }
 
   updatepayperiodfunc(Admin) {
-    debugger;
     console.log(Admin)
     Admin.PayPeriodDate = Admin.PayPeriodDate.toDateString();
     Admin.PayPeriodId = parseInt(Admin.PayPeriodId);
