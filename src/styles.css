@@ -25,3 +25,6 @@ element {
 .button.line.whitelin{
   background-color: transparent !important;
 }
+.form-height-schedule{
+  height: 50px !important;
+}

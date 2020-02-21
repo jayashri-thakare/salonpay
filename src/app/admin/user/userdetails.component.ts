@@ -27,7 +27,7 @@ import { UserdataService } from 'src/app/userdata.service';
     '                                      <div class="avatar-upload">\n' +
     '                                        <div class="avatar-edit">\n' +
     '                                          <label class="hoverable" for="fileInput">\n' +
-    '                                            <img [src]="url ? url : \'https://www.w3schools.com/howto/img_avatar.png\'">\n' +
+    '                                            <img [src]="userdataService.imagepath!=null ? userdataService.imagepath : \'https://www.w3schools.com/howto/img_avatar.png\'">\n' +
     '                                            <div class="hover-text">Choose file</div>\n' +
     '                                            <div class="background"></div>\n' +
     '                                          </label>\n' +
