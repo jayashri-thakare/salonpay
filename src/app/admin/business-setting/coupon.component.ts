@@ -185,7 +185,7 @@ export class BusinessCouponComponent implements OnInit {
   }
   get f1() {
     return this.updatecouponForm.controls;
-  }  
+  }
   ngOnInit() {
     this.getBusinessCoupons();
     this.addcouponForm = this.formBuilder.group({
@@ -211,7 +211,6 @@ export class BusinessCouponComponent implements OnInit {
   }
 
   createBusinessCoupon(Admin) {
-    debugger;
     console.log(Admin)
     Admin.EnableBirthdayCoupon = JSON.parse(Admin.EnableBirthdayCoupon)
     Admin.DaysBefore = parseInt(Admin.DaysBefore)
@@ -244,7 +243,6 @@ export class BusinessCouponComponent implements OnInit {
   }
 
   updateBusinessCoupon(Admin) {
-    debugger;
     console.log(Admin)
     Admin.EnableBirthdayCoupon = JSON.parse(this.businesscoupons.enableBirthdayCoupon)
     Admin.DaysBefore = parseInt(Admin.DaysBefore)
@@ -266,7 +264,6 @@ export class BusinessCouponComponent implements OnInit {
   }
 
   deleteBusinessCoupon() {
-    debugger;
     // tslint:disable-next-line:triple-equals
       this.AdminService.deleteBusinessCoupon().subscribe((data) => {
         console.log(data)
@@ -277,7 +274,6 @@ export class BusinessCouponComponent implements OnInit {
   }
 
   toggleBusinessCoupon(Admin) {
-    debugger;
     console.log(Admin)
     this.toggle = {}
     this.toggle['flag'] = Admin

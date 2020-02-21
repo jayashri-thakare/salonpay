@@ -87,7 +87,6 @@ export class UserComponent implements OnInit {
   }
 
   addupdateform(type){
-    debugger;
     if(type == 'add'){
       this.updateform = false;
       this.addform = true;

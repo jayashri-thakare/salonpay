@@ -76,13 +76,13 @@ export class AddServicesComponent implements OnInit {
   @Input('Servicesobj') arrayofselectedobj: Array<any>=[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
-  
+
   get f() {
     return this.addservicesForm.controls;
   }
   get f1() {
     return this.updateservicesForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.addservicesForm = this.formBuilder.group({
@@ -94,7 +94,6 @@ export class AddServicesComponent implements OnInit {
   }
 
   createServices(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.addservicesForm.status == 'VALID') {
@@ -114,7 +113,6 @@ export class AddServicesComponent implements OnInit {
   }
 
   updateService(Admin) {
-    debugger;
     console.log(Admin)
     Admin.ServiceCategoryId = this.arrayofselectedobj[0].serviceCategoryId;
     // tslint:disable-next-line:triple-equals

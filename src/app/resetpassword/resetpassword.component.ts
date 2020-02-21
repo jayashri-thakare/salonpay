@@ -45,9 +45,7 @@ export class ResetpasswordComponent implements OnInit {
     // this.id$ = this.route.paramMap.pipe(map(paramMap => paramMap.get('id')));
     // this.id = this.route.snapshot.paramMap.get('id');
     // this.email = this.route.snapshot.paramMap.get('email');
-    // debugger;
     this.sub = this.route.params.subscribe(params => {
-      debugger;
       this.id = params['id']; // (+) converts string 'id' to a number
       this.email = params['email'];
       // In a real app: dispatch action to load the details here.
@@ -64,7 +62,6 @@ export class ResetpasswordComponent implements OnInit {
       // User data which we have received from the registration form.
       this.userdataService.resetPassword(userdata).subscribe((response) => {
         console.log(response);
-        debugger;
         this.messageService.add('Password changed succesfully.');
         this.router.navigate(['/login']);
       });

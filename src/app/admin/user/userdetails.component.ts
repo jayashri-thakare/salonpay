@@ -138,7 +138,6 @@ export class UserDetailsComponent implements OnInit {
   }
 
   upload_profile_image(event) {
-    debugger;
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); // read file as data url

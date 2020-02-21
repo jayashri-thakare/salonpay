@@ -118,7 +118,6 @@ export class TimerComponent1 implements OnInit, OnDestroy {
   private getTimeDifference(){
     this.userdataService.get_time_difference().subscribe((data) => {
       // this.userdetail = data;
-      debugger;
       if(data['totalTime']) {
         var hms = data['totalTime'];
         var a = hms.split(':'); // split it at the colons

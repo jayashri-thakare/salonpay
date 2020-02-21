@@ -365,19 +365,19 @@ export class AdminRolesComponent implements OnInit {
             if(this.getcustomerobj){
               this.getcustomerobjright = this.getrolesmodclaim[i]['rights'][0];
             }
-          } 
+          }
           if(this.getrolesmodclaim[i]['moduleName'] == 'Appointments'){
             this.getappointmentobj = this.getrolesmodclaim[i];
             if(this.getappointmentobj){
               this.getappointmentobjright = this.getrolesmodclaim[i]['rights'][0];
             }
-          } 
+          }
           if(this.getrolesmodclaim[i]['moduleName'] == 'Sales'){
             this.getsalesobj = this.getrolesmodclaim[i];
             if(this.getsalesobj){
               this.getsalesobjright = this.getrolesmodclaim[i]['rights'][0];
             }
-          } 
+          }
         }
         this.getrolesindclaim = this.getrolesclaim.result
         this.getrolesindclaim = this.getrolesclaim.result[0].claim.individualRights;

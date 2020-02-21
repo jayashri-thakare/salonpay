@@ -75,7 +75,6 @@ export class AdminInventoryComponent implements OnInit {
   }
 
   deleteProduct(selected_product) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (selected_product) {
       this.AdminService.deleteProduct(selected_product[0].productId).subscribe((data) => {

@@ -147,7 +147,7 @@ import {Observable, Subscription} from 'rxjs';
 export class BusinessStaffComponent implements OnInit {
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
   private staff: any[];
-  private result: ({ parentCompanyId: number; dayName: string; staffCountId: number; id: number } | { parentCompanyId: number; dayName: string; staffCountId: number; id: number } | { parentCompanyId: number; dayName: string; staffCountId: number; id: number })[];
+  private result: Observable<any>;
   // addStaffForm: FormGroup;
   private submitted: boolean;
   employee = [ 1, 2, 3, 4, 5, 6, 7];
@@ -167,6 +167,7 @@ export class BusinessStaffComponent implements OnInit {
 
   filledVal(day) {
     if(this.result) {
+      // @ts-ignore
       for (const entry of this.result) {
         if (entry.dayName === day) {
           return entry.staffCountId
@@ -197,7 +198,7 @@ export class BusinessStaffComponent implements OnInit {
           staffCountId: 4
         }
       ];
-      this.result = data1;
+      this.result = data;
       // @ts-ignore
     //   let sorter = {
     //     // "sunday": 0, // << if sunday is first day of week
@@ -219,10 +220,8 @@ export class BusinessStaffComponent implements OnInit {
   }
 
   createStaff() {
-    debugger;
     // if (this.addStaffForm.status == 'VALID') {
     this.AdminService.createStaff(this.staff).subscribe((data) => {
-        debugger;
         this.messageService.clear();
         this.messageService.add('Staff added successfully.');
       });
@@ -234,7 +233,6 @@ export class BusinessStaffComponent implements OnInit {
     // }
   }
   saveObj(day, event) {
-    debugger;
     const x = {};
     // const index: number = this.enableCheckbox.indexOf(modulename);
     // if (index !== -1) {
@@ -247,7 +245,7 @@ export class BusinessStaffComponent implements OnInit {
     if (this.staff.length >= 1) {
       this.staff.indexOf(day)
       const index: number = this.staff.indexOf(day);
-      if (index == -1) {
+      if (index != -1) {
         this.staff.splice(index, 1);
       }
     }

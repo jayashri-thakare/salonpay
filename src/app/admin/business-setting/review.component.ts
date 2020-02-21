@@ -140,7 +140,6 @@ export class BusinessReviewComponent implements OnInit {
   }
 
   deleteReviews() {
-    debugger;
     // tslint:disable-next-line:triple-equals
       this.AdminService.deleteReview().subscribe((data) => {
         console.log(data)

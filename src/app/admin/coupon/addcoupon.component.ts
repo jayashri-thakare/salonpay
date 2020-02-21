@@ -13,7 +13,8 @@ import { Subscription } from 'rxjs';
     '        <div class="mobile-side">\n' +
     '        <!-- common headline -->\n' +
     '        <h3 class="close-btn main-comm-head">\n' +
-    '            <i class="icon-down-arrow com-arw" (click)="closeModal(\'add-coupon\')"></i>Add Create<span> Coupon</span>\n' +
+    '            <i *ngIf="adminService.couponName===add" class="icon-down-arrow com-arw" (click)="closeModal(\'add-coupon\')"></i>Add Create<span> Coupon</span>\n' +
+    // '            <i *ngIf="adminService.couponName===update" class="icon-down-arrow com-arw" (click)="closeModal(\'add-coupon\')"></i>Update<span> Coupon =={{adminService.couponName}}</span>\n' +
     '        </h3>\n' +
     '        <!-- common headline end -->\n' +
     '        <form id="couponForm" [formGroup]="addcouponForm" (ngSubmit)="updateCoupon(addcouponForm.value)" class="popup-scrll">\n' +
@@ -136,6 +137,7 @@ export class AddCouponComponent implements OnInit {
       Service: [''],
       Technician: ['']
     });
+    // this.adminService.couponName = 'add';
     this.getTechnician();
   }
 
@@ -152,7 +154,6 @@ export class AddCouponComponent implements OnInit {
     });
   }
   updateCoupon(userdata) {
-    debugger;
     // userdata.Service = String ([userdata.Service])
     userdata.Technician = String ([userdata.Technician])
     // userdata.ProductId = String ([userdata.ProductId])
@@ -163,17 +164,23 @@ export class AddCouponComponent implements OnInit {
     if(userdata.ValueBit == '' || userdata.ValueBit==undefined){
       userdata.ValueBit = false;
     }
+    if(this.adminService.couponName=='update') {
+      userdata.CouponId = this.adminService.coupon['couponId'];
+    }
     userdata.Value = parseInt(userdata.Value)
     userdata.MaxUses = parseInt(userdata.MaxUses);
     userdata.ValueBit = Boolean(userdata.ValueBit)
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_coupon(userdata).subscribe((data) => {
-      debugger;
       this.adminService.publish('call-coupon');
       this.adminService.editservice = false;
       this.modalService.close('add-coupon');
       this.messageService.clear();
-      this.messageService.add('Coupon created successfully.');
+      if(this.adminService.couponName=='update'){
+        this.messageService.add('Coupon updated successfully.');
+      }else{
+        this.messageService.add('Coupon created successfully.');
+      }
       // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
     });
   }

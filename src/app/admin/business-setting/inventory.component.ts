@@ -149,7 +149,6 @@ export class BusinessInventoryComponent implements OnInit {
   }
 
   createBusinessInventory(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     Admin.LowThreshold = parseInt(Admin.LowThreshold)
@@ -191,7 +190,6 @@ export class BusinessInventoryComponent implements OnInit {
   }
 
   updateBusinessInventory(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     Admin.LowThreshold = parseInt(Admin.LowThreshold)

@@ -73,13 +73,13 @@ export class AddReviewComponent implements OnInit {
   @Input('Reviewobj') arrayofselectedobj: Array<any>=[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
-  
+
   get f() {
     return this.addreviewForm.controls;
   }
   get f1() {
     return this.updatereviewForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.addreviewForm = this.formBuilder.group({
@@ -91,7 +91,6 @@ export class AddReviewComponent implements OnInit {
   }
 
   createReviews(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.addreviewForm.status == 'VALID') {
@@ -111,7 +110,6 @@ export class AddReviewComponent implements OnInit {
   }
 
   updateReviews(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.updatereviewForm.status == 'VALID') {

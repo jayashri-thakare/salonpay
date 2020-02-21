@@ -5,7 +5,7 @@
             <h3 class="main-comm-head m-0">Coupons</h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
-                    <button class="button flg-btn side-menu" (click)="modalService.close('add-coupon');modalService.open1('add-coupon')">+ Add New</button>
+                    <button class="button flg-btn side-menu" (click)="modalService.close('add-coupon');modalService.open1('add-coupon'); adminService.couponName='add'">+ Add New</button>
                     <div class="form-group mb-0 mr-2">
                         <form>
                             <input class="form-field" type="text" name="filter-searh" required>
@@ -65,7 +65,7 @@
                             <div class="yur-mail-rig">
                                 <i class="icon-status1 status"></i>
                                 <ul class="status-list">
-                                   <li (click)="modalService.open('add-coupon',coupon.couponId ); adminService.getCoupon(coupon);"><i class="icon-edit" ></i> Edit</li>
+                                   <li (click)="modalService.open('add-coupon',coupon.couponId ); adminService.getCoupon(coupon); adminService.couponName='update'"><i class="icon-edit" ></i> Edit</li>
                                     <li><i class="icon-share"></i> Share</li>
                                     <li class="delt" data-toggle="modal" data-target="#deletePopup"
                                         data-backdrop="static" (click)="selectproductobj(coupon)" data-keyboard="false"><i class="icon-delete"></i>
@@ -144,9 +144,9 @@
                         <div class="yur-mail-rig">
                             <i class="icon-status1 status"></i>
                             <ul class="status-list">
-                                <li class="side-menu" data-name="edit-service"><i class="icon-edit"></i> Edit</li>
+                                <li class="side-menu" data-name="edit-service" (click)="modalService.open('add-coupon',coupon.couponId ); adminService.getCoupon(coupon);adminService.couponName='update'"><i class="icon-edit"></i> Edit</li>
                                 <li><i class="icon-share"></i> Share</li>
-                                <li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+                                <li class="delt" data-toggle="modal" data-target="#deletePopup" (click)="selectproductobj(coupon)" data-backdrop="static"
                                     data-keyboard="false"><i class="icon-delete"></i>
                                     Delete</li>
                             </ul>

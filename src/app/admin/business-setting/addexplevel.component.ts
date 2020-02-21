@@ -76,13 +76,13 @@ export class AddExpLevelComponent implements OnInit {
   @Input('explevelobj') arrayofselectedobj: Array<any>=[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
-  
+
   get f() {
     return this.addexplevelForm.controls;
   }
   get f1() {
     return this.updateexplevelForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.addexplevelForm = this.formBuilder.group({
@@ -94,7 +94,6 @@ export class AddExpLevelComponent implements OnInit {
   }
 
   createExpLevel(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.addexplevelForm.status == 'VALID') {
@@ -114,7 +113,6 @@ export class AddExpLevelComponent implements OnInit {
   }
 
   updateExpLevel(Admin) {
-    debugger;
     console.log(Admin)
     Admin.ServiceLevelId = this.arrayofselectedobj[0].serviceLevelId;
     // tslint:disable-next-line:triple-equals

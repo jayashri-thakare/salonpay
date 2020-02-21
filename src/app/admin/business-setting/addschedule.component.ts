@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'addschedule-modal',
-  template: '<jw-modal id="add-schedule">\n' + 
+  template: '<jw-modal id="add-schedule">\n' +
     '    <!-- Edit Salon Timing Menu -->\n' +
     '    <div class="mobile-side">\n' +
     '        <!-- common headline -->\n' +
@@ -218,7 +218,7 @@ export class AddScheduleComponent implements OnInit {
   @Input('addSchedule') addSchedule: any;
   @Input('updateSchedule') updateSchedule: any;
   @Input('Schedulesobj') arrayofselectedobj: Array<any>=[];
-  
+
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
   get f() {
     return this.addscheduleForm.controls;
@@ -251,7 +251,6 @@ export class AddScheduleComponent implements OnInit {
   }
 
   selectedDays(selected_day){
-    debugger;
     var index = this.arrayofselecteddays.indexOf(selected_day);
     if(index<0){
       this.arrayofselecteddays.push(selected_day);
@@ -262,7 +261,6 @@ export class AddScheduleComponent implements OnInit {
   }
 
   createSchedule(Admin) {
-    debugger;
     console.log(Admin)
     Admin.DayName = this.arrayofselecteddays;
     // tslint:disable-next-line:triple-equals
@@ -284,7 +282,6 @@ export class AddScheduleComponent implements OnInit {
   }
 
   updateSchedulefunc(Admin) {
-    debugger;
     console.log(Admin)
     Admin.DayName = [this.arrayofselectedobj[0]['dayName']];
     // tslint:disable-next-line:triple-equals

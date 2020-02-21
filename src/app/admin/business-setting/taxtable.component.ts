@@ -140,7 +140,6 @@ export class BusinessTaxTableComponent implements OnInit {
   }
 
   deleteTax(selected_tax) {
-    debugger;
     // tslint:disable-next-line:triple-equals
     if (selected_tax) {
       this.AdminService.deleteTax(selected_tax[0].taxId).subscribe((data) => {

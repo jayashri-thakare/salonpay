@@ -86,7 +86,7 @@ export class AddSupplierComponent implements OnInit {
     @Input('turncountsobj') arrayofselectedobj: Array<any>=[];
   constructor(public AdminService: AdminService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
-  
+
   get f() {
     return this.addsupplierForm.controls;
   }
@@ -106,7 +106,6 @@ export class AddSupplierComponent implements OnInit {
   }
 
   createSupplier(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.addsupplierForm.status == 'VALID') {
@@ -126,7 +125,6 @@ export class AddSupplierComponent implements OnInit {
   }
 
   updateSupplier(Admin) {
-    debugger;
     console.log(Admin)
     Admin.SupplierId = this.arrayofselectedobj[0]['supplierId']
     // tslint:disable-next-line:triple-equals

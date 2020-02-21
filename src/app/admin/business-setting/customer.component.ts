@@ -236,7 +236,6 @@ export class BusinessCustomerComponent implements OnInit {
   }
 
   emailTimeSelection(event, type, content){
-    debugger;
     if(event.currentTarget.checked && type == 'Email'){
       var index = this.arrayofselectedemailobj.indexOf(content);
       if(index<0 && event.currentTarget.checked){
@@ -260,7 +259,6 @@ export class BusinessCustomerComponent implements OnInit {
   }
 
   addemailsmsnotification() {
-    debugger;
     this.claims['EmailNotification'] = this.emailnotiobj;
     this.claims['SMSNotification'] = this.smsnotiobj;
     // tslint:disable-next-line:triple-equals
@@ -291,7 +289,6 @@ export class BusinessCustomerComponent implements OnInit {
   }
 
   updateCustomerNoti(checkvalue, type, content){
-    debugger;
     if(content){
       checkvalue = checkvalue.currentTarget.checked
     }
@@ -337,7 +334,6 @@ export class BusinessCustomerComponent implements OnInit {
   }
 
   Updateemailsmsnotification() {
-    debugger;
     // tslint:disable-next-line:triple-equals
     this.AdminService.updateEmailSmsNotification(this.emailnotiobj).subscribe((data) => {
       // this.AdminService.publish('call-user');

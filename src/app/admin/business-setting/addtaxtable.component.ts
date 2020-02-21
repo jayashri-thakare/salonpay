@@ -98,7 +98,6 @@ export class AddTaxTableComponent implements OnInit {
   }
 
   createTaxTable(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.addTaxForm.status == 'VALID') {
@@ -118,7 +117,6 @@ export class AddTaxTableComponent implements OnInit {
   }
 
   updateTaxTable(Admin) {
-    debugger;
     console.log(Admin)
     Admin.TaxId = parseInt(this.arrayofselectedobj[0].taxId)
     // tslint:disable-next-line:triple-equals

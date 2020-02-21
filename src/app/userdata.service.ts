@@ -99,7 +99,6 @@ export class UserdataService {
 
   addOffice(userdata) {
     // tslint:disable-next-line:no-debugger
-  	debugger;
 	  // const input = new URLSearchParams();
    //  // input.append('grant_type', 'password');
 	  // // input.append('scope', ' https://graph.microsoft.com/.default');
@@ -137,7 +136,6 @@ export class UserdataService {
 	// }
 
    this.httpClient.post(this.baseUrl, httpOptions).subscribe((val) => {
-      debugger;
     });
 
 
@@ -237,7 +235,6 @@ export class UserdataService {
   }
 
   update_notification(userdata) {
-    debugger;
     this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/notificationsetting/NotoficationOnOff? ';
     userdata.UserId = localStorage.getItem('userId');
     userdata.ParentCompanyId = parseInt (localStorage.getItem('companyId'));

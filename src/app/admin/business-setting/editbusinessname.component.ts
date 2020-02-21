@@ -51,7 +51,7 @@ export class EditBusinessProfileNameComponent implements OnInit {
 
   get f() {
     return this.updatenameForm.controls;
-  }  
+  }
 
   ngOnInit() {
     this.updatenameForm = this.formBuilder.group({
@@ -60,7 +60,6 @@ export class EditBusinessProfileNameComponent implements OnInit {
   }
 
   updateProfieName(Admin) {
-    debugger;
     console.log(Admin)
     // tslint:disable-next-line:triple-equals
     if (this.updatenameForm.status == 'VALID') {
