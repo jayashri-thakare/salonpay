@@ -260,7 +260,8 @@ export class UserdataService {
 	  input.append('file', userdata[0]);
    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
       this.imagepath = '';
-      this.imagepath = 'https://payzliapi1.azurewebsites.net/' + val['profilePicPath'] ;
+      this.getProfilePic(this.userId);
+      // this.imagepath = 'https://payzliapi1.azurewebsites.net/' + val['profilePicPath'] ;
     });
   }
 

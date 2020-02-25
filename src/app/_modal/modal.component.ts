@@ -51,11 +51,26 @@ export class ModalComponent implements OnInit, OnDestroy {
     document.querySelector('.overlay').classList.add('overlay-in');
   }
 
+  // open modal
+  openNote(): void {
+    document.body.classList.add('jw-modal-open');
+    let myTag = this.el.nativeElement.querySelector('.comm-note'); // you can select html element by getelementsByClassName also, please use as per your requirement.
+    myTag.classList.add('comm-note-box');
+    // document.querySelector('.overlay').classList.add('overlay-in');
+  }
+
   // close modal
   close(): void {
     document.body.classList.remove('jw-modal-open');
     let myTag = this.el.nativeElement.querySelector('.mobile-side'); // you can select html element by getelementsByClassName also, please use as per your requirement.
     myTag.classList.remove('mobile-side-in');
     document.querySelector('.overlay').classList.remove('overlay-in');
+  }  // close modal
+
+  closeNote(): void {
+    document.body.classList.remove('jw-modal-open');
+    let myTag = this.el.nativeElement.querySelector('.comm-note'); // you can select html element by getelementsByClassName also, please use as per your requirement.
+    myTag.classList.remove('comm-note-box');
+    // document.querySelector('.overlay').classList.remove('overlay-in');
   }
 }

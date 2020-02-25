@@ -23,10 +23,23 @@ export class ModalService {
 
   open1(id: string) {
     // open modal specified by id
+    debugger;
     const modal = this.modals.find(x => x.id === id);
     modal.open();
   }
 
+  opennote(id: string) {
+    // open modal specified by id
+    const modal = this.modals.find(x => x.id === id);
+    modal.openNote();
+  }
+
+  closeNote(id: string) {
+    // close modal specified by id
+    const modal = this.modals.find(x => x.id === id);
+    // document.querySelector('.overlay').classList.remove('overlay-in');
+    modal.closeNote();
+  }
   setUser(userdetail) {
     this.userdetail = userdetail;
   }
