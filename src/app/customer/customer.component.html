@@ -7,7 +7,7 @@
         <app-statusbar></app-statusbar>
     </div>
 
-    <div id="gridView" [ngStyle]="{'display': gridview ? 'block' : 'none' }">
+    <div id="gridView">
         <!-- start -->
         <div class="f-row f-3 f-1440-2 f-640-1">
             <div class="f-col" *ngFor="let customer of customerlist">
@@ -16,7 +16,7 @@
                     <!-- start -->
                     <div class="app-pad-box">
                         <div class="cust-rig">
-                            <a href="customerdashboard">
+                            <a href="customerdashboard" (click)="customerService.selectedCustomerObj(customer)">
                                 <h6>{{customer.firstName}} {{customer.lastName}}</h6>
                             </a>
 
@@ -36,7 +36,7 @@
                     <!-- start -->
                     <div class="app-pad-box app-pad-box-brk">
                         <div class="cust-reward">
-                            <a href="customerdashboard">
+                            <a href="customerdashboard" (click)="customerService.selectedCustomerObj(customer)">
                                 <div class="techi-user">
                                     <i class="icon-calender"></i>
                                     <div class="tech-usr-cont">
@@ -48,7 +48,7 @@
                             <i class="icon-right-arrow nxt"></i>
                         </div>
                         <div class="cust-reward">
-                            <a href="customerdashboard">
+                            <a href="customerdashboard" (click)="customerService.selectedCustomerObj(customer)">
                                 <div class="techi-user">
                                     <i class="icon-cart"></i>
                                     <div class="tech-usr-cont">
@@ -60,7 +60,7 @@
                             <i class="icon-right-arrow nxt"></i>
                         </div>
                         <div class="cust-reward">
-                            <a href="customerdashboard">
+                            <a href="customerdashboard" (click)="customerService.selectedCustomerObj(customer)">
                                 <div class="techi-user">
                                     <i class="icon-reward"></i>
                                     <div class="tech-usr-cont">

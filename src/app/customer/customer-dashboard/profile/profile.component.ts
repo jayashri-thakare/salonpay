@@ -12,11 +12,23 @@ import { MessageService } from '../../../message.service';
 })
 
 export class CustomerProfileComponent implements OnInit {
+  customerProfile: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-   
+    this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
+    this.customerService.getCustomerProfilePic(localStorage.getItem('userId'));
+  }
+
+  getCustomerProfile(customerid) {
+    debugger;
+    this.customerService.getCustomerProfile(customerid).subscribe((data) => {
+      this.customerProfile = data;
+      // this.customerProfile = this.customerProfile.result;
+      console.log(this.customerProfile)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 
 }

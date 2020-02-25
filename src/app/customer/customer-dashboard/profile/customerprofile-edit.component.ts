@@ -77,7 +77,7 @@ export class CustomerProfileEditComponent implements OnInit {
 
   model: any = {};
   private form: FormGroup;
-  @Input('userdata') customerdetail: any;
+  @Input('customerProfile') customerProfile: any;
   @Output() messageToEmit = new EventEmitter<string>();
   constructor(private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
               public customerService: CustomerService, private messageService: MessageService) {
@@ -86,18 +86,6 @@ export class CustomerProfileEditComponent implements OnInit {
   get f() {
     return this.customerprofileForm.controls;
   }
-
-  updateDetail(customer) {
-    // userdata.Email = this.email;
-    customer = JSON.stringify(this.customerprofileForm.value);
-    this.customerService.update_customer_profile(this.customerprofileForm.value);
-    this.customerService.publish('call-parent');
-    this.closeModal('side-menu-customerprofile');
-    this.messageService.clear();
-    this.messageService.add('Customer details updated successfully.');
-    // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
-  }
-
 
   ngOnInit() {
     this.customerprofileForm = this.formBuilder.group({
@@ -109,8 +97,28 @@ export class CustomerProfileEditComponent implements OnInit {
 
   }
 
-  ngOnChanges() {
-    this.customerdetail = this.customerdetail;
+  updateDetail(customer) {
+    debugger;
+    console.log(customer)
+    // tslint:disable-next-line:triple-equals
+    if (this.customerprofileForm.status == 'VALID') {
+      this.customerService.update_customer_profile(customer).subscribe((data) => {
+        if(data['success'] == 0){
+          this.messageService.clear();
+          this.messageService.add(data['message']);
+        }else if(data['success'] == 1){
+          this.closeModal('side-menu-customerprofile');
+          this.messageService.clear();
+          this.messageService.add('Customer details updated successfully.');
+        }
+      });
+    } else {
+      console.log(customer, this.customerprofileForm.status);
+      this.submitted = true;
+      if (this.customerprofileForm.invalid) {
+        return;
+      }
+    }
   }
 
   closeModal(id: string) {
