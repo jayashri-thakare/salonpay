@@ -22,17 +22,17 @@ import { MessageService } from '../../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Contact\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="string" id="cont-mob" ngModel="{{userdetail?.phoneNumber}}" internationalTelNo name="cont-mob" formControlName="PhoneNumber" class="form-field field--not-empty" \n' +
+    '          <input type="string" id="cont-mob" internationalTelNo name="cont-mob" formControlName="mobileContact" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Mobile\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="string" id="cont-work" ngModel="{{userdetail?.workContact}}" internationalTelNo name="cont-work" formControlName="WorkContact" class="form-field field--not-empty" \n' +
+    '          <input type="string" id="cont-work" internationalTelNo name="cont-work" formControlName="workContact" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Work\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="string" id="cont-home" ngModel="{{userdetail?.homeConatct}}" internationalTelNo name="cont-home" formControlName="HomeConatct" class="form-field field--not-empty" \n' +
+    '          <input type="string" id="cont-home" internationalTelNo name="cont-home" formControlName="homeContact" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Home\' | translate}}</p>\n' +
     '        </div>\n' +
@@ -57,7 +57,10 @@ export class CustomerContactEditComponent implements OnInit {
   customercontactForm: FormGroup;
   control: FormControl;
   submitted = false;
-  @Input('userdata') customerdetail: any;
+  @Input('customerProfile') customerProfile: any;
+  mobileContactCtrl: FormControl;
+  workContactCtrl: FormControl;
+  homeContactCtrl: FormControl;
   constructor(private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
               public customerService: CustomerService, private messageService: MessageService) { }
 
@@ -66,22 +69,42 @@ export class CustomerContactEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customercontactForm = this.formBuilder.group({
-      PhoneNumber: ['', [Validators.required]],
-      WorkContact: ['', [Validators.required]],
-      HomeConatct: ['', [Validators.required]]
+    this.customercontactForm = this.initForm(this.customerProfile);
+  }
+
+  initForm(data): FormGroup {
+    this.mobileContactCtrl = this.formBuilder.control(data.mobileContact, [Validators.required]);
+    this.workContactCtrl = this.formBuilder.control(data.workContact, [Validators.required]);
+    this.homeContactCtrl = this.formBuilder.control(data.homeContact, [Validators.required]);
+    return this.formBuilder.group({
+      mobileContact: this.mobileContactCtrl,
+      workContact: this.workContactCtrl,
+      homeContact: this.homeContactCtrl
     });
   }
 
   updateDetail(customer) {
-    // userdata.Email = this.email;
     debugger;
-    this.customerService.update_customer_profile(this.customercontactForm.value);
-    this.customerService.publish('call-parent');
-    this.closeModal('side-menu-Customercontact');
-    this.messageService.clear();
-    this.messageService.add('Customer details updated successfully.');
-    // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
+    console.log(customer)
+    // tslint:disable-next-line:triple-equals
+    if (this.customercontactForm.status == 'VALID') {
+      this.customerService.update_customer_profile(customer).subscribe((data) => {
+        if(data['success'] == 0){
+          this.messageService.clear();
+          this.messageService.add(data['message']);
+        }else if(data['success'] == 1){
+          this.closeModal('side-menu-customercontact');
+          this.messageService.clear();
+          this.messageService.add('Customer details updated successfully.');
+        }
+      });
+    } else {
+      console.log(customer, this.customercontactForm.status);
+      this.submitted = true;
+      if (this.customercontactForm.invalid) {
+        return;
+      }
+    }
   }
 
   closeModal(id: string) {

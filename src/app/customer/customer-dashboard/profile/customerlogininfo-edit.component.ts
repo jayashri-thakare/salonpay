@@ -23,7 +23,7 @@ import { MessageService } from '../../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'login info\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input class="form-field field--not-empty" type="text" id="info-email" ngModel="{{ userdetail?.email }}" formControlName="Email"\n' +
+    '          <input class="form-field field--not-empty" type="text" id="info-email" ngModel="{{ userdetail?.email }}" formControlName="email"\n' +
     '                 required="" aria-invalid="false"  readonly />\n' +
     '          <p class="form-label">{{\'Email\' | translate}}</p>\n' +
     '        </div>\n' +
@@ -58,8 +58,7 @@ export class CustomerProfileinfoEditComponent implements OnInit {
   customerinfoForm: FormGroup;
   control: FormControl;
   submitted = false;
-  // tslint:disable-next-line:ban-types
-  @Input('userdata') userdetail: any;
+  @Input('customerProfile') customerProfile: any;
   constructor(public messageService:MessageService, public customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router) { }
   get f() {
     return this.customerinfoForm.controls;
@@ -67,7 +66,7 @@ export class CustomerProfileinfoEditComponent implements OnInit {
 
   ngOnInit() {
     this.customerinfoForm = this.formBuilder.group({
-      Email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
+      email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       oldPassword: ['',  [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_+=])(?=\S+$).{8,}$/)]],
       newPassword: ['',  [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_+=])(?=\S+$).{8,}$/)]],
     });
@@ -77,19 +76,19 @@ export class CustomerProfileinfoEditComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  update_profile_info(customer) {
-    console.log(customer, this.customerinfoForm)
+  updateDetail(customer) {
+    debugger;
+    console.log(customer)
     // tslint:disable-next-line:triple-equals
     if (this.customerinfoForm.status == 'VALID') {
-      customer.id = localStorage.getItem('userId')
       this.customerService.update_customer_profile(customer).subscribe((data) => {
-        if (data['success'] == 0){
+        if(data['success'] == 0){
           this.messageService.clear();
-          this.messageService.add(data['result']);
+          this.messageService.add(data['message']);
         }else if(data['success'] == 1){
-          this.closeModal('side-menu-logininfo');
+          this.closeModal('side-menu-customerlogininfo');
           this.messageService.clear();
-          this.messageService.add(data['result']);
+          this.messageService.add('Customer details updated successfully.');
         }
       });
     } else {

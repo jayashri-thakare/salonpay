@@ -13,6 +13,7 @@ import { MessageService } from '../message.service';
 
 export class CustomerComponent implements OnInit {
   customerlist: any;
+  customerProfile: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 

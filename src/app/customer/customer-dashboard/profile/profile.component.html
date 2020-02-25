@@ -26,19 +26,21 @@
                 <div class="usr-pro-box">
                     <!-- start -->
                     <div class="usr-pro-top">
-                        <!-- upload start -->
-                        <div class="avatar-upload">
-                            <div class="avatar-edit">
-                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                         <!-- upload start -->
+                            <div class="avatar-upload">
+                                <div class="avatar-edit">
+                                <label class="hoverable" for="fileInput">
+                                    <img [src]="customerService.imagepath!=null ? customerService.imagepath : 'https://www.w3schools.com/howto/img_avatar.png'">
+                                    <div class="hover-text">Choose file</div>
+                                    <div class="background"></div>
+
+                                <input id="fileInput" type='file' (change)="customerService.upload_customer_profile_image($event.target.files)">
                                 <label for="imageUpload"><i class="icon-uploading grd-icon"></i></label>
-                            </div>
-                            <div class="avatar-preview">
-                                <div id="imagePreview" style="background-image: url(img/usr-profile.svg);">
+                                </label>
                                 </div>
                             </div>
-                        </div>
                         <!-- upload end -->
-                        <h6>Maya Didas</h6>
+                        <h6>{{customerProfile?.firstName}} {{customerProfile?.lastName}}</h6>
                         <p>Technician</p>
                         <i class="icon-edit grd-icon pro-edt side-menu" (click)="modalService.open1('side-menu-customerprofile')"></i>
                     </div>
@@ -46,11 +48,11 @@
                     <div class="usr-pro-btm">
                         <div class="comm-cont">
                             <p>Birthdate</p>
-                            <h6>8/15/1989</h6>
+                            <h6>{{customerProfile?.dateOfBirth | date: 'M/d/yyyy'}}</h6>
                         </div>
                         <div class="comm-cont">
                             <p>Gender</p>
-                            <h6>Female</h6>
+                            <h6>{{customerProfile?.gender}}</h6>
                         </div>
                     </div>
                     <!-- end -->
@@ -67,15 +69,15 @@
                 <div class="prof-comm-shad">
                     <div class="comm-cont w100 mb-4 p-0">
                         <p>Mobile</p>
-                        <h6>1-541-754-3010</h6>
+                        <h6>{{customerProfile?.mobileContact}}</h6>
                     </div>
                     <div class="comm-cont w100 mb-4 p-0">
                         <p>Work</p>
-                        <h6>716-875-6409</h6>
+                        <h6>{{customerProfile?.workContact}}</h6>
                     </div>
                     <div class="comm-cont w100 p-0">
                         <p>Home</p>
-                        <h6>516-804-3341</h6>
+                        <h6>{{customerProfile?.homeContact}}</h6>
                     </div>
                 </div>
                 <!-- end -->
@@ -91,23 +93,27 @@
                 <div class="prof-comm-shad">
                     <div class="comm-cont w100 mb-4 p-0">
                         <p>Address Line 1</p>
-                        <h6>2142 Westwood Avenue</h6>
+                        <h6>{{customerProfile?.addressLine1}}</h6>
                     </div>
                     <div class="comm-cont w100 mb-4 p-0">
                         <p>Address Line 2</p>
-                        <h6>2142 Westwood Avenue, Park Center</h6>
+                        <h6>{{customerProfile?.addressLine2}}</h6>
                     </div>
                     <div class="comm-cont w33 w-480-50 mb-480-30 p-0">
                         <p>City</p>
-                        <h6>Hicksville</h6>
+                        <h6>{{customerProfile?.cityName}}</h6>
+                    </div>
+                    <div class="comm-cont w33 w-480-50 mb-480-30 p-0">
+                        <p>Country</p>
+                        <h6>{{customerProfile?.countryName}}</h6>
                     </div>
                     <div class="comm-cont w33 w-480-50 mb-480-30 p-0">
                         <p>State</p>
-                        <h6>New York</h6>
+                        <h6>{{customerProfile?.stateName}}</h6>
                     </div>
                     <div class="comm-cont w33 w-480-50 p-0">
                         <p>Zip Code</p>
-                        <h6>11612</h6>
+                        <h6>{{customerProfile?.zipcode}}</h6>
                     </div>
                 </div>
                 <!-- end -->
@@ -123,7 +129,7 @@
                 <div class="prof-comm-shad mb-3">
                     <div class="comm-cont w100 p-0">
                         <p>Email</p>
-                        <h6>nickbocker@salescorp.com</h6>
+                        <h6>{{customerProfile?.email}}</h6>
                     </div>
                 </div>
                 <!-- end -->
@@ -138,73 +144,11 @@
             </div>
         </div>
         <!-- end -->
-        <!-- start -->
-        <div class="row mb-5">
-            <div class="usr-pro-box-flex usr-pro-box-flex-4">
-                <div class="pro-comm-fle mt-4">
-                    <h6>Reminder</h6>
-                </div>
-                <!-- start -->
-                <div class="prof-comm-shad cust-reminder">
-                    <div class="comm-cont">
-                        <p>Email</p>
-                        <div class="switch switch--horizontal m-0">
-                            <input id="email-rim-off" type="radio" name="email-switch">
-                            <label for="email-rim-off">Off</label>
-                            <input id="email-rim-on" type="radio" name="email-switch" checked="checked">
-                            <label for="email-rim-on">On</label><span class="toggle-outside"><span
-                                    class="toggle-inside"></span></span>
-                        </div>
-                    </div>
-                    <div class="comm-cont">
-                        <p>SMS</p>
-                        <div class="switch switch--horizontal m-0">
-                            <input id="sms-rim-off" type="radio" name="sms-switch" checked="checked">
-                            <label for="sms-rim-off">Off</label>
-                            <input id="sms-rim-on" type="radio" name="sms-switch">
-                            <label for="sms-rim-on">On</label><span class="toggle-outside"><span
-                                    class="toggle-inside"></span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end -->
-            </div>
-
-            <div class="usr-pro-box-flex usr-pro-box-flex-4">
-                <div class="pro-comm-fle mt-4">
-                    <h6>others</h6>
-                </div>
-                <!-- start -->
-                <div class="prof-comm-shad cust-reminder">
-                    <div class="comm-cont">
-                        <p>Category</p>
-                        <div class="switch switch--horizontal m-0">
-                            <input id="cate-rim-off" type="radio" name="cate-switch">
-                            <label for="cate-rim-off">New</label>
-                            <input id="cate-rim-on" type="radio" name="cate-switch" checked="checked">
-                            <label for="cate-rim-on">Existing</label><span class="toggle-outside"><span
-                                    class="toggle-inside"></span></span>
-                        </div>
-                    </div>
-                    <div class="comm-cont">
-                        <p>Status</p>
-                        <div class="switch switch--horizontal m-0">
-                            <input id="status-rim-off" type="radio" name="status-switch" checked="checked">
-                            <label for="status-rim-off">Inactive</label>
-                            <input id="status-rim-on" type="radio" name="status-switch">
-                            <label for="status-rim-on">Active</label><span class="toggle-outside"><span
-                                    class="toggle-inside"></span></span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end -->
-            </div>
-        </div>
-        <!-- end -->
+        <app-customer-profilesetting></app-customer-profilesetting>
     </div>
-    <customer-profile-modal></customer-profile-modal>
-    <customer-contact-modal></customer-contact-modal>
-    <customer-address-modal></customer-address-modal>
-    <customer-profileinfo-modal></customer-profileinfo-modal>
+    <customer-profile-modal [customerProfile]="customerProfile"></customer-profile-modal>
+    <customer-contact-modal [customerProfile]="customerProfile"></customer-contact-modal>
+    <customer-address-modal [customerProfile]="customerProfile"></customer-address-modal>
+    <customer-profileinfo-modal [customerProfile]="customerProfile"></customer-profileinfo-modal>
 </div>
 <!-- Main Container Ends -->

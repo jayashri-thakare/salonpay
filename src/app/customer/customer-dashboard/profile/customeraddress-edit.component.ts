@@ -23,12 +23,12 @@ import { CscService } from 'src/app/services/cscdropdown.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Address\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-line1" name="add-line1" ngModel="{{userdetail?.addressLine1}}" formControlName="AddressLine1" class="form-field field--not-empty" \n' +
+    '          <input type="text" id="add-line1" name="add-line1" ngModel="{{userdetail?.addressLine1}}" formControlName="addressLine1" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Address Line 1\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-line2" name="add-line2" ngModel="{{userdetail?.addressLine2}}" formControlName="AddressLine2" class="form-field field--not-empty" \n' +
+    '          <input type="text" id="add-line2" name="add-line2" ngModel="{{userdetail?.addressLine2}}" formControlName="addressLine2" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Address Line 2\' | translate}}</p>\n' +
     '        </div>\n' +
@@ -39,13 +39,13 @@ import { CscService } from 'src/app/services/cscdropdown.service';
     '          </select>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <select formControlName="StateId" ngModel="{{userdetail?.stateid}}" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
+    '          <select formControlName="stateId" ngModel="{{userdetail?.stateid}}" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
     '            <option value="">Select state...</option>\n' +
     '            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <select formControlName="CityId" ngModel="{{userdetail?.cityid}}" class="select-field form-field">\n' +
+    '          <select formControlName="cityId" ngModel="{{userdetail?.cityid}}" class="select-field form-field">\n' +
     '            <option value="">Select city...</option>\n' +
     '            <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>\n' +
     '          </select>\n' +
@@ -61,7 +61,7 @@ import { CscService } from 'src/app/services/cscdropdown.service';
     // '          <p class="form-label">State</p>\n' +
     // '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-code" name="add-code" ngModel="{{userdetail?.zipcode}}" formControlName="ZipCode" class="form-field field--not-empty" \n' +
+    '          <input type="text" id="add-code" name="add-code" ngModel="{{userdetail?.zipcode}}" formControlName="zipcode" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">Zip Code</p>\n' +
     '        </div>\n' +
@@ -91,7 +91,7 @@ export class CustomerAddressEditComponent implements OnInit {
   countries: {};
   states: {};
   cities: {};
-  @Input('userdata') customerdetail: any;
+  @Input('customerProfile') customerProfile: any;
   constructor( private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
               public customerService: CustomerService, private cscService: CscService,
               private messageService: MessageService) { }
@@ -102,12 +102,12 @@ export class CustomerAddressEditComponent implements OnInit {
 
   ngOnInit() {
     this.customeraddressForm = this.formBuilder.group({
-      AddressLine1: [''],
-      AddressLine2: [''],
+      addressLine1: [''],
+      addressLine2: [''],
       countryId: [''],
-      CityId: [''],
-      StateId: [''],
-      ZipCode: ['', [Validators.pattern(/^[0-9]{1,6}$/)]]
+      cityId: [''],
+      stateId: [''],
+      zipcode: ['', [Validators.pattern(/^[0-9]{1,6}$/)]]
     });
     this.cscService.getCountries().subscribe((data) => {
       this.countries = data;
@@ -140,14 +140,27 @@ export class CustomerAddressEditComponent implements OnInit {
   }
 
   updateDetail(customer) {
-    // userdata.Email = this.email;
     debugger;
-    this.customerService.update_customer_profile(this.customeraddressForm.value);
-    this.customerService.publish('call-parent');
-    this.closeModal('side-menu-Customercontact');
-    this.messageService.clear();
-    this.messageService.add('Customer details updated successfully.');
-    // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
+    console.log(customer)
+    // tslint:disable-next-line:triple-equals
+    if (this.customeraddressForm.status == 'VALID') {
+      this.customerService.update_customer_profile(customer).subscribe((data) => {
+        if(data['success'] == 0){
+          this.messageService.clear();
+          this.messageService.add(data['message']);
+        }else if(data['success'] == 1){
+          this.closeModal('side-menu-customeraddress');
+          this.messageService.clear();
+          this.messageService.add('Customer details updated successfully.');
+        }
+      });
+    } else {
+      console.log(customer, this.customeraddressForm.status);
+      this.submitted = true;
+      if (this.customeraddressForm.invalid) {
+        return;
+      }
+    }
   }
 
   closeModal(id: string) {

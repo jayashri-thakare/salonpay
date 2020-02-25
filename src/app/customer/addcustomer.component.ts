@@ -83,12 +83,12 @@ export class AddCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.addcustomerForm = this.formBuilder.group({
-      FirstName:[''],
-      LastName:[''],
-      DateOfBirth:[''],
+      FirstName:['', [Validators.required]],
+      LastName:['', [Validators.required]],
+      DateOfBirth:['', [Validators.required]],
       Gender:[''],
-      Email:[''],
-      PhoneNumber:['']
+      Email:['', [Validators.required]],
+      PhoneNumber:['', [Validators.required]]
     });
   }
 
@@ -99,12 +99,17 @@ export class AddCustomerComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.addcustomerForm.status == 'VALID') {
       this.customerService.add_customer(customer).subscribe((data) => {
-        // this.customerService.publish('call-customer');
-        this.addcustomerForm.reset();
-        this.router.navigate(['/customerdashboard'])
-        this.customerService.showNav(6);
-        this.messageService.clear();
-        this.messageService.add('Customer added successfully.')
+        if(data['success'] == 0){
+          this.messageService.clear();
+          this.messageService.add(data['message'])
+        }else if(data['success'] == 1){
+          // this.customerService.publish('call-customer');
+          this.addcustomerForm.reset();
+          this.router.navigate(['/customerdashboard'])
+          this.customerService.showNav(6);
+          this.messageService.clear();
+          this.messageService.add('Customer added successfully.')
+        }
       });
     } else {
       console.log(customer, this.addcustomerForm.status);
