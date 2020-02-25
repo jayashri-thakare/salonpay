@@ -23,32 +23,32 @@ import { MessageService } from '../../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'My\' | translate}} {{\'Profile\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="first-name" value="{{userdetail?.firstName}}" ngModel="{{userdetail?.firstName}}" formControlName="firstName" class="form-field field--not-empty"  \n' +
+    '          <input type="text" id="first-name" formControlName="firstName" class="form-field field--not-empty"  \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">First Name </p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="last-name" value="{{ userdetail?.lastName }}" ngModel="{{ userdetail?.lastName }}" formControlName="lastName"  class="form-field field--not-empty" \n' +
+    '          <input type="text" id="last-name" formControlName="lastName"  class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">Last Name</p>\n' +
     '        </div>\n' +
     '         <h6 class="poptile">Birthday</h6>\n' +
     '        <div class="form-group form-field field--not-empty">\n' +
-    '              <ejs-datetimepicker id=\'datetimepicker\' ngModel="{{ userdetail?.dateOfBirth | date: \'M/d/yyyy\' }}" formControlName="DateOfBirth" [max]="maxDate" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" placeholder=\'Birthday\' [value]=\'dateValue\' format =\'M/dd/yyyy\'></ejs-datetimepicker>' +
+    '              <ejs-datetimepicker id=\'datetimepicker\' formControlName="dateOfBirth" [max]="maxDate" [ngClass]="{ \'error\': submitted && f.birthdate.errors }" placeholder=\'Birthday\' [value]=\'dateValue\' format =\'M/dd/yyyy\'></ejs-datetimepicker>' +
     '        </div>\n' +
     '        <!-- end -->\n' +
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Gender\' | translate}}</h6>\n' +
     '        <div class="radio-box">\n' +
-    '          <input type="radio" id="radio1" [ngClass]="{ \'error\': submitted && f.Gender.errors }" ngModel="{{userdetail?.gender}}" value="Male" formControlName="Gender" />\n' +
+    '          <input type="radio" id="radio1" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Male" formControlName="gender" />\n' +
     '          <label for="radio1">Male</label>\n' +
     '        </div>\n' +
     '        <div class="radio-box">\n' +
-    '          <input type="radio" id="radio2" [ngClass]="{ \'error\': submitted && f.Gender.errors }" ngModel="{{userdetail?.gender}}" value="Female" formControlName="Gender" />\n' +
+    '          <input type="radio" id="radio2" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Female" formControlName="gender" />\n' +
     '          <label for="radio2">Female</label>\n' +
     '        </div>\n' +
     '        <div class="radio-box">\n' +
-    '          <input type="radio" id="radio3" [ngClass]="{ \'error\': submitted && f.Gender.errors }" ngModel="{{userdetail?.gender}}" value="Others" formControlName="Gender" />\n' +
+    '          <input type="radio" id="radio3" [ngClass]="{ \'error\': submitted && f.Gender.errors }" value="Others" formControlName="gender" />\n' +
     '          <label for="radio3">Others</label>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
@@ -79,6 +79,10 @@ export class CustomerProfileEditComponent implements OnInit {
   private form: FormGroup;
   @Input('customerProfile') customerProfile: any;
   @Output() messageToEmit = new EventEmitter<string>();
+  firstNameCtrl: FormControl;
+  lastNameCtrl: FormControl;
+  dateOfBirthCtrl: FormControl;
+  genderCtrl: FormControl;
   constructor(private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
               public customerService: CustomerService, private messageService: MessageService) {
   }
@@ -88,13 +92,20 @@ export class CustomerProfileEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customerprofileForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      DateOfBirth: [''],
-      Gender: ['']
-    });
+    this.customerprofileForm = this.initForm(this.customerProfile);
+  }
 
+  initForm(data): FormGroup {
+    this.firstNameCtrl = this.formBuilder.control(data.firstName, [Validators.required]);
+    this.lastNameCtrl = this.formBuilder.control(data.lastName, [Validators.required]);
+    this.dateOfBirthCtrl = this.formBuilder.control(data.dateOfBirth, [Validators.required]);
+    this.genderCtrl = this.formBuilder.control(data.gender, [Validators.required]);
+    return this.formBuilder.group({
+      firstName: this.firstNameCtrl,
+      lastName: this.lastNameCtrl,
+      dateOfBirth: this.dateOfBirthCtrl,
+      gender: this.genderCtrl
+    });
   }
 
   updateDetail(customer) {
@@ -108,6 +119,7 @@ export class CustomerProfileEditComponent implements OnInit {
           this.messageService.add(data['message']);
         }else if(data['success'] == 1){
           this.closeModal('side-menu-customerprofile');
+          this.customerService.publish('call-profileDetail');
           this.messageService.clear();
           this.messageService.add('Customer details updated successfully.');
         }

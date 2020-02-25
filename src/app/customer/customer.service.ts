@@ -29,7 +29,7 @@ export class CustomerService {
   private result: {
     serviceDetails: { serviceId: any };
   };
-  subjects: any;
+  private subjects: Subject<any>[] = [];
   baseUrl: string;
   ParentCompanyId: number;
   public navTab = 1;
@@ -72,6 +72,46 @@ export class CustomerService {
     customer.id = parseInt(localStorage.Arrayofcustomer);
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.114:5656/api/Customers/EditCustomer';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_customer_profile_address(customer) {
+    debugger;
+    // customer.lastModifiedByUserId = localStorage.userId;
+    customer.customerId = parseInt(localStorage.Arrayofcustomer);
+    customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/EditAddress';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_status(customer) {
+    debugger;
+    // customer.lastModifiedByUserId = localStorage.userId;
+    customer.id = parseInt(localStorage.Arrayofcustomer);
+    customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/ToggleUpdateStatus';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_emailRemainder(customer) {
+    debugger;
+    // customer.lastModifiedByUserId = localStorage.userId;
+    customer.id = parseInt(localStorage.Arrayofcustomer);
+    customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/ToggleUpdateEmailReminder';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  update_smsRemainder(customer) {
+    debugger;
+    // customer.lastModifiedByUserId = localStorage.userId;
+    customer.id = parseInt(localStorage.Arrayofcustomer);
+    customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/ToggleUpdateSmsReminder';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
