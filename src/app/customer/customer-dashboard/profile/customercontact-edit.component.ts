@@ -94,6 +94,7 @@ export class CustomerContactEditComponent implements OnInit {
           this.messageService.add(data['message']);
         }else if(data['success'] == 1){
           this.closeModal('side-menu-customercontact');
+          this.customerService.publish('call-profileDetail');
           this.messageService.clear();
           this.messageService.add('Customer details updated successfully.');
         }

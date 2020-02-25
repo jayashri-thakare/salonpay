@@ -23,29 +23,29 @@ import { CscService } from 'src/app/services/cscdropdown.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'Address\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-line1" name="add-line1" ngModel="{{userdetail?.addressLine1}}" formControlName="addressLine1" class="form-field field--not-empty" \n' +
+    '          <input type="text" id="add-line1" name="add-line1" formControlName="addressLine1" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Address Line 1\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-line2" name="add-line2" ngModel="{{userdetail?.addressLine2}}" formControlName="addressLine2" class="form-field field--not-empty" \n' +
+    '          <input type="text" id="add-line2" name="add-line2" formControlName="addressLine2" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">{{\'Address Line 2\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '        <select formControlName="countryId" ngModel="{{userdetail?.countryId}}" class="select-field form-field" (change)="onChangeCountry($event.target.value)">\n' +
+    '        <select formControlName="countryId" class="select-field form-field" (change)="onChangeCountry($event.target.value)">\n' +
     '            <option value="">Select country...</option>\n' +
     '            <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <select formControlName="stateId" ngModel="{{userdetail?.stateid}}" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
+    '          <select formControlName="stateId" class="select-field form-field" (change)="onChangeState($event.target.value)">\n' +
     '            <option value="">Select state...</option>\n' +
     '            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>\n' +
     '          </select>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <select formControlName="cityId" ngModel="{{userdetail?.cityid}}" class="select-field form-field">\n' +
+    '          <select formControlName="cityId" class="select-field form-field">\n' +
     '            <option value="">Select city...</option>\n' +
     '            <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>\n' +
     '          </select>\n' +
@@ -61,7 +61,7 @@ import { CscService } from 'src/app/services/cscdropdown.service';
     // '          <p class="form-label">State</p>\n' +
     // '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input type="text" id="add-code" name="add-code" ngModel="{{userdetail?.zipcode}}" formControlName="zipcode" class="form-field field--not-empty" \n' +
+    '          <input type="text" id="add-code" name="add-code" formControlName="zipcode" class="form-field field--not-empty" \n' +
     '                 aria-invalid="false" />\n' +
     '          <p class="form-label">Zip Code</p>\n' +
     '        </div>\n' +
@@ -92,6 +92,12 @@ export class CustomerAddressEditComponent implements OnInit {
   states: {};
   cities: {};
   @Input('customerProfile') customerProfile: any;
+  addressLine1Ctrl: FormControl;
+  addressLine2Ctrl: FormControl;
+  countryIdCtrl: FormControl;
+  cityIdCtrl: FormControl;
+  stateIdCtrl: FormControl;
+  zipcodeCtrl: FormControl;
   constructor( private modalService: ModalService, private router: Router, private formBuilder: FormBuilder,
               public customerService: CustomerService, private cscService: CscService,
               private messageService: MessageService) { }
@@ -101,17 +107,27 @@ export class CustomerAddressEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customeraddressForm = this.formBuilder.group({
-      addressLine1: [''],
-      addressLine2: [''],
-      countryId: [''],
-      cityId: [''],
-      stateId: [''],
-      zipcode: ['', [Validators.pattern(/^[0-9]{1,6}$/)]]
-    });
+    this.customeraddressForm = this.initForm(this.customerProfile);
     this.cscService.getCountries().subscribe((data) => {
       this.countries = data;
       // localStorage.setItem('companyId', data['parentCompanyId']);
+    });
+  }
+
+  initForm(data): FormGroup {
+    this.addressLine1Ctrl = this.formBuilder.control(data.addressLine1, [Validators.required]);
+    this.addressLine2Ctrl = this.formBuilder.control(data.addressLine2, [Validators.required]);
+    this.countryIdCtrl = this.formBuilder.control(data.countryId, [Validators.required]);
+    this.cityIdCtrl = this.formBuilder.control(data.cityId, [Validators.required]);
+    this.stateIdCtrl = this.formBuilder.control(data.stateId, [Validators.required]);
+    this.zipcodeCtrl = this.formBuilder.control(data.zipcode, [Validators.required]);
+    return this.formBuilder.group({
+      addressLine1: this.addressLine1Ctrl,
+      addressLine2: this.addressLine2Ctrl,
+      countryId: this.countryIdCtrl,
+      cityId: this.cityIdCtrl,
+      stateId: this.stateIdCtrl,
+      zipcode: this.zipcodeCtrl
     });
   }
 
@@ -144,12 +160,13 @@ export class CustomerAddressEditComponent implements OnInit {
     console.log(customer)
     // tslint:disable-next-line:triple-equals
     if (this.customeraddressForm.status == 'VALID') {
-      this.customerService.update_customer_profile(customer).subscribe((data) => {
+      this.customerService.update_customer_profile_address(customer).subscribe((data) => {
         if(data['success'] == 0){
           this.messageService.clear();
           this.messageService.add(data['message']);
         }else if(data['success'] == 1){
           this.closeModal('side-menu-customeraddress');
+          this.customerService.publish('call-profileDetail');
           this.messageService.clear();
           this.messageService.add('Customer details updated successfully.');
         }

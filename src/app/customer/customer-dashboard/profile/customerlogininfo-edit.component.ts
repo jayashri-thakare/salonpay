@@ -23,17 +23,17 @@ import { MessageService } from '../../../message.service';
     '        <!-- start -->\n' +
     '        <h6 class="poptile">{{\'login info\' | translate}}</h6>\n' +
     '        <div class="form-group">\n' +
-    '          <input class="form-field field--not-empty" type="text" id="info-email" ngModel="{{ userdetail?.email }}" formControlName="email"\n' +
+    '          <input class="form-field field--not-empty" type="text" id="info-email" formControlName="email"\n' +
     '                 required="" aria-invalid="false"  readonly />\n' +
     '          <p class="form-label">{{\'Email\' | translate}}</p>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input class="form-field" type="password"  id="info-password" ngModel="{{ userdetail?.password }}" formControlName="oldPassword" required>\n' +
+    '          <input class="form-field" type="password"  id="info-password" formControlName="oldPassword" required>\n' +
     '          <p class="form-label">{{\'Old\' | translate}} {{\'Password\' | translate}}</p>\n' +
     '          <i class="view-pass icon-hide"></i>\n' +
     '        </div>\n' +
     '        <div class="form-group">\n' +
-    '          <input class="form-field" type="password"  id="new-password" ngModel="{{ userdetail?.password }}" formControlName="newPassword" required>\n' +
+    '          <input class="form-field" type="password"  id="new-password" formControlName="newPassword" required>\n' +
     '          <p class="form-label">{{\'New\' | translate}} {{\'Password\' | translate}}</p>\n' +
     '          <i class="view-pass icon-hide"></i>\n' +
     '        </div>\n' +
@@ -59,16 +59,26 @@ export class CustomerProfileinfoEditComponent implements OnInit {
   control: FormControl;
   submitted = false;
   @Input('customerProfile') customerProfile: any;
+  emailCtrl: FormControl;
+  oldPasswordCtrl: FormControl;
+  newPasswordCtrl: any;
   constructor(public messageService:MessageService, public customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router) { }
   get f() {
     return this.customerinfoForm.controls;
   }
 
   ngOnInit() {
-    this.customerinfoForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
-      oldPassword: ['',  [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_+=])(?=\S+$).{8,}$/)]],
-      newPassword: ['',  [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_+=])(?=\S+$).{8,}$/)]],
+    this.customerinfoForm = this.initForm(this.customerProfile);
+  }
+
+  initForm(data): FormGroup {
+    this.emailCtrl = this.formBuilder.control(data.email, [Validators.required]);
+    this.oldPasswordCtrl = this.formBuilder.control(data.oldPassword, [Validators.required]);
+    this.newPasswordCtrl = this.formBuilder.control(data.newPassword, [Validators.required]);
+    return this.formBuilder.group({
+      email: this.emailCtrl,
+      oldPassword: this.oldPasswordCtrl,
+      newPassword: this.newPasswordCtrl
     });
   }
 
@@ -87,6 +97,7 @@ export class CustomerProfileinfoEditComponent implements OnInit {
           this.messageService.add(data['message']);
         }else if(data['success'] == 1){
           this.closeModal('side-menu-customerlogininfo');
+          this.customerService.publish('call-profileDetail');
           this.messageService.clear();
           this.messageService.add('Customer details updated successfully.');
         }
