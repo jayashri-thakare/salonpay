@@ -54,7 +54,8 @@ export class CustomerAddNotesComponent implements OnInit {
   saveNote(note){
     debugger;
     note['ClientType'] = 'Customer';
-    note['ClientId'] = '1'
+
+    note['ClientId'] = localStorage.getItem('Arrayofcustomer');
     // tslint:disable-next-line:triple-equals
     // @ts-ignore
     if (this.customerService.note != '') {

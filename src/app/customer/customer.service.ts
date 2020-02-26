@@ -40,6 +40,7 @@ export class CustomerService {
   };
   imagepath: string;
   arrayofselectedcustobj: Array<any> = [];
+  private customId: string;
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
   public showNav(nav) {
@@ -67,7 +68,8 @@ export class CustomerService {
 
   getNotes() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8011/api/Notes/GetAllNotes?ParentCompanyId=66&PageNumber=1&PageSize=5&ClientId=5cc9b3d9-a0c6-445a-bce4-7b53ec0b73d3';
+    this.customId = localStorage.getItem('Arrayofcustomer');
+    this.baseUrl = 'http://172.16.0.99:8011/api/Notes/GetAllNotes?ParentCompanyId='+ this.ParentCompanyId +'&PageNumber=1&PageSize=20&ClientId='+this.customId;
     return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
