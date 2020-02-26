@@ -115,6 +115,7 @@ import {CustomerContactEditComponent} from './customer/customer-dashboard/profil
 import {CustomerAddressEditComponent} from './customer/customer-dashboard/profile/customeraddress-edit.component'
 import {CustomerProfileinfoEditComponent} from './customer/customer-dashboard/profile/customerlogininfo-edit.component'
 import {CustomerProfileSettingComponent} from './customer/customer-dashboard/profile/customerprofilesetting.component'
+import {MobileSidebarComponent} from './_layout/sidebar/mobile-sidebar.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -164,6 +165,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CustomerAddressEditComponent,
     CustomerProfileinfoEditComponent,
     CustomerProfileSettingComponent,
+    MobileSidebarComponent,
     AddReviewComponent,
     AddTaxTableComponent,
     BusinessTipAdjustmentComponent,
