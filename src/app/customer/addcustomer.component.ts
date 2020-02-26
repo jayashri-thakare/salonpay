@@ -95,7 +95,6 @@ export class AddCustomerComponent implements OnInit {
   createCustomer(customer) {
     debugger;
     console.log(customer)
-    this.customerService.showNav(6);
     // tslint:disable-next-line:triple-equals
     if (this.addcustomerForm.status == 'VALID') {
       this.customerService.add_customer(customer).subscribe((data) => {
@@ -105,6 +104,7 @@ export class AddCustomerComponent implements OnInit {
         }else if(data['success'] == 1){
           // this.customerService.publish('call-customer');
           this.addcustomerForm.reset();
+          this.customerService.publish('call-customerDetail');
           this.router.navigate(['/customerdashboard'])
           this.customerService.showNav(6);
           this.messageService.clear();

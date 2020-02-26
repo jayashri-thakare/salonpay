@@ -14,11 +14,13 @@ import { MessageService } from '../message.service';
 export class CustomerComponent implements OnInit {
   customerlist: any;
   customerProfile: any;
+  subscription: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getCustomerList();
+    this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
 
   getCustomerList() {
@@ -26,6 +28,7 @@ export class CustomerComponent implements OnInit {
       this.customerlist = data;
       this.customerlist = this.customerlist.list;
       console.log(this.customerlist)
+      localStorage.setItem('Arrayofcustomer', JSON.stringify(this.customerlist[this.customerlist.length - 1].id))
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
