@@ -19,7 +19,7 @@ export class CustomerProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
-    this.customerService.getCustomerProfilePic(localStorage.getItem('userId'));
+    this.customerService.getCustomerProfilePic(localStorage.getItem('Arrayofcustomer'));
     this.subscription = this.customerService.on('call-profileDetail').subscribe(() => this.getCustomerProfile(localStorage.getItem('Arrayofcustomer')));
 
   }

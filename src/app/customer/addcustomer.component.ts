@@ -102,9 +102,8 @@ export class AddCustomerComponent implements OnInit {
           this.messageService.clear();
           this.messageService.add(data['message'])
         }else if(data['success'] == 1){
-          // this.customerService.publish('call-customer');
-          this.addcustomerForm.reset();
           this.customerService.publish('call-customerDetail');
+          this.addcustomerForm.reset();
           this.router.navigate(['/customerdashboard'])
           this.customerService.showNav(6);
           this.messageService.clear();
