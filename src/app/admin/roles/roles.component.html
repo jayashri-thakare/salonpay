@@ -358,7 +358,7 @@
                                                 <input id="indiv3" type="radio" (click)="irightsupdate('Manage Sales Commissions, Tips and Turns', false)" name="indiv-radio3" />
                                                 <label for="indiv3"></label>
                                                 <input id="indiv32" type="radio" [checked]="managesales?.isSelected && managesales?.moduleName == 'Manage Sales Commissions,Tips and Turns'" (click)="irightsupdate('Manage Sales Commissions, Tips and Turns', true)" name="indiv-radio3"
-                                                   />
+                                                   /> {{managesales?.isSelected && managesales?.moduleName == 'Manage Sales Commissions,Tips and Turns'}}
                                                 <label for="indiv32"></label><span class="toggle-outside"><span
                                                         class="toggle-inside"></span></span>
                                             </div>

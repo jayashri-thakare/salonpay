@@ -473,12 +473,21 @@ export class AdminRolesComponent implements OnInit {
   onofffunc(bool,type){
     if(type=='sales'){
       this.sales = bool
+      if(bool == false){
+        this.getsalesobj['isSelected'] = bool
+      }
     }
     if(type=='customer'){
       this.customer = bool
+      if(bool == false){
+        this.getcustomerobj['isSelected'] = bool
+      }
     }
     if(type=='appointment'){
       this.appointment = bool
+      if(bool == false){
+        this.getappointmentobj['isSelected'] = bool
+      }
     }
   }
 
