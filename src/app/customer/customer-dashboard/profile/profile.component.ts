@@ -21,11 +21,10 @@ export class CustomerProfileComponent implements OnInit {
     this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
     this.customerService.getCustomerProfilePic(localStorage.getItem('userId'));
     this.subscription = this.customerService.on('call-profileDetail').subscribe(() => this.getCustomerProfile(localStorage.getItem('Arrayofcustomer')));
-  
+
   }
 
   getCustomerProfile(customerid) {
-    debugger;
     this.customerService.getCustomerProfile(customerid).subscribe((data) => {
       this.customerProfile = data;
       // this.customerProfile = this.customerProfile.result;

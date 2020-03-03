@@ -1,0 +1,43 @@
+<div class="mainContainer m-0">
+  <h3 class="main-comm-head">
+    <a href="./transaction-customer-type.html"><i class="icon-down-arrow com-arw"></i></a>
+    New <span>Sale</span>
+  </h3>
+
+  <div class="comm-headline-btn">
+    <h4 class="hdn2 m-0">Select Customer</h4>
+    <div class="form-group search-group mb-0 mr-2">
+      <form>
+        <input class="form-field" type="text" name="filter-searh" required="">
+        <p class="form-label">Search</p>
+        <button class="search icon-search" type="submit"></button>
+      </form>
+    </div>
+  </div>
+
+  <div class="f-row f-4 f-1600-3 f-900-2 f-640-1">
+    <div class="f-col"  *ngFor="let customer of customerlist; let i = index">
+      <!-- Main App grid Starts -->
+        <div class="app-pad-box">
+          <div class="cust-rig">
+            <h6>{{customer?.firstName}} {{customer?.lastName}}</h6>
+            <div class="usr-pho">
+              <div class="flag-img"><img src="img/usa.svg" alt=""></div>
+              <p>{{customer?.mobileContact}}</p>
+            </div>
+            <div class="usr-pho">
+              <i class="icon-envelope"></i>
+              <p>{{customer?.email}}</p>
+            </div>
+          </div>
+          <div class="main-selt">
+            <input type="radio" id="cust-detail-{{i}}" name="cust-detail" required="">
+            <label for="cust-detail-{{i}}"  (click)="salesService.storeCustomer(customer.id);">Select</label>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="popBtn">
+    <a class="button" href="getcustomer">Next</a>
+  </div>
+</div>

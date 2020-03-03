@@ -1,4 +1,4 @@
-<div *ngIf="router.url === '/dashboard' || router.url === '/admin' || router.url === '/customer' || router.url === '/addcustomer' || router.url === '/updatecustomer' || router.url === '/customerdashboard'">
+<div *ngIf="router.url === '/dashboard' || router.url === '/admin' || router.url === '/customer' || router.url === '/addcustomer' || router.url === '/updatecustomer'  || router.url === '/newsales' || router.url ===  '/allcustomer'">
   <header>
     <div class="head-top">
       <div class="head-lef">
@@ -14,7 +14,7 @@
           <li><a href="admin">{{'Administration' | translate}}</a></li>
         </ul>
         <button class="button white">{{'New' | translate}} {{'Appointment' | translate}}</button>
-        <button class="button line whitelin">{{'New' | translate}} {{'Sale' | translate}}</button>
+        <button class="button line whitelin"><a href="newsales">{{'New' | translate}} {{'Sale' | translate}}</a></button>
         <div class="head-ico">
           <i class="icon-question suprt-service"></i>
         </div>

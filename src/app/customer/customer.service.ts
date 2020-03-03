@@ -37,6 +37,7 @@ export class CustomerService {
   note: {
     description: any;
     title: any;
+    id: any;
   };
   imagepath: string;
   arrayofselectedcustobj: Array<any> = [];
@@ -46,6 +47,10 @@ export class CustomerService {
   public showNav(nav) {
     this.navTab = nav;
     console.log(this.navTab);
+  }
+
+  deleteNote(noteid) {
+    return this.httpClient.delete(' http://172.16.0.99:8011/api/Notes/DisableNotes?Id=' + noteid);
   }
 
   selectedCustomerObj(selected_obj){
@@ -142,7 +147,7 @@ export class CustomerService {
 	  this.baseUrl = 'http://172.16.0.114:5656/api/Customers/UploadProfilePicture';
     const input = new FormData();
     input.append('ParentCompanyId', localStorage.companyId)
-    input.append('CustomerId', '1');
+    input.append('CustomerId', localStorage.Arrayofcustomer);
 	  input.append('file', userdata[0]);
    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
       this.imagepath = '';

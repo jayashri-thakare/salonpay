@@ -254,12 +254,13 @@ export class UserdataService {
   }
 
   upload_profile_image(userdata) {
-	  this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture';
+	  // this.baseUrl = 'https://payzliapi1.azurewebsites.net/api/Profile/UploadProfilePicture';
+	  this.baseUrl = 'http://172.16.0.99:7894/api/Profile/UploadProfilePicture';
 	  const input = new FormData();
     input.append('id', this.userId);
 	  input.append('file', userdata[0]);
    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
-      this.imagepath = '';
+      // this.imagepath = '';
       this.getProfilePic(this.userId);
       // this.imagepath = 'https://payzliapi1.azurewebsites.net/' + val['profilePicPath'] ;
     });
@@ -272,7 +273,8 @@ export class UserdataService {
     this.httpClient.get<Observable<imagepath>>(this.baseUrl).subscribe((data) => {
       // tslint:disable-next-line:indent
       this.imagepath = '';
-      this.imagepath =  'https://payzliapi1.azurewebsites.net/' + data['path'];
+      // this.imagepath =  'https://payzliapi1.azurewebsites.net/' + data['path'];
+      this.imagepath =  'http://172.16.0.99:7894/' + data['path'];
     });
   }
   add_time_tracker(statusflag) {

@@ -16,6 +16,9 @@ import { CustomerComponent } from './customer/customer.component';
 import { AddCustomerComponent } from './customer/addcustomer.component';
 import { UpdateCustomerComponent } from './customer/updatecustomer.component';
 import { CustomerDashboardComponent } from './customer/customer-dashboard/customerdashboard.component';
+import {SalesComponent} from './sales/sales.component';
+import {AllcustomerComponent} from './sales/allcustomer.component';
+import {CustomerSaleComponent} from './sales/customerdetail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +28,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'customer', component: CustomerComponent},
+  { path: 'newsales', component: SalesComponent},
+  { path: 'allcustomer', component: AllcustomerComponent},
+  { path: 'getcustomer', component: CustomerSaleComponent},
   { path: 'addcustomer', component: AddCustomerComponent},
   { path: 'updatecustomer', component: UpdateCustomerComponent},
   { path: 'customerdashboard', component: CustomerDashboardComponent}

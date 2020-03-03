@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
 '                         <li [ngClass]="{ \'active\': AdminService.business_settingnav==11 }"><a (click)="AdminService.showBusinessNav(11)">Pay Period</a></li>\n' +
 '                         <li [ngClass]="{ \'active\': AdminService.business_settingnav==12 }"><a (click)="AdminService.showBusinessNav(12)">Schedule</a></li>\n' +
 '                         <li [ngClass]="{ \'active\': AdminService.business_settingnav==13 }"><a (click)="AdminService.showBusinessNav(13)">Supplier</a></li>\n' +
+'                         <li [ngClass]="{ \'active\': AdminService.business_settingnav==14 }"><a (click)="AdminService.showBusinessNav(14)">Products Category</a></li>\n' +
 '                    </ul>\n' +
   '                </div>\n' +
   '                <!-- end -->\n' +

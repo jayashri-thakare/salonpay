@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]],
       // tslint:disable-next-line:max-line-length
-      Password: ['',  [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*_+=])(?=\S+$).{8,}$/)]]
+      Password: ['']
     });
 
   }

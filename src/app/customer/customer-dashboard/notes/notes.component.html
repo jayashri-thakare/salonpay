@@ -62,7 +62,7 @@
                                     <li class="comm-btm-popup" data-name="add-new-popup"><i class="icon-edit" (click)="customerService.note=note; modalService.opennote('add-new-popup')"></i>
                                         Edit</li>
                                     <li class="delt" data-toggle="modal" data-target="#deletePopup"
-                                        data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>
+                                        data-backdrop="static" data-keyboard="false" (click)="customerService.note = note;"><i class="icon-delete"></i>
                                         Delete</li>
                                 </ul>
                             </div>
@@ -71,9 +71,9 @@
                           {{note?.description}}
                         </p>
                         <div class="techi-user">
-                            <div class="tech-user-img"><img src="http://172.16.0.99:8011/{{note?.profilePic}}" alt=""></div>
+                            <div class="tech-user-img"><img src="http://172.16.0.99:8011/{{note.user?.profilePic?.split('\\').join('/')}}" alt=""></div>
                             <div class="tech-usr-cont">
-                                <h3>David Dion</h3>
+                                <h3>{{note.user?.userName}}</h3>
                                 <p>{{note?.createdOn | date: 'M/d/yyyy' }}</p>
                             </div>
                         </div>
@@ -85,6 +85,22 @@
         </div>
 
     </div>
+</div>
+<!-- Main Container Ends -->
+<div class="modal fade" id="deletePopup">
+  <div class="modal-dialog medium-window">
+    <div class="modal-content">
+      <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+      <h2 class="modal-title">Are you sure you want to delete this Note?</h2>
+
+      <div class="modal-btn">
+        <button class="button line mr-2" data-dismiss="modal">No</button>
+        <button class="button red" data-dismiss="modal" (click)="deleteNote(customerService.note)">Yes</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 <customer-addnotes-modal></customer-addnotes-modal>
 <!-- Main Container Ends -->
