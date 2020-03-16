@@ -25,6 +25,7 @@ export class AdminServiceComponent implements OnInit {
   }
 
   getServiceList() {
+    debugger;
     this.adminService.getAllServices().subscribe((res) => {
       this.result = res ;
       this.serviceList = this.result["result"]["list"];

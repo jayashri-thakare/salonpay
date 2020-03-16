@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import { ModalService } from '../_modal/modal.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -9,7 +9,7 @@ import {MessageService} from '../message.service';
   selector: 'app-statusbar',
   template: '<div class="filter-container-up filter-container-grid" *ngIf="router.url === \'/customer\'">\n' +
     '            <div class="filter-container">\n' +
-    '                <a href="addcustomer" class="button flg-btn">+ Add New</a>\n' +
+    '                <a href="addcustomer" (click)="customertransactionfunc(\'customer\')" class="button flg-btn">+ Add New</a>\n' +
     '                <div class="form-group mb-0 mr-2">\n' +
     '                    <form>\n' +
     '                        <input class="form-field" type="text" name="filter-searh" required>\n' +
@@ -62,7 +62,7 @@ import {MessageService} from '../message.service';
     '                <a href="addcustomer" class="button flg-btn">+ Add New</a>\n' +
     '\n' +
     '                    <div class="checkbox-box checkbox-box-button select-all-btn mb-0 mr-2">\n' +
-    '                        <input class="selected-all" type="checkbox" id="select-all" name="select-all" required>\n' +
+    '                        <input class="selected-all" type="checkbox" id="select-all" (click)="Selectallfunction($event)" name="select-all" required>\n' +
     '                        <label for="select-all"><span>Select</span> All</label>\n' +
     '                    </div>\n' +
     '\n' +
@@ -93,6 +93,9 @@ import {MessageService} from '../message.service';
 export class CustomerStatusBarComponent implements OnInit {
   gridview: boolean;
   listview: boolean;
+  customertransaction: boolean;
+  customerUpdate: boolean;
+  @Output() messageToEmit = new EventEmitter<string>();
 
   constructor(public customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -108,6 +111,29 @@ export class CustomerStatusBarComponent implements OnInit {
       this.gridview = false;
       this.listview = true;
     }
+  }
+
+  customertransactionfunc(type){
+    if(type == 'customer'){
+      localStorage.setItem('cust', 'true')
+    }
+  }
+
+  Selectallfunction(event){
+    debugger;
+    if(event.currentTarget.checked){
+      this.customerUpdate = true;
+      this.sendMessageToParent(this.customerUpdate)
+      this.customerService.publish('call-customerupdate');
+    }else{
+      this.customerUpdate = false;
+      this.sendMessageToParent(this.customerUpdate)
+      this.customerService.publish('call-customerupdate');
+    }
+  }
+
+  sendMessageToParent(message) {
+    this.messageToEmit.emit(message)
   }
 
 }

@@ -156,7 +156,7 @@ import {SalesService} from './sales.service';
     '\n' +
     '        <div class="popBtn mb-4">\n' +
     '            <a href="./transaction-customer-existing.html" class="button line">Back</a>\n' +
-    '            <a href="./transaction-customer-existing-service.html" class="button">Next</a>\n' +
+    '            <a class="button" (click)="createSaleOrder(customerProfile.customerId)">Next</a>\n' +
     '        </div>\n' +
     '\n' +
     '    </div>\n' +
@@ -164,7 +164,9 @@ import {SalesService} from './sales.service';
 })
 export class CustomerSaleComponent implements OnInit {
   private customerProfile: Observable<any>;
-  constructor(public salesService: SalesService, private formBuilder: FormBuilder) { }
+  Sales = {};
+  saleorder: Observable<any>;
+  constructor(public salesService: SalesService, private formBuilder: FormBuilder, public router: Router) { }
 
   ngOnInit() {
     this.getCustomerDetail();
@@ -187,6 +189,15 @@ export class CustomerSaleComponent implements OnInit {
       if (data['id']){
         this.getCustomerDetail();
       }
+    });
+  }
+
+  createSaleOrder(customerid) {
+    this.Sales['CustomerId'] = customerid
+    this.salesService.create_sales(this.Sales).subscribe((data) => {
+      this.saleorder = data;
+      localStorage.setItem('orderId', data['saleId']);
+      this.router.navigate(['/transactionnewsales'])
     });
   }
 }

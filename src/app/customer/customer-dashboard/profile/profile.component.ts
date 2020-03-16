@@ -32,5 +32,4 @@ export class CustomerProfileComponent implements OnInit {
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
-
 }

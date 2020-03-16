@@ -121,6 +121,13 @@ import {BusinessProductsCategoryComponent} from './admin/business-setting/produc
 import {SalesComponent} from './sales/sales.component';
 import {AllcustomerComponent} from './sales/allcustomer.component';
 import {CustomerSaleComponent} from './sales/customerdetail.component';
+import {NewSalesComponent} from './sales/newsales/newsales.component';
+import {SalesTransactionServicesComponent} from './sales/newsales/salestransactionservices.component'
+import {SalesFrequentlyServicesComponent} from './sales/newsales/frequentlyservices.component'
+import {AddonServicesComponent} from './sales/newsales/addonservices.component'
+import {NewSalesProductComponent} from './sales/newsales/newsalesproduct.component'
+import {SalesTransactionProductComponent} from './sales/newsales/salestransactionproduct.component'
+import {FrequentlyAddedProductComponent} from './sales/newsales/frequentlyproduct.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -153,6 +160,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     })
   ],
     declarations: [AppComponent,
+        NewSalesComponent,
+        SalesTransactionServicesComponent,
+        SalesFrequentlyServicesComponent,
+        AddonServicesComponent,
+        NewSalesProductComponent,
+        SalesTransactionProductComponent,
+        FrequentlyAddedProductComponent,
         CustomerComponent,
         AddCustomerComponent,
         UpdateCustomerComponent,

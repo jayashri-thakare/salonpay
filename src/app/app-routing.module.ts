@@ -19,6 +19,8 @@ import { CustomerDashboardComponent } from './customer/customer-dashboard/custom
 import {SalesComponent} from './sales/sales.component';
 import {AllcustomerComponent} from './sales/allcustomer.component';
 import {CustomerSaleComponent} from './sales/customerdetail.component';
+import { NewSalesComponent } from './sales/newsales/newsales.component';
+import { NewSalesProductComponent } from './sales/newsales/newsalesproduct.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,11 +31,13 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent},
   { path: 'customer', component: CustomerComponent},
   { path: 'newsales', component: SalesComponent},
+  { path: 'transactionnewsales', component: NewSalesComponent},
   { path: 'allcustomer', component: AllcustomerComponent},
   { path: 'getcustomer', component: CustomerSaleComponent},
   { path: 'addcustomer', component: AddCustomerComponent},
   { path: 'updatecustomer', component: UpdateCustomerComponent},
-  { path: 'customerdashboard', component: CustomerDashboardComponent}
+  { path: 'customerdashboard', component: CustomerDashboardComponent},
+  { path: 'transactionproduct', component: NewSalesProductComponent}
 ];
 
 @NgModule({

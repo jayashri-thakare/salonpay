@@ -13,19 +13,19 @@ import {MessageService} from '../message.service';
     '            <h3 class="main-comm-head m-0">Customers<i class="icon-question rig-icn" data-toggle="tooltip"\n' +
     '                    title="Merge Sales"></i>\n' +
     '            </h3>\n' +
-    '        <app-statusbar></app-statusbar>\n' +
+    '        <app-statusbar (messageToEmit)="getMessage($event)"></app-statusbar>\n' +
     '        </div>\n' +
     '\n' +
     '        <!-- start -->\n' +
-    '        <div class="table-bdy">\n' +
+    '        <div class="table-bdy" *ngFor="let customer of customerlist">\n' +
     '            <!-- start -->\n' +
     '            <div class="tab-top-head">\n' +
     '                <div class="cust-detail-ckbox">\n' +
     '                    <div class="checkbox-box mb-0 mr-2">\n' +
-    '                        <input class="selectedId" type="checkbox" id="updt-checkbox1" name="select-all" required="">\n' +
-    '                        <label for="updt-checkbox1">&nbsp;</label>\n' +
+    '                        <input class="selectedId" type="checkbox" id="{{customer?.id}}" [checked]="receivedChildMessage" (click)="selectedCustomersList(customer, $event)" name="{{customer?.id}}" required="">\n' +
+    '                        <label for="{{customer?.id}}">&nbsp;</label>\n' +
     '                    </div>\n' +
-    '                    <h4 class="gridhead m-0">David Shnader</h4>\n' +
+    '                    <h4 class="gridhead m-0">{{customer?.firstName}} {{customer?.lastName}}</h4>\n' +
     '                </div>\n' +
     '                <div class="cust-cald-arrw">\n' +
     '                    <a href="appointment-date.html"><i class="icon-calender"></i></a>\n' +
@@ -38,13 +38,13 @@ import {MessageService} from '../message.service';
     '                <!-- start -->\n' +
     '                <li class="table-dta">\n' +
     '                    <span>Mobile</span>\n' +
-    '                    +1-818-269-1084\n' +
+    '                    {{customer?.mobileContact}}\n' +
     '                </li>\n' +
     '                <!-- end -->\n' +
     '                <!-- start -->\n' +
     '                <li class="table-dta">\n' +
     '                    <span>Email</span>\n' +
-    '                    nickbocker@salescorp.com\n' +
+    '                    {{customer?.email}}\n' +
     '                </li>\n' +
     '                <!-- end -->\n' +
     '                <!-- start -->\n' +
@@ -78,11 +78,48 @@ import {MessageService} from '../message.service';
     '    <!-- Main Container Ends -->'
 })
 export class UpdateCustomerComponent implements OnInit {
+  arrayofselectedobj: Array<any> = [];
+  customerlist: any;
+  subscription: any;
+  receivedChildMessage: boolean;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.getCustomerList();
+    this.subscription = this.customerService.on('call-customerupdate').subscribe(() => this.selectedCustomersList(this.customerlist, ''));
+  }
 
+  getCustomerList() {
+    this.customerService.getCustomerList().subscribe((data) => {
+      this.customerlist = data;
+      this.customerlist = this.customerlist.list;
+      console.log(this.customerlist)
+      localStorage.setItem('Arrayofcustomer', JSON.stringify(this.customerlist[this.customerlist.length - 1].id))
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+
+  selectedCustomersList(selected_obj, event){
+    debugger;
+    var index = this.arrayofselectedobj.indexOf(selected_obj);
+    if (selected_obj.length == this.customerlist.length){
+      if(this.receivedChildMessage == true){
+        this.arrayofselectedobj = selected_obj;
+      }else{
+        this.arrayofselectedobj = [];
+      }
+    }else if(index<0 && event.currentTarget.checked){
+      this.arrayofselectedobj.push(selected_obj);
+    }else{
+      this.arrayofselectedobj.splice(index, 1);
+    }
+    console.log(this.arrayofselectedobj)
+  }
+
+  getMessage(message) {
+    this.receivedChildMessage = message;
+    console.log(this.receivedChildMessage)
   }
 
 }

@@ -1,0 +1,83 @@
+<!-- Main Container Starts -->
+<div class="mainContainer m-0">
+  <div class="common-row-box">
+      <!-- left side starts -->
+      <div class="common-left-box common-left-box-1">
+          <h3 class="main-comm-head">
+              <a href="./transaction-customer-existing-detail.html"><i class="icon-down-arrow com-arw"></i></a>
+              {{customerProfile?.firstName}} {{customerProfile?.lastName}} Customer
+          </h3>
+          <div class="row">
+              <div class="w20 w-1300-40 w-990-30 w-640-40 w-480-100">
+                  <h6 class="poptile">Order</h6>
+
+                  <!-- start -->
+                  <div class="prof-comm-shad pad-2 mb-3">
+                      <div class="comm-cont w100 p-0">
+                          <h6>{{orderIdOfSale}}</h6>
+                      </div>
+                  </div>
+                  <!-- end -->
+              </div>
+              <div class="w30 w-1300-60 w-990-40 w-640-60 w-480-100">
+                  <h6 class="poptile">customer</h6>
+
+                  <!-- start -->
+                  <div class="prof-comm-shad pad-2 mb-3">
+                      <div class="comm-cont w100 p-0">
+                          <h6>{{customerProfile?.firstName}} {{customerProfile?.lastName}}</h6>
+                      </div>
+                  </div>
+                  <!-- end -->
+              </div>
+          </div>
+          <!-- Gap -->
+          <div class="row mb-4"></div>
+          <app-frequentlyservices></app-frequentlyservices>
+          <app-servicestransaction (messageToEmit)="getMessage($event)"></app-servicestransaction>
+      </div>
+      <!-- left side Ends -->
+      <!-- right side Starts -->
+      <div class="common-right-btn"><i class="icon-cart"></i></div>
+      <div class="common-right-box">
+          <div class="common-right-box-in">
+              <h3 class="main-comm-head">Order <span>Summary</span></h3>
+
+              <form action="./transaction-customer-existing-product.html">
+                  <div class="cmn-mdl-content scrollbar">
+                      <h6 class="poptile">Services</h6>
+                      <!-- start -->
+                      <div class="techi-box" *ngFor="let selectedservice of receivedChildMessage">
+                          <div class="techi-top">
+                              <div class="user-det">
+                                  <i class="icon-dye prodt-ico"></i>
+                                  <div class="usr-name">
+                                      <h3><span>{{selectedservice?.serviceName}}</span>$ {{selectedservice?.serviceCost}}</h3>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="techi-top border-0 techi-top-btm">
+                              <p *ngIf="selectedservice.addonServices">add on services</p>
+                              <ul>
+                                  <li *ngFor="let addon of selectedservice.addonServices">{{addon?.serviceName}}: <span>$ {{selectedservice?.serviceCost}}</span>
+                                      <div class="addon-remove" (click)="deleteSelectedServices('', addon?.addOnServiceId)"><i class="icon-cir-plus"></i></div>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="techi-remove" (click)="deleteSelectedServices(selectedservice?.serviceId, '')"><i class="icon-delete"></i></div>
+                      </div>
+                      <!-- end -->
+                  </div>
+                  <div class="popBtn mt-0">
+                      <a href="./transaction-customer-existing-detail.html"
+                          class="button line commonPopBtn1">Back</a>
+                      <button class="button line commonPopBtn2" type="button">Cancel</button>
+                      <a class="button" (click)="createSaleService()" >Next</a>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <!-- right side Ends -->
+  </div>
+</div>
+<!-- Main Container Ends -->

@@ -51,7 +51,7 @@ export class SalesService {
     if (this.customid) {
       this.customerId = this.customid;
     }
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/GetCustomersProfile?ParentCompanyId=' + this.parentId + '&CustomerId=' + this.customerId;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/GetCustomersProfile?ParentCompanyId=' + this.parentId + '&CustomerId=' + this.customerId;
     return this.httpClient.get<Observable<customerProfile>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -66,5 +66,41 @@ export class SalesService {
     //   // return this.httpClient.get<Observable<customerProfile>>(this.baseUrl, httpOptions).pipe(map(data => data));
     // });
     // return customerProfile;
+  }
+
+  getServicesByCategoryId(serviceid) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetServicesByCategoryId?ServiceCategoryId=' + serviceid;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getAllAddedServices(serviceid) {
+    this.parentId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetAddOnsByServiceId?ServiceId=' + serviceid + '&ParentCompanyId=' + this.parentId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  GetProductList() {
+    this.parentId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = ' http://172.16.0.99:8055/api/Inventory/GetProductCategory?ParentCompanyId=' + this.parentId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  create_sales(Sales) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/CreateSale';
+    Sales.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
+    .pipe(map( data => data));
+  }
+
+  create_sales_service(Sales) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/SaveServices';
+    Sales.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
+    .pipe(map( data => data));
+  }
+
+  getProductByCategoryId(productid) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetProductByCategoryId?ProductCategoryId=' + productid;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 }

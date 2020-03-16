@@ -66,7 +66,7 @@ export class CustomerService {
   add_customer(customer) {
     customer.ParentCompanyId = parseInt(localStorage.companyId);
     customer.CreatedByUserId = localStorage.userId;
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/CreateCustomer';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/CreateCustomer';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
@@ -89,7 +89,7 @@ export class CustomerService {
 
   getCustomerList() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/GetCustomersList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=20';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/GetCustomersList?ParentCompanyId=' + this.ParentCompanyId + '&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -98,7 +98,7 @@ export class CustomerService {
     customer.lastModifiedByUserId = localStorage.userId;
     customer.id = parseInt(localStorage.Arrayofcustomer);
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/EditCustomer';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/EditCustomer';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
@@ -108,7 +108,7 @@ export class CustomerService {
     // customer.lastModifiedByUserId = localStorage.userId;
     customer.customerId = parseInt(localStorage.Arrayofcustomer);
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/EditAddress';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/EditAddress';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
@@ -118,7 +118,7 @@ export class CustomerService {
     // customer.lastModifiedByUserId = localStorage.userId;
     customer.id = parseInt(localStorage.Arrayofcustomer);
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/ToggleUpdateStatus';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/ToggleUpdateStatus';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
@@ -128,7 +128,7 @@ export class CustomerService {
     // customer.lastModifiedByUserId = localStorage.userId;
     customer.id = parseInt(localStorage.Arrayofcustomer);
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/ToggleUpdateEmailReminder';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/ToggleUpdateEmailReminder';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
@@ -138,35 +138,40 @@ export class CustomerService {
     // customer.lastModifiedByUserId = localStorage.userId;
     customer.id = parseInt(localStorage.Arrayofcustomer);
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/ToggleUpdateSmsReminder';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/ToggleUpdateSmsReminder';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
 
   upload_customer_profile_image(userdata) {
-	  this.baseUrl = 'http://172.16.0.114:5656/api/Customers/UploadProfilePicture';
+	  this.baseUrl = 'http://172.16.0.114:5555/api/Customers/UploadProfilePicture';
     const input = new FormData();
     input.append('ParentCompanyId', localStorage.companyId)
     input.append('CustomerId', localStorage.Arrayofcustomer);
 	  input.append('file', userdata[0]);
    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
       this.imagepath = '';
-      this.imagepath = 'http://172.16.0.114:5656/' + val['profilePicPath'] ;
+      this.imagepath = 'http://172.16.0.114:5555/' + val['profilePicPath'] ;
     });
   }
 
   getCustomerProfilePic(customerId) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/GetProfilePicture?CustomerId=' + customerId + '&ParentCompanyId=' + this.ParentCompanyId;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/GetProfilePicture?CustomerId=' + customerId + '&ParentCompanyId=' + this.ParentCompanyId;
     this.httpClient.get<Observable<imagepath>>(this.baseUrl).subscribe((data) => {
       this.imagepath = '';
-      this.imagepath =  'http://172.16.0.114:5656/' + data['path'];
+      this.imagepath =  'http://172.16.0.114:5555/' + data['path'];
     });
   }
 
   getCustomerProfile(customerId) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.114:5656/api/Customers/GetCustomersProfile?ParentCompanyId=' + this.ParentCompanyId + '&CustomerId=' + customerId;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/GetCustomersProfile?ParentCompanyId=' + this.ParentCompanyId + '&CustomerId=' + customerId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getCustomerHistory(customerId) {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Customers/GetCustomersHistory?CustomerId=' + customerId + '&PageNumber=1&PageSize=10';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 

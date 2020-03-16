@@ -425,7 +425,7 @@ export class AdminRolesComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if (this.claims['IndividualRights'].length > 0 && this.claims['ModuleRights'].length > 0 ) {
       for(let i=0; i < this.arrayofselectedmoduleobj.length; i++){
-        if(this.arrayofselectedmoduleobj[i]['Rights'][0]['View'] == true || this.arrayofselectedmoduleobj[i]['Rights'][0]['Create'] == true || this.arrayofselectedmoduleobj[i]['Rights'][0]['Update'] == true || this.arrayofselectedmoduleobj[i]['Rights'][0]['Delete'] == true){
+        if(this.arrayofselectedmoduleobj[i]['Rights'][0]['View'] == false && this.arrayofselectedmoduleobj[i]['Rights'][0]['Create'] == false && this.arrayofselectedmoduleobj[i]['Rights'][0]['Update'] == false && this.arrayofselectedmoduleobj[i]['Rights'][0]['Delete'] == false){
           this.AdminService.addUpdateRoleClaims(this.claims).subscribe((data) => {
             this.getuserRoles();
             this.claims = {};

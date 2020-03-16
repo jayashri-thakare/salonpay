@@ -246,6 +246,7 @@ export class AddInventoryComponent implements OnInit {
     console.log(Admin)
     Admin.SupplierId = parseInt(Admin.SupplierId)
     Admin.Status = JSON.parse(Admin.Status)
+    Admin.ProductCategoryId = 5;
     // tslint:disable-next-line:triple-equals
     if (this.addinventoryForm.status == 'VALID') {
       this.AdminService.add_inventory(Admin).subscribe((data) => {
@@ -271,6 +272,7 @@ export class AddInventoryComponent implements OnInit {
     Admin.ReOrderMin = parseInt(Admin.ReOrderMin)
     Admin.Status = JSON.parse(Admin.Status)
     Admin.ProductId = parseInt(this.arrayofselectedobj[0].productId)
+    Admin.ProductCategoryId = 5;
     // tslint:disable-next-line:triple-equals
     if (this.updateinventoryForm.status == 'VALID') {
       this.AdminService.add_inventory(Admin).subscribe((data) => {

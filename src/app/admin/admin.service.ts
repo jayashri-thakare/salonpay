@@ -138,6 +138,7 @@ export class AdminService {
   }
 
   getAllServices() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/Services/GetServicesList?ParentCompanyId=' + this.ParentCompanyId +'&ServiceId=0&PageNumber=1&PageSize=20';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
@@ -481,6 +482,20 @@ export class AdminService {
   }
 
   update_services(Admin) {
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/BusinessSettings/UpdateServiceCategory';
+    Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+    .pipe(map( data => data));
+  }
+
+  add_product(Admin) {
+    this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/BusinessSettings/CreateServiceCategory';
+    Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)
+    .pipe(map( data => data));
+  }
+
+  update_product(Admin) {
     this.baseUrl = 'https://payziliapi3.azurewebsites.net/api/BusinessSettings/UpdateServiceCategory';
     Admin.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<Admindetail>>(this.baseUrl, Admin, httpOptions)

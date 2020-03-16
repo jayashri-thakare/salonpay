@@ -74,6 +74,7 @@ export class AddCustomerComponent implements OnInit {
   addcustomerForm: FormGroup;
   control: FormControl;
   submitted = false;
+  customer: string;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -104,7 +105,12 @@ export class AddCustomerComponent implements OnInit {
         }else if(data['success'] == 1){
           this.customerService.publish('call-customerDetail');
           this.addcustomerForm.reset();
-          this.router.navigate(['/customerdashboard'])
+          this.customer = JSON.parse(localStorage.getItem('cust'))
+          if(customer == true){
+            this.router.navigate(['/customerdashboard'])
+          }else{
+            this.router.navigate(['/transactionnewsales'])
+          }
           this.customerService.showNav(6);
           this.messageService.clear();
           this.messageService.add('Customer added successfully.')
