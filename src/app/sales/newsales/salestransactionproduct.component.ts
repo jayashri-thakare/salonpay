@@ -8,7 +8,16 @@ import { SalesService } from '../sales.service';
   selector: 'app-transactionproduct',
   template: '<div class="row mb-5">\n' +
   '              <div class="col-12">\n' +
-  '                  <h4 class="hdn2">Select Products</h4>\n' +
+  '                  <div class="comm-headline-btn">\n' +
+  '                      <h4 class="hdn2 m-0">Select Products</h4>\n' +
+  '                      <div class="form-group search-group mb-0">\n' +
+  '                          <form>\n' +
+  '                              <input class="form-field" type="text" name="filter-searh" required>\n' +
+  '                              <p class="form-label">Search</p>\n' +
+  '                              <button class="search icon-search" type="submit"></button>\n' +
+  '                          </form>\n' +
+  '                      </div>\n' +
+  '                  </div>\n' +
   '              </div>\n' +
   '              <div class="col-12">\n' +
   '                  <div class="tab-2">\n' +
@@ -37,12 +46,12 @@ import { SalesService } from '../sales.service';
   '                                                  <div class="user-det">\n' +
   '                                                      <i class="icon-haircut prodt-ico"></i>\n' +
   '                                                      <div class="usr-name">\n' +
-  '                                                          <h3><span>{{addedservice?.serviceName}}</span>$ {{addedservice?.serviceCost}}</h3>\n' +
+  '                                                          <h3><span>{{addedproduct?.productName}}</span>$ {{addedproduct?.productCost}}</h3>\n' +
   '                                                      </div>\n' +
   '                                                  </div>\n' +
   '                                                  <div class="main-selt">\n' +
-  '                                                      <input type="checkbox" id="{{addedservice?.serviceName}}" name="{{addedservice?.serviceName}}" (click)="selectedServices(addedservice, $event)" required>\n' +
-  '                                                      <label for="{{addedservice?.serviceName}}">Select</label>\n' +
+  '                                                      <input type="checkbox" id="{{addedproduct?.productId}}" name="{{addedproduct?.productId}}" (click)="selectedServices(addedproduct, $event)" required>\n' +
+  '                                                      <label for="{{addedproduct?.productId}}">Select</label>\n' +
   '                                                  </div>\n' +
   '                                              </div>\n' +
   '                                        <div class="techi-top techi-top-qty">\n' +
@@ -84,7 +93,7 @@ export class SalesTransactionProductComponent implements OnInit {
       this.result = res ;
       this.productList = this.result;
       console.log(this.productList)
-      // this.getAddedProductList(this.result["list"][0]['productCategoryId']);
+       this.getAddedProductList(this.result[0].productCategoryId);
     });
   }
 
