@@ -79,9 +79,9 @@ export class SalesTransactionProductComponent implements OnInit {
     result: any;
     productList: any;
     addedproductList: any;
-    arrayofselectedservices: Array<any>=[];
+    arrayofselectedproducts: Array<any>=[];
+    arrayofselectedqty: Array<any>=[];
     @Output() messageToEmit = new EventEmitter<string>();
-
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
@@ -104,19 +104,18 @@ export class SalesTransactionProductComponent implements OnInit {
     });
   }
 
-  selectedServices(selected_services, event){
-    var index = this.arrayofselectedservices.indexOf(selected_services);
+  selectedServices(selected_products, event){
+    var index = this.arrayofselectedproducts.indexOf(selected_products);
     if(index<0 && event.currentTarget.checked){
-      this.arrayofselectedservices.push(selected_services);
+      this.arrayofselectedproducts.push(selected_products);
     }else{
-      this.arrayofselectedservices.splice(index, 1);
+      this.arrayofselectedproducts.splice(index, 1);
     }
-    console.log(this.arrayofselectedservices)
-    this.sendMessageToParent(this.arrayofselectedservices)
+    console.log(this.arrayofselectedproducts)
+    this.sendMessageToParent(this.arrayofselectedproducts)
   }
-
   sendMessageToParent(message) {
-    this.messageToEmit.emit(message)
+    this.salesService.generateSelectedData(message)
   }
 
 }

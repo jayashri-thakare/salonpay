@@ -53,31 +53,31 @@ import { SalesService } from '../sales.service';
     '\n' +
     '                    <form action="./transaction-customer-cart.html">\n' +
     '                        <div class="cmn-mdl-content scrollbar">\n' +
-    '                            <h6 class="poptile">Services</h6>\n' +
-    '                            <!-- start -->\n' +
-    '                            <div class="techi-box" *ngFor="let selectedproduct of receivedChildMessage">\n' +
-    '                                <div class="techi-top">\n' +
-    '                                    <div class="user-det">\n' +
-    '                                        <i class="icon-dye prodt-ico"></i>\n' +
-    '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>Hair Shampoo</span>$ 150</h3>\n' +
-    '                                        </div>\n' +
-    '                                    </div>\n' +
-    '                                </div>\n' +
-    '                                <div class="techi-top start border-0">\n' +
-    '                                    <p>add on services</p>\n' +
-    '                                    <ul>\n' +
-    '                                        <li>Hair Spa: <span>$ 45</span>\n' +
-    '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
-    '                                        </li>\n' +
-    '                                        <li>Nail Art: <span>$ 35</span>\n' +
-    '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
-    '                                        </li>\n' +
-    '                                    </ul>\n' +
-    '                                </div>\n' +
-    '                                <div class="techi-remove"><i class="icon-delete"></i></div>\n' +
-    '                            </div>\n' +
-    '                            <!-- end -->\n' +
+    // '                            <h6 class="poptile">Services</h6>\n' +
+    // '                            <!-- start -->\n' +
+    // '                            <div class="techi-box" *ngFor="let selectedproduct of receivedChildMessage">\n' +
+    // '                                <div class="techi-top">\n' +
+    // '                                    <div class="user-det">\n' +
+    // '                                        <i class="icon-dye prodt-ico"></i>\n' +
+    // '                                        <div class="usr-name">\n' +
+    // '                                            <h3><span>Hair Shampoo</span>$ 150</h3>\n' +
+    // '                                        </div>\n' +
+    // '                                    </div>\n' +
+    // '                                </div>\n' +
+    // '                                <div class="techi-top start border-0">\n' +
+    // '                                    <p>add on services</p>\n' +
+    // '                                    <ul>\n' +
+    // '                                        <li>Hair Spa: <span>$ 45</span>\n' +
+    // '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
+    // '                                        </li>\n' +
+    // '                                        <li>Nail Art: <span>$ 35</span>\n' +
+    // '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
+    // '                                        </li>\n' +
+    // '                                    </ul>\n' +
+    // '                                </div>\n' +
+    // '                                <div class="techi-remove"><i class="icon-delete"></i></div>\n' +
+    // '                            </div>\n' +
+    // '                            <!-- end -->\n' +
     '\n' +
     '                            <h6 class="poptile">Products</h6>\n' +
     '                            <!-- start -->\n' +
@@ -86,7 +86,7 @@ import { SalesService } from '../sales.service';
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-dye prodt-ico"></i>\n' +
     '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>Hair Shampoo</span>$ 150</h3>\n' +
+    '                                              <h3><span>{{selectedproduct?.productName}}</span>$ {{selectedproduct?.productCost}}</h3>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
@@ -123,15 +123,16 @@ export class NewSalesProductComponent implements OnInit {
     receivedChildMessage: Array<any>= [];
   orderIdOfSale: string;
 
-  constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) {
+    this.salesService.selectedData.subscribe(
+      data => {
+        this.receivedChildMessage = data;
+    })
+   }
 
   ngOnInit() {
     this.getCustomerDetail();
     this.orderIdOfSale = localStorage.getItem('orderId')
-  }
-
-  getMessage(message) {
-    this.receivedChildMessage = message;
   }
 
   getCustomerDetail() {

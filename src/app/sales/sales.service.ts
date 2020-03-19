@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {Observable, of, Subject} from 'rxjs';
+import {Observable, of, Subject, BehaviorSubject} from 'rxjs';
 import {MessageService} from '../message.service';
 
 class User {
@@ -22,6 +22,8 @@ class customerProfile {
   providedIn: 'root'
 })
 export class SalesService {
+  private messageSource = new BehaviorSubject('default message');
+  currentMessage = this.messageSource.asObservable();
   private res: Object;
   private result: {
     serviceDetails: { serviceId: any };
@@ -32,7 +34,13 @@ export class SalesService {
   private customerId: any;
   private parentId: number;
   customid: any;
+  public selectedData: Subject<any>; 
   constructor(private httpClient: HttpClient, private messageService: MessageService) {
+    this.selectedData = new Subject();
+  }
+
+  generateSelectedData(row:any) {
+    this.selectedData.next(row);
   }
 
   getCustomers() {
