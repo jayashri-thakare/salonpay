@@ -6,6 +6,7 @@ import {AdminService} from '../admin.service';
 import {MessageService} from '../../message.service';
 import { Subscription } from 'rxjs';
 import { parse } from 'querystring';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'addproduct-modal',
@@ -179,7 +180,8 @@ import { parse } from 'querystring';
     '    </form>\n' +
     '\n' +
     '</div>\n' +
-    '</jw-modal>'
+    '</jw-modal>',
+    styleUrls: ['./inventory.component.css']
 })
 export class AddInventoryComponent implements OnInit {
   addinventoryForm: FormGroup;

@@ -8,4 +8,40 @@
     padding-top: 8px;
   }
 
+  .sch-error{
+    font-weight: 400;
+    margin: 0;
+    margin-top: 5px;
+    line-height: 2;
+    font-size: 14px;
+    color: #f71336;
+    position: relative;
+    padding-left: 30px;
+  }
+  .sch-error:before {
+    content: "\e927";
+    font-family: 'icomoon' !important;
+    position: absolute;
+    left: 10px;
+    top: 0;
+}
+
+.rto-error{
+  font-weight: 400;
+  margin: 0;
+  margin-top: 0px;
+  line-height: 2;
+  font-size: 14px;
+  color: #f71336;
+  position: relative;
+  padding-left: 30px;
+}
+.rto-error:before {
+  content: "\e927";
+  font-family: 'icomoon' !important;
+  position: absolute;
+  left: 10px;
+  top: 0;
+}
+
   

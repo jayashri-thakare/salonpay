@@ -14,7 +14,7 @@ import {parseJsonSchemaToCommandDescription} from '@angular/cli/utilities/json-s
   template: '<!-- Edit Profile Menu -->\n' +
     '<jw-modal id="side-menu-imap">\n' +
     '<div class="mobile-side">\n' +
-    '  <h3 class="close-btn main-comm-head">\n' +
+    '  <h3 class="close-btn main-comm-head" (click)="closeModal(\'side-menu-imap\');">\n' +
     '    <i class="icon-down-arrow com-arw"></i>{{\'Email\' | translate}}  <span>{{\'Signature\' | translate}}</span>\n' +
     '  </h3>\n' +
     '<form class="popup-scrll" [formGroup]="accountForm" (ngSubmit)="update_account(accountForm.value)">\n' +

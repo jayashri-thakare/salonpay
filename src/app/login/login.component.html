@@ -15,7 +15,7 @@
       <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
         <div class="login-box-in">
           <div class="form-group">
-            <input type="email" id="Email" formControlName="Email" class="form-field" [ngClass]="{ 'error': submitted && f.Email.errors }" />
+            <input autocomplete="off" type="email" id="Email" formControlName="Email" class="form-field" [ngClass]="{ 'error': submitted && f.Email.errors }" />
             <p class="form-label">{{'Email' | translate}}</p>
           </div>
           <div class="form-group">

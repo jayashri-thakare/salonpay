@@ -50,3 +50,6 @@ img {
   border-color: #fff !important;
   padding-top: 8px;
 }
+.e-time-icon{
+  display: none !important;
+}

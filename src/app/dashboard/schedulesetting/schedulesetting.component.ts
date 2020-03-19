@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Router} from '@angular/router';
-import {UserdataService} from '../../userdata.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserdataService } from '../../userdata.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { MessageService } from 'src/app/message.service';
 
@@ -21,22 +21,23 @@ export class SchedulesettingComponent implements OnInit {
   private arrayofselecteddays: Array<string> = [];
   public DateRangePicker;
   // private arrayofselectedobj: Array<string> = [];
-  public currentDate: Date = new Date ();
-  public dateValue: Date = new Date ();
+  public currentDate: Date = new Date();
+  public dateValue: Date = new Date();
   // public maxDate: Date = new Date (this.currentDate)
   userschedule: any;
   customday: boolean;
   @Input('userdata') arrayofselectedobj: Array<string> = [];
   userdelschedule: any;
   subscription: any;
-
-  constructor(private modalService: ModalService,private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
+  public fail: boolean;
+  constructor(private modalService: ModalService, private messageService: MessageService, private formBuilder: FormBuilder, private router: Router, public userdataService: UserdataService) { }
 
   get f() {
     return this.scheduleForm.controls;
   }
 
   ngOnInit() {
+    this.fail = false;
     this.userdataService.schedulenav = false;
     this.requesttimevar = false;
     this.schedulevar = true;
@@ -64,38 +65,39 @@ export class SchedulesettingComponent implements OnInit {
     this.subscription = this.userdataService.on('call-schedule').subscribe(() => this.getuserSchedule());
   }
 
-  requesttimefunction(){
-    if (this.requesttimevar == false && this.schedulevar == true){
+  requesttimefunction() {
+    if (this.requesttimevar == false && this.schedulevar == true) {
       this.requesttimevar = true;
       this.schedulevar = false;
-    }else {
+    } else {
       this.requesttimevar = false;
       this.schedulevar = true;
     }
   }
 
-  selectedDays(selected_day){
+  selectedDays(selected_day) {
     var index = this.arrayofselecteddays.indexOf(selected_day);
-    if(index<0){
+    if (index < 0) {
       this.arrayofselecteddays.push(selected_day);
-    }else{
+    } else {
       this.arrayofselecteddays.splice(index, 1);
     }
     console.log(this.arrayofselecteddays)
   }
 
-  selectdayobj(selected_obj){
+  selectdayobj(selected_obj) {
     var index = this.arrayofselectedobj.indexOf(selected_obj);
-    if(index<0){
+    if (index < 0) {
       this.arrayofselectedobj.splice(index, 1);
       this.arrayofselectedobj.push(selected_obj);
     }
   }
 
-  customtime(){
-    if(this.customday === true){
+  customtime() {
+    this.allvalid = false;
+    if (this.customday === true) {
       this.customday = false;
-    }else{
+    } else {
       this.customday = true;
     }
   }
@@ -111,34 +113,62 @@ export class SchedulesettingComponent implements OnInit {
   updateSchedule(userdata) {
     console.log(userdata, this.scheduleForm)
     userdata.DayName = this.arrayofselecteddays;
-    // tslint:disable-next-line:triple-equals
-    if (this.scheduleForm.status == 'VALID') {
-      this.userdataService.add_schedule(userdata).subscribe((data) => {
-        this.arrayofselecteddays = [];
-        this.getuserSchedule();
-        this.scheduleForm.reset();
-        this.messageService.clear();
-        this.messageService.add('Schedule added successfully.');
-      });
-    } else {
-      console.log(userdata, this.scheduleForm.status);
-      this.submitted = true;
-      if (this.scheduleForm.invalid) {
-        return;
+    if ((userdata.StartTimeMeridian != "" && userdata.StartTimeMeridian != null) && (userdata.EndTimeMeridian != "" && userdata.EndTimeMeridian != null) && userdata.StartTimeHour != "" && userdata.EndTimeHour != "" && userdata.StartTimeMinute != undefined && userdata.EndTimeMinute != undefined) {
+      // tslint:disable-next-line:triple-equals
+      if (this.scheduleForm.status == 'VALID') {
+        this.fail = false;
+        this.userdataService.add_schedule(userdata).subscribe((data) => {
+          this.arrayofselecteddays = [];
+          this.getuserSchedule();
+          this.scheduleForm.reset();
+          this.messageService.clear();
+          this.messageService.add('Schedule added successfully.');
+        });
+      } else {
+        this.fail = false;
+        console.log(userdata, this.scheduleForm.status);
+        this.submitted = true;
+        if (this.scheduleForm.invalid) {
+          return;
+        }
       }
+    } else {
+      this.fail = true;
     }
   }
-
+  valid: boolean;
+  public allvalid: boolean = false
   updateTimeoff(userdata, date) {
     console.log(userdata, this.timeoffForm)
-    if(date){
+    if (date) {
       userdata.StartDate = date[0].toDateString();
       userdata.EndDate = date[1].toDateString();
-    }else{
-      userdata.StartDate = userdata.StartDate.toDateString();
+    } else {
+      if (userdata.StartDate) {
+        userdata.StartDate = userdata.StartDate.toDateString();
+      } else {
+        userdata.StartDate = null;
+      }
     }
     // tslint:disable-next-line:triple-equals
-    if (this.timeoffForm.status == 'VALID') {
+    if (this.customday === true) {
+      if ((userdata.StartTimeMeridian != "" && userdata.StartTimeMeridian != null) && (userdata.EndTimeMeridian != "" && userdata.EndTimeMeridian != null) && userdata.StartTimeHour != "" && userdata.EndTimeHour != "" && userdata.StartTimeMinute != undefined && userdata.EndTimeMinute != undefined) {
+        this.valid = true;
+        this.allvalid = false;
+      } else {
+        this.valid = false;
+        this.allvalid = true;
+      }
+    } else {
+      if (userdata.StartDate) {
+        this.valid = true;
+        this.allvalid = false;
+      } else {
+        this.valid = false;
+        this.allvalid = true;
+      }
+    }
+    if (this.timeoffForm.status == 'VALID' && this.valid) {
       this.userdataService.update_timeoff(userdata).subscribe((data) => {
         this.timeoffForm.reset();
         this.messageService.clear();
@@ -169,7 +199,7 @@ export class SchedulesettingComponent implements OnInit {
         console.log(data)
         this.getuserSchedule();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add('Schedule deleted successfully');
       });
     }
   }

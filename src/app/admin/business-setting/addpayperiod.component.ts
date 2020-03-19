@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   template: '<jw-modal id="add-payperiod">\n' +
   '        <div class="mobile-side">\n' +
   '        <!-- common headline -->\n' +
-  '        <h3 class="close-btn main-comm-head">\n' +
+  '        <h3 class="close-btn main-comm-head" (click)="closeModal(\'add-payperiod\');">\n' +
   '            <i class="icon-down-arrow com-arw"></i>Pay <span>Period</span>\n' +
   '        </h3>\n' +
   '        <!-- common headline end -->\n' +
@@ -50,7 +50,7 @@ import { Subscription } from 'rxjs';
   '            </div>\n' +
   '\n' +
   '            <div class="popBtn">\n' +
-  '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+  '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-payperiod\');">Cancel</button>\n' +
   '                <button class="button" type="submit">Create</button>\n' +
   '            </div>\n' +
   '\n' +
@@ -89,7 +89,7 @@ import { Subscription } from 'rxjs';
   '            </div>\n' +
   '\n' +
   '            <div class="popBtn">\n' +
-  '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+  '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-payperiod\');">Cancel</button>\n' +
   '                <button class="button" type="submit">Update</button>\n' +
   '            </div>\n' +
   '\n' +
@@ -115,7 +115,9 @@ export class AddPayPeriodComponent implements OnInit {
   get f1() {
     return this.updatepayperiodForm.controls;
   }
-
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
   ngOnInit() {
     this.addpayperiodForm = this.formBuilder.group({
         Value: [''],

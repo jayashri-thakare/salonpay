@@ -12,10 +12,10 @@ import { Subscription } from 'rxjs';
     '    <!-- Edit Salon Timing Menu -->\n' +
     '    <div class="mobile-side">\n' +
     '        <!-- common headline -->\n' +
-    '        <h3 *ngIf="addSchedule" class="close-btn main-comm-head">\n' +
+    '        <h3 *ngIf="addSchedule" class="close-btn main-comm-head" (click)="closeModal(\'add-schedule\');">\n' +
     '            <i class="icon-down-arrow com-arw"></i>Add<span> Salon Timing</span>\n' +
     '        </h3>\n' +
-    '        <h3 *ngIf="updateSchedule" class="close-btn main-comm-head">\n' +
+    '        <h3 *ngIf="updateSchedule" class="close-btn main-comm-head" (click)="closeModal(\'add-schedule\');">\n' +
     '            <i class="icon-down-arrow com-arw"></i>Update<span> Salon Timing</span>\n' +
     '        </h3>\n' +
     '        <!-- common headline end -->\n' +
@@ -105,7 +105,7 @@ import { Subscription } from 'rxjs';
     '            </div>\n' +
     '\n' +
     '            <div class="popBtn">\n' +
-    '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+    '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-schedule\');">Cancel</button>\n' +
     '                <button class="button" type="submit">Update</button>\n' +
     '            </div>\n' +
     '\n' +
@@ -196,7 +196,7 @@ import { Subscription } from 'rxjs';
     '            </div>\n' +
     '\n' +
     '            <div class="popBtn">\n' +
-    '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+    '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-schedule\');">Cancel</button>\n' +
     '                <button class="button" type="submit">Update</button>\n' +
     '            </div>\n' +
     '\n' +
@@ -226,7 +226,9 @@ export class AddScheduleComponent implements OnInit {
   get f1() {
     return this.updatescheduleForm.controls;
   }
-
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
   ngOnInit() {
     var H = 13; this.arrayofhours = Array.apply(null, {length: H}).map(Number.call, Number)
     var M = 60; this.arrayofminute = Array.apply(null, {length: M}).map(Number.call, Number)

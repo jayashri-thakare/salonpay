@@ -50,3 +50,26 @@
   #fileInput{
     display: none;
   }  
+  ::ng-deep .e-multi-select-wrapper .e-chips{
+    border-radius: 0px !important;
+  }
+
+  .scroll-padding::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 10px;
+  }
+  
+  .scroll-padding::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 10px;
+  }
+  
+  .scroll-padding::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,0.85);
+    border-radius: 10px;
+  } 
+  .scroll-padding::-webkit-scrollbar-thumb {
+    background-color: #a7b3c4;
+    border-radius: 10px;
+    transition: .5s;
+  }  

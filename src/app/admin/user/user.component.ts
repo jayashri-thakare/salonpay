@@ -140,7 +140,7 @@ export class UserComponent implements OnInit {
         console.log(data)
         this.getuserList();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add(data['message']);
       });
     }
   }

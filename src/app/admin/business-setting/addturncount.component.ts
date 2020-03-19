@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
   template: '<jw-modal id="add-turncount">\n' +
   '        <div class="mobile-side">\n' +
   '        <!-- common headline -->\n' +
-  '        <h3 *ngIf="addturncount" class="close-btn main-comm-head">\n' +
+  '        <h3 *ngIf="addturncount" class="close-btn main-comm-head" (click)="closeModal(\'add-turncount\');">\n' +
   '            <i class="icon-down-arrow com-arw"></i>Add <span>turn count</span>\n' +
   '        </h3>\n' +
-  '        <h3 *ngIf="updateturncount" class="close-btn main-comm-head">\n' +
+  '        <h3 *ngIf="updateturncount" class="close-btn main-comm-head" (click)="closeModal(\'add-turncount\');">\n' +
   '            <i class="icon-down-arrow com-arw"></i>Update <span>turn count</span>\n' +
   '        </h3>\n' +
   '        <!-- common headline end -->\n' +
@@ -35,7 +35,7 @@ import { Subscription } from 'rxjs';
   '            </div>\n' +
   '\n' +
   '            <div class="popBtn">\n' +
-  '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+  '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-turncount\');">Cancel</button>\n' +
   '                <button class="button" type="submit">Create</button>\n' +
   '            </div>\n' +
   '\n' +
@@ -57,7 +57,7 @@ import { Subscription } from 'rxjs';
   '            </div>\n' +
   '\n' +
   '            <div class="popBtn">\n' +
-  '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+  '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-turncount\');">Cancel</button>\n' +
   '                <button class="button" type="submit">Update</button>\n' +
   '            </div>\n' +
   '\n' +
@@ -83,7 +83,9 @@ export class AddTurnCountComponent implements OnInit {
   get f1() {
     return this.updateturncountForm.controls;
   }
-
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
   ngOnInit() {
     this.addturncountForm = this.formBuilder.group({
         Value: ['']

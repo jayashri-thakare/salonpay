@@ -12,8 +12,8 @@ import { Subscription } from 'rxjs';
   template: '<jw-modal id="add-coupon">\n' +
     '        <div class="mobile-side">\n' +
     '        <!-- common headline -->\n' +
-    '        <h3 class="close-btn main-comm-head">\n' +
-    '            <i *ngIf="adminService.couponName===add" class="icon-down-arrow com-arw" (click)="closeModal(\'add-coupon\')"></i>Add Create<span> Coupon</span>\n' +
+    '        <h3 class="close-btn main-comm-head" (click)="closeModal(\'add-coupon\')">\n' +
+    '            <i class="icon-down-arrow com-arw"></i>Add New<span> Coupon</span>\n' +
     // '            <i *ngIf="adminService.couponName===update" class="icon-down-arrow com-arw" (click)="closeModal(\'add-coupon\')"></i>Update<span> Coupon =={{adminService.couponName}}</span>\n' +
     '        </h3>\n' +
     '        <!-- common headline end -->\n' +

@@ -1,3 +1,30 @@
 .addbtncol{
   color: #fff !important;
 }
+
+.grd-icon-big{
+  width: 27px;
+  height: 27px;
+  background: linear-gradient(#ff8324 0, #ff5124 100%);
+  filter: drop-shadow(0 3px 6px rgba(255,87,36,0.15));
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 27px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 68%
+}
+@media (max-width: 480px){
+  .grd-icon-big {
+  margin-left: 5%
+  }
+}
+
+#mail-img{
+  width: 40px;
+}
+.dashed-button{
+  color: #ff8224 !important;
+}

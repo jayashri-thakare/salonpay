@@ -21,6 +21,7 @@
           </div>
           <app-customTimePicker [customTimePicker]= scheduleForm [userdata]="userschedule" addchildAMMessage="add"></app-customTimePicker>
           <button class="button" type="submit">{{'Add' | translate}}</button>
+          <label class="sch-error" *ngIf="fail">{{'All fields are mandatory!' | translate}}</label>
         </div>
         <!-- left side Ends -->
         <!-- right side Ends -->
@@ -69,7 +70,7 @@
         <div class="tab-pane fade active show" id="tab1">
             <div class="one-day-box">
               <div class="form-group form-field">
-                <ejs-datetimepicker id='datetimepicker' formControlName="StartDate" [ngClass]="{ 'error': submitted && f.birthdate.errors }" placeholder='Select Date' [value]='dateValue' format ='M/dd/yyyy'></ejs-datetimepicker>
+                <ejs-datetimepicker id='datetimepicker' formControlName="StartDate" [ngClass]="{ 'error': submitted }" placeholder='Select Date' [value]='dateValue' format ='M/dd/yyyy'></ejs-datetimepicker>
               </div>
               <div class="switch switch--horizontal get-switch-val" data-name="weekly-switch">
                 <input class="notif-radio" id="all-day-switch" value="false" (click)="customtime()" type="radio" name="first-switch-email">
@@ -84,6 +85,7 @@
                 <button class="button line" (click)="requesttimefunction()" type="button">{{'Cancel' | translate}}</button>
                 <button class="button" type="submit">{{'Submit' | translate}}</button>
               </div>
+              <label class="rto-error" *ngIf="allvalid">{{'All fields are mandatory!' | translate}}</label>
             </div>
         </div>
         <div class="tab-pane" id="tab2">

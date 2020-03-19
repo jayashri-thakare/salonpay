@@ -52,9 +52,9 @@
               class="toggle-inside"></span></span>
             </div>
             <div class="switch switch--horizontal only-switch">
-              <input id="sms1" type="checkbox" [ngModel]="notification.enableEmailNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="NotificationTypeSMS"/>
+              <input id="sms1" type="checkbox" [ngModel]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="NotificationTypeSMS"/>
               <label for="sms1"></label>
-              <input id="sms11" type="checkbox" [ngModel]="notification.enableEmailNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="NotificationTypeSMS"/>
+              <input id="sms11" type="checkbox" [ngModel]="notification.enableTextNotification" (change)="notificationsetting($event, 'sms', notification.notificationType)" formControlName="NotificationTypeSMS"/>
               <label for="sms11"></label><span class="toggle-outside"><span
               class="toggle-inside"></span></span>
             </div>

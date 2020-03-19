@@ -23,7 +23,7 @@ export class ModalService {
 
   open1(id: string) {
     // open modal specified by id
-    debugger;
+    // debugger;
     const modal = this.modals.find(x => x.id === id);
     modal.open();
   }

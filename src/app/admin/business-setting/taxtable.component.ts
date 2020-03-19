@@ -146,7 +146,7 @@ export class BusinessTaxTableComponent implements OnInit {
         console.log(data)
         this.getTaxTable();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add(data['message']);
       });
     }
   }

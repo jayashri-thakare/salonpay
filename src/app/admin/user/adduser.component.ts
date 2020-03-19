@@ -24,7 +24,7 @@ import {MessageService} from '../../message.service';
     '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="full-name" formControlName="FirstName" class="form-field" required />\n' +
-    '                        <p class="form-label">Full Name</p>\n' +
+    '                        <p class="form-label">First Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="last-name" formControlName="LastName" class="form-field" required />\n' +
@@ -95,7 +95,7 @@ import {MessageService} from '../../message.service';
     '                <div class="fill-box-in scrollbar scroll-padding">\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="full-name" ngModel="{{userdetail.user.firstName}}" formControlName="FirstName" class="form-field field--not-empty" required />\n' +
-    '                        <p class="form-label">Full Name</p>\n' +
+    '                        <p class="form-label">First Name</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
     '                        <input type="text" id="last-name" ngModel="{{userdetail.user.lastName}}" formControlName="LastName" class="form-field field--not-empty" required />\n' +
@@ -161,7 +161,8 @@ import {MessageService} from '../../message.service';
     '        </form>\n' +
     '    \n' +
     '    </div>\n'+
-    '    </jw-modal>'
+    '    </jw-modal>',
+  styleUrls: ['./user.component.css']
 })
 export class AddUserComponent implements OnInit {
   adduserForm: FormGroup;
