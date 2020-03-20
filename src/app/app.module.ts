@@ -128,6 +128,7 @@ import {AddonServicesComponent} from './sales/newsales/addonservices.component'
 import {NewSalesProductComponent} from './sales/newsales/newsalesproduct.component'
 import {SalesTransactionProductComponent} from './sales/newsales/salestransactionproduct.component'
 import {FrequentlyAddedProductComponent} from './sales/newsales/frequentlyproduct.component'
+import { SalesTransactionCartComponent } from './sales/newsales/saletransactioncart.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -167,6 +168,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         NewSalesProductComponent,
         SalesTransactionProductComponent,
         FrequentlyAddedProductComponent,
+        SalesTransactionCartComponent,
         CustomerComponent,
         AddCustomerComponent,
         UpdateCustomerComponent,

@@ -9,7 +9,7 @@ import {MessageService} from '../message.service';
   selector: 'app-statusbar',
   template: '<div class="filter-container-up filter-container-grid" *ngIf="router.url === \'/customer\'">\n' +
     '            <div class="filter-container">\n' +
-    '                <a href="addcustomer" (click)="customertransactionfunc(\'customer\')" class="button flg-btn">+ Add New</a>\n' +
+    '                <a (click)="customertransactionfunc(\'customer\')" class="button flg-btn">+ Add New</a>\n' +
     '                <div class="form-group mb-0 mr-2">\n' +
     '                    <form>\n' +
     '                        <input class="form-field" type="text" name="filter-searh" required>\n' +
@@ -62,7 +62,7 @@ import {MessageService} from '../message.service';
     '                <a href="addcustomer" class="button flg-btn">+ Add New</a>\n' +
     '\n' +
     '                    <div class="checkbox-box checkbox-box-button select-all-btn mb-0 mr-2">\n' +
-    '                        <input class="selected-all" type="checkbox" id="select-all" (click)="Selectallfunction($event)" name="select-all" required>\n' +
+    '                        <input class="selected-all" type="checkbox" id="select-all" ngModel="{{customerupdate}}" (click)="Selectallfunction($event)" name="select-all" required>\n' +
     '                        <label for="select-all"><span>Select</span> All</label>\n' +
     '                    </div>\n' +
     '\n' +
@@ -96,6 +96,7 @@ export class CustomerStatusBarComponent implements OnInit {
   customertransaction: boolean;
   customerUpdate: boolean;
   @Output() messageToEmit = new EventEmitter<string>();
+  @Input('customerupdate') customerupdate: any;
 
   constructor(public customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -115,7 +116,8 @@ export class CustomerStatusBarComponent implements OnInit {
 
   customertransactionfunc(type){
     if(type == 'customer'){
-      localStorage.setItem('cust', 'true')
+      localStorage.setItem('cust', 'true');
+      this.router.navigate(['/addcustomer']);
     }
   }
 

@@ -37,12 +37,12 @@ import { SalesService } from '../sales.service';
   '                                                  <div class="user-det">\n' +
   '                                                      <i class="icon-haircut prodt-ico"></i>\n' +
   '                                                      <div class="usr-name">\n' +
-  '                                                          <h3><span>{{addedservice?.serviceName}}</span>$ {{addedservice?.serviceCost}}</h3>\n' +
+  '                                                          <h3><span>{{addedproduct?.productName}}</span>$ {{addedproduct?.productCost}}</h3>\n' +
   '                                                      </div>\n' +
   '                                                  </div>\n' +
   '                                                  <div class="main-selt">\n' +
-  '                                                      <input type="checkbox" id="{{addedservice?.serviceName}}" name="{{addedservice?.serviceName}}" (click)="selectedServices(addedservice, $event)" required>\n' +
-  '                                                      <label for="{{addedservice?.serviceName}}">Select</label>\n' +
+  '                                                      <input type="checkbox" id="{{addedproduct?.productId}}" name="{{addedproduct?.productId}}" (click)="selectedServices(addedproduct, $event)" required>\n' +
+  '                                                      <label for="{{addedproduct?.productId}}">Select</label>\n' +
   '                                                  </div>\n' +
   '                                              </div>\n' +
   '                                        <div class="techi-top techi-top-qty">\n' +
@@ -70,7 +70,7 @@ export class SalesTransactionProductComponent implements OnInit {
     result: any;
     productList: any;
     addedproductList: any;
-    arrayofselectedservices: Array<any>=[];
+    arrayofselectedproduct: Array<any>=[];
     @Output() messageToEmit = new EventEmitter<string>();
 
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
@@ -84,7 +84,7 @@ export class SalesTransactionProductComponent implements OnInit {
       this.result = res ;
       this.productList = this.result;
       console.log(this.productList)
-      // this.getAddedProductList(this.result["list"][0]['productCategoryId']);
+      this.getAddedProductList(this.result["list"][0]['productCategoryId']);
     });
   }
 
@@ -95,15 +95,15 @@ export class SalesTransactionProductComponent implements OnInit {
     });
   }
 
-  selectedServices(selected_services, event){
-    var index = this.arrayofselectedservices.indexOf(selected_services);
+  selectedServices(selected_product, event){
+    var index = this.arrayofselectedproduct.indexOf(selected_product);
     if(index<0 && event.currentTarget.checked){
-      this.arrayofselectedservices.push(selected_services);
+      this.arrayofselectedproduct.push(selected_product);
     }else{
-      this.arrayofselectedservices.splice(index, 1);
+      this.arrayofselectedproduct.splice(index, 1);
     }
-    console.log(this.arrayofselectedservices)
-    this.sendMessageToParent(this.arrayofselectedservices)
+    console.log(this.arrayofselectedproduct)
+    this.sendMessageToParent(this.arrayofselectedproduct)
   }
 
   sendMessageToParent(message) {

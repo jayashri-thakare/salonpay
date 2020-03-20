@@ -51,14 +51,14 @@ import { AddonServicesComponent } from './addonservices.component';
     '                                                      </div>\n' +
     '                                                  </div>\n' +
     '                                                  <div class="main-selt">\n' +
-    '                                                      <input type="checkbox" id="{{addedservice?.serviceId}}" name="{{addedservice?.serviceId}}" (click)="selectedServices(addedservice, $event)" required>\n' +
+    '                                                      <input type="checkbox" id="{{addedservice?.serviceId}}" name="{{addedservice?.serviceId}}" (click)="selectedServices(addedservice, $event);addingaddon(addedservice?.serviceId, $event)" required>\n' +
     '                                                      <label for="{{addedservice?.serviceId}}">Select</label>\n' +
     '                                                  </div>\n' +
     '                                              </div>\n' +
-    '                                              <div class="techi-top center">\n' +
+    '                                              <div class="techi-top center" *ngIf="addedservice.serviceId == serviceIds">\n' +
     '                                                  <a href="#" data-toggle="modal"\n' +
     '                                                      data-target="#addonServicePopup">\n' +
-    '                                                      <h5 class="prodt-ct" (click)="getaddonServiceList(addedservice?.serviceId);addingaddon(addedservice?.serviceId)"> <i class="icon-cir-plus mr-1"></i>\n' +
+    '                                                      <h5 class="prodt-ct" (click)="getaddonServiceList(addedservice?.serviceId);"> <i class="icon-cir-plus mr-1"></i>\n' +
     '                                                          Select Add On\n' +
     '                                                          Services\n' +
     '                                                      </h5>\n' +
@@ -88,6 +88,7 @@ export class SalesTransactionServicesComponent implements OnInit {
     customerProfile: any;
     receivedAddonService: Array<any> = [];
     @Output() addonsertoparent = new EventEmitter<string>();
+  serviceIds: any;
 
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -144,7 +145,12 @@ export class SalesTransactionServicesComponent implements OnInit {
     });
   }
 
-  addingaddon(serviceid){
+  addingaddon(serviceid, event){
+    if(event.currentTarget.checked){
+      this.serviceIds = serviceid;
+    }else{
+      this.serviceIds = '';
+    }
     for(let i=0;i< this.arrayofselectedservices.length; i++){
       if(this.arrayofselectedservices[i]['serviceId']== serviceid){
         this.arrayofselectedservices[i]['addonServices'] = []

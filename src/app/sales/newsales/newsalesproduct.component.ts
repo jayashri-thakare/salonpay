@@ -40,7 +40,7 @@ import { SalesService } from '../sales.service';
     '                <!-- Gap -->\n' +
     '                <div class="row mb-4"></div>\n' +
     '                <app-frequentlyproduct></app-frequentlyproduct>\n' +
-    '                <app-transactionproduct></app-transactionproduct>\n' +
+    '                <app-transactionproduct (messageToEmit)="getMessage($event)"></app-transactionproduct>\n' +
     '\n' +
     '\n' +
     '            </div>\n' +
@@ -55,7 +55,7 @@ import { SalesService } from '../sales.service';
     '                        <div class="cmn-mdl-content scrollbar">\n' +
     '                            <h6 class="poptile">Services</h6>\n' +
     '                            <!-- start -->\n' +
-    '                            <div class="techi-box" *ngFor="let selectedproduct of receivedChildMessage">\n' +
+    '                            <div class="techi-box">\n' +
     '                                <div class="techi-top">\n' +
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-dye prodt-ico"></i>\n' +
@@ -81,12 +81,12 @@ import { SalesService } from '../sales.service';
     '\n' +
     '                            <h6 class="poptile">Products</h6>\n' +
     '                            <!-- start -->\n' +
-    '                            <div class="techi-box"  *ngFor="let selectedproduct of receivedChildMessage">\n' +
+    '                            <div class="techi-box"  *ngFor="let selectedproduct of arryOfSalesProduct">\n' +
     '                                <div class="techi-top">\n' +
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-dye prodt-ico"></i>\n' +
     '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>Hair Shampoo</span>$ 150</h3>\n' +
+    '                                            <h3><span>{{selectedproduct?.productName}}</span>$ {{selectedproduct?.productCost}}</h3>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
@@ -98,7 +98,7 @@ import { SalesService } from '../sales.service';
     '                                        <button class="count-up" type="button">+</button>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
-    '                                <div class="techi-remove"><i class="icon-delete"></i></div>\n' +
+    '                                <div class="techi-remove" (click)="deleteSelectedProducts(selectedproduct?.productId)"><i class="icon-delete"></i></div>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +
     '                        </div>\n' +
@@ -107,7 +107,7 @@ import { SalesService } from '../sales.service';
     '                            <a href="./transaction-customer-existing-service.html"\n' +
     '                                class="button line commonPopBtn1">Back</a>\n' +
     '                            <button class="button line commonPopBtn2" type="button">Cancel</button>\n' +
-    '                            <button class="button" type="submit">Next</button>\n' +
+    '                            <button class="button" (click)="createSaleService()">Next</button>\n' +
     '                        </div>\n' +
     '                    </form>\n' +
     '\n' +
@@ -121,7 +121,9 @@ import { SalesService } from '../sales.service';
 export class NewSalesProductComponent implements OnInit {
     customerProfile: any;
     receivedChildMessage: Array<any>= [];
-  orderIdOfSale: string;
+    arryOfSalesProduct: Array<any>= [];
+    orderIdOfSale: string;
+    Product= {};
 
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -132,6 +134,8 @@ export class NewSalesProductComponent implements OnInit {
 
   getMessage(message) {
     this.receivedChildMessage = message;
+    this.arryOfSalesProduct = this.receivedChildMessage;
+    console.log(this.receivedChildMessage)
   }
 
   getCustomerDetail() {
@@ -141,5 +145,28 @@ export class NewSalesProductComponent implements OnInit {
       console.log(this.customerProfile)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  deleteSelectedProducts(productid){
+    debugger;
+    if(productid){
+      for(let i=0;i< this.arryOfSalesProduct.length;i++){
+        if(this.arryOfSalesProduct[i]['productId'] == productid){
+          this.arryOfSalesProduct.splice(this.arryOfSalesProduct.indexOf(productid), 1)
+        }
+      }
+    }
+  }
+
+  createSaleService() {
+    // this.Product['CustomerId'] = parseInt(localStorage.getItem('customerId'));
+    // this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
+    // this.Product['ordersummaryservices'] = this.receivedChildMessage;
+    // this.salesService.create_sales_service(this.Product).subscribe((data) => {
+      this.router.navigate(['/transactioncart']);
+    //   this.messageService.clear();
+    //   this.messageService.add('Sales Product added Successfully.')
+    //   this.createservice = data;
+    // });
   }
 }
