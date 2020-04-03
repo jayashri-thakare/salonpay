@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
   template: '<jw-modal id="add-services">\n' +
   '        <div class="mobile-side">\n' +
   '        <!-- common headline -->\n' +
-  '        <h3 *ngIf="addServices" class="close-btn main-comm-head">\n' +
+  '        <h3 *ngIf="addServices" class="close-btn main-comm-head" (click)="closeModal(\'add-services\');">\n' +
   '            <i class="icon-down-arrow com-arw"></i>Add <span>services category</span>\n' +
   '        </h3>\n' +
-  '        <h3 *ngIf="updateServices" class="close-btn main-comm-head">\n' +
+  '        <h3 *ngIf="updateServices" class="close-btn main-comm-head" (click)="closeModal(\'add-services\');">\n' +
   '            <i class="icon-down-arrow com-arw"></i>Update <span>services category</span>\n' +
   '        </h3>\n' +
   '        <!-- common headline end -->\n' +
@@ -35,7 +35,7 @@ import { Subscription } from 'rxjs';
   '            </div>\n' +
   '\n' +
   '            <div class="popBtn">\n' +
-  '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+  '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-services\');">Cancel</button>\n' +
   '                <button class="button" type="submit">Create</button>\n' +
   '            </div>\n' +
   '\n' +
@@ -57,7 +57,7 @@ import { Subscription } from 'rxjs';
   '            </div>\n' +
   '\n' +
   '            <div class="popBtn">\n' +
-  '                <button class="button line close-btn" type="button">Cancel</button>\n' +
+  '                <button class="button line close-btn" type="button" (click)="closeModal(\'add-services\');">Cancel</button>\n' +
   '                <button class="button" type="submit">Update</button>\n' +
   '            </div>\n' +
   '\n' +
@@ -83,7 +83,9 @@ export class AddServicesComponent implements OnInit {
   get f1() {
     return this.updateservicesForm.controls;
   }
-
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
   ngOnInit() {
     this.addservicesForm = this.formBuilder.group({
         CategoryType: ['']

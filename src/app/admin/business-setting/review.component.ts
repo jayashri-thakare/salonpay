@@ -145,7 +145,7 @@ export class BusinessReviewComponent implements OnInit {
         console.log(data)
         this.getReview();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add('Review deleted successfully.');
       });
   }
 

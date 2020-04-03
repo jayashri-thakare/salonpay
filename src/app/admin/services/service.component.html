@@ -6,7 +6,7 @@
       <h3 class="main-comm-head m-0">Services</h3>
       <div class="filter-container-up filter-container-grid">
         <div class="filter-container">
-          <button class="button flg-btn side-menu" (click)="modalService.open1('add-service');">+ Add New</button>
+          <button class="button flg-btn side-menu" (click)="modalService.open1('add-service');;addupdateform('add')">+ Add New</button>
           <div class="form-group mb-0 mr-2">
             <form>
               <input class="form-field" type="text" name="filter-searh" required>
@@ -55,7 +55,7 @@
             <div class="yur-mail-rig">
               <i class="icon-status1 status"></i>
               <ul class="status-list">
-                <li (click)="modalService.open('add-service',service?.serviceId ); adminService.getServiceObject(service?.serviceId);"><i class="icon-edit" ></i> Edit</li>
+                <li (click)="modalService.open('add-service',service?.serviceId); adminService.getServiceObject(service?.serviceId);addupdateform('update')"><i class="icon-edit" ></i> Edit</li>
                 <li><i class="icon-share"></i> Share</li>
                 <li class="delt" data-toggle="modal" data-target="#deletePopup" (click)="selectproductobj(service)" ><i class="icon-delete"></i> Delete</li>
               </ul>
@@ -96,7 +96,7 @@
     </div>
   <!-- Add Service -->
 
-   <app-addservice></app-addservice>
+   <app-addservice [addservice]="addservice" [updateservice]="updateservice" ></app-addservice>
   <!-- Add Service End -->
 
 

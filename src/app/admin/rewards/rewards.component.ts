@@ -58,7 +58,7 @@ export class AdminRewardsComponent implements OnInit {
         console.log(data)
         this.getRewards();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add(data['message']);
       });
     }
   }

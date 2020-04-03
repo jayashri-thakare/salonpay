@@ -139,7 +139,12 @@ export class AddRewardsComponent implements OnInit {
   updateRewards(Admin) {
     Admin.RewardId = parseInt(this.arrayofselectedobj[0].rewardId)
     Admin.RewardPercentage = parseFloat(Admin.RewardPercentage)
-    Admin.IsActive = Boolean(Admin.IsActive)
+    if(Admin.IsActive=="false"){
+      Admin.IsActive=false;
+    }else{
+      Admin.IsActive=true;
+    }
+   
     // tslint:disable-next-line:triple-equals
     if (this.updaterewardsForm.status == 'VALID') {
       this.AdminService.update_rewards(Admin).subscribe((data) => {

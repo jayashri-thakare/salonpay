@@ -314,7 +314,7 @@ export class AdminRolesComponent implements OnInit {
         console.log(data)
         this.getuserRoles();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add(data['message']);
       });
     }
   }

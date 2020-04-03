@@ -8,7 +8,16 @@ import { SalesService } from '../sales.service';
   selector: 'app-transactionproduct',
   template: '<div class="row mb-5">\n' +
   '              <div class="col-12">\n' +
-  '                  <h4 class="hdn2">Select Products</h4>\n' +
+  '                  <div class="comm-headline-btn">\n' +
+  '                      <h4 class="hdn2 m-0">Select Products</h4>\n' +
+  '                      <div class="form-group search-group mb-0">\n' +
+  '                          <form>\n' +
+  '                              <input class="form-field" type="text" name="filter-searh" required>\n' +
+  '                              <p class="form-label">Search</p>\n' +
+  '                              <button class="search icon-search" type="submit"></button>\n' +
+  '                          </form>\n' +
+  '                      </div>\n' +
+  '                  </div>\n' +
   '              </div>\n' +
   '              <div class="col-12">\n' +
   '                  <div class="tab-2">\n' +
@@ -73,7 +82,6 @@ export class SalesTransactionProductComponent implements OnInit {
     addedproductList: any;
     arrayofselectedproduct: Array<any>=[];
     @Output() messageToEmit = new EventEmitter<string>();
-
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
@@ -117,9 +125,8 @@ export class SalesTransactionProductComponent implements OnInit {
     console.log(this.arrayofselectedproduct)
     this.sendMessageToParent(this.arrayofselectedproduct)
   }
-
   sendMessageToParent(message) {
-    this.messageToEmit.emit(message)
+    this.salesService.generateSelectedData(message)
   }
 
   productquantity(type){

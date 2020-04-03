@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {AdminService} from '../admin.service';
 import {ModalService} from '../../_modal/modal.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -10,8 +10,11 @@ import {MessageService} from '../../message.service';
   template: '<jw-modal id="add-service">\n' +
     '    <div class="mobile-side" id="add-service">\n' +
     '        <!-- common headline -->\n' +
-    '        <h3 class="close-btn main-comm-head">\n' +
+    '        <h3 *ngIf="addservice" class="close-btn main-comm-head" (click)="modalService.close(\'add-service\')">\n' +
     '            <i class="icon-down-arrow com-arw"></i>Add New<span> Service</span>\n' +
+    '        </h3>\n' +
+    '        <h3 *ngIf="updateservice" class="close-btn main-comm-head" (click)="modalService.close(\'add-service\')">\n' +
+    '            <i class="icon-down-arrow com-arw"></i>Edit<span> Service</span>\n' +
     '        </h3>\n' +
     '        <!-- common headline end -->\n' +
     '        <form id="serviceForm" [formGroup]="addserviceForm"  class="popup-scrll">\n' +
@@ -114,7 +117,9 @@ import {MessageService} from '../../message.service';
     '\n' +
     '            <div class="popBtn">\n' +
     '                <button class="button line close-btn" type="button" (click)="modalService.close(\'add-service\')">Cancel</button>\n' +
-    '                <button class="button" type="submit" (click)="updateDetail(addserviceForm.value)">Add</button>\n' +
+    '                <button *ngIf="addservice" class="button" type="submit" (click)="updateDetail(addserviceForm.value)">Add</button>\n' +
+    '                <button *ngIf="updateservice" class="button" type="submit" (click)="updateDetail(addserviceForm.value)">Update</button>\n' +
+
     '            </div>\n' +
     '\n' +
     '        </form>\n' +
@@ -126,7 +131,8 @@ export class AddServiceComponent implements OnInit {
   addserviceForm: FormGroup;
   control: FormControl;
   public levelList: FormArray;
-
+  @Input('addservice') addservice: any;
+  @Input('updateservice') updateservice: any;
   submitted = false;
   // tslint:disable-next-line:no-shadowed-variable
   public result: {};
@@ -227,10 +233,10 @@ export class AddServiceComponent implements OnInit {
     // userdata.Email = this.email;
     userdata.ServiceCategoryId = + (userdata.ServiceCategoryId);
     userdata.ServiceCost = + (userdata.ServiceCost);
-    if(userdata.PricingBit=='' || userdata.ServicePriceSt[0].ServiceLevelId==''){
+    if(userdata.PricingBit=='' || userdata.ServicePriceSt.length == 0 || userdata.ServicePriceSt[0].ServiceLevelId==''){
       userdata.PricingBit = false;
-      userdata.ServicePriceSt[0].ServiceLevelId = 0;
-      userdata.ServicePriceSt[0].Price = 0;
+      userdata.ServicePriceSt['ServiceLevelId'] = 0;
+      userdata.ServicePriceSt['Price'] = 0;
     }
     if(userdata.TurnCountOverride==''){
       userdata.TurnCountOverride = false;
@@ -245,7 +251,11 @@ export class AddServiceComponent implements OnInit {
       this.adminService.editservice = false;
       this.modalService.close('add-service');
       this.messageService.clear();
-      this.messageService.add('Service created.');
+      if(this.addservice===true){
+        this.messageService.add('Service created successfully.');
+      }else{
+        this.messageService.add('Service updated successfully.');
+      }
       // this.userdataService.publish('call-parent', this.userprofileForm, userdata);
     });
   }

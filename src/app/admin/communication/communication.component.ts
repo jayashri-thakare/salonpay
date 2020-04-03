@@ -97,14 +97,14 @@ export class AdminCommunicationComponent implements OnInit {
         console.log(data)
         this.getEmailAndSmsTemplateList();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add('Email Template Deleted Successfully.');
       });
     }else if(type == 'Sms'){
       this.AdminService.deleteEmailSmsCom(selected_obj[0].smsTemplateId, type).subscribe((data) => {
         console.log(data)
         this.getEmailAndSmsTemplateList();
         this.messageService.clear();
-        this.messageService.add(data['result']);
+        this.messageService.add('SMS Template Deleted Successfully.');
       });
     }
   }

@@ -4,13 +4,14 @@
 <div class="mainContainer" *ngIf="emailsign">
   <div class="main-head-flx">
     <h3 class="main-comm-head mb-0">{{'Email' | translate}} <span>{{'Settings' | translate}}</span></h3>
-    <i class="icon-edit grd-icon-big hover-rotate side-menu" (click)="modalService.open1('side-menu-imap')"></i>
+    <!-- <i class="icon-edit grd-icon-big hover-rotate side-menu" (click)="modalService.open1('side-menu-imap')"></i> -->
   </div>
   <!-- start -->
   <div class="comm-w520">
     <!-- start -->
     <div class="mail-sign">
-      <h6 class="poptile">Email Signature</h6>
+      <h6 class="poptile">Email Signature
+    <i class="icon-edit grd-icon-big hover-rotate side-menu" (click)="modalService.open1('side-menu-imap')"></i></h6>
       <div class="mail-regrd">
         <p class="regd">Regards,</p>
         <div [innerHTML]="userdetail?.emailSignature  | safeHtml" ></div>
@@ -31,7 +32,7 @@
 
       <div class="yur-mail-box">
         <div class="yur-mail-left">
-          <div class="mr-3"><img src="img/gmailsign.svg" alt=""></div>
+          <div class="mr-3"><img id="mail-img" src="../../../assets/assets_admin/img/mail1.svg" alt=""></div>
           <div class="yur-mail-cont">
             <h6>user@salonpay.com</h6>
             <p>Connection Type : Gmail</p>

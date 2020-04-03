@@ -15,6 +15,8 @@ export class AdminServiceComponent implements OnInit {
   public serviceList: Observable<any>;
   public result: Observable<any>;
   arrayofselectedobj: Array<any> = [];
+  updateservice: boolean;
+  addservice: boolean;
   constructor(public adminService: AdminService, public modalService: ModalService, public messageService: MessageService) {
   }
 
@@ -52,5 +54,15 @@ export class AdminServiceComponent implements OnInit {
       this.messageService.clear();
       this.messageService.add('Service deleted successfully.');
     });
+  }
+
+  addupdateform(type){
+    if(type == 'add'){
+      this.updateservice = false;
+      this.addservice = true;
+    }else if(type == 'update'){
+      this.updateservice = true;
+      this.addservice = false;
+    }
   }
 }

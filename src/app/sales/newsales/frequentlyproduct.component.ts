@@ -10,13 +10,6 @@ import { SalesService } from '../sales.service';
     '                    <div class="col-12">\n' +
     '                        <div class="comm-headline-btn">\n' +
     '                            <h4 class="hdn2 m-0">Frequently Purchased Products</h4>\n' +
-    '                            <div class="form-group search-group mb-0">\n' +
-    '                                <form>\n' +
-    '                                    <input class="form-field" type="text" name="filter-searh" required>\n' +
-    '                                    <p class="form-label">Search</p>\n' +
-    '                                    <button class="search icon-search" type="submit"></button>\n' +
-    '                                </form>\n' +
-    '                            </div>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                    <div class="col-12">\n' +

@@ -49,11 +49,11 @@ import { Subscription } from 'rxjs';
     '                <div class="fill-box-in scrollbar scroll-padding" *ngFor="let tax of arrayofselectedobj">\n' +
     '                    <!-- start -->\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="number" formControlName="ProductTaxRate" ngModel="{{tax.productTaxRate}}" id="tax-collected" name="tax-collected" class="form-field field--not-empty" required />\n' +
+    '                        <input type="number" formControlName="ProductTaxRate" [(ngModel)]="tax.productTaxRate" id="tax-collected" name="tax-collected" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Product Tax Rate</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="number" formControlName="ServiceTaxRate" ngModel="{{tax.serviceTaxRate}}" id="tax-expected" name="tax-expected" class="form-field field--not-empty" required />\n' +
+    '                        <input type="number" formControlName="ServiceTaxRate" [(ngModel)]="tax.serviceTaxRate" id="tax-expected" name="tax-expected" class="form-field field--not-empty" required />\n' +
     '                        <p class="form-label">Service Tax Rate</p>\n' +
     '                    </div>\n' +
     '                </div>\n' +
@@ -104,7 +104,7 @@ export class AddTaxTableComponent implements OnInit {
       this.AdminService.add_taxtable(Admin).subscribe((data) => {
         this.AdminService.publish('call-taxtable');
         this.messageService.clear();
-        this.messageService.add('TaxTable added successfully.')
+        this.messageService.add('Tax Table added successfully.')
         this.modalService.close('add-taxtable');
       });
     } else {
@@ -124,7 +124,7 @@ export class AddTaxTableComponent implements OnInit {
       this.AdminService.update_taxtable(Admin).subscribe((data) => {
         this.AdminService.publish('call-taxtable');
         this.messageService.clear();
-        this.messageService.add('TaxTable updated successfully.')
+        this.messageService.add('Tax Table updated successfully.')
         this.modalService.close('add-taxtable');
       });
     } else {
