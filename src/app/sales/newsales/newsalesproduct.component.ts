@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AdminService } from 'src/app/admin/admin.service';
 import { SalesService } from '../sales.service';
+import { MessageService } from 'src/app/message.service';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-newproductsale',
@@ -55,22 +57,19 @@ import { SalesService } from '../sales.service';
     '                        <div class="cmn-mdl-content scrollbar">\n' +
     '                            <h6 class="poptile">Services</h6>\n' +
     '                            <!-- start -->\n' +
-    '                            <div class="techi-box">\n' +
+    '                            <div class="techi-box" *ngFor="let service of arrayofservices; let index = i;">\n' +
     '                                <div class="techi-top">\n' +
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-dye prodt-ico"></i>\n' +
     '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>Hair Shampoo</span>$ 150</h3>\n' +
+    '                                            <h3><span>{{service.serviceName}}</span>$ {{service.serviceCost}}</h3>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
     '                                <div class="techi-top start border-0">\n' +
     '                                    <p>add on services</p>\n' +
     '                                    <ul>\n' +
-    '                                        <li>Hair Spa: <span>$ 45</span>\n' +
-    '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
-    '                                        </li>\n' +
-    '                                        <li>Nail Art: <span>$ 35</span>\n' +
+    '                                        <li *ngFor="let addon of service.addonServices">{{addon.serviceName}}: <span>$ {{addon.serviceCost}}</span>\n' +
     '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
     '                                        </li>\n' +
     '                                    </ul>\n' +
@@ -93,9 +92,9 @@ import { SalesService } from '../sales.service';
     '                                <div class="techi-top techi-top-qty border-0">\n' +
     '                                    <p>quantity</p>\n' +
     '                                    <div class="container-count-box active">\n' +
-    '                                        <button class="count-down" type="button">-</button>\n' +
-    '                                        <span class="container-count">02</span>\n' +
-    '                                        <button class="count-up" type="button">+</button>\n' +
+    // '                                        <button class="count-down" type="button">-</button>\n' +
+    '                                        <span class="container-count">{{selectedproduct?.quantity}}</span>\n' +
+    // '                                        <button class="count-up" type="button">+</button>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
     '                                <div class="techi-remove" (click)="deleteSelectedProducts(selectedproduct?.productId)"><i class="icon-delete"></i></div>\n' +
@@ -104,10 +103,10 @@ import { SalesService } from '../sales.service';
     '                        </div>\n' +
     '\n' +
     '                        <div class="popBtn mt-0">\n' +
-    '                            <a href="./transaction-customer-existing-service.html"\n' +
-    '                                class="button line commonPopBtn1">Back</a>\n' +
+    '                            <a \n' +
+    '                                class="button line commonPopBtn1" (click)="backtoservices()">Back</a>\n' +
     '                            <button class="button line commonPopBtn2" type="button">Cancel</button>\n' +
-    '                            <button class="button" (click)="createSaleService()">Next</button>\n' +
+    '                            <button class="button" (click)="createSaleProduct()">Next</button>\n' +
     '                        </div>\n' +
     '                    </form>\n' +
     '\n' +
@@ -124,12 +123,15 @@ export class NewSalesProductComponent implements OnInit {
     arryOfSalesProduct: Array<any>= [];
     orderIdOfSale: string;
     Product= {};
+    createproduct: any;
+  arrayofservices: any;
 
-  constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public messageService: MessageService,private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.getCustomerDetail();
     this.orderIdOfSale = localStorage.getItem('orderId')
+    this.getCustomerServices();
   }
 
   getMessage(message) {
@@ -147,6 +149,20 @@ export class NewSalesProductComponent implements OnInit {
     });
   }
 
+  getCustomerServices() {
+    this.salesService.getCustomerServices(this.orderIdOfSale).subscribe((data) => {
+      this.arrayofservices = data;
+      this.arrayofservices = this.arrayofservices.ordersummaryservices;
+      console.log(this.arrayofservices)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+
+  backtoservices(){
+    this.getCustomerServices();
+    this.router.navigate(['/transactionnewsales']);
+  }
+
   deleteSelectedProducts(productid){
     debugger;
     if(productid){
@@ -158,15 +174,15 @@ export class NewSalesProductComponent implements OnInit {
     }
   }
 
-  createSaleService() {
+  createSaleProduct() {
     // this.Product['CustomerId'] = parseInt(localStorage.getItem('customerId'));
-    // this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
-    // this.Product['ordersummaryservices'] = this.receivedChildMessage;
-    // this.salesService.create_sales_service(this.Product).subscribe((data) => {
+    this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
+    this.Product['Products'] = this.receivedChildMessage;
+    this.salesService.create_sales_product(this.Product).subscribe((data) => {
       this.router.navigate(['/transactioncart']);
-    //   this.messageService.clear();
-    //   this.messageService.add('Sales Product added Successfully.')
-    //   this.createservice = data;
-    // });
+      this.messageService.clear();
+      this.messageService.add('Sales Product added Successfully.')
+      this.createproduct = data;
+    });
   }
 }

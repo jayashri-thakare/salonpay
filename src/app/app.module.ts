@@ -129,6 +129,10 @@ import {NewSalesProductComponent} from './sales/newsales/newsalesproduct.compone
 import {SalesTransactionProductComponent} from './sales/newsales/salestransactionproduct.component'
 import {FrequentlyAddedProductComponent} from './sales/newsales/frequentlyproduct.component'
 import { SalesTransactionCartComponent } from './sales/newsales/saletransactioncart.component';
+import { TechnicianCartComponent } from './sales/newsales/techniciancart.component';
+import { MeregeSalesCartComponent } from './sales/newsales/mergesalescart.component';
+import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment.component'
+import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -169,7 +173,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         SalesTransactionProductComponent,
         FrequentlyAddedProductComponent,
         SalesTransactionCartComponent,
+        TechnicianCartComponent,
+        MeregeSalesCartComponent,
         CustomerComponent,
+        TipAdjustmentSalesComponent,
+        ReviewSalesComponent,
         AddCustomerComponent,
         UpdateCustomerComponent,
         CustomerStatusBarComponent,

@@ -156,7 +156,7 @@ import {SalesService} from './sales.service';
     '\n' +
     '        <div class="popBtn mb-4">\n' +
     '            <a href="./transaction-customer-existing.html" class="button line">Back</a>\n' +
-    '            <a class="button" (click)="createSaleOrder(customerProfile.customerId)">Next</a>\n' +
+    '            <a class="button custom-btn" (click)="createSaleOrder(customerProfile.customerId)">Next</a>\n' +
     '        </div>\n' +
     '\n' +
     '    </div>\n' +

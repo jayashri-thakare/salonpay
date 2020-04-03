@@ -22,6 +22,9 @@ import {CustomerSaleComponent} from './sales/customerdetail.component';
 import { NewSalesComponent } from './sales/newsales/newsales.component';
 import { NewSalesProductComponent } from './sales/newsales/newsalesproduct.component';
 import { SalesTransactionCartComponent } from './sales/newsales/saletransactioncart.component';
+import { MeregeSalesCartComponent } from './sales/newsales/mergesalescart.component';
+import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment.component';
+import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,7 +42,10 @@ const routes: Routes = [
   { path: 'updatecustomer', component: UpdateCustomerComponent},
   { path: 'customerdashboard', component: CustomerDashboardComponent},
   { path: 'transactionproduct', component: NewSalesProductComponent},
-  { path: 'transactioncart', component: SalesTransactionCartComponent}
+  { path: 'transactioncart', component: SalesTransactionCartComponent},
+  { path: 'mergesalescart', component: MeregeSalesCartComponent },
+  { path: 'transactiontipadjustment', component: TipAdjustmentSalesComponent },
+  { path: 'transactionreview', component: ReviewSalesComponent }
 ];
 
 @NgModule({

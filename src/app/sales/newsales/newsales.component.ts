@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 
 export class NewSalesComponent implements OnInit {
-  receivedChildMessage: Array<any>= [];
+  receivedChildMessage: any;
   customerProfile: any;
   orderIdOfSale: string;
   Service= {};
@@ -18,7 +18,8 @@ export class NewSalesComponent implements OnInit {
 
   ngOnInit() {
     this.getCustomerDetail();
-    this.orderIdOfSale = localStorage.getItem('orderId')
+    this.orderIdOfSale = localStorage.getItem('orderId');
+    this.getCustomerServices();
   }
 
   getMessage(message) {
@@ -35,6 +36,15 @@ export class NewSalesComponent implements OnInit {
     });
   }
 
+  getCustomerServices() {
+    this.salesService.getCustomerServices(this.orderIdOfSale).subscribe((data) => {
+      this.receivedChildMessage = data;
+      this.receivedChildMessage = this.receivedChildMessage.ordersummaryservices;
+      console.log(this.receivedChildMessage)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+
   deleteSelectedServices(serviceid, addonserviceid){
     console.log(this.receivedChildMessage)
     if(serviceid){
@@ -45,9 +55,12 @@ export class NewSalesComponent implements OnInit {
       }
     }else if(addonserviceid){
       for(let i=0;i< this.receivedChildMessage.length;i++){
+        var count=-1;
         for(let j=0;j< this.receivedChildMessage[i]['addonServices'].length;j++){
+          count=count+1;
           if(this.receivedChildMessage[i]['addonServices'][j]['addOnServiceId'] == addonserviceid){
-            this.receivedChildMessage[i]['addonServices'].splice(this.receivedChildMessage[i]['addonServices'].indexOf(addonserviceid), 1)
+            this.receivedChildMessage[i]['addonServices'].splice(count, 1) //this.receivedChildMessage[i]['addonServices'].indexOf(addonserviceid)
+            break;
           }
         }
       }

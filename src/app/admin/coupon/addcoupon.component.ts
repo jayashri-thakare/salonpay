@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdminService} from '../admin.service';
 import {MessageService} from '../../message.service';
 import { Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'addcoupon-modal',
@@ -119,7 +120,7 @@ export class AddCouponComponent implements OnInit {
     public techfields: Object = { text: 'fullName', value: 'id'};
     public prodfields: Object = { text: 'productName', value: 'productId'};
   public technician: any;
-  constructor(public adminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public datepipe: DatePipe, public adminService: AdminService, private formBuilder: FormBuilder, public modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   get f() {
     return this.addcouponForm.controls;
@@ -167,6 +168,7 @@ export class AddCouponComponent implements OnInit {
     if(this.adminService.couponName=='update') {
       userdata.CouponId = this.adminService.coupon['couponId'];
     }
+    userdata.ExpiryDate = this.datepipe.transform(userdata.ExpiryDate, 'yyyy/MM/dd')
     userdata.Value = parseInt(userdata.Value)
     userdata.MaxUses = parseInt(userdata.MaxUses);
     userdata.ValueBit = Boolean(userdata.ValueBit)
