@@ -183,4 +183,17 @@ export class SalesService {
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
+
+  getFrequentlyProductDetails() {
+    this.parentId = parseInt(localStorage.getItem('companyId'));
+    this.customerId = parseInt(localStorage.getItem('customerId'));
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetFrequentlyPurchasedProduct?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getFrequentlyServiceDetails() {
+    this.parentId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetFrequentlyUsedServices?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
 }

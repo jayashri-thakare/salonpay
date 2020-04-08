@@ -9,7 +9,7 @@ import {MessageService} from '../message.service';
   selector: 'app-statusbar',
   template: '<div class="filter-container-up filter-container-grid" *ngIf="router.url === \'/customer\'">\n' +
     '            <div class="filter-container">\n' +
-    '                <a (click)="customertransactionfunc(\'customer\')" class="button flg-btn">+ Add New</a>\n' +
+    '                <a (click)="customertransactionfunc(\'customer\')" class="button flg-btn custom-btn">+ Add New</a>\n' +
     '                <div class="form-group mb-0 mr-2">\n' +
     '                    <form>\n' +
     '                        <input class="form-field" type="text" name="filter-searh" required>\n' +

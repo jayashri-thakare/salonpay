@@ -45,10 +45,20 @@ import { SalesService } from '../sales.service';
     '                </div>'
 })
 export class FrequentlyAddedProductComponent implements OnInit {
+  frequentlyProduct: any;
 
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.getFrequentlyProductDetail();
+  }
 
+  getFrequentlyProductDetail() {
+    this.salesService.getFrequentlyProductDetails().subscribe((data) => {
+      this.frequentlyProduct = data;
+      // this.customerProfile = this.customerProfile.result;
+      console.log(this.frequentlyProduct)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 }

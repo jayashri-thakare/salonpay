@@ -176,13 +176,18 @@ export class NewSalesProductComponent implements OnInit {
 
   createSaleProduct() {
     // this.Product['CustomerId'] = parseInt(localStorage.getItem('customerId'));
-    this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
-    this.Product['Products'] = this.receivedChildMessage;
-    this.salesService.create_sales_product(this.Product).subscribe((data) => {
-      this.router.navigate(['/transactioncart']);
+    if(this.receivedChildMessage.length > 0 || this.receivedChildMessage.length > 0){
+      this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
+      this.Product['Products'] = this.receivedChildMessage;
+      this.salesService.create_sales_product(this.Product).subscribe((data) => {
+        this.router.navigate(['/transactioncart']);
+        this.messageService.clear();
+        this.messageService.add('Sales Product added Successfully.')
+        this.createproduct = data;
+      });
+    }else{
       this.messageService.clear();
-      this.messageService.add('Sales Product added Successfully.')
-      this.createproduct = data;
-    });
+      this.messageService.add('Sales Product or Service not Added.')
+    }
   }
 }

@@ -4,6 +4,7 @@ import { ModalService } from '../_modal/modal.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../customer/customer.service';
 import {MessageService} from '../message.service';
+import { SalesService } from '../sales/sales.service';
 
 @Component({
   selector: 'app-addcustomer',
@@ -75,8 +76,10 @@ export class AddCustomerComponent implements OnInit {
   control: FormControl;
   submitted = false;
   customer: string;
+  Sales= {};
+  saleorder: any;
 
-  constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
+  constructor(public salesService: SalesService, private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   get f() {
     return this.addcustomerForm.controls;
@@ -94,7 +97,6 @@ export class AddCustomerComponent implements OnInit {
   }
 
   createCustomer(customer) {
-    debugger;
     console.log(customer)
     // tslint:disable-next-line:triple-equals
     if (this.addcustomerForm.status == 'VALID') {
@@ -109,7 +111,8 @@ export class AddCustomerComponent implements OnInit {
           if(customer == true){
             this.router.navigate(['/customerdashboard'])
           }else{
-            this.router.navigate(['/transactionnewsales'])
+            localStorage.setItem('customerId', data['result']['id']);
+            this.createSaleOrder(localStorage.getItem('customerId'));
           }
           this.customerService.showNav(6);
           this.messageService.clear();
@@ -123,6 +126,15 @@ export class AddCustomerComponent implements OnInit {
         return;
       }
     }
+  }
+
+  createSaleOrder(customerid) {
+    this.Sales['CustomerId'] = parseInt(customerid)
+    this.salesService.create_sales(this.Sales).subscribe((data) => {
+      this.saleorder = data;
+      localStorage.setItem('orderId', data['saleId']);
+      this.router.navigate(['/transactionnewsales'])
+    });
   }
 
 }

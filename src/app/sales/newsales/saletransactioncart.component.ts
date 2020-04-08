@@ -166,7 +166,7 @@ import { MessageService } from 'src/app/message.service';
     '\n' +
     '        <div class="row">\n' +
     '            <div class="col-12">\n' +
-    '                <a (click)="mergesalesfunc()" class="button">Merge Sales</a>\n' +
+    '                <a (click)="mergesalesfunc()" class="button custom-btn">Merge Sales</a>\n' +
     '            </div>\n' +
     '        </div>\n' +
     '        <!-- Gap -->\n' +
@@ -529,18 +529,23 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   finalSaleService() {
-    this.finalSale['SaleId'] = parseInt(localStorage.getItem('orderId'));
-    this.finalSale['Currency'] = '$';
-    this.finalSale['TotalAmount'] = this.finalamount;
-    this.finalSale['ReceivedAmount'] = this.finalamount;
-    this.finalSale['IsFullPaymentComplete'] = true;
-    this.finalSale['productsUpdate'] = this.customerProductCart;
-    this.finalSale['ordersummaryservicesUpdate'] = this.arrayofservices;
-    this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
-      this.router.navigate(['/transactiontipadjustment']);
+    if(this.customerProductCart.length > 0 || this.arrayofservices.length > 0){
+      this.finalSale['SaleId'] = parseInt(localStorage.getItem('orderId'));
+      this.finalSale['Currency'] = '$';
+      this.finalSale['TotalAmount'] = this.finalamount;
+      this.finalSale['ReceivedAmount'] = this.finalamount;
+      this.finalSale['IsFullPaymentComplete'] = true;
+      this.finalSale['productsUpdate'] = this.customerProductCart;
+      this.finalSale['ordersummaryservicesUpdate'] = this.arrayofservices;
+      this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
+        this.router.navigate(['/transactiontipadjustment']);
+        this.messageService.clear();
+        this.messageService.add('Sales Completed Successfully.')
+        this.createsale = data;
+      });
+    }else{
       this.messageService.clear();
-      this.messageService.add('Sales Completed Successfully.')
-      this.createsale = data;
-    });
+      this.messageService.add('Sales Services or Product not added.')
+    } 
   }
 }

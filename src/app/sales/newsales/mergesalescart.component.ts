@@ -119,8 +119,9 @@ export class MeregeSalesCartComponent implements OnInit {
 
   movetotransactioncart(){
       if(this.arrayofselectedobj.length == 0){
+        this.router.navigate(['/transactioncart']);
         this.messageService.clear();
-        this.messageService.add('No Sale Merged')
+        // this.messageService.add('No Sale Merged')
       }else if(this.arrayofselectedobj.length > 0){
         this.router.navigate(['/transactioncart']);
         this.messageService.clear();

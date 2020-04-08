@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { SalesService } from '../sales.service';
 
 @Component({
   selector: 'app-frequentlyservices',
@@ -49,10 +50,20 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
     '          </div>'
 })
 export class SalesFrequentlyServicesComponent implements OnInit {
+  frequentlyServices: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public salesService: SalesService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.getFrequentlyServiceDetail();
+  }
 
+  getFrequentlyServiceDetail() {
+    this.salesService.getFrequentlyServiceDetails().subscribe((data) => {
+      this.frequentlyServices = data;
+      // this.customerProfile = this.customerProfile.result;
+      console.log(this.frequentlyServices)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 }
