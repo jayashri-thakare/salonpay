@@ -21,8 +21,11 @@ import {AllcustomerComponent} from './sales/allcustomer.component';
 import {CustomerSaleComponent} from './sales/customerdetail.component';
 import { NewSalesComponent } from './sales/newsales/newsales.component';
 import { NewSalesProductComponent } from './sales/newsales/newsalesproduct.component';
-import {AppointmentserviceComponent} from "./appointments/appointmentservice.component";
-
+import {AppointmentserviceComponent} from './appointments/appointmentservice.component';
+import { SalesTransactionCartComponent } from './sales/newsales/saletransactioncart.component';
+import { MeregeSalesCartComponent } from './sales/newsales/mergesalescart.component';
+import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment.component';
+import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -39,7 +42,11 @@ const routes: Routes = [
   { path: 'addcustomer', component: AddCustomerComponent},
   { path: 'updatecustomer', component: UpdateCustomerComponent},
   { path: 'customerdashboard', component: CustomerDashboardComponent},
-  { path: 'transactionproduct', component: NewSalesProductComponent}
+  { path: 'transactionproduct', component: NewSalesProductComponent},
+  { path: 'transactioncart', component: SalesTransactionCartComponent},
+  { path: 'mergesalescart', component: MeregeSalesCartComponent },
+  { path: 'transactiontipadjustment', component: TipAdjustmentSalesComponent },
+  { path: 'transactionreview', component: ReviewSalesComponent }
 ];
 
 @NgModule({

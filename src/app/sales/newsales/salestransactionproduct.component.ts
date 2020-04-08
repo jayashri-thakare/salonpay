@@ -57,9 +57,9 @@ import { SalesService } from '../sales.service';
   '                                        <div class="techi-top techi-top-qty">\n' +
     '                                            <h5 class="prodt-ct">Quantity</h5>\n' +
     '                                            <div class="container-count-box">\n' +
-    '                                                <button class="count-down">-</button>\n' +
-    '                                                <span class="container-count">00</span>\n' +
-    '                                                <button class="count-up">+</button>\n' +
+    '                                                <button class="count-down" (click)="productquantity(\'count-down\');quantityselectionofproduct(addedproduct.productId)">-</button>\n' +
+    '                                                <span class="container-count">{{this.quantity}}</span>\n' +
+    '                                                <button class="count-up" (click)="productquantity(\'count-up\');quantityselectionofproduct(addedproduct.productId)">+</button>\n' +
     '                                            </div>\n' +
     '                                        </div>\n' +
   '                                          </div>\n' +
@@ -76,15 +76,16 @@ import { SalesService } from '../sales.service';
   '          </div>'
 })
 export class SalesTransactionProductComponent implements OnInit {
+    quantity: any;
     result: any;
     productList: any;
     addedproductList: any;
-    arrayofselectedproducts: Array<any>=[];
-    arrayofselectedqty: Array<any>=[];
+    arrayofselectedproduct: Array<any>=[];
     @Output() messageToEmit = new EventEmitter<string>();
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.quantity = 0;
     this.getProductList();
   }
 
@@ -93,7 +94,7 @@ export class SalesTransactionProductComponent implements OnInit {
       this.result = res ;
       this.productList = this.result;
       console.log(this.productList)
-       this.getAddedProductList(this.result[0].productCategoryId);
+      this.getAddedProductList(this.result[0]['productCategoryId']);
     });
   }
 
@@ -104,18 +105,37 @@ export class SalesTransactionProductComponent implements OnInit {
     });
   }
 
-  selectedServices(selected_products, event){
-    var index = this.arrayofselectedproducts.indexOf(selected_products);
+  selectedServices(selected_product, event){
+    var index = this.arrayofselectedproduct.indexOf(selected_product);
     if(index<0 && event.currentTarget.checked){
-      this.arrayofselectedproducts.push(selected_products);
+      this.arrayofselectedproduct.push(selected_product);
     }else{
-      this.arrayofselectedproducts.splice(index, 1);
+      this.arrayofselectedproduct.splice(index, 1);
     }
-    console.log(this.arrayofselectedproducts)
-    this.sendMessageToParent(this.arrayofselectedproducts)
+    console.log(this.arrayofselectedproduct)
+    this.sendMessageToParent(this.arrayofselectedproduct)
+  }
+
+  quantityselectionofproduct(productid){
+    for(let i=0; i<this.arrayofselectedproduct.length;i++){
+      if(productid == this.arrayofselectedproduct[i]['productId']){
+        this.arrayofselectedproduct[i]['quantity'] = this.quantity;
+      }
+    }
+    console.log(this.arrayofselectedproduct)
+    this.sendMessageToParent(this.arrayofselectedproduct)
   }
   sendMessageToParent(message) {
     this.salesService.generateSelectedData(message)
+  }
+
+  productquantity(type){
+    if(type == 'count-down'){
+      this.quantity--;
+    }else if(type == 'count-up'){
+      this.quantity++;
+    }
+    console.log(this.quantity)
   }
 
 }

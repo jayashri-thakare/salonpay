@@ -13,7 +13,7 @@ import {MessageService} from '../message.service';
     '            <h3 class="main-comm-head m-0">Customers<i class="icon-question rig-icn" data-toggle="tooltip"\n' +
     '                    title="Merge Sales"></i>\n' +
     '            </h3>\n' +
-    '        <app-statusbar (messageToEmit)="getMessage($event)"></app-statusbar>\n' +
+    '        <app-statusbar (messageToEmit)="getMessage($event)" [customerupdate]= "customerupdate"></app-statusbar>\n' +
     '        </div>\n' +
     '\n' +
     '        <!-- start -->\n' +
@@ -82,6 +82,7 @@ export class UpdateCustomerComponent implements OnInit {
   customerlist: any;
   subscription: any;
   receivedChildMessage: boolean;
+  customerUpdate: boolean;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -113,6 +114,7 @@ export class UpdateCustomerComponent implements OnInit {
       this.arrayofselectedobj.push(selected_obj);
     }else{
       this.arrayofselectedobj.splice(index, 1);
+      this.customerUpdate = false;
     }
     console.log(this.arrayofselectedobj)
   }

@@ -211,6 +211,7 @@ export class BusinessCouponComponent implements OnInit {
   }
 
   createBusinessCoupon(Admin) {
+    debugger;
     console.log(Admin)
     Admin.EnableBirthdayCoupon = JSON.parse(Admin.EnableBirthdayCoupon)
     Admin.DaysBefore = parseInt(Admin.DaysBefore)
