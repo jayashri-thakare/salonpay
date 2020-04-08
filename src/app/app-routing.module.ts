@@ -21,6 +21,7 @@ import {AllcustomerComponent} from './sales/allcustomer.component';
 import {CustomerSaleComponent} from './sales/customerdetail.component';
 import { NewSalesComponent } from './sales/newsales/newsales.component';
 import { NewSalesProductComponent } from './sales/newsales/newsalesproduct.component';
+import {AppointmentserviceComponent} from "./appointments/appointmentservice.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'admin', component: AdminComponent},
   { path: 'customer', component: CustomerComponent},
+  { path: 'appointment', component: AppointmentserviceComponent},
   { path: 'newsales', component: SalesComponent},
   { path: 'transactionnewsales', component: NewSalesComponent},
   { path: 'allcustomer', component: AllcustomerComponent},

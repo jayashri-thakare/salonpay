@@ -23,6 +23,8 @@ import { BanksettingComponent } from './dashboard/banksetting/banksetting.compon
 import { SchedulesettingComponent } from './dashboard/schedulesetting/schedulesetting.component';
 import { SidebarComponent } from './_layout/sidebar/sidebar.component';
 import { HeaderComponent } from './_layout/header/header.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 // import { GlobalErrorHandler } from './_errorlogging/global-error-handler';
 // import { ServerErrorInterceptor } from './_errorlogging/server-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -36,7 +38,7 @@ import {UserdataService} from './userdata.service';
 import {CscComponent} from './dashboard/profilesetting/ctcdropdown.component';
 import {InternationalTelNoDirective} from './international-tel-no.directive';
 import { ForgotComponent } from './login/forgot.component';
-import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
+import { DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
 import {AccountEditComponent} from './dashboard/accountsetting/account-edit.component';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import {EmailEditComponent} from './dashboard/emailsetting/emailsignature.component';
@@ -128,6 +130,7 @@ import {AddonServicesComponent} from './sales/newsales/addonservices.component'
 import {NewSalesProductComponent} from './sales/newsales/newsalesproduct.component'
 import {SalesTransactionProductComponent} from './sales/newsales/salestransactionproduct.component'
 import {FrequentlyAddedProductComponent} from './sales/newsales/frequentlyproduct.component'
+import {AppointmentserviceComponent} from "./appointments/appointmentservice.component";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -145,6 +148,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ModalModule,
     FormsModule,
     RichTextEditorAllModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
       level: NgxLoggerLevel.TRACE,
@@ -250,7 +257,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, TimerComponent1, UserDetailsComponent,
         UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
         AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent, CustomerAddNotesComponent, CustomerProfileSettingComponent, BusinessProductsCategoryComponent,
-        SalesComponent, AllcustomerComponent, CustomerSaleComponent
+        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent
     ],
   providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService],
   entryComponents: [ControlErrorComponent, ModalComponent],

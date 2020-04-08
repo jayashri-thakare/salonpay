@@ -18,6 +18,36 @@
   <link rel="stylesheet" type="text/less" href="../assets/css/_elements.less">
   <link rel="stylesheet" type="text/less" href="./assets/assets_admin/css/_global.less">
   <link rel="stylesheet" type="text/less" href="../assets/assets_admin/css/_elements.less">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+  <link href="https://unpkg.com/angular-calendar@0.26.1/css/angular-calendar.css" rel="stylesheet">
+  <style type="text/css">
+
+    .cal-week-view .cal-time-events,
+    .cal-week-view .cal-time-label-column {
+      display: none !important;
+    }
+
+    .cal-week-view .cal-day-headers {
+      padding-left: 0;
+    }
+
+    .cal-week-view .cal-events-row {
+      margin-left: 0 !important;
+    }
+    /*day-select-class{color: #AFBAC9;*/
+    /*  border-color: transparent;*/
+    /*  padding: 10px 10px 10px 10px;*/
+    /*  border-radius: 5px;*/
+    /*  margin-right: 5px;*/
+    /*  border: 1px solid #AFBAC9;}*/
+    /*day-select-class-onclick{color: #fff;*/
+    /*  border-color: transparent;*/
+    /*  !* background: linear-gradient(90deg, #2ecbaa 0, #358fd0 100%); *!*/
+    /*  padding: 10px 10px 10px 10px;*/
+    /*  border-radius: 5px;*/
+    /*  margin-right: 5px;*/
+    /*  border: 1px solid #AFBAC9;}*/
+  </style>
 
 <!--  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
   <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
@@ -33,11 +63,38 @@
   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">-->
   <script src="../assets/js/all.js"></script>
   <script type="text/javascript" src="assets/js/login.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+  <script>
+    var swiper = new Swiper('.apn-swiper', {
+      slidesPerView: 5,
+      spaceBetween: 20,
+      breakpoints: {
+        310: {
+          slidesPerView: 4.5,
+          spaceBetween: 10,
+        },
+        401: {
+          slidesPerView: 4.5,
+          spaceBetween: 15,
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+      },
+      navigation: {
+        nextEl: '.apn-button-next',
+        prevEl: '.apn-button-prev',
+      },
+    });
+
+  </script>
   <!-- <script src="../assets/assets_admin/js/all.js"></script> -->
   <!-- <script type="text/javascript" src="assets/assets_admin/js/login.js"></script> -->
   <base href="/">
 </head>
 <body>
   <app-root></app-root>
+
 </body>
 </html>
