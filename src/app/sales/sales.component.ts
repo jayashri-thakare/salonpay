@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SalesService} from './sales.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html'
@@ -11,7 +12,7 @@ export class SalesComponent implements OnInit {
   subscription: any;
   customertransaction: boolean;
 
-  constructor(private salesService: SalesService) { }
+  constructor(private salesService: SalesService,public router: Router) { }
 
   ngOnInit() {
   }
@@ -19,6 +20,14 @@ export class SalesComponent implements OnInit {
   customertransactionfunc(type){
     if(type == 'transactionsale'){
       localStorage.setItem('cust', 'false')
+    }
+  }
+
+  customerselect(){
+    if(this.router.url == '/customerappointment'){
+      this.router.navigate(['/allcustomerappointment'])
+    }else if(this.router.url == '/newsales'){
+      this.router.navigate(['/allcustomer'])
     }
   }
 

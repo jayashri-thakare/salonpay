@@ -46,7 +46,7 @@ export class SalesService {
 
   getCustomers() {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetAllCustomers?ParentCompanyId=' + this.parentId + '&PageNumber=1&PageSize=5';
+    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetAllCustomers?ParentCompanyId=' + this.parentId + '&PageNumber=1&PageSize=15';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -195,5 +195,15 @@ export class SalesService {
     this.parentId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetFrequentlyUsedServices?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  create_appointment(appointment) {
+    debugger;
+    appointment.lastModifiedBy = localStorage.userId;
+    appointment.createdBy = localStorage.userId;
+    appointment.parentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/CreateAppointment';
+    return this.httpClient.post<Observable<any>>(this.baseUrl, appointment, httpOptions)
+  .pipe(map( data => data));
   }
 }

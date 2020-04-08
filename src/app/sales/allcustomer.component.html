@@ -1,7 +1,11 @@
 <div class="mainContainer m-0">
-  <h3 class="main-comm-head">
+  <h3 *ngIf="router.url == '/allcustomer'" class="main-comm-head">
     <a href="./transaction-customer-type.html"><i class="icon-down-arrow com-arw"></i></a>
     New <span>Sale</span>
+  </h3>
+  <h3 *ngIf="router.url == '/allcustomerappointment'" class="main-comm-head">
+    <a href="./transaction-customer-type.html"><i class="icon-down-arrow com-arw"></i></a>
+    New <span>Appointment</span>
   </h3>
 
   <div class="comm-headline-btn">
@@ -38,6 +42,6 @@
       </div>
   </div>
   <div class="popBtn">
-    <a class="button" href="getcustomer">Next</a>
+    <a class="button" (click)="getallcustomer()">Next</a>
   </div>
 </div>

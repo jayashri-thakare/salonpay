@@ -1,9 +1,16 @@
 <div class="mainContainer m-0">
-  <h3 class="main-comm-head">New Sale</h3>
+  <h3 *ngIf="router.url == '/newsales'" class="main-comm-head">
+    <a href="./transaction-customer-type.html"><i class="icon-down-arrow com-arw"></i></a>
+    New <span>Sale</span>
+  </h3>
+  <h3 *ngIf="router.url == '/customerappointment'" class="main-comm-head">
+    <a href="./transaction-customer-type.html"><i class="icon-down-arrow com-arw"></i></a>
+    New <span>Appointment</span>
+  </h3>
    <div class="popBtn">
         <a href="addcustomer" (click)="customertransactionfunc('transactionsale')" class="button">New Customer</a>
     </div>
   <div class="popBtn">
-    <a class="button line" href="allcustomer">Existing Customer</a>
+    <a class="button line" (click)="customerselect()">Existing Customer</a>
   </div>
 </div>

@@ -1,38 +1,44 @@
 <!-- Choose Date Starts -->
-<div id="chdate">
-<h6 class="hdn2 apn-choose-date">Choose Date</h6>
-<div class="apn-date-container">
-  <!-- swiper slider starts -->
-  <div class="apn-swiper-up">
-    <div class="swiper-container apn-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide radio-box radio-box-2">
-          <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
-          <!--                <label for="apn-swiper-box-1">-->
-          <mwl-calendar-week-view
-            [viewDate]="viewDate"
-            [refresh]="refresh"
-          >
-          </mwl-calendar-week-view>
+<div class="mainContainer m-0">
+  <div class="apn-container">
+      <div class="apn-left">
+        <div id="chdate">
+        <h6 class="hdn2 apn-choose-date">Choose Date</h6>
+        <div class="apn-date-container">
+          <!-- swiper slider starts -->
+          <div class="apn-swiper-up">
+            <div class="swiper-container apn-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide radio-box radio-box-2">
+                  <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
+                  <!--                <label for="apn-swiper-box-1">-->
+                  <mwl-calendar-week-view
+                    [viewDate]="viewDate"
+                    [refresh]="refresh"
+                  >
+                  </mwl-calendar-week-view>
+                </div>
+              </div>
+            </div>
+            <div mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenWeekViewDay()"
+                class="swiper-button-next apn-button-next"></div>
+            <div mwlCalendarPreviousView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
+            <!-- swiper slider Ends -->
+          </div>
+        </div>
+          <div class="popBtn mt-0">
+            <button class="button" type="submit" (click)="nextScreen1()">Next</button>
+          </div>
+        <!-- Choose Date Ends -->
         </div>
       </div>
     </div>
-    <div mwlCalendarNextView
-         [view]="view"
-         [(viewDate)]="viewDate"
-         (viewDateChange)="closeOpenWeekViewDay()"
-         class="swiper-button-next apn-button-next"></div>
-    <div mwlCalendarPreviousView
-         [view]="view"
-         [(viewDate)]="viewDate"
-         (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
-    <!-- swiper slider Ends -->
-  </div>
-</div>
-  <div class="popBtn mt-0">
-    <button class="button" type="submit" (click)="nextScreen1()">Next</button>
-  </div>
-<!-- Choose Date Ends -->
 </div>
 
 <div id="appnt1" class="mainContainer m-0 "  style="display:block" xmlns="http://www.w3.org/1999/html">
@@ -195,12 +201,12 @@
                 <input type="checkbox" id="apn-technician-1" name="apn-technician" required />
                 <label for="apn-technician-1">
                   <div class="apn-technician">
-                    <div class="user-img"><img src="img/user-icon.svg" alt=""></div>
+                    <div class="user-img"><img src="../assets/img/user-icon.svg" alt=""></div>
                     <div class="usr-name">
                       <h3>No Preference</h3>
                       <ul class="usr-social">
-                        <li><a href="#"><img src="./img/fb.svg" alt="img" /></a></li>
-                        <li><a href="#"><img src="./img/insta.svg" alt="img" /></a></li>
+                        <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                        <li><a href="#"><img src="..assets/img/insta.svg" alt="img" /></a></li>
                       </ul>
                     </div>
                   </div>
@@ -212,12 +218,12 @@
                 <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(technician)" required />
                 <label for="apn-technician-2-{{j}}">
                   <div class="apn-technician">
-                    <div class="user-img"><img src="img/user.svg" alt=""></div>
+                    <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
                     <div class="usr-name">
                       <h3>{{technician?.firstName}} {{technician?.lastName}}</h3>
                       <ul class="usr-social">
-                        <li><a href="#"><img src="./img/fb.svg" alt="img" /></a></li>
-                        <li><a href="#"><img src="./img/insta.svg" alt="img" /></a></li>
+                        <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                        <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
                       </ul>
                     </div>
 
@@ -242,15 +248,15 @@
                   <h6> {{tech1?.serviceCost}}</h6>
                 </div>
                 <div class="apn-technician">
-                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="user-img"><img src="./assets/img/user.svg" alt=""></div>
                   <div class="usr-name">
                     <h3>Ira Membrit</h3>
                     <ul class="usr-social">
-                      <li><a href="#"><img src="./img/fb.svg" alt="img" /></a></li>
-                      <li><a href="#"><img src="./img/insta.svg" alt="img" /></a></li>
+                      <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                      <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
                     </ul>
                   </div>
-                  <a href="#" class="apn-tech-edit"><img src="./img/edit1.svg"
+                  <a href="#" class="apn-tech-edit"><img src="../assets/img/edit1.svg"
                                                          alt="edit" /></a>
                 </div>
               </div>
