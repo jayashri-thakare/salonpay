@@ -275,7 +275,7 @@ import { MessageService } from 'src/app/message.service';
     '                </form>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <a (click)="backtoproduct()" type="button" class="button line whitelin custom-btn">Back</a>\n' +
+    '        <button (click)="backtoproduct()" type="button" class="button line btn-lin-cust">Back</button>\n' +
     '\n' +
     '        <!-- Gap -->\n' +
     '        <div class="row mb-5"></div>\n' +
@@ -426,17 +426,17 @@ export class SalesTransactionCartComponent implements OnInit {
 
   singletotalpriceofserviceandproduct(type){
     if(type == 'service'){
-      for(let i=0;i<this.arrayofservices.length;i++){
-        this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['serviceCost']
-        for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
-          this.arrayofservices[i]['totalServiceCost'] = this.arrayofservices[i]['serviceCost'] + this.arrayofservices[i]['addonServices'][j]['serviceCost']
+        for(let i=0;i<this.arrayofservices.length;i++){
+          this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['serviceCost']
+          for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
+            this.arrayofservices[i]['totalServiceCost'] = this.arrayofservices[i]['serviceCost'] + this.arrayofservices[i]['addonServices'][j]['serviceCost']
+          }
+        }
+    }else if(type == 'product'){
+        for(let i=0;i<this.customerProductCart.length;i++){
+          this.customerProductCart[i]['totalProductCost'] = this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost']
         }
       }
-    }else if(type == 'product'){
-      for(let i=0;i<this.customerProductCart.length;i++){
-        this.customerProductCart[i]['totalProductCost'] = this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost']
-      }
-    }
     console.log(this.totalservicecost)
   }
 

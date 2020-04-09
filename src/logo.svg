@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="162" height="51" viewBox="0 0 162 51">
+  <g id="logo" transform="translate(-49 -23)">
+    <g id="Group_8379" data-name="Group 8379" transform="translate(-9 -3)">
+      <text id="A_PAYZLI_PRODUCT" data-name="A PAYZLI PRODUCT" transform="translate(139 74)" fill="#a7b3c4" font-size="12" font-family="CeraPro-Medium, Cera Pro" font-weight="500" letter-spacing="0.3em"><tspan x="-80.472" y="0">A PAYZLI PRODUCT</tspan></text>
+      <g id="Group_8378" data-name="Group 8378" transform="translate(-1.078)">
+        <text id="SALON_PAY" data-name="SALON PAY" transform="translate(158 50.999)" fill="#1c75bc" font-size="24" font-family="CeraPro-Bold, Cera Pro" font-weight="700"><tspan x="-62.184" y="0">SALON </tspan><tspan y="0" font-family="CeraPro-Regular, Cera Pro" font-weight="400">PAY</tspan></text>
+        <g id="Group_8309" data-name="Group 8309" transform="translate(-361.405 -230.999)">
+          <path id="Path_2" data-name="Path 2" d="M37.6,20.308A8.521,8.521,0,0,1,29.1,28.816H24.408a12.614,12.614,0,0,0-5.54,1.267A11.91,11.91,0,0,0,12.1,40.9V28.835A17.063,17.063,0,0,1,29.1,11.8,8.509,8.509,0,0,1,37.6,20.308Z" transform="translate(409.384 245.199)" fill="#ff8324"/>
+          <path id="Path_8" data-name="Path 8" d="M17.5,132.68h4.727V122.3C19.863,124.077,17.727,128.917,17.5,132.68Z" transform="translate(405.005 155.591)" fill="#1c75bc"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

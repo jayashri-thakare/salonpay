@@ -42,6 +42,7 @@ export class CustomerService {
   imagepath: string;
   arrayofselectedcustobj: Array<any> = [];
   private customId: string;
+  customerId: number;
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
   public showNav(nav) {
@@ -167,6 +168,13 @@ export class CustomerService {
   getCustomerProfile(customerId) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.114:5555/api/Customers/GetCustomersProfile?ParentCompanyId=' + this.ParentCompanyId + '&CustomerId=' + customerId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getCustomerSales() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.customerId = parseInt(localStorage.getItem('customerId'));
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetCustomerSell?ParentCompanyId=' + this.ParentCompanyId + '&CustomerId=' + this.customerId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 

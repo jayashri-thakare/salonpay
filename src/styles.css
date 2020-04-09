@@ -79,3 +79,10 @@ element {
 .cal-week-view .cal-day-headers .cal-header:hover, .cal-week-view .cal-day-headers .cal-drag-over {
   background-color: #fff;
 }
+.btn-col-sub{
+  color: #fff;
+    background-image: linear-gradient(to right, #ff8324, #ff5124, #e75918, #ff8324);
+}
+.btn-lin-cust{
+  margin-top: -75px;
+}

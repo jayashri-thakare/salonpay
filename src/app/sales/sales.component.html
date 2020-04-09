@@ -1,4 +1,4 @@
-<div class="mainContainer m-0">
+<!-- <div class="mainContainer m-0">
   <h3 *ngIf="router.url == '/newsales'" class="main-comm-head">
     <a href="./transaction-customer-type.html"><i class="icon-down-arrow com-arw"></i></a>
     New <span>Sale</span>
@@ -13,4 +13,21 @@
   <div class="popBtn">
     <a class="button line" (click)="customerselect()">Existing Customer</a>
   </div>
+</div> -->
+
+<!-- Main Container Starts -->
+<div class="mainContainer p-0 m-0">
+  <div class="mail-typ-flex">
+      <!-- start -->
+      <div class="customer-typ-box">
+          <h3 *ngIf="router.url == '/newsales'" class="main-comm-head text-center">New <span>Sales</span></h3>
+          <h3 *ngIf="router.url == '/customerappointment'" class="main-comm-head text-center">New <span>Appointment</span></h3>
+          <div class="cust-typ-btn">
+            <a href="addcustomer" (click)="customertransactionfunc('transactionsale')" class="button">New Customer</a>
+            <a class="button line" (click)="customerselect()">Existing Customer</a>
+          </div>
+      </div>
+      <!-- end -->
+  </div>
 </div>
+<!-- Main Container Ends -->

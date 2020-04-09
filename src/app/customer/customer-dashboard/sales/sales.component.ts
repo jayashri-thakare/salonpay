@@ -11,11 +11,21 @@ import { MessageService } from '../../../message.service';
 })
 
 export class CustomerSalesComponent implements OnInit {
+  customerSales: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
-   
+   this.getCustomerSales();
+  }
+
+  getCustomerSales() {
+    this.customerService.getCustomerSales().subscribe((data) => {
+      this.customerSales = data;
+      // this.receivedChildMessage = this.receivedChildMessage.ordersummaryservices;
+      console.log(this.customerSales)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 
 }
