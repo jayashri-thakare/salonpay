@@ -126,7 +126,8 @@ export class SalesTransactionProductComponent implements OnInit {
     this.sendMessageToParent(this.arrayofselectedproduct)
   }
   sendMessageToParent(message) {
-    this.salesService.generateSelectedData(message)
+    console.log(message)
+    this.messageToEmit.emit(message)
   }
 
   productquantity(type){

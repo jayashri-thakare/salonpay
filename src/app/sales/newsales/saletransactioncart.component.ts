@@ -275,7 +275,7 @@ import { MessageService } from 'src/app/message.service';
     '                </form>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <a (click)="backtoproduct()" type="button" class="button line whitelin custom-btn">Back</a>\n' +
+    '        <button (click)="backtoproduct()" type="button" class="button line btn-lin-cust">Back</button>\n' +
     '\n' +
     '        <!-- Gap -->\n' +
     '        <div class="row mb-5"></div>\n' +
@@ -426,17 +426,17 @@ export class SalesTransactionCartComponent implements OnInit {
 
   singletotalpriceofserviceandproduct(type){
     if(type == 'service'){
-      for(let i=0;i<this.arrayofservices.length;i++){
-        this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['serviceCost']
-        for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
-          this.arrayofservices[i]['totalServiceCost'] = this.arrayofservices[i]['serviceCost'] + this.arrayofservices[i]['addonServices'][j]['serviceCost']
+        for(let i=0;i<this.arrayofservices.length;i++){
+          this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['serviceCost']
+          for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
+            this.arrayofservices[i]['totalServiceCost'] = this.arrayofservices[i]['serviceCost'] + this.arrayofservices[i]['addonServices'][j]['serviceCost']
+          }
+        }
+    }else if(type == 'product'){
+        for(let i=0;i<this.customerProductCart.length;i++){
+          this.customerProductCart[i]['totalProductCost'] = this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost']
         }
       }
-    }else if(type == 'product'){
-      for(let i=0;i<this.customerProductCart.length;i++){
-        this.customerProductCart[i]['totalProductCost'] = this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost']
-      }
-    }
     console.log(this.totalservicecost)
   }
 
@@ -529,23 +529,62 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   finalSaleService() {
-    if(this.customerProductCart.length > 0 || this.arrayofservices.length > 0){
       this.finalSale['SaleId'] = parseInt(localStorage.getItem('orderId'));
       this.finalSale['Currency'] = '$';
       this.finalSale['TotalAmount'] = this.finalamount;
       this.finalSale['ReceivedAmount'] = this.finalamount;
       this.finalSale['IsFullPaymentComplete'] = true;
-      this.finalSale['productsUpdate'] = this.customerProductCart;
+      this.finalSale['productsUpdate'] = [
+          {
+              "productCost": 4.00,
+              "productId": 1,
+              "productName": "Nail Polish",
+              "quantity": 2
+          },
+          {
+              "productCost": 2.00,
+              "productId": 2,
+              "productName": "Nykaa Matte Nail Enamel",
+              "quantity": 5
+          }
+      ];
       this.finalSale['ordersummaryservicesUpdate'] = this.arrayofservices;
+      this.finalSale['PaymentType']=[
+            {
+            "Type":"COUPON",
+            "TypeDescription":"coupon001",
+            "Amount":4.0
+            },
+            {
+            "Type":"REWARD",
+            "Amount":4.0
+            },
+            {
+            "Type":"CASH",
+            "Amount":10.0
+            },
+            {
+            "Type":"TAX",
+            "Amount":1.0
+            }
+      ],
+      this.finalSale['Card']=[
+            {
+            "Type":"CARD",
+            "CardDescription":"1264-2536-4523-5689",
+            "CardAmount":2.0
+            },
+            {
+            "Type":"CARD",
+            "CardDescription":"1264-2536-4523-5689",
+            "CardAmount":1.0
+            }
+      ],
       this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
         this.router.navigate(['/transactiontipadjustment']);
         this.messageService.clear();
         this.messageService.add('Sales Completed Successfully.')
         this.createsale = data;
       });
-    }else{
-      this.messageService.clear();
-      this.messageService.add('Sales Services or Product not added.')
-    } 
   }
 }

@@ -8,9 +8,13 @@ import {SalesService} from './sales.service';
   selector: 'customersale',
   template: '    <!-- Main Container Starts -->\n' +
     '    <div class="mainContainer m-0">\n' +
-    '        <h3 class="main-comm-head">\n' +
+    '        <h3 *ngIf="router.url == \'/getcustomer\'" class="main-comm-head">\n' +
     '            <a href="./transaction-customer-existing.html"><i class="icon-down-arrow com-arw"></i></a>\n' +
     '            New <span>Sale</span>\n' +
+    '        </h3>\n' +
+    '        <h3 *ngIf="router.url == \'/getcustomerappointment\'" class="main-comm-head">\n' +
+    '            <a href="./transaction-customer-existing.html"><i class="icon-down-arrow com-arw"></i></a>\n' +
+    '            New <span>Appointment</span>\n' +
     '        </h3>\n' +
     '\n' +
     '        <div class="trs-cust-new-box">\n' +
@@ -156,7 +160,8 @@ import {SalesService} from './sales.service';
     '\n' +
     '        <div class="popBtn mb-4">\n' +
     '            <a href="./transaction-customer-existing.html" class="button line">Back</a>\n' +
-    '            <a class="button custom-btn" (click)="createSaleOrder(customerProfile.customerId)">Next</a>\n' +
+    '            <a *ngIf="router.url == \'/getcustomer\'" class="button custom-btn" (click)="createSaleOrder(customerProfile.customerId)">Next</a>\n' +
+    '            <a *ngIf="router.url == \'/getcustomerappointment\'" class="button custom-btn" (click)="createAppointment(customerProfile)">Next</a>\n' +
     '        </div>\n' +
     '\n' +
     '    </div>\n' +
@@ -166,6 +171,7 @@ export class CustomerSaleComponent implements OnInit {
   private customerProfile: Observable<any>;
   Sales = {};
   saleorder: Observable<any>;
+  appointment= {};
   constructor(public salesService: SalesService, private formBuilder: FormBuilder, public router: Router) { }
 
   ngOnInit() {
@@ -198,6 +204,29 @@ export class CustomerSaleComponent implements OnInit {
       this.saleorder = data;
       localStorage.setItem('orderId', data['saleId']);
       this.router.navigate(['/transactionnewsales'])
+    });
+  }
+
+  createAppointment(customer) {
+    this.appointment['appointmentDate']= "7/11/2020",
+    this.appointment['servicePreference']= 0,
+    this.appointment['createdOn']= "4:00AM",
+    this.appointment['customerId']= customer.customerId,
+    this.appointment['customerEmailId']= customer.email,
+    this.appointment['isCancelled']= false,
+    this.appointment['isOpen']= true,
+    this.appointment['startTime']= "4:00AM",
+    this.appointment['appointments']= [
+      {
+        "serviceId": 0,
+        "technicianId": "2",
+        "technicianEmailId": "ron@leo.net",
+        "startTime": "2:00AM",
+        "defaultTime": "2:00AM"
+      }
+    ]
+    this.salesService.create_appointment(this.appointment).subscribe((data) => {
+      this.saleorder = data;
     });
   }
 }

@@ -78,6 +78,7 @@ export class AddCustomerComponent implements OnInit {
   customer: string;
   Sales= {};
   saleorder: any;
+  appointment: any;
 
   constructor(public salesService: SalesService, private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 

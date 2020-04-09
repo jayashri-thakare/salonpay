@@ -107,7 +107,7 @@ import { MessageService } from 'src/app/message.service';
     '                            <div class="tip-flex-other">\n' +
     '                                <div class="tip-input">\n' +
     '                                    <div class="form-group m-0">\n' +
-    '                                        <input type="text" id="full-name" (input)="tipvaluefunc($event, tip.serviceId)" name="full-name" class="form-field" required\n' +
+    '                                        <input type="text" id="full-name" (input)="tipvaluefunc($event.target.value, tip.serviceId)" name="full-name" class="form-field" required\n' +
     '                                             />\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
@@ -175,6 +175,7 @@ export class TipAdjustmentSalesComponent implements OnInit {
   constructor(public messageService: MessageService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    document.body.classList.remove('succe-overlay-in')
     this.tipcashbool = true;
     this.tipmode = 'Cash';
     this.tipvalue = 0;
