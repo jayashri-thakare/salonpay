@@ -136,6 +136,7 @@ import { TechnicianCartComponent } from './sales/newsales/techniciancart.compone
 import { MeregeSalesCartComponent } from './sales/newsales/mergesalescart.component';
 import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment.component'
 import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
+import {AppointmentListComponent} from "./appointments/appointment-list.component";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -267,7 +268,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, TimerComponent1, UserDetailsComponent,
         UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
         AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent, CustomerAddNotesComponent, CustomerProfileSettingComponent, BusinessProductsCategoryComponent,
-        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent
+        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent, AppointmentListComponent
     ],
   providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService],
   entryComponents: [ControlErrorComponent, ModalComponent],

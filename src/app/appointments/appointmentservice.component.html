@@ -238,7 +238,7 @@
           <!-- Technician Selection ends -->
 
           <!-- Appointment Summary Starts -->
-          <div class="apn-appointment-selection" *ngIf="techserList">
+          <div class="apn-appointment-selection" *ngIf="techserList.length>0">
             <h6 class="hdn2">Appointment Summary</h6>
             <div class="apn-appointment-container" *ngFor="let tech1 of techserList; let in = index" >
               <div class="apn-appointment-box" >
@@ -375,7 +375,7 @@
               <input type="radio" id="morning6" ngModel="11:00AM" name="timeslot">
               <label for="morning6">11:00 AM</label>
             </div>
-            <div class="radio-box radio-box-2">ngModel="5:00PM
+            <div class="radio-box radio-box-2">
               <input type="radio" id="morning7" ngModel="11:30AM" name="timeslot">
               <label for="morning7">11:30 AM</label>
             </div>
