@@ -59,6 +59,17 @@ export class AppointmentService {
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  tecBookTime(tech) {
+    const app = {}
+    app['technicianId'] = tech.id
+    app['appointmentDate'] = tech.date;
+    app['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
+
+    this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/GetTechBookedTime';
+    return this.httpClient.post<Observable<any>>(this.baseUrl, app, httpOptions).pipe(map(data => data));
+  }
+
+
   getSearchService(name) {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/SearchServiceByName?ParentCompanyId=' + this.ParentCompanyId +'&ServiceName='+name;

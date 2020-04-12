@@ -116,15 +116,15 @@
         <h6 class="hdn2">Service Preferences Technician</h6>
         <div class="apn-right-radio">
           <div class="radio-box radio-box-2">
-            <input type="radio" id="apn-r-mob1" name="apn-r-mob" checked>
-            <label for="apn-r-mob1">Single</label>
+            <input type="radio" id="apn-r-mob1" name="apn-r-mob" [value]="1"  (click)="selectPref(1)">
+            <label for="apn-r-mob1">Single1</label>
           </div>
           <div class="radio-box radio-box-2">
-            <input type="radio" id="apn-r-mob2" name="apn-r-mob">
+            <input type="radio" id="apn-r-mob2" name="apn-r-mob" [value]="2" (click)="selectPref(2)">
             <label for="apn-r-mob2">Multiple</label>
           </div>
           <div class="radio-box radio-box-2">
-            <input type="radio" id="apn-r-mob3" name="apn-r-mob">
+            <input type="radio" id="apn-r-mob3" name="apn-r-mob" [value]="3" (click)="selectPref(3)">
             <label for="apn-r-mob3">Simultaneous</label>
           </div>
         </div>
@@ -170,15 +170,15 @@
             <h6 class="hdn2">Service Preferences Technician</h6>
             <div class="apn-right-radio">
               <div class="radio-box radio-box-2">
-                <input type="radio" id="apn-r1" name="apn-r" checked>
+                <input type="radio" id="apn-r1" name="apn-r" [value]="1" [(ngModel)]="preference" [checked]="preference==1">
                 <label for="apn-r1">Single</label>
               </div>
               <div class="radio-box radio-box-2">
-                <input type="radio" id="apn-r2" name="apn-r">
+                <input type="radio" id="apn-r2" name="apn-r" [value]="2" [(ngModel)]="preference" [checked]="preference==2" >
                 <label for="apn-r2">Multiple</label>
               </div>
               <div class="radio-box radio-box-2">
-                <input type="radio" id="apn-r3" name="apn-r">
+                <input type="radio" id="apn-r3" name="apn-r" [value]="3" [(ngModel)]="preference" [checked]="preference==3">
                 <label for="apn-r3">Simultaneous</label>
               </div>
             </div>
@@ -314,9 +314,9 @@
       </div>
       <!-- Choose Date Ends -->
 
-      <h6 class="hdn2">Choose Main Service</h6>
+      <h6 class="hdn2">Choose Main Service </h6>
        <!-- start -->
-      <div class="apn-appointment-box apn-input-selection" *ngFor="let tech of techserList; let i = index">
+      <div class="apn-appointment-box apn-input-selection" *ngFor="let tech of techserList; let i = index" (click)="tecBookTime(tech)">
         <input type="checkbox" id="apn-appt-2-{{i}}" name="apn-appt" required />
         <label for="apn-appt-2-{{i}}">
           <div class="apn-ser">
@@ -345,87 +345,7 @@
     <div class="apn-right-btn"><i class="icon-status1"></i></div>
     <div class="bgOverlay"></div>
     <div class="apn-right">
-      <div class="apn-right-in">
-        <div class="scrollbar">
-          <h6 class="hdn2">Available Start Times</h6>
-
-          <div class="apn-time-slot">
-            <p class="sub-med mb-3">Morning</p>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning1" ngModel="8:00AM" name="timeslot" checked>
-              <label for="morning1">8:00 AM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning2" ngModel="8:30AM" name="timeslot">
-              <label for="morning2">8:30 AM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning3" ngModel="9:00AM"  name="timeslot">
-              <label for="morning3">9:00 AM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning4" ngModel="9:30AM" name="timeslot">
-              <label for="morning4">9:30 AM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning5" ngModel="10:30AM" name="timeslot">
-              <label for="morning5">10:30 AM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning6" ngModel="11:00AM" name="timeslot">
-              <label for="morning6">11:00 AM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="morning7" ngModel="11:30AM" name="timeslot">
-              <label for="morning7">11:30 AM</label>
-            </div>
-
-            <p class="sub-med my-3">Afternoon</p>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="afternoon1" ngModel="12:30PM" name="timeslot">
-              <label for="afternoon1">12:30 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="afternoon2" ngModel="1:00PM"  name="timeslot">
-              <label for="afternoon2">1:00 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="afternoon3" ngModel="1:30PM" name="timeslot">
-              <label for="afternoon3">1:30 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="afternoon4" ngModel="2:30PM" name="timeslot">
-              <label for="afternoon4">2:30 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="afternoon5" ngModel="3:00PM" name="timeslot">
-              <label for="afternoon5">3:00 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="afternoon6"  ngModel="3:30PM" name="timeslot">
-              <label for="afternoon6">3:30 PM</label>
-            </div>
-
-            <p class="sub-med my-3">Evening</p>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="evening1" ngModel="5:00PM" name="timeslot">
-              <label for="evening1">5:00 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="evening2" ngModel="6:00PM" name="timeslot">
-              <label for="evening2">6:00 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="evening3" ngModel="6:30PM" name="timeslot">
-              <label for="evening3">6:30 PM</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="evening4" ngModel="7:30PM" name="timeslot">
-              <label for="evening4">7:30 PM</label>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-appointmenttime [bookedTime]="bookedTime"></app-appointmenttime>
       <div class="popBtn mt-0">
         <button class="button line apnPopBtnClose" type="button">Cancel</button>
         <a href="customerappointment" class="button btn-col-sub" type="submit">Next</a>
