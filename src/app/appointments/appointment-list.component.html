@@ -1,0 +1,758 @@
+
+<!-- Main Container Starts -->
+<div class="mainContainer m-0 main-container-flg">
+<div class="comm-headline-btn">
+<h3 class="main-comm-head m-0">Appointments<i class="icon-question rig-icn" data-toggle="tooltip"
+title="Merge Sales"></i>
+  </h3>
+  <div class="filter-container-up filter-container-grid">
+<div class="filter-container">
+<a href="./appointment" class="button flg-btn">New Appointment</a>
+<div class="form-group mb-0 mr-2">
+<form>
+  <input class="form-field" type="text" name="filter-searh" required>
+<p class="form-label">Search</p>
+  <button class="search icon-search" type="submit"></button>
+  </form>
+  </div>
+  <div class="yur-mail-rig filtdrp-status">
+<button type="button" class="button line grey status mr-2">
+<i class="icon-fliter-list"></i>
+  <span>Sort by</span>
+</button>
+<ul class="status-list center">
+<li class="drpFil">Sort by</li>
+<li><a href="#">Ascending</a></li>
+<li><a href="#">Descending</a></li>
+</ul>
+</div>
+<div class="yur-mail-rig filtdrp-status">
+<button type="button" class="button line grey status mr-2">
+<i class="icon-filter"></i>
+  <span>Fliters</span>
+  </button>
+  <ul class="status-list center">
+<li class="drpFil">Filters</li>
+<li><a href="#">Upcoming</a></li>
+<li><a href="#">Cancelled</a></li>
+</ul>
+</div>
+
+<div class="radio-box radio-box-2 rad-org flg-grid-btn">
+<input type="radio" class="listCheck" id="grid" name="list-view" value="grid" checked>
+<label for="grid"><i class="icon-gird"></i></label>
+</div>
+
+<div class="radio-box radio-box-2 rad-org flg-list-btn">
+<input type="radio" class="listCheck" id="list" name="list-view" value="list">
+  <label for="list"><i class="icon-list"></i></label>
+</div>
+</div>
+</div>
+</div>
+
+<div id="gridView">
+<!-- start -->
+<div class="f-row f-4 f-1600-3 f-900-2 f-640-1">
+<div class="f-col" *ngFor="let appoint of appointmentList; let i=index;">
+  <!-- Main App grid Starts -->
+<div class="app-grid-box" >
+<!-- start -->
+<div class="app-pad-box" >
+<div class="app-pad-top">
+<h4 class="gridhead"> {{appoint?.technicianList[0]?.serviceName}}</h4>
+  <a href="user-profile-settings.html">
+<div class="techi-user">
+<div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+  <div class="tech-usr-cont">
+  <h3> {{appoint?.technicianList[0]?.technicianName}}</h3>
+<p>Technician</p>
+</div>
+</div>
+</a>
+</div>
+<div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup"
+data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+<!-- start -->
+<div class="app-pad-box">
+<div class="cust-rig">
+  <h6> {{appoint?.customerDetails?.firstName}}</h6>
+<div class="usr-pho">
+<div class="flag-img"><img src="img/usa.svg" alt=""></div>
+  <p>{{appoint?.customerDetails?.workContact}}</p>
+  </div>
+  <div class="usr-pho">
+<i class="icon-envelope"></i>
+  <p> {{appoint?.customerDetails?.email}}</p>
+</div>
+</div>
+</div>
+<!-- end -->
+<!-- start -->
+<div class="app-pad-box app-pad-date-box">
+<div class="techi-user">
+<i class="icon-calender"></i>
+  <div class="tech-usr-cont">
+  <p>Date</p>
+  <h3>{{appoint?.appointmentDate}}</h3>
+</div>
+</div>
+<div class="techi-user">
+<i class="icon-clock"></i>
+  <div class="tech-usr-cont">
+  <p>Time</p>
+  <h3> {{appoint?.time}}</h3>
+</div>
+</div>
+</div>
+<!-- end -->
+</div>
+<!-- Main App grid Ends -->
+</div>
+<div class="f-col">
+  <!-- Main App grid Starts -->
+<!-- Main App grid Ends -->
+</div>
+<div class="f-col">
+  <!-- Main App grid Starts -->
+<!-- Main App grid Ends -->
+</div>
+</div>
+<!-- end -->
+</div>
+
+<div id="listView">
+  <!-- Main App List Starts -->
+<div class="table-bdy">
+<!-- start -->
+<div class="tab-top-head">
+<h4 class="gridhead m-0">Haircut</h4>
+  <div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+
+<ul class="table-rw">
+<!-- start -->
+<li>
+  <a href="user-profile-settings.html">
+  <span>Technician</span>
+  <div class="techi-user">
+<div class="tech-user-img"><img src="img/user.svg" alt=""></div>
+  <div class="tech-usr-cont">
+<h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>
+</div>
+</div>
+</a>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Customer</span>
+<b>Nick R. Bocker</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Mobile</span>
+<b>1-541-754-3010</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Email</span>
+<b>nickbocker@salescorp.com</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Date</span>
+<b>29 Oct, 2019</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Time</span>
+<b>5:00 - 05:30 PM</b>
+</li>
+<!-- end -->
+</ul>
+</div>
+<!-- Main App List Ends -->
+<!-- Main App List Starts -->
+<div class="table-bdy">
+<!-- start -->
+<div class="tab-top-head">
+<h4 class="gridhead m-0">Haircut</h4>
+  <div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+
+<ul class="table-rw">
+<!-- start -->
+<li>
+  <a href="user-profile-settings.html">
+  <span>Technician</span>
+  <div class="techi-user">
+<div class="tech-user-img"><img src="img/user.svg" alt=""></div>
+  <div class="tech-usr-cont">
+<h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>
+</div>
+</div>
+</a>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Customer</span>
+<b>Nick R. Bocker</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Mobile</span>
+<b>1-541-754-3010</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Email</span>
+<b>nickbocker@salescorp.com</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Date</span>
+<b>29 Oct, 2019</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Time</span>
+<b>5:00 - 05:30 PM</b>
+</li>
+<!-- end -->
+</ul>
+</div>
+<!-- Main App List Ends -->
+<!-- Main App List Starts -->
+<div class="table-bdy">
+<!-- start -->
+<div class="tab-top-head">
+<h4 class="gridhead m-0">Haircut</h4>
+  <div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+
+<ul class="table-rw">
+<!-- start -->
+<li>
+  <a href="user-profile-settings.html">
+  <span>Technician</span>
+  <div class="techi-user">
+<div class="tech-user-img"><img src="img/user.svg" alt=""></div>
+  <div class="tech-usr-cont">
+<h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>
+</div>
+</div>
+</a>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Customer</span>
+<b>Nick R. Bocker</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Mobile</span>
+<b>1-541-754-3010</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Email</span>
+<b>nickbocker@salescorp.com</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Date</span>
+<b>29 Oct, 2019</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Time</span>
+<b>5:00 - 05:30 PM</b>
+</li>
+<!-- end -->
+</ul>
+</div>
+<!-- Main App List Ends -->
+<!-- Main App List Starts -->
+<div class="table-bdy">
+<!-- start -->
+<div class="tab-top-head">
+<h4 class="gridhead m-0">Haircut</h4>
+  <div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+
+<ul class="table-rw">
+<!-- start -->
+<li>
+  <a href="user-profile-settings.html">
+  <span>Technician</span>
+  <div class="techi-user">
+<div class="tech-user-img"><img src="img/user.svg" alt=""></div>
+  <div class="tech-usr-cont">
+<h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>
+</div>
+</div>
+</a>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Customer</span>
+<b>Nick R. Bocker</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Mobile</span>
+<b>1-541-754-3010</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Email</span>
+<b>nickbocker@salescorp.com</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Date</span>
+<b>29 Oct, 2019</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Time</span>
+<b>5:00 - 05:30 PM</b>
+</li>
+<!-- end -->
+</ul>
+</div>
+<!-- Main App List Ends -->
+<!-- Main App List Starts -->
+<div class="table-bdy">
+<!-- start -->
+<div class="tab-top-head">
+<h4 class="gridhead m-0">Haircut</h4>
+  <div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+
+<ul class="table-rw">
+<!-- start -->
+<li>
+  <a href="user-profile-settings.html">
+  <span>Technician</span>
+  <div class="techi-user">
+<div class="tech-user-img"><img src="img/user.svg" alt=""></div>
+  <div class="tech-usr-cont">
+<h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>
+</div>
+</div>
+</a>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Customer</span>
+<b>Nick R. Bocker</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Mobile</span>
+<b>1-541-754-3010</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Email</span>
+<b>nickbocker@salescorp.com</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Date</span>
+<b>29 Oct, 2019</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Time</span>
+<b>5:00 - 05:30 PM</b>
+</li>
+<!-- end -->
+</ul>
+</div>
+<!-- Main App List Ends -->
+<!-- Main App List Starts -->
+<div class="table-bdy">
+<!-- start -->
+<div class="tab-top-head">
+<h4 class="gridhead m-0">Haircut</h4>
+  <div class="yur-mail-rig">
+<i class="icon-status1 status"></i>
+  <ul class="status-list">
+<li class="side-menu" data-name="side-menu-logininfo"><i class="icon-edit"></i>
+Edit
+</li>
+<li class="delt" data-toggle="modal" data-target="#deletePopup" data-backdrop="static"
+data-keyboard="false"><i class="icon-delete"></i>
+Delete</li>
+</ul>
+</div>
+</div>
+<!-- end -->
+
+<ul class="table-rw">
+<!-- start -->
+<li>
+  <a href="user-profile-settings.html">
+  <span>Technician</span>
+  <div class="techi-user">
+<div class="tech-user-img"><img src="img/user.svg" alt=""></div>
+  <div class="tech-usr-cont">
+<h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>
+</div>
+</div>
+</a>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Customer</span>
+<b>Nick R. Bocker</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Mobile</span>
+<b>1-541-754-3010</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Email</span>
+<b>nickbocker@salescorp.com</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Date</span>
+<b>29 Oct, 2019</b>
+</li>
+<!-- end -->
+<!-- start -->
+<li>
+<span>Time</span>
+<b>5:00 - 05:30 PM</b>
+</li>
+<!-- end -->
+</ul>
+</div>
+<!-- Main App List Ends -->
+</div>
+</div>
+<!-- Main Container Ends -->
+
+<!-- Edit Address Menu -->
+<div class="overlay"></div>
+  <div class="mobile-side" id="side-menu-logininfo">
+  <!-- common headline -->
+<h3 class="close-btn main-comm-head">
+<i class="icon-down-arrow com-arw"></i>Edit<span> Appointment</span>
+</h3>
+<!-- common headline end -->
+<form id="editAppt" class="popup-scrll">
+
+<div class="filBox">
+<!-- start -->
+<div class="fill-box-in scrollbar">
+<div class="form-group mt-2">
+<select class="select-field form-field field--not-empty" name="service" id="service" required>
+<option selected>Haircut</option>
+<option>Option 2</option>
+<option>Option 3</option>
+<option>Option 4</option>
+<option>Option 5</option>
+</select>
+<p class="form-label sel-blk">Service</p>
+  </div>
+  <div class="form-group">
+<select class="select-field form-field field--not-empty" name="technician" id="technician"
+required>
+<option selected>Ira Membrit</option>
+<option>Option 2</option>
+<option>Option 3</option>
+<option>Option 4</option>
+<option>Option 5</option>
+</select>
+<p class="form-label sel-blk">Technician</p>
+  </div>
+  <div class="form-group">
+<select class="select-field form-field field--not-empty" name="customer" id="customer" required>
+<option selected>Nick R. Bocker</option>
+<option>Option 1</option>
+<option>Option 2</option>
+<option>Option 3</option>
+<option>Option 4</option>
+<option>Option 5</option>
+</select>
+<p class="form-label sel-blk">Customer</p>
+  </div>
+  <div class="form-group">
+<input type="text" class="form-field field--not-empty datetimepicker-input" id="date1"
+name="date1" value="12/25/2019" autocomplete="off" />
+<i class="icon-calender"></i>
+  <p class="form-label">Date</p>
+  </div>
+  <h6 class="poptile">Start Time</h6>
+<div class="start-time-input time-input-sidebar">
+<!-- start -->
+<div class="form-group mb-0">
+<select class="select-field form-field field--not-empty" name="start-hr-fld" required="">
+  <option>00</option>
+  <option>01</option>
+  <option>02</option>
+  <option>03</option>
+  <option>04</option>
+  <option selected>05</option>
+<option>06</option>
+<option>07</option>
+<option>08</option>
+<option>09</option>
+<option>10</option>
+<option>11</option>
+<option>12</option>
+</select>
+<p class="form-label sel-blk">Hr.</p>
+  </div>
+  <!-- end -->
+  <!-- start -->
+  <div class="form-group mb-0">
+<select class="select-field form-field field--not-empty" name="start-min-fld" required="">
+  <option selected>00</option>
+  <option>01</option>
+  <option>02</option>
+  <option>03</option>
+  <option>04</option>
+  <option>05</option>
+  <option>06</option>
+  <option>07</option>
+  <option>08</option>
+<option>09</option>
+<option>10</option>
+<option>11</option>
+<option>12</option>
+</select>
+<p class="form-label sel-blk">Min.</p>
+  </div>
+  <!-- end -->
+  <!-- start -->
+  <div class="radio-box radio-box-2 mb-0">
+<input type="radio" id="chk-start1" name="chk-start" required="">
+  <label for="chk-start1">AM</label>
+  </div>
+  <!-- end -->
+  <!-- start -->
+  <div class="radio-box radio-box-2 mb-0">
+<input type="radio" id="chk-start2" name="chk-start" required="" checked>
+<label for="chk-start2">PM</label>
+  </div>
+  <!-- end -->
+  </div>
+
+  <!-- End Time -->
+  <h6 class="poptile">End Time</h6>
+<div class="start-time-input time-input-sidebar">
+<!-- start -->
+<div class="form-group mb-0">
+<select class="select-field form-field field--not-empty" name="end-hr-fld" required="">
+  <option></option>
+  <option>00</option>
+  <option>01</option>
+  <option>02</option>
+  <option>03</option>
+  <option>04</option>
+  <option selected>05</option>
+<option>06</option>
+<option>07</option>
+<option>08</option>
+<option>09</option>
+<option>10</option>
+<option>11</option>
+<option>12</option>
+</select>
+<p class="form-label sel-blk">Hr.</p>
+  </div>
+  <!-- end -->
+  <!-- start -->
+  <div class="form-group mb-0">
+<select class="select-field form-field field--not-empty" name="end-min-fld" required="">
+  <option></option>
+  <option>00</option>
+  <option>01</option>
+  <option>02</option>
+  <option>03</option>
+  <option>04</option>
+  <option>05</option>
+  <option>06</option>
+  <option>07</option>
+  <option>08</option>
+<option>09</option>
+<option>10</option>
+<option>11</option>
+<option>12</option>
+<option selected>30</option>
+</select>
+<p class="form-label sel-blk">Min.</p>
+  </div>
+  <!-- end -->
+  <!-- start -->
+  <div class="radio-box radio-box-2 mb-0">
+<input type="radio" id="chk-end1" name="chk-end" required="">
+  <label for="chk-end1">AM</label>
+  </div>
+  <!-- end -->
+  <!-- start -->
+  <div class="radio-box radio-box-2 mb-0">
+<input type="radio" id="chk-end2" name="chk-end" required="" checked>
+<label for="chk-end2">PM</label>
+  </div>
+  <!-- end -->
+  </div>
+
+
+  <div class="email-edit-radio-box">
+<div class="comm-cont">
+  <p>Email</p>
+  <div class="switch switch--horizontal m-0">
+<input id="email-rim-off" type="radio" name="email-switch">
+  <label for="email-rim-off">Off</label>
+  <input id="email-rim-on" type="radio" name="email-switch" checked="checked">
+  <label for="email-rim-on">On</label><span class="toggle-outside"><span
+  class="toggle-inside"></span></span>
+</div>
+</div>
+<div class="comm-cont">
+  <p>SMS</p>
+  <div class="switch switch--horizontal m-0">
+<input id="sms-rim-off" type="radio" name="sms-switch" checked="checked">
+  <label for="sms-rim-off">Off</label>
+  <input id="sms-rim-on" type="radio" name="sms-switch">
+  <label for="sms-rim-on">On</label><span class="toggle-outside"><span
+  class="toggle-inside"></span></span>
+</div>
+</div>
+</div>
+
+</div>
+<!-- end -->
+</div>
+
+<div class="popBtn">
+<button class="button line close-btn" type="button">Cancel</button>
+  <button class="button" type="submit">Update</button>
+  </div>
+
+  </form>
+
+  </div>
+  <!-- Edit Address Menu End -->
+
+  <!-- Delete Modal Starts -->
+  <div class="modal fade" id="deletePopup">
+<div class="modal-dialog modal-dialog-centered medium-window">
+<div class="modal-content">
+<div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>
+
+<h2 class="modal-title">Are you sure to cancel appointment?</h2>
+
+
+  <div class="modal-btn">
+<button class="button line mr-2" data-dismiss="modal">No</button>
+  <button class="button red" data-dismiss="modal">Yes</button>
+  </div>
+
+  </div>
+  </div>
+  </div>
+<!-- Delete Modal Ends -->

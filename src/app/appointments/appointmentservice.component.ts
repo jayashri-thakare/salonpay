@@ -61,6 +61,10 @@ export class AppointmentserviceComponent {
 //   tech: []
 // };
   private servicechk: any;
+  date: Date;
+  preference: any;
+  private serviceBind: Array<any>;
+  private bookedTime: any;
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService) {
   }
 
@@ -77,6 +81,8 @@ export class AppointmentserviceComponent {
     datediv.style.display = 'block'
     this.getServiceList();
     this.checkedList = [];
+    this.serviceBind
+     =[];
     // @ts-ignore
     this.jobj={};
     this.techserList = [];
@@ -85,16 +91,12 @@ export class AppointmentserviceComponent {
   }
   selectTec(tec) {
     debugger;
-    // this.jobj.service.technicianName = tec.firstName
-    // this.jobj.service.serviceName = this.servicechk.serviceName;
-    // this.jobj.service.serviceTime = this.servicechk.serviceTime
-    // this.jobj.service.serviceCost = this.servicechk.serviceCost
-
-    this.jobj.technicianName = tec.firstName
-    this.jobj.serviceName = this.servicechk.serviceName;
-    this.jobj.serviceTime = this.servicechk.serviceTime
-    this.jobj.serviceCost = this.servicechk.serviceCost
-    this.techserList.push(this.jobj);
+   this.jobj.technicianName = tec.firstName
+    // this.jobj.serviceName = this.serviceBind.slice(-1)[0].serviceName;
+    // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
+    // this.jobj.serviceCost = this.serviceBind.slice(-1)[0].serviceCost
+    this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
+    this.techserList.push(this.serviceBind.slice(-1)[0]);
     console.log(this.techserList);
   }
   ;
@@ -102,7 +104,9 @@ export class AppointmentserviceComponent {
     var obj = {};
     if(event.target.checked) {
       this.checkedList.push(serviceId);
+      debugger;
       this.servicechk = service;
+      this.serviceBind.push(service);
       this.getTechnicianList();
       console.log(this.jobj)
     } else {
@@ -113,6 +117,11 @@ export class AppointmentserviceComponent {
       }
     }
     console.log(this.checkedList);
+  }
+
+  selectPref(val){
+    debugger;
+    this.preference = val;
   }
 
   nextScreen1(){
@@ -127,6 +136,7 @@ export class AppointmentserviceComponent {
     ;  }
 
   nextScreen(){
+    debugger;
     // tslint:disable-next-line:prefer-const
       var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
       var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
@@ -156,15 +166,17 @@ export class AppointmentserviceComponent {
     });
   }
 
+  tecBookTime(tech){
+    this.appointmentService.tecBookTime(tech).subscribe((data) => {
+      this.bookedTime = data['result'];
+      this.bookedTime = this.bookedTime['bookedTime'];
+    });
+  }
+
   getTechnicianList() {
     this.appointmentService.getServiceTechnician(this.checkedList).subscribe((data) => {
       this.technicianlist = data['result'][0];
       this.technicianlist = this.technicianlist['technicians'];
-      debugger;
-      // this.customerlist = this.customerlist.list;
-      // console.log(this.customerlist)
-      // localStorage.setItem('Arrayofcustomer', JSON.stringify(this.customerlist[this.customerlist.length - 1].id))
-      // // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
 
