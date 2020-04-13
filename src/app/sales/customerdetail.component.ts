@@ -218,7 +218,7 @@ export class CustomerSaleComponent implements OnInit {
     this.appointment['startTime']= "4:00AM",
     this.appointment['appointments']= [
       {
-        "serviceId": 0,
+        "serviceId": 9,
         "technicianId": "2",
         "technicianEmailId": "ron@leo.net",
         "startTime": "2:00AM",
