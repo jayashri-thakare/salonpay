@@ -12,8 +12,8 @@ import {Observable} from 'rxjs';
     '          <h6 class="hdn2">Available Start Times</h6>\n' +
     '\n' +
     '          <div class="apn-time-slot">\n' +
-    '            <p class="sub-med mb-3">Morning </p>\n' +
-    '            <div class="radio-box radio-box-2" *ngFor="let time1 of morning; let i = index">\n' +
+    '            <p class="sub-med mb-3">Morning</p>\n' +
+    '            <div class="radio-box radio-box-2"  [ngClass]="{ \'booked-time\': getClass(time1) }" *ngFor="let time1 of morning; let i = index">\n' +
     '              <input type="radio" id="morning{{i}}" [(ngModel)]="time1" [value]="time1" name="timeslot" >\n' +
     '              <label for="morning{{i}}">{{time1}}</label>\n' +
     '            </div>\n' +
@@ -46,5 +46,18 @@ export class AppointmentTimeComponent {
 
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
+
+  getClass = function(keyVal) {
+    if(this.appointmentService.bookedTime!=undefined) {
+      for (var i = 0; i < this.appointmentService.bookedTime.length; i++) {
+        var bookt = this.appointmentService.bookedTime[i];
+        var splits = bookt.split(" -")
+        if (splits[0] === keyVal) {
+          console.log(keyVal)
+          return  true;
+        }
+      }
+    }
+  };
 
 }
