@@ -136,6 +136,8 @@ import { TechnicianCartComponent } from './sales/newsales/techniciancart.compone
 import { MeregeSalesCartComponent } from './sales/newsales/mergesalescart.component';
 import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment.component'
 import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
+import { AppointmentListComponent } from './appointments/appointmentlist.component';
+import { AppointmentEditComponent } from './appointments/appointmentedit.component'
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -173,6 +175,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
     declarations: [AppComponent,
         NewSalesComponent,
+        AppointmentListComponent,
+        AppointmentEditComponent,
         SalesTransactionServicesComponent,
         SalesFrequentlyServicesComponent,
         AddonServicesComponent,
