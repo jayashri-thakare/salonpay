@@ -1,4 +1,4 @@
-import {Component, ElementRef, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, TemplateRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppointmentService} from './appointment.service';
 import {Observable} from 'rxjs';
@@ -30,6 +30,10 @@ import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
   '}\n' +
   '.hide-appnt{\n' +
   '  display: none !important;\n' +
+  '}.radio-box-2 .booked-time {\n' +
+  '    color: #fff;\n' +
+  '    border-color: transparent;\n' +
+  '    background: red;\n' +
   '}' ,
   ]
 })
@@ -39,6 +43,8 @@ export class AppointmentserviceComponent {
   private technicianlist: Observable<any>;
   private checkedList: Array<any>;
   private techserList: Array<any>;
+  @Input('bookedTime') bookedTime: any;
+
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Week;
@@ -64,7 +70,7 @@ export class AppointmentserviceComponent {
   date: Date;
   preference: any;
   private serviceBind: Array<any>;
-  private bookedTime: any;
+  // private bookedTime: any;
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService) {
   }
 
@@ -167,9 +173,10 @@ export class AppointmentserviceComponent {
   }
 
   tecBookTime(tech){
+    tech['appointmentDate'] = this.viewDate
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
-      this.bookedTime = this.bookedTime['bookedTime'];
+      this.appointmentService.bookedTime = this.bookedTime['bookedTime'];
     });
   }
 
