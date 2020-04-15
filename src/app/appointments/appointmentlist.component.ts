@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AppointmentService } from './appointment.service';
@@ -79,7 +79,7 @@ import { ModalService } from '../_modal/modal.service';
     '                            <div class="yur-mail-rig">\n' +
     '                                <i class="icon-status1 status"></i>\n' +
     '                                <ul class="status-list">\n' +
-    '                                    <li class="side-menu" (click)="modalServices.open1(\'edit-appointment\')"><i class="icon-edit"></i>\n' +
+    '                                    <li class="side-menu" (click)="selectappointmentobj(appointment)"><i class="icon-edit"></i>\n' +
     '                                        Edit\n' +
     '                                    </li>\n' +
     '                                    <li class="delt" data-toggle="modal" data-target="#deletePopup"\n' +
@@ -196,12 +196,13 @@ import { ModalService } from '../_modal/modal.service';
     '            <!-- Main App List Ends -->\n' +
     '        </div>\n' +
     '    </div>\n' +
-    '    <!-- Main Container Ends -->\n' +
-    '    <modal-appointmentedit></modal-appointmentedit>'
+    '    <!-- Main Container Ends -->\n'
 })
 export class AppointmentListComponent implements OnInit {
   frequentlyServices: any;
     appointmentlist: any;
+  arrayofselectedobj:Array<any>=[];
+  @Output() messageToEmit = new EventEmitter<string>();
 
   constructor(public appointmentService: AppointmentService,private formBuilder: FormBuilder, private router: Router, public modalServices: ModalService) { }
 
@@ -216,5 +217,22 @@ export class AppointmentListComponent implements OnInit {
       console.log(this.appointmentlist)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+  
+  selectappointmentobj(selected_obj){
+    var index = this.arrayofselectedobj.indexOf(selected_obj);
+    if(index<0){
+      this.arrayofselectedobj.splice(index, 1);
+      this.arrayofselectedobj.push(selected_obj);
+      this.appointmentService.arrayofselectedappointment = this.arrayofselectedobj;
+      this.router.navigate(['appointment']);
+    }
+    console.log(this.arrayofselectedobj)
+    this.sendMessageToParent(this.arrayofselectedobj)
+  }
+
+  sendMessageToParent(message) {
+    console.log(message)
+    this.messageToEmit.emit(message)
   }
 }

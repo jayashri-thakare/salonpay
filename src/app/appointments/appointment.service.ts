@@ -45,6 +45,7 @@ export class AppointmentService {
   arrayofselectedcustobj: Array<any> = [];
   private customId: string;
   bookedTime: any;
+  arrayofselectedappointment : Array<any> = []; 
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
   public showNav(nav) {
