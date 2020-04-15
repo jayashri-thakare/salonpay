@@ -224,10 +224,10 @@ export class AppointmentserviceComponent {
 
 
       console.log(this.appointmentService.appObj);
-    this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
-      this.appointmentList = data;
-    });
-    // this.router.navigate(['/customerappointment']);
+    // this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
+    //   this.appointmentList = data;
+    // });
+    this.router.navigate(['/customerappointment']);
   }
 
   getTechnicianList() {
