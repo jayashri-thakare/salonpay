@@ -209,24 +209,31 @@ export class CustomerSaleComponent implements OnInit {
 
   createAppointment(customer) {
     debugger;
-    this.appointment['appointmentDate']= "7/11/2020",
-    this.appointment['servicePreference']= 0,
-    this.appointment['createdOn']= "4:00AM",
-    this.appointment['customerId']= customer.customerId,
-    this.appointment['customerEmailId']= customer.email,
-    this.appointment['isCancelled']= false,
-    this.appointment['isOpen']= true,
-    this.appointment['startTime']= "4:00AM",
-    this.appointment['appointments']= [
-      {
-        "serviceId": 9,
-        "technicianId": "2",
-        "technicianEmailId": "ron@leo.net",
-        "startTime": "2:00AM",
-        "defaultTime": "2:00AM"
-      }
-    ]
+    // this.appointment['appointmentDate']= "7/11/2020",
+    // this.appointment['servicePreference']= 0,
+    // this.appointment['createdOn']= "4:00AM",
+    // this.appointment['customerId']= customer.customerId,
+    // this.appointment['customerEmailId']= customer.email,
+    // this.appointment['isCancelled']= false,
+    // this.appointment['isOpen']= true,
+    // this.appointment['startTime']= "4:00AM",
+    // this.appointment['appointments']= [
+    //   {
+    //     "serviceId": 9,
+    //     "technicianId": "2",
+    //     "technicianEmailId": "ron@leo.net",
+    //     "startTime": "2:00AM",
+    //     "defaultTime": "2:00AM"
+    //   }
+    // ]
+
+    this.appointment = JSON.parse(localStorage.appointment);
+    this.appointment['customerId']= customer.customerId
+    this.appointment['customerEmailId']= customer.email
     this.salesService.create_appointment(this.appointment).subscribe((data) => {
+      debugger;
+      this.router.navigate(['/appointmentlist']);
+
       this.saleorder = data;
     });
   }

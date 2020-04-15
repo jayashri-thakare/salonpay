@@ -217,8 +217,8 @@ export class AppointmentserviceComponent {
     this.appointmentService.appObj['startTime'] = this.appointmentService.apptime;
     this.appointmentService.appObj['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
     this.appointmentService.appObj['appointments'] = this.techserList;
-    this.appointmentService.appObj['customerId']= 26;
-    this.appointmentService.appObj['customerEmailId']= 'jayashrit@leotechnosoft.net';
+    // this.appointmentService.appObj['customerId']= 26;
+    // this.appointmentService.appObj['customerEmailId']= 'jayashrit@leotechnosoft.net';
     this.appointmentService.appObj['createdOn']= '';
     this.appointmentService.appObj['isCancelled']= true;
     this.appointmentService.appObj['isOpen']= true;
@@ -228,6 +228,9 @@ export class AppointmentserviceComponent {
     // this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
     //   this.appointmentList = data;
     // });
+    localStorage.setItem('appointment', JSON.stringify(this.appointmentService.appObj))
+    localStorage.setItem('jay', 'false')
+
     this.router.navigate(['/customerappointment']);
   }
 
