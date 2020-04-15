@@ -14,7 +14,7 @@ import { ModalService } from '../_modal/modal.service';
     '            </h3>\n' +
     '            <div class="filter-container-up filter-container-grid">\n' +
     '                <div class="filter-container">\n' +
-    '                    <a href="./appointment-date.html" class="button flg-btn">+ Add New</a>\n' +
+    '                    <a href="./appointment" class="button flg-btn">+ Add New</a>\n' +
     '                    <div class="form-group mb-0 mr-2">\n' +
     '                        <form>\n' +
     '                            <input class="form-field" type="text" name="filter-searh" required>\n' +

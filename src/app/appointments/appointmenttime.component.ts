@@ -14,7 +14,7 @@ import {Observable} from 'rxjs';
     '          <div class="apn-time-slot">\n' +
     '            <p class="sub-med mb-3">Morning</p>\n' +
     '            <div class="radio-box radio-box-2"  [ngClass]="{ \'booked-time\': getClass(time1) }" *ngFor="let time1 of morning; let i = index">\n' +
-    '              <input type="radio" id="morning{{i}}" [(ngModel)]="time1" [value]="time1" name="timeslot" >\n' +
+    '              <input type="radio" id="morning{{i}}" [value]="time1" name="timeslot"  [(ngModel)]="appointmentService.apptime" [checked]="apptime==time1" >\n' +
     '              <label for="morning{{i}}">{{time1}}</label>\n' +
     '            </div>\n' +
     '\n' +
@@ -39,6 +39,7 @@ export class AppointmentTimeComponent {
    afternoon = ['12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM' ];
    evening = ['4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM']
   @Input('bookedTime') bookedTime: any;
+  private apptime: any;
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService) {
   }
 

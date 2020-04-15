@@ -27,6 +27,8 @@ class imagepath {
 })
 export class AppointmentService {
   private res: Object;
+  apptime: any;
+  appObj: any
   private result: {
     serviceDetails: { serviceId: any };
   };
@@ -141,7 +143,14 @@ export class AppointmentService {
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
   .pipe(map( data => data));
   }
-
+  create_appointment(appointment) {
+    debugger;
+    appointment.lastModifiedBy = localStorage.userId;
+    appointment.createdBy = localStorage.userId;
+    this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/CreateAppointment';
+    return this.httpClient.post<Observable<any>>(this.baseUrl, appointment, httpOptions)
+      .pipe(map( data => data));
+  }
   update_customer_profile_address(customer) {
     debugger;
     // customer.lastModifiedByUserId = localStorage.userId;
