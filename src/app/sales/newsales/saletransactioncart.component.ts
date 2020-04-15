@@ -5,6 +5,7 @@ import { AdminService } from 'src/app/admin/admin.service';
 import { SalesService } from '../sales.service';
 import { ModalService } from 'src/app/_modal/modal.service';
 import { MessageService } from 'src/app/message.service';
+import { CustomerService } from 'src/app/customer/customer.service';
 
 @Component({
   selector: 'app-transactioncart',
@@ -318,7 +319,7 @@ export class SalesTransactionCartComponent implements OnInit {
   cardamountvalue: any;
   cashamountvalue: any;
 
-  constructor(public messageService: MessageService, public modalService: ModalService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public customerService: CustomerService, public messageService: MessageService, public modalService: ModalService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   get f() {
     return this.addrewardForm.controls;
@@ -581,7 +582,8 @@ export class SalesTransactionCartComponent implements OnInit {
             }
       ],
       this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
-        this.router.navigate(['/transactiontipadjustment']);
+        this.router.navigate(['/customerdaashboard']);
+        this.customerService.showNav(4);
         this.messageService.clear();
         this.messageService.add('Sales Completed Successfully.')
         this.createsale = data;
