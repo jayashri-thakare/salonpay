@@ -89,14 +89,15 @@ export class AppointmentserviceComponent {
     this.checkedList = [];
     this.serviceBind  =[];
     this.appointmentService.appObj = {};
-    this.serviceBind =[];
     // @ts-ignore
     this.jobj={};
     this.techserList = [];
-    this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
-    this.customerdetailsobj = this.arrayofselectedobj[0]['customerDetails'];
-    this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
-    console.log(this.technicianobj)
+    if(this.appointmentService.arrayofselectedappointment.length > 0){
+      this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
+      this.customerdetailsobj = this.arrayofselectedobj[0]['customerDetails'];
+      this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
+      console.log(this.technicianobj)
+    }
     if(this.arrayofselectedobj.length == 0){
       var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
       var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
