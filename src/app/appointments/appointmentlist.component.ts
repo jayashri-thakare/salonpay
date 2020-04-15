@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AppointmentService } from './appointment.service';
 import { ModalService } from '../_modal/modal.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-appointmentlist',
@@ -82,7 +83,7 @@ import { ModalService } from '../_modal/modal.service';
     '                                    <li class="side-menu" (click)="selectappointmentobj(appointment)"><i class="icon-edit"></i>\n' +
     '                                        Edit\n' +
     '                                    </li>\n' +
-    '                                    <li class="delt" data-toggle="modal" data-target="#deletePopup"\n' +
+    '                                    <li class="delt" data-toggle="modal" data-target="#deletePopup" (click)="selectappointmentdelobj(appointment)"\n' +
     '                                        data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i>\n' +
     '                                        Delete</li>\n' +
     '                                </ul>\n' +
@@ -196,15 +197,30 @@ import { ModalService } from '../_modal/modal.service';
     '            <!-- Main App List Ends -->\n' +
     '        </div>\n' +
     '    </div>\n' +
-    '    <!-- Main Container Ends -->\n'
+    '    <!-- Main Container Ends -->\n' +
+    '<!-- Delete Modal Starts -->\n' +
+    '<div class="modal fade" id="deletePopup">\n' +
+    '    <div class="modal-dialog medium-window">\n' +
+    '        <div class="modal-content">\n' +
+    '            <div class="modalCancel" data-dismiss="modal"><i class="icon-cir-plus"></i></div>\n' +
+    '\n' +
+    '            <h2 class="modal-title">Are you sure to cancel appointment?</h2>\n' +
+    '            <div class="modal-btn">\n' +
+    '                <button class="button line mr-2" data-dismiss="modal">No</button>\n' +
+    '                <button class="button red" data-dismiss="modal" (click)="getAppointmentDelete(arrayofselectedobj[0][\'appointmentId\'])">Yes</button>\n' +
+    '           </div>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '</div>\n' +
+    '<!-- Delete Modal Ends -->\n' 
 })
 export class AppointmentListComponent implements OnInit {
   frequentlyServices: any;
     appointmentlist: any;
   arrayofselectedobj:Array<any>=[];
-  @Output() messageToEmit = new EventEmitter<string>();
+  appointmentdelete: any;
 
-  constructor(public appointmentService: AppointmentService,private formBuilder: FormBuilder, private router: Router, public modalServices: ModalService) { }
+  constructor(public messageService: MessageService, public appointmentService: AppointmentService,private formBuilder: FormBuilder, private router: Router, public modalServices: ModalService) { }
 
   ngOnInit() {
     this.getAppointmentList();
@@ -225,14 +241,27 @@ export class AppointmentListComponent implements OnInit {
       this.arrayofselectedobj.splice(index, 1);
       this.arrayofselectedobj.push(selected_obj);
       this.appointmentService.arrayofselectedappointment = this.arrayofselectedobj;
-      this.router.navigate(['appointment']);
+      this.router.navigate(['appointmentedit']);
     }
     console.log(this.arrayofselectedobj)
-    this.sendMessageToParent(this.arrayofselectedobj)
   }
 
-  sendMessageToParent(message) {
-    console.log(message)
-    this.messageToEmit.emit(message)
+  selectappointmentdelobj(selected_obj){
+    var index = this.arrayofselectedobj.indexOf(selected_obj);
+    if(index<0){
+      this.arrayofselectedobj.splice(index, 1);
+      this.arrayofselectedobj.push(selected_obj);
+    }
+    console.log(this.arrayofselectedobj)
+  }
+
+  getAppointmentDelete(appointment) {
+    this.appointmentService.getAppointmentDelete(appointment).subscribe((data) => {
+      this.appointmentdelete = data;
+      this.messageService.clear();
+      this.messageService.add(data['message'])
+      this.getAppointmentList();
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 }
