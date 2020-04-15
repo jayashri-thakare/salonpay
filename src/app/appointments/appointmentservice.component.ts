@@ -87,12 +87,9 @@ export class AppointmentserviceComponent {
   ngOnInit() {
     this.getServiceList();
     this.checkedList = [];
-<<<<<<< HEAD
     this.serviceBind  =[];
     this.appointmentService.appObj = {};
-=======
     this.serviceBind =[];
->>>>>>> a42000f1edb3a23001d1c57660308e86b40fb4b4
     // @ts-ignore
     this.jobj={};
     this.techserList = [];
