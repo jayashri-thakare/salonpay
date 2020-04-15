@@ -208,6 +208,7 @@ export class CustomerSaleComponent implements OnInit {
   }
 
   createAppointment(customer) {
+    debugger;
     this.appointment['appointmentDate']= "7/11/2020",
     this.appointment['servicePreference']= 0,
     this.appointment['createdOn']= "4:00AM",

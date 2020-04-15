@@ -272,7 +272,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent, CustomerAddNotesComponent, CustomerProfileSettingComponent, BusinessProductsCategoryComponent,
         SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent, AppointmentListComponent, AppointmentTimeComponent
     ],
-  providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService],
+  providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService, DatePipe],
   entryComponents: [ControlErrorComponent, ModalComponent],
   bootstrap: [AppComponent]
 })
