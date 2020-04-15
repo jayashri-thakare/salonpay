@@ -4,8 +4,7 @@ import {AppointmentService} from './appointment.service';
 import {Observable} from 'rxjs';
 import {  CalendarView } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
-import { DatePipe } from '@angular/common';
-
+import {DatePipe} from "@angular/common";
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
@@ -73,11 +72,8 @@ export class AppointmentserviceComponent {
   preference: any;
   private serviceBind: Array<any>;
   arrayofselectedobj: Array<any>=[];
-  customerdetailsobj= {};
-  technicianobj= {};
   // private bookedTime: any;
-  private appointmentList: Observable<any>;
-  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, private datePipe: DatePipe) {
+  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe) {
   }
 
   setView(view: CalendarView) {
@@ -87,33 +83,17 @@ export class AppointmentserviceComponent {
   ngOnInit() {
     this.getServiceList();
     this.checkedList = [];
-    this.serviceBind  =[];
-    this.appointmentService.appObj = {};
+    this.serviceBind =[];
     // @ts-ignore
     this.jobj={};
     this.techserList = [];
-    if(this.appointmentService.arrayofselectedappointment.length > 0){
-      this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
-      this.customerdetailsobj = this.arrayofselectedobj[0]['customerDetails'];
-      this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
-      console.log(this.technicianobj)
-    }
-    if(this.arrayofselectedobj.length == 0){
-      var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
-      var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
-      var datediv = this.elementRef.nativeElement.querySelector('#chdate');
-      myDiv.style.display = 'none'
-      myDiv1.style.display = 'none'
-      datediv.style.display = 'block'
-    }else if(this.arrayofselectedobj.length > 0){
-      var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
-      var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
-      var datediv = this.elementRef.nativeElement.querySelector('#chdate');
+    var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
+    var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
+    var datediv = this.elementRef.nativeElement.querySelector('#chdate');
 
-      myDiv.style.display = 'block'
-      datediv.style.display = 'none'
-      myDiv1.style.display = 'none'
-    }
+    myDiv.style.display = 'block'
+    datediv.style.display = 'none'
+    myDiv1.style.display = 'none'
     // this.jobj = [];
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
@@ -123,9 +103,6 @@ export class AppointmentserviceComponent {
     // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
     // this.jobj.serviceCost = this.serviceBind.slice(-1)[0].serviceCost
     this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
-    this.serviceBind.slice(-1)[0].technicianId = tec.id;
-    this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
-    this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
     this.techserList.push(this.serviceBind.slice(-1)[0]);
     console.log(this.techserList);
   }
@@ -166,7 +143,6 @@ export class AppointmentserviceComponent {
     ;  }
 
   nextScreen(){
-    debugger;
     // tslint:disable-next-line:prefer-const
       var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
       var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
@@ -229,8 +205,6 @@ export class AppointmentserviceComponent {
     //   this.appointmentList = data;
     // });
     localStorage.setItem('appointment', JSON.stringify(this.appointmentService.appObj))
-    localStorage.setItem('jay', 'false')
-
     this.router.navigate(['/customerappointment']);
   }
 

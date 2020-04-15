@@ -9,13 +9,12 @@
           <div class="apn-swiper-up">
             <div class="swiper-container apn-swiper">
               <div class="swiper-wrapper">
-                <div class=" radio-box radio-box-2">
-                  <!--       date         <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
+                <div class="swiper-slide radio-box radio-box-2">
+                  <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
                   <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
                     [refresh]="refresh"
-                    [(ngModel)]="date"
                   >
                   </mwl-calendar-week-view>
                 </div>
@@ -147,7 +146,7 @@
       <div class="apn-service-box">
         <!-- start -->
         <div class="apn-input-selection" *ngFor="let service of  servicelist; let i = index">
-          <input type="checkbox" id="apnChk{{i}}" value="{{service}}" [checked]="service.serviceId == technicianobj.serviceId" (change)="selectService($event, service?.serviceId, service)">
+          <input type="checkbox" id="apnChk{{i}}" value="{{service}}"  (change)="selectService($event, service?.serviceId, service)">
           <label for="apnChk{{i}}">
             <div class="apn-ser">
               <h5>  {{service?.serviceName}}</h5>
@@ -216,7 +215,7 @@
               <!-- end -->
               <!-- start -->
               <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
-                <input type="checkbox" id="apn-technician-2-{{j}}" [checked]="technician.technicianId==technicianobj.technicianId" name="apn-technician" (click)="selectTec(technician)" required />
+                <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(technician)" required />
                 <label for="apn-technician-2-{{j}}">
                   <div class="apn-technician">
                     <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
@@ -349,7 +348,7 @@
       <app-appointmenttime [bookedTime]="bookedTime"></app-appointmenttime>
       <div class="popBtn mt-0">
         <button class="button line apnPopBtnClose" type="button">Cancel</button>
-        <button (click)="saveObj()" class="button btn-col-sub" type="submit">Next</button>
+        <button href="customerappointment" class="button btn-col-sub" type="submit">Next</button>
       </div>
     </div>
   </div>
