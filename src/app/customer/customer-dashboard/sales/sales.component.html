@@ -5,7 +5,7 @@
         <div class="comm-headline-btn">
             <h3 class="main-comm-head main-head-colr-pur m-0">
                 <!-- <i class="icon-down-arrow com-arw"></i> -->
-                Maya <span>Didas</span>
+                {{customerProfile?.firstName}} <span>{{customerProfile?.lastName}}</span>
             </h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
@@ -58,15 +58,15 @@
         </div>
 
         <div class="f-row f-3 f-1300-2 f-640-1">
-            <div class="f-col">
+            <div class="f-col" *ngFor="let sale of customerSales;let index=i;">
                 <!-- start -->
                 <div class="app-grid-box">
                     <!-- start -->
-                    <div class="app-pad-box">
+                    <div class="app-pad-box" *ngFor="let service of sale.completedServices">
                         <a href="customer-sales-detail.html">
                             <div class="app-pad-top">
-                                <h4 class="gridhead m-0">Haircut</h4>
-                                <p class="girdpara">Nick R. Bocker</p>
+                                <h4 class="gridhead m-0">{{service.serviceName}}</h4>
+                                <p class="girdpara">{{service.technicianName}}</p>
                             </div>
                         </a>
                         <div class="yur-mail-rig">
@@ -84,7 +84,7 @@
                             <i class="icon-calender"></i>
                             <div class="tech-usr-cont">
                                 <p>Date</p>
-                                <h3>29 Oct, 2019</h3>
+                                <h3>{{sale.date | date:'mm/dd/yyyy'}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -93,7 +93,7 @@
                             <i class="icon-clock"></i>
                             <div class="tech-usr-cont">
                                 <p>Time</p>
-                                <h3>5:00 - 5:30 PM</h3>
+                                <h3>{{sale.time}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -102,7 +102,7 @@
                             <i class="icon-cart"></i>
                             <div class="tech-usr-cont">
                                 <p>Sales Amount</p>
-                                <h3>$ 150</h3>
+                                <h3>$ {{sale.salesAmount}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -111,7 +111,7 @@
                             <i class="icon-money"></i>
                             <div class="tech-usr-cont">
                                 <p>Tip Amount</p>
-                                <h3>$ 15</h3>
+                                <h3>$ {{sale.tipAmount}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -129,7 +129,7 @@
                             <i class="icon-reward"></i>
                             <div class="tech-usr-cont">
                                 <p>Rewards</p>
-                                <h3>45</h3>
+                                <h3>{{sale.rewards}}</h3>
                             </div>
                         </div>
                         <!-- end -->

@@ -224,6 +224,7 @@ export class AppointmentListComponent implements OnInit {
     if(index<0){
       this.arrayofselectedobj.splice(index, 1);
       this.arrayofselectedobj.push(selected_obj);
+      this.appointmentService.arrayofselectedappointment = this.arrayofselectedobj;
       this.router.navigate(['appointment']);
     }
     console.log(this.arrayofselectedobj)
