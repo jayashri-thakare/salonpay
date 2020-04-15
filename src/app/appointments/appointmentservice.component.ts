@@ -87,19 +87,17 @@ export class AppointmentserviceComponent {
   ngOnInit() {
     this.getServiceList();
     this.checkedList = [];
-<<<<<<< HEAD
     this.serviceBind  =[];
     this.appointmentService.appObj = {};
-=======
-    this.serviceBind =[];
->>>>>>> a42000f1edb3a23001d1c57660308e86b40fb4b4
     // @ts-ignore
     this.jobj={};
     this.techserList = [];
-    this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
-    this.customerdetailsobj = this.arrayofselectedobj[0]['customerDetails'];
-    this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
-    console.log(this.technicianobj)
+    if(this.appointmentService.arrayofselectedappointment.length > 0){
+      this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
+      this.customerdetailsobj = this.arrayofselectedobj[0]['customerDetails'];
+      this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
+      console.log(this.technicianobj)
+    }
     if(this.arrayofselectedobj.length == 0){
       var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
       var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
