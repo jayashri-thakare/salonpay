@@ -91,8 +91,8 @@ export class AppointmentserviceComponent {
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
 
-    myDiv.style.display = 'block'
-    datediv.style.display = 'none'
+    myDiv.style.display = 'none'
+    datediv.style.display = 'block'
     myDiv1.style.display = 'none'
     // this.jobj = [];
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());

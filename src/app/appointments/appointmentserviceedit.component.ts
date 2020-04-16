@@ -71,6 +71,7 @@ export class AppointmentserviceEditComponent {
   preference: any;
   private serviceBind: Array<any>;
   arrayofselectedobj: Array<any>=[];
+    technicianobj= {};
   // private bookedTime: any;
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService) {
   }
@@ -86,13 +87,26 @@ export class AppointmentserviceEditComponent {
     // @ts-ignore
     this.jobj={};
     this.techserList = [];
-    var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
-    var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
-    var datediv = this.elementRef.nativeElement.querySelector('#chdate');
+    this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
+    if(this.arrayofselectedobj.length>0){
+        this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
+        console.log(this.technicianobj)
+        var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
+        var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
+        var datediv = this.elementRef.nativeElement.querySelector('#chdate');
 
-    myDiv.style.display = 'block'
-    datediv.style.display = 'none'
-    myDiv1.style.display = 'none'
+        myDiv.style.display = 'block'
+        datediv.style.display = 'none'
+        myDiv1.style.display = 'none'
+    }else{
+        var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
+        var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
+        var datediv = this.elementRef.nativeElement.querySelector('#chdate');
+    
+        myDiv.style.display = 'none'
+        datediv.style.display = 'none'
+        myDiv1.style.display = 'block'
+    }
     // this.jobj = [];
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
