@@ -336,7 +336,7 @@
             <a href="#" class="apn-tech-edit"><img src="./img/edit1.svg" alt="edit" /></a>
           </div>
           <div class="apn-date">
-            8 February - <span> 8:00 AM</span>
+            {{viewDate | date:'M/d/yyyy'}} <span> {{appointmentService?.apptime}}</span>
           </div>
         </label>
       </div>

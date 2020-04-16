@@ -20,13 +20,13 @@ import {Observable} from 'rxjs';
     '\n' +
     '            <p class="sub-med my-3">Afternoon </p>\n' +
     '            <div class="radio-box radio-box-2" *ngFor="let time2 of afternoon; let i2 = index">\n' +
-    '              <input type="radio" id="afternoon{{i2}}" ngModel="{{time2}}" name="timeslot">\n' +
+    '              <input type="radio" id="afternoon{{i2}}"  [(ngModel)]="appointmentService.apptime" [checked]="apptime==time2" name="timeslot">\n' +
     '              <label for="afternoon{{i2}}">{{time2}}</label>\n' +
     '            </div>\n' +
     '\n' +
     '            <p class="sub-med my-3">Evening </p>\n' +
     '            <div class="radio-box radio-box-2" *ngFor="let time3 of evening; let i3 = index">\n' +
-    '              <input type="radio" id="evening{{i3}}" ngModel="{{time3}}" name="timeslot">\n' +
+    '              <input type="radio" id="evening{{i3}}" [(ngModel)]="appointmentService.apptime" [checked]="apptime==time3"  name="timeslot">\n' +
     '              <label for="evening{{i3}}">{{time3}}</label>\n' +
     '            </div>\n' +
     '          </div>\n' +
