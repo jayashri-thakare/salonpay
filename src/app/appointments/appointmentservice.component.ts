@@ -86,6 +86,7 @@ export class AppointmentserviceComponent {
     this.serviceBind =[];
     // @ts-ignore
     this.jobj={};
+    this.appointmentService.appObj = {}
     this.techserList = [];
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
@@ -103,6 +104,9 @@ export class AppointmentserviceComponent {
     // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
     // this.jobj.serviceCost = this.serviceBind.slice(-1)[0].serviceCost
     this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
+    this.serviceBind.slice(-1)[0].technicianId = tec.id;
+    this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
+    this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
     this.techserList.push(this.serviceBind.slice(-1)[0]);
     console.log(this.techserList);
   }

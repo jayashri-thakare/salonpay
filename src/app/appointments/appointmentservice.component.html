@@ -348,7 +348,7 @@
       <app-appointmenttime [bookedTime]="bookedTime"></app-appointmenttime>
       <div class="popBtn mt-0">
         <button class="button line apnPopBtnClose" type="button">Cancel</button>
-        <button href="customerappointment" class="button btn-col-sub" type="submit">Next</button>
+        <button (click)="saveObj()" class="button btn-col-sub" type="submit">Next</button>
       </div>
     </div>
   </div>
