@@ -146,7 +146,7 @@
         <div class="apn-service-box">
           <!-- start -->
           <div class="apn-input-selection" *ngFor="let service of  servicelist; let i = index">
-            <input type="checkbox" id="apnChk{{i}}" value="{{service}}"  (change)="selectService($event, service?.serviceId, service)">
+            <input type="checkbox" id="apnChk{{i}}" value="{{service}}" [checked]="service.serviceId==technicianobj.serviceId" (change)="selectService($event, service?.serviceId, service)">
             <label for="apnChk{{i}}">
               <div class="apn-ser">
                 <h5>  {{service?.serviceName}}</h5>
@@ -215,7 +215,7 @@
                 <!-- end -->
                 <!-- start -->
                 <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
-                  <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(technician)" required />
+                  <input type="checkbox" id="apn-technician-2-{{j}}" [checked]="technician.technicianId==technicianobj.technicianId" name="apn-technician" (click)="selectTec(technician)" required />
                   <label for="apn-technician-2-{{j}}">
                     <div class="apn-technician">
                       <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
