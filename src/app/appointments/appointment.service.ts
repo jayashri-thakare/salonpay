@@ -45,6 +45,7 @@ export class AppointmentService {
   arrayofselectedcustobj: Array<any> = [];
   private customId: string;
   bookedTime: any;
+  appointment = {};
   arrayofselectedappointment : Array<any> = []; 
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
@@ -169,6 +170,17 @@ export class AppointmentService {
     customer.parentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.114:5555/api/Customers/ToggleUpdateStatus';
     return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  getAppointmentDelete(appointmentId) {
+    debugger;
+    // customer.lastModifiedByUserId = localStorage.userId;
+    this.appointment['appointmentId'] = parseInt(appointmentId);
+    this.appointment['customerId'] = parseInt(localStorage.Arrayofcustomer);
+    this.appointment['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/CancelAppointment';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, this.appointment, httpOptions)
   .pipe(map( data => data));
   }
 

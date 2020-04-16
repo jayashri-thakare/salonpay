@@ -138,6 +138,7 @@ import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment
 import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 import { AppointmentListComponent } from './appointments/appointmentlist.component';
 import {AppointmentTimeComponent} from "./appointments/appointmenttime.component";
+import {AppointmentserviceEditComponent} from "./appointments/appointmentserviceedit.component"
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -175,6 +176,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
     declarations: [AppComponent,
         NewSalesComponent,
+        AppointmentserviceEditComponent,
         AppointmentListComponent,
         SalesTransactionServicesComponent,
         SalesFrequentlyServicesComponent,
