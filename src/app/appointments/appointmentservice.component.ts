@@ -44,6 +44,7 @@ export class AppointmentserviceComponent {
   private technicianlist: Observable<any>;
   private checkedList: Array<any>;
   private techserList: Array<any>;
+  @Input('preference') preference1: any;
   @Input('bookedTime') bookedTime: any;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
@@ -192,11 +193,21 @@ export class AppointmentserviceComponent {
 
   saveObj(){
     this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
+    // tslint:disable-next-line:triple-equals
+    // @ts-ignore
+    if (this.preference ===3){
+      // tslint:disable-next-line:prefer-for-of
+        for (let i=0; i< this.appointmentService.techserList.length; i++){
+          this.appointmentService.techserList[i]['startTime'] = this.appointmentService.apptime;
+        }
+      }
 
     this.appointmentService.appObj['appointmentDate'] =  this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     this.appointmentService.appObj['servicePreference'] = this.preference;
     // this.appointmentService.techserList[0]['startTime'] = this.appointmentService.apptime;
-    this.appointmentService.appObj['startTime'] = this.appointmentService.techserList[0]['startTime'];
+    if (this.appointmentService.techserList.length>0) {
+      this.appointmentService.appObj['startTime'] = this.appointmentService.techserList[0]['startTime'];
+    }
     this.appointmentService.appObj['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
     this.appointmentService.appObj['appointments'] = this.appointmentService.techserList;
     // this.appointmentService.appObj['customerId']= 26;
