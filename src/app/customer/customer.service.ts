@@ -183,6 +183,20 @@ export class CustomerService {
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  getCustomerRecentSale() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.customId = localStorage.getItem('Arrayofcustomer');
+    this.baseUrl = 'http://172.16.0.99:8044/api/CustomerDashboard/GetCustomerDashboardRecentSale?ParentCompanyId='+ this.ParentCompanyId + '&CustomerId=' + this.customId;
+    return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getCustomerRecentAppointment() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.customId = localStorage.getItem('Arrayofcustomer');
+    this.baseUrl = 'http://172.16.0.99:8044/api/CustomerDashboard/GetAppointmentbyCustomer?ParentCompanyId='+ this.ParentCompanyId + '&CustomerId=' + this.customId;
+    return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
   publish(eventName: string) {
     // ensure a subject for the event name exists
         this.subjects[eventName] = this.subjects[eventName] || new Subject();

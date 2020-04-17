@@ -9,7 +9,7 @@ import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
 
 @Component({
   selector: 'app-appointmentservice',
-  templateUrl: './appointmentservice.component.html',
+  templateUrl: './appointmentserviceedit.component.html',
   styles:  ['cal-time-events {\n' +
   '    display: none !important;\n' +
   '  }\n' +
@@ -37,7 +37,7 @@ import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
   '}' ,
   ]
 })
-export class AppointmentserviceEditComponent {
+export class AppointmentServiceEditComponent {
   title = 'SalonPay';
   private servicelist: Observable<any>;
   private technicianlist: Observable<any>;
@@ -89,7 +89,9 @@ export class AppointmentserviceEditComponent {
     this.techserList = [];
     this.arrayofselectedobj = this.appointmentService.arrayofselectedappointment;
     if(this.arrayofselectedobj.length>0){
+        this.getTechnicianList();
         this.technicianobj = this.arrayofselectedobj[0]['technicianList'][0];
+        this.techserList = this.arrayofselectedobj[0]['technicianList']
         console.log(this.technicianobj)
         var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
         var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
