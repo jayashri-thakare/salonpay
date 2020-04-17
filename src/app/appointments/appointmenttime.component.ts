@@ -13,7 +13,7 @@ import {Observable} from 'rxjs';
     '\n' +
     '          <div class="apn-time-slot">\n' +
     '            <p class="sub-med mb-3">Morning</p>\n' +
-    '            <div class="radio-box radio-box-2"  [ngClass]="{ \'booked-time\': getClass(time1) }" *ngFor="let time1 of morning; let i = index">\n' +
+    '            <div class="radio-box radio-box-2"  [ngClass]="{ \'booked-time\': getClass(time1) }" *ngFor="let time1 of morning; let i = index" (click)="addTime(time1)">\n' +
     '              <input type="radio" id="morning{{i}}" [value]="time1" name="timeslot"  [(ngModel)]="appointmentService.apptime" [checked]="apptime==time1" >\n' +
     '              <label for="morning{{i}}">{{time1}}</label>\n' +
     '            </div>\n' +
@@ -48,6 +48,14 @@ export class AppointmentTimeComponent {
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
 
+
+  addTime(time){
+    debugger;
+    if(this.appointmentService.objIndex>=0){
+      this.appointmentService.techserList[this.appointmentService.objIndex]['startTime'] = time;
+      console.log(this.appointmentService.techserList);
+    }
+  }
   getClass = function(keyVal) {
     if(this.appointmentService.bookedTime!=undefined) {
       for (var i = 0; i < this.appointmentService.bookedTime.length; i++) {

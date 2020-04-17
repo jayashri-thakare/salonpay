@@ -14,7 +14,7 @@
                   <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
-                    [refresh]="refresh"
+                    [refresh]="refresh" [daysInWeek]="Short"
                   >
                   </mwl-calendar-week-view>
                 </div>
@@ -237,9 +237,9 @@
           <!-- Technician Selection ends -->
 
           <!-- Appointment Summary Starts -->
-          <div class="apn-appointment-selection" *ngIf="techserList.length>0">
+          <div class="apn-appointment-selection" *ngIf="appointmentService.techserList.length>0">
             <h6 class="hdn2">Appointment Summary</h6>
-            <div class="apn-appointment-container" *ngFor="let tech1 of techserList; let in = index" >
+            <div class="apn-appointment-container" *ngFor="let tech1 of appointmentService.techserList; let in = index" >
               <div class="apn-appointment-box" >
                 <div class="apn-ser">
                   <h5>{{tech1?.serviceName}}</h5>
@@ -315,7 +315,7 @@
 
       <h6 class="hdn2">Choose Main Service </h6>
        <!-- start -->
-      <div class="apn-appointment-box apn-input-selection" *ngFor="let tech of techserList; let i = index" (click)="tecBookTime(tech)">
+      <div class="apn-appointment-box apn-input-selection" *ngFor="let tech of appointmentService.techserList; let i = index" (click)="tecBookTime(tech, i)">
         <input type="checkbox" id="apn-appt-2-{{i}}" name="apn-appt" required />
         <label for="apn-appt-2-{{i}}">
           <div class="apn-ser">
@@ -335,7 +335,7 @@
             <a href="#" class="apn-tech-edit"><img src="./img/edit1.svg" alt="edit" /></a>
           </div>
           <div class="apn-date">
-            {{viewDate | date:'M/d/yyyy'}} <span> {{appointmentService?.apptime}}</span>
+            {{viewDate | date:'M/d/yyyy'}} <span> {{tech?.startTime}}</span>
           </div>
         </label>
       </div>

@@ -73,6 +73,7 @@ export class AppointmentserviceComponent {
   private serviceBind: Array<any>;
   arrayofselectedobj: Array<any>=[];
   // private bookedTime: any;
+  private objIndex: any;
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe) {
   }
 
@@ -87,7 +88,7 @@ export class AppointmentserviceComponent {
     // @ts-ignore
     this.jobj={};
     this.appointmentService.appObj = {}
-    this.techserList = [];
+    this.appointmentService.techserList = [];
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
@@ -107,8 +108,8 @@ export class AppointmentserviceComponent {
     this.serviceBind.slice(-1)[0].technicianId = tec.id;
     this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
     this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
-    this.techserList.push(this.serviceBind.slice(-1)[0]);
-    console.log(this.techserList);
+    this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
+    console.log(this.appointmentService.techserList);
   }
   ;
   selectService(event, serviceId, service) {
@@ -176,8 +177,9 @@ export class AppointmentserviceComponent {
     });
   }
 
-  tecBookTime(tech){
+  tecBookTime(tech, i){
     tech['appointmentDate'] = this.viewDate
+    this.appointmentService.objIndex = i ;
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
       this.appointmentService.bookedTime = this.bookedTime['bookedTime'];
@@ -193,10 +195,10 @@ export class AppointmentserviceComponent {
 
     this.appointmentService.appObj['appointmentDate'] =  this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     this.appointmentService.appObj['servicePreference'] = this.preference;
-    this.techserList[0]['startTime'] = this.appointmentService.apptime;
-    this.appointmentService.appObj['startTime'] = this.appointmentService.apptime;
+    // this.appointmentService.techserList[0]['startTime'] = this.appointmentService.apptime;
+    this.appointmentService.appObj['startTime'] = this.appointmentService.techserList[0]['startTime'];
     this.appointmentService.appObj['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
-    this.appointmentService.appObj['appointments'] = this.techserList;
+    this.appointmentService.appObj['appointments'] = this.appointmentService.techserList;
     // this.appointmentService.appObj['customerId']= 26;
     // this.appointmentService.appObj['customerEmailId']= 'jayashrit@leotechnosoft.net';
     this.appointmentService.appObj['createdOn']= '';
