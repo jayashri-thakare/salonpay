@@ -27,7 +27,7 @@ import { MeregeSalesCartComponent } from './sales/newsales/mergesalescart.compon
 import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment.component';
 import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 import { AppointmentListComponent } from './appointments/appointmentlist.component';
-import { AppointmentserviceEditComponent } from './appointments/appointmentserviceedit.component';
+import { AppointmentServiceEditComponent } from './appointments/appointmentserviceedit.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent},
   { path: 'customer', component: CustomerComponent},
   { path: 'appointment', component: AppointmentserviceComponent},
-  { path: 'appointmentedit', component: AppointmentserviceEditComponent},
+  { path: 'appointmentedit', component: AppointmentServiceEditComponent},
   { path: 'newsales', component: SalesComponent},
   { path: 'transactionnewsales', component: NewSalesComponent},
   { path: 'allcustomer', component: AllcustomerComponent},
