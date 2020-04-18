@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {  CalendarView } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {MessageService} from '../message.service';
+
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
@@ -75,7 +77,9 @@ export class AppointmentserviceComponent {
   arrayofselectedobj: Array<any>=[];
   // private bookedTime: any;
   private objIndex: any;
-  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe) {
+  private customerEmail: string;
+  private customerId: number;
+  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
 
   setView(view: CalendarView) {
@@ -90,6 +94,8 @@ export class AppointmentserviceComponent {
     this.jobj={};
     this.appointmentService.appObj = {}
     this.appointmentService.techserList = [];
+    this.customerEmail = localStorage.getItem('appoointmentCustEmail')
+    this.customerId = parseInt(localStorage.getItem('appoointmentCustId'));
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
@@ -210,19 +216,30 @@ export class AppointmentserviceComponent {
     }
     this.appointmentService.appObj['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
     this.appointmentService.appObj['appointments'] = this.appointmentService.techserList;
-    // this.appointmentService.appObj['customerId']= 26;
-    // this.appointmentService.appObj['customerEmailId']= 'jayashrit@leotechnosoft.net';
     this.appointmentService.appObj['createdOn']= '';
     this.appointmentService.appObj['isCancelled']= true;
     this.appointmentService.appObj['isOpen']= true;
-
-
       console.log(this.appointmentService.appObj);
-    // this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
-    //   this.appointmentList = data;
-    // });
-    localStorage.setItem('appointment', JSON.stringify(this.appointmentService.appObj))
-    this.router.navigate(['/customerappointment']);
+      debugger;
+      if(this.customerId!=undefined) {
+        this.appointmentService.appObj['customerEmailId']= this.customerEmail;
+        this.appointmentService.appObj['customerId']= this.customerId;
+
+        this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
+          localStorage.removeItem('appoointmentCustId')
+          localStorage.removeItem('appoointmentCustEmail')
+          this.messageService.clear();
+          this.messageService.add("Appointment created successfully.")
+
+          setTimeout(() => {
+              this.router.navigate(['/appointmentlist']);
+            }
+            , 5000);
+        });
+      } else {
+        localStorage.setItem('appointment', JSON.stringify(this.appointmentService.appObj))
+        this.router.navigate(['/customerappointment']);
+      }
   }
 
   getTechnicianList() {
