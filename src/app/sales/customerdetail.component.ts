@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subscription} from 'rxjs';
 import {SalesService} from './sales.service';
+import {MessageService} from "../message.service";
 
 @Component({
   selector: 'customersale',
@@ -172,7 +173,7 @@ export class CustomerSaleComponent implements OnInit {
   Sales = {};
   saleorder: Observable<any>;
   appointment= {};
-  constructor(public salesService: SalesService, private formBuilder: FormBuilder, public router: Router) { }
+  constructor(public salesService: SalesService, private formBuilder: FormBuilder, public router: Router, public messageService: MessageService) { }
 
   ngOnInit() {
     this.getCustomerDetail();
@@ -208,33 +209,18 @@ export class CustomerSaleComponent implements OnInit {
   }
 
   createAppointment(customer) {
-    debugger;
-    // this.appointment['appointmentDate']= "7/11/2020",
-    // this.appointment['servicePreference']= 0,
-    // this.appointment['createdOn']= "4:00AM",
-    // this.appointment['customerId']= customer.customerId,
-    // this.appointment['customerEmailId']= customer.email,
-    // this.appointment['isCancelled']= false,
-    // this.appointment['isOpen']= true,
-    // this.appointment['startTime']= "4:00AM",
-    // this.appointment['appointments']= [
-    //   {
-    //     "serviceId": 9,
-    //     "technicianId": "2",
-    //     "technicianEmailId": "ron@leo.net",
-    //     "startTime": "2:00AM",
-    //     "defaultTime": "2:00AM"
-    //   }
-    // ]
-
     this.appointment = JSON.parse(localStorage.appointment);
     this.appointment['customerId']= customer.customerId
     this.appointment['customerEmailId']= customer.email
     this.salesService.create_appointment(this.appointment).subscribe((data) => {
-      debugger;
-      this.router.navigate(['/appointmentlist']);
+      localStorage.removeItem('appointment');
+      this.messageService.clear();
+      this.messageService.add("Appointment created successfully.")
 
-      this.saleorder = data;
+      setTimeout(() => {
+          this.router.navigate(['/appointmentlist']);
+        }
+        , 5000);
     });
   }
 }

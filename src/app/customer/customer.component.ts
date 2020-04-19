@@ -23,6 +23,14 @@ export class CustomerComponent implements OnInit {
     this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
 
+  callAppointment(id, email){
+    debugger;
+    localStorage.setItem('appoointmentCustId', id);
+    localStorage.setItem('appoointmentCustEmail', email);
+    this.router.navigate(['/appointment']);
+
+  }
+
   getCustomerList() {
     this.customerService.getCustomerList().subscribe((data) => {
       this.customerlist = data;

@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {  CalendarView } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {MessageService} from '../message.service';
+
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
@@ -44,6 +46,7 @@ export class AppointmentserviceComponent {
   private technicianlist: Observable<any>;
   private checkedList: Array<any>;
   private techserList: Array<any>;
+  @Input('preference') preference1: any;
   @Input('bookedTime') bookedTime: any;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
@@ -73,7 +76,10 @@ export class AppointmentserviceComponent {
   private serviceBind: Array<any>;
   arrayofselectedobj: Array<any>=[];
   // private bookedTime: any;
-  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe) {
+  private objIndex: any;
+  private customerEmail: string;
+  private customerId: number;
+  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
 
   setView(view: CalendarView) {
@@ -87,7 +93,9 @@ export class AppointmentserviceComponent {
     // @ts-ignore
     this.jobj={};
     this.appointmentService.appObj = {}
-    this.techserList = [];
+    this.appointmentService.techserList = [];
+    this.customerEmail = localStorage.getItem('appoointmentCustEmail')
+    this.customerId = parseInt(localStorage.getItem('appoointmentCustId'));
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
@@ -107,8 +115,8 @@ export class AppointmentserviceComponent {
     this.serviceBind.slice(-1)[0].technicianId = tec.id;
     this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
     this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
-    this.techserList.push(this.serviceBind.slice(-1)[0]);
-    console.log(this.techserList);
+    this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
+    console.log(this.appointmentService.techserList);
   }
   ;
   selectService(event, serviceId, service) {
@@ -176,8 +184,9 @@ export class AppointmentserviceComponent {
     });
   }
 
-  tecBookTime(tech){
+  tecBookTime(tech, i){
     tech['appointmentDate'] = this.viewDate
+    this.appointmentService.objIndex = i ;
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
       this.appointmentService.bookedTime = this.bookedTime['bookedTime'];
@@ -190,26 +199,47 @@ export class AppointmentserviceComponent {
 
   saveObj(){
     this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
+    // tslint:disable-next-line:triple-equals
+    // @ts-ignore
+    if (this.preference ===3){
+      // tslint:disable-next-line:prefer-for-of
+        for (let i=0; i< this.appointmentService.techserList.length; i++){
+          this.appointmentService.techserList[i]['startTime'] = this.appointmentService.apptime;
+        }
+      }
 
     this.appointmentService.appObj['appointmentDate'] =  this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     this.appointmentService.appObj['servicePreference'] = this.preference;
-    this.techserList[0]['startTime'] = this.appointmentService.apptime;
-    this.appointmentService.appObj['startTime'] = this.appointmentService.apptime;
+    // this.appointmentService.techserList[0]['startTime'] = this.appointmentService.apptime;
+    if (this.appointmentService.techserList.length>0) {
+      this.appointmentService.appObj['startTime'] = this.appointmentService.techserList[0]['startTime'];
+    }
     this.appointmentService.appObj['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
-    this.appointmentService.appObj['appointments'] = this.techserList;
-    // this.appointmentService.appObj['customerId']= 26;
-    // this.appointmentService.appObj['customerEmailId']= 'jayashrit@leotechnosoft.net';
+    this.appointmentService.appObj['appointments'] = this.appointmentService.techserList;
     this.appointmentService.appObj['createdOn']= '';
     this.appointmentService.appObj['isCancelled']= true;
     this.appointmentService.appObj['isOpen']= true;
-
-
       console.log(this.appointmentService.appObj);
-    // this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
-    //   this.appointmentList = data;
-    // });
-    localStorage.setItem('appointment', JSON.stringify(this.appointmentService.appObj))
-    this.router.navigate(['/customerappointment']);
+      debugger;
+      if(this.customerId!=undefined) {
+        this.appointmentService.appObj['customerEmailId']= this.customerEmail;
+        this.appointmentService.appObj['customerId']= this.customerId;
+
+        this.appointmentService.create_appointment(this.appointmentService.appObj).subscribe((data) => {
+          localStorage.removeItem('appoointmentCustId')
+          localStorage.removeItem('appoointmentCustEmail')
+          this.messageService.clear();
+          this.messageService.add("Appointment created successfully.")
+
+          setTimeout(() => {
+              this.router.navigate(['/appointmentlist']);
+            }
+            , 5000);
+        });
+      } else {
+        localStorage.setItem('appointment', JSON.stringify(this.appointmentService.appObj))
+        this.router.navigate(['/customerappointment']);
+      }
   }
 
   getTechnicianList() {
