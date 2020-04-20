@@ -14,7 +14,10 @@
                   <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
-                    [refresh]="refresh" [daysInWeek]="Short"
+                    [refresh]="refresh"
+                    (dayHeaderClicked)="dayHeaderClicked($event)"
+                    [ngStyle]="{ backgroundColor: 'blue'}"
+
                   >
                   </mwl-calendar-week-view>
                 </div>
@@ -91,6 +94,7 @@
         <mwl-calendar-week-view
           [viewDate]="viewDate"
           [refresh]="refresh"
+          (dayHeaderClicked)="dayHeaderClicked($event)"
         >
         </mwl-calendar-week-view>
                 <div mwlCalendarNextView
@@ -294,6 +298,7 @@
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
                     [refresh]="refresh"
+                    (dayHeaderClicked)="dayHeaderClicked($event)"
                   >
                   </mwl-calendar-week-view>
               </div>

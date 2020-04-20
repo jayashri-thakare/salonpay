@@ -48,6 +48,7 @@ export class AppointmentserviceComponent {
   private techserList: Array<any>;
   @Input('preference') preference1: any;
   @Input('bookedTime') bookedTime: any;
+  @Input() activeDay: Date;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -143,8 +144,15 @@ export class AppointmentserviceComponent {
     this.preference = val;
   }
 
+  //Funtion to getselected week date
+  dayHeaderClicked(evn){
+// console.log(evn);
+    debugger;
+    this.viewDate = evn.day.date; // finally get the clicked date value
+  }
   nextScreen1(){
     // tslint:disable-next-line:prefer-const
+    debugger;
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
@@ -193,7 +201,7 @@ export class AppointmentserviceComponent {
     });
   }
 
-  selectedDate(date1){
+  selectedDate(){
   debugger;
   }
 
@@ -220,8 +228,7 @@ export class AppointmentserviceComponent {
     this.appointmentService.appObj['isCancelled']= true;
     this.appointmentService.appObj['isOpen']= true;
       console.log(this.appointmentService.appObj);
-      debugger;
-      if(this.customerId!=undefined) {
+      if(this.customerId!=undefined && !isNaN(this.customerId)) {
         this.appointmentService.appObj['customerEmailId']= this.customerEmail;
         this.appointmentService.appObj['customerId']= this.customerId;
 
