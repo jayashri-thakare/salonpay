@@ -15,8 +15,12 @@
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
                     [refresh]="refresh"
+                    [ngClass]="{'booked-time': activeDayIsOpen}"
                     (dayHeaderClicked)="dayHeaderClicked($event)"
-                    [ngStyle]="{ backgroundColor: 'blue'}"
+                    [ngStyle]="{ backgroundColor: 'green' }"
+                    (eventClicked)="handleEvent('Clicked', $event.event)"
+
+                    (mwlClick)="dayClicked.emit({ day: viewDate.getDay(), sourceEvent: $event })"
 
                   >
                   </mwl-calendar-week-view>
@@ -94,6 +98,8 @@
         <mwl-calendar-week-view
           [viewDate]="viewDate"
           [refresh]="refresh"
+          [ngClass]="{'cal-today': selectedDay}"
+          [class.cal-today]="viewDate.getDay()==selectedDay"
           (dayHeaderClicked)="dayHeaderClicked($event)"
         >
         </mwl-calendar-week-view>

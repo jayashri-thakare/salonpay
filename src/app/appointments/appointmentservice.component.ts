@@ -1,12 +1,25 @@
-import {Component, ElementRef, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, Output, TemplateRef, ViewChild, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppointmentService} from './appointment.service';
 import {Observable} from 'rxjs';
-import {  CalendarView } from 'angular-calendar';
+import {
+  startOfDay,
+  endOfDay,
+  subDays,
+  addDays,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours,
+  isSameWeek
+} from 'date-fns';
+import { Subject } from 'rxjs';
+import { CalendarEvent, CalendarView, CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+} from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
-import {DatePipe} from "@angular/common";
+import {DatePipe, WeekDay} from "@angular/common";
 import {MessageService} from '../message.service';
-
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
@@ -49,17 +62,29 @@ export class AppointmentserviceComponent {
   @Input('preference') preference1: any;
   @Input('bookedTime') bookedTime: any;
   @Input() activeDay: Date;
+  activeDayIsOpen: boolean = true;
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @Input() refresh: Subject<any>;
+  // @Output()
+  // dayHeaderClicked = new EventEmitter<{
+  //   day: WeekDay;
+  //   sourceEvent: MouseEvent;
+  // }>();
 
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+  @Output() viewChange: EventEmitter<string> = new EventEmitter();
+
+  @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
   private searchServicen: string;
   private searchTech: string;
   // private jobj: { };
+  evnVar: any;
+  event: any
   public jobj: {
     serviceCost: any;
     serviceTime: any;
@@ -80,13 +105,30 @@ export class AppointmentserviceComponent {
   private objIndex: any;
   private customerEmail: string;
   private customerId: number;
+  selectedDay: WeekDay;
+
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
 
   setView(view: CalendarView) {
     this.view = view;
   }
-
+  // dayClicked(day: WeekDay): void {
+  //   debugger;
+  //   if (this.selectedDay) {
+  //     delete this.selectedDay.cssClass;
+  //   }
+  //   day.cssClass = 'cal-today';
+  //   this.selectedDay = day;
+  // }
+  // beforeViewRender({header}: {header: WeekDay[]}): void {
+  //   header.forEach((day) => {
+  //     if (this.selectedDay && day.date.getTime() === this.selectedDay.date.getTime()) {
+  //       day.cssClass = 'cal-day-selected';
+  //       this.selectedDay = day;
+  //     }
+  //   });
+  // }
   ngOnInit() {
     this.getServiceList();
     this.checkedList = [];
@@ -120,6 +162,11 @@ export class AppointmentserviceComponent {
     console.log(this.appointmentService.techserList);
   }
   ;
+  handleEvent(action: string, event: CalendarEvent): void {
+    debugger;
+    // this.modalData = { event, action };
+    // this.modal.open(this.modalContent, { size: 'lg' });
+  }
   selectService(event, serviceId, service) {
     var obj = {};
     if(event.target.checked) {
@@ -148,10 +195,24 @@ export class AppointmentserviceComponent {
   dayHeaderClicked(evn){
 // console.log(evn);
     debugger;
+    if(this.evnVar!=undefined){
+        this.evnVar.style.backgroundColor = 'white';
+    }
     this.viewDate = evn.day.date; // finally get the clicked date value
+    this.selectedDay = evn.day;
+    evn.sourceEvent.target.classList.add('cal-today')
+    this.evnVar = evn.sourceEvent.target.parentElement;
+    let  ele = document.getElementsByClassName("cal-today");
+    ele[0].classList.remove('cal-today')
+    // ele[2].classList.remove('cal-today')
+    // ele[1].classList.remove('cal-today')
+    this.event = evn;
+    evn.sourceEvent.target.parentElement.style.color ='#fff'
+    evn.sourceEvent.target.parentElement.style.borderColor ='transparent'
+    evn.sourceEvent.target.parentElement.style.background ='linear-gradient(90deg, #2ecbaa 0, #358fd0 100%)'
   }
+
   nextScreen1(){
-    // tslint:disable-next-line:prefer-const
     debugger;
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
@@ -160,6 +221,9 @@ export class AppointmentserviceComponent {
     myDiv.style.display = 'block'
     datediv.style.display = 'none'
     myDiv1.style.display = 'none'
+    this.dayHeaderClicked(this.event);
+    this.evnVar.style.backgroundColor = 'blue';
+
     ;  }
 
   nextScreen(){
