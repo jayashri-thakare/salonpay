@@ -186,7 +186,15 @@ export class AppointmentService {
   .pipe(map( data => data));
   }
 
-
+  editAppointment(appointment) {
+    debugger;
+    appointment['CustomerId'] = parseInt(localStorage.Arrayofcustomer);
+    appointment['ParentCompanyId'] = parseInt(localStorage.getItem('companyId'));
+    appointment['LastModifiedBy'] = localStorage.getItem('userId');
+    this.baseUrl = 'http://172.16.0.186:9810/api/Appointments/EditAppointment';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, appointment, httpOptions)
+  .pipe(map( data => data));
+  }
 
    publish(eventName: string) {
     // ensure a subject for the event name exists

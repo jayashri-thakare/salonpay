@@ -12,11 +12,13 @@ import { MessageService } from '../../../message.service';
 
 export class CustomerHistoryComponent implements OnInit {
   customerHistory: any;
+  customerProfile: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getCustomerHistory(localStorage.getItem('Arrayofcustomer'));
+    this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
   }
 
   getCustomerHistory(customerid) {
@@ -24,6 +26,14 @@ export class CustomerHistoryComponent implements OnInit {
       this.customerHistory = data;
       this.customerHistory = this.customerHistory.list;
       console.log(this.customerHistory)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+  getCustomerProfile(customerid) {
+    this.customerService.getCustomerProfile(customerid).subscribe((data) => {
+      this.customerProfile = data;
+      // this.customerProfile = this.customerProfile.result;
+      console.log(this.customerProfile)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }

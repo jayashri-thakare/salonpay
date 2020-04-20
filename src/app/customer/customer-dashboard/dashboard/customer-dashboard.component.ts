@@ -15,12 +15,14 @@ export class CustDashboardComponent implements OnInit {
   customerRecentAppointment: any;
   favproduct: any;
   favservice: any;
+  customerProfile: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
    this.getCustomerRecentSale();
    this.getCustomerRecentAppointment();
+   this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
   }
 
   getCustomerRecentSale() {
@@ -35,6 +37,15 @@ export class CustDashboardComponent implements OnInit {
   getCustomerRecentAppointment() {
     this.customerService.getCustomerRecentAppointment().subscribe((data) => {
       this.customerRecentAppointment = data;
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+
+  getCustomerProfile(customerid) {
+    this.customerService.getCustomerProfile(customerid).subscribe((data) => {
+      this.customerProfile = data;
+      // this.customerProfile = this.customerProfile.result;
+      console.log(this.customerProfile)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }

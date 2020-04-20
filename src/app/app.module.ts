@@ -138,7 +138,8 @@ import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment
 import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 import { AppointmentListComponent } from './appointments/appointmentlist.component';
 import {AppointmentTimeComponent} from "./appointments/appointmenttime.component";
-import {AppointmentServiceEditComponent} from "./appointments/appointmentserviceedit.component"
+import {AppointmentServiceEditComponent} from "./appointments/appointmentserviceedit.component";
+import {SalesDetailsComponent} from "./customer/customer-dashboard/sales/salesdetails.component";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -176,6 +177,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
     declarations: [AppComponent,
         NewSalesComponent,
+        SalesDetailsComponent,
         AppointmentServiceEditComponent,
         AppointmentListComponent,
         SalesTransactionServicesComponent,

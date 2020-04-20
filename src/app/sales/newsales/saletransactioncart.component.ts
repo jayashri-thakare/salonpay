@@ -582,8 +582,7 @@ export class SalesTransactionCartComponent implements OnInit {
             }
       ],
       this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
-        this.router.navigate(['/customerdashboard']);
-        this.customerService.showNav(4);
+        this.router.navigate(['/transactiontipadjustment']);
         this.messageService.clear();
         this.messageService.add('Sales Completed Successfully.')
         this.createsale = data;

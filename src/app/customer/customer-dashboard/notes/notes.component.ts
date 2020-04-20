@@ -14,12 +14,14 @@ import {Observable, Subscription} from 'rxjs';
 export class CustomerNotesComponent implements OnInit {
   private notes: Observable<any>;
   private subscription: Subscription;
+  customerProfile: Observable<any>;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
     this.getNotes();
     this.subscription = this.customerService.on('call-notes').subscribe(() => this.getNotes());
+    this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
 
   }
 
@@ -34,6 +36,15 @@ export class CustomerNotesComponent implements OnInit {
       this.getNotes();
       this.messageService.clear();
       this.messageService.add('Note deleted successfully.');
+    });
+  }
+
+  getCustomerProfile(customerid) {
+    this.customerService.getCustomerProfile(customerid).subscribe((data) => {
+      this.customerProfile = data;
+      // this.customerProfile = this.customerProfile.result;
+      console.log(this.customerProfile)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
 }

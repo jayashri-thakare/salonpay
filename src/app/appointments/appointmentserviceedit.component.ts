@@ -4,6 +4,8 @@ import {AppointmentService} from './appointment.service';
 import {Observable} from 'rxjs';
 import {  CalendarView } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
+import { DatePipe } from '@angular/common';
+import { MessageService } from '../message.service';
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
@@ -72,8 +74,11 @@ export class AppointmentServiceEditComponent {
   private serviceBind: Array<any>;
   arrayofselectedobj: Array<any>=[];
     technicianobj= {};
+  editAppointmentData: any;
+  editappointment= {};
+  appointmenteditobj= {};
   // private bookedTime: any;
-  constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService) {
+  constructor(public messageService:MessageService, public datePipe:DatePipe, private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService) {
   }
 
   setView(view: CalendarView) {
@@ -192,6 +197,27 @@ export class AppointmentServiceEditComponent {
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
       this.appointmentService.bookedTime = this.bookedTime['bookedTime'];
+    });
+  }
+
+  editAppointment(){
+    this.editappointment['Id'] = this.appointmentService.arrayofselectedappointment[0]['appointmentId']
+    this.editappointment['AppointmentDate'] = this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
+    this.editappointment['ServicePreferences'] = parseInt('2')
+    this.editappointment['StartTime'] = "10:00 AM"
+    this.editappointment['CustomerId'] = this.appointmentService.arrayofselectedappointment[0]['customerDetails']['customerId']
+    this.editappointment['CustomerEmailId'] = this.appointmentService.arrayofselectedappointment[0]['customerDetails']['email']
+    this.editappointment['Appointment'] = [this.appointmenteditobj]
+    this.appointmenteditobj['StartTime'] = "10:00 AM"
+    this.appointmenteditobj['DefaultTime'] = "45 00"
+    this.appointmenteditobj['ServiceId'] = this.appointmentService.arrayofselectedappointment[0]['technicianList'][0]['serviceId']
+    this.appointmenteditobj['TechnicianId'] = this.appointmentService.arrayofselectedappointment[0]['technicianList'][0]['technicianId']
+    this.appointmentService.editAppointment(this.editappointment).subscribe((data) => {
+      this.editAppointmentData = data;
+      this.router.navigate(['/appointmentlist']);
+      this.messageService.clear();
+      this.messageService.add('Sales Completed Successfully.')
+      // this.appointmentService.bookedTime = this.bookedTime['bookedTime'];
     });
   }
 
