@@ -531,6 +531,7 @@ export class SalesTransactionCartComponent implements OnInit {
 
   finalSaleService() {
       this.finalSale['SaleId'] = parseInt(localStorage.getItem('orderId'));
+      this.finalSale['ParentComapnyId'] = parseInt(localStorage.getItem('companyId'));
       this.finalSale['Currency'] = '$';
       this.finalSale['TotalAmount'] = this.finalamount;
       this.finalSale['ReceivedAmount'] = this.finalamount;

@@ -70,7 +70,7 @@ import { MessageService } from '../message.service';
     '                            <div class="app-pad-top" *ngFor="let technician of appointment.technicianList">\n' +
     '                                <h4 class="gridhead">{{technician.serviceName}}</h4>\n' +
     '                                <div class="techi-user">\n' +
-    '                                    <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>\n' +
+    '                                    <div class="tech-user-img"><img src="assets/img/profile.svg" alt=""></div>\n' +
     '                                    <div class="tech-usr-cont">\n' +
     '                                        <h3>{{technician.technicianName}}</h3>\n' +
     '                                        <p>Technician</p>\n' +
@@ -95,7 +95,7 @@ import { MessageService } from '../message.service';
     '                            <div class="cust-rig">\n' +
     '                                <h6>{{appointment.customerDetails.firstName}}{{appointment.customerDetails.lastName}}</h6>\n' +
     '                                <div class="usr-pho">\n' +
-    '                                    <div class="flag-img"><img src="img/usa.svg" alt=""></div>\n' +
+    '                                    <div class="flag-img"><img src="assets/img/usa.svg" alt=""></div>\n' +
     '                                    <p>{{appointment.customerDetails.mobileContact}}</p>\n' +
     '                                </div>\n' +
     '                                <div class="usr-pho">\n' +
@@ -155,7 +155,7 @@ import { MessageService } from '../message.service';
     '                    <li>\n' +
     '                        <span>Technician</span>\n' +
     '                        <div class="techi-user">\n' +
-    '                            <div class="tech-user-img"><img src="img/user.svg" alt=""></div>\n' +
+    '                            <div class="tech-user-img"><img src="assets/img/user.svg" alt=""></div>\n' +
     '                            <div class="tech-usr-cont">\n' +
     '                                <h3 class="ellipsis">Ira Membrit (Ira-Membrit)</h3>\n' +
     '                            </div>\n' +

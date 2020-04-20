@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { CustomerService } from '../../customer.service';
 
 @Component({
   selector: 'app-salesdetail',
@@ -316,9 +317,20 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
     '    <!-- Main Container Ends -->'
 })
 export class SalesDetailsComponent implements OnInit {
+  saleDetails: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public customerService: CustomerService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.getCustomerSalesDetails(localStorage.getItem('saledetailid'))
+  }
+
+  getCustomerSalesDetails(saleid) {
+    this.customerService.getCustomerSalesDetails(saleid).subscribe((data) => {
+      this.saleDetails = data;
+      // this.receivedChildMessage = this.receivedChildMessage.ordersummaryservices;
+      console.log(this.saleDetails)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 }

@@ -39,4 +39,11 @@ export class CustomerSalesComponent implements OnInit {
     });
   }
 
+  saledetail(saleid){
+    if(saleid){
+      localStorage.setItem('saledetailid', saleid);
+      this.router.navigate(['/salesdetail'])
+    }
+  }
+
 }
