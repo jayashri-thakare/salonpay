@@ -77,10 +77,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
-            </div>
-          <br/> <br/><br/>
+            <div class="col-md-4" style="    margin-left: -180px;">
+              <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+            </div><br/><br/>
           </div>
             <div class="swiper-container apn-swiper">
               <div class="swiper-wrapper">
@@ -206,7 +205,7 @@
                         <h3>No Preference</h3>
                         <ul class="usr-social">
                           <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
-                          <li><a href="#"><img src="..assets/img/insta.svg" alt="img" /></a></li>
+                          <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
                         </ul>
                       </div>
                     </div>
@@ -248,7 +247,7 @@
                     <h6> {{tech1?.serviceCost}}</h6>
                   </div>
                   <div class="apn-technician">
-                    <div class="user-img"><img src="./assets/img/user.svg" alt=""></div>
+                    <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
                     <div class="usr-name">
                       <h3>{{tech1?.technicianName}}</h3>
                       <ul class="usr-social">
@@ -333,10 +332,10 @@
                   <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
                 </ul>
               </div>
-              <a href="#" class="apn-tech-edit"><img src="../assets/img/edit1.svg" alt="edit" /></a>
+              <a (click)="nextScreen1()" class="apn-tech-edit"><img src="../assets/img/edit1.svg" alt="edit" /></a>
             </div>
             <div class="apn-date">
-              8 February - <span> 8:00 AM</span>
+                {{viewDate | date:'M/d/yyyy'}} <span> {{tech?.startTime}}</span>
             </div>
           </label>
         </div>
@@ -345,10 +344,10 @@
       <div class="apn-right-btn"><i class="icon-status1"></i></div>
       <div class="bgOverlay"></div>
       <div class="apn-right">
-        <app-appointmenttime [bookedTime]="bookedTime"></app-appointmenttime>
+        <app-appointmenttime [bookedTime]="bookedTime" [preference]="preference"></app-appointmenttime>
         <div class="popBtn mt-0">
           <button class="button line apnPopBtnClose" type="button">Cancel</button>
-          <button href="customerappointment" class="button btn-col-sub" type="submit">Edit</button>
+          <button (click)="editAppointment()" href="customerappointment" class="button btn-col-sub" type="submit">Edit</button>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
 
         <div class="comm-headline-btn">
             <h3 class="main-comm-head main-head-colr-pur m-0">
-                <a href="customer-grid-view.html"><i class="icon-down-arrow com-arw"></i></a>Maya <span>Didas</span>
+                <a href="customer-grid-view.html"><i class="icon-down-arrow com-arw"></i></a>{{customerProfile?.firstName}} <span>{{customerProfile?.lastName}}</span>
             </h3>
             <div class="filter-container-up filter-container-grid">
                 <div class="filter-container">
@@ -27,32 +27,32 @@
                     <!-- start -->
                     <li class="table-dta">
                         <span>Last Visit</span>
-                        {{customerRecentSale.lastVisit}}
+                        {{customerRecentSale?.lastVisit | date:"M/d/yy"}}
                     </li>
                     <!-- end -->
                     <!-- start -->
                     <li class="table-dta">
                         <span>Last Technician(s)</span>
-                        {{favservice.technicianName}}
+                        {{favservice?.technicianName}}
                     </li>
                     <!-- end -->
                     <!-- start -->
                     <li class="table-dta">
                         <span>Average Sale</span>
-                        ${{customerRecentSale.averageSale}}
+                        ${{customerRecentSale?.averageSale}}
                     </li>
                     <!-- end -->
                     <!-- start -->
                     <li class="table-dta">
                         <span>Average Tip</span>
-                        ${{customerRecentSale.averageTip}}
+                        ${{customerRecentSale?.averageTip}}
                     </li>
                     <!-- end -->
                     <!-- start -->
                     <li class="table-dta">
                         <span>Favorite Products</span>
                         <div class="table-prodt-list">
-                            <p>{{favproduct.productName}}</p> <i class="icon-info" data-toggle="tooltip"
+                            <p>{{favproduct?.productName}}</p> <i class="icon-info" data-toggle="tooltip"
                                 data-placement="bottom" data-html="true"
                                 title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
                         </div>
@@ -62,7 +62,7 @@
                     <li class="table-dta">
                         <span>Favorite Services</span>
                         <div class="table-prodt-list">
-                            <p>{{favservice.serviceName}}</p> <i class="icon-info" data-toggle="tooltip"
+                            <p>{{favservice?.serviceName}}</p> <i class="icon-info" data-toggle="tooltip"
                                 data-placement="bottom" data-html="true"
                                 title="<ul class='tooltip-list'> <li>Face Cream</li> <li>Skin Toner</li> <li>Hair Lotion</li> </ul>"></i>
                         </div>
@@ -137,17 +137,17 @@
             </div>
         </div>
         <div class="f-row f-4 f-1660-3 f-900-2 f-640-1">
-            <div class="f-col">
+            <div class="f-col" *ngFor="let appointment of customerRecentAppointment">
                 <!-- start -->
                 <div class="app-grid-box">
                     <!-- start -->
                     <div class="app-pad-box">
                         <div class="app-pad-top">
-                            <h4 class="gridhead">Haircut</h4>
+                            <h4 class="gridhead">{{appointment.serviceName}}</h4>
                             <div class="techi-user">
                                 <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
                                 <div class="tech-usr-cont">
-                                    <h3>Ira Membrit</h3>
+                                    <h3>{{appointment.technicianName}}</h3>
                                     <p>Technician</p>
                                 </div>
                             </div>
@@ -170,72 +170,14 @@
                             <i class="icon-calender"></i>
                             <div class="tech-usr-cont">
                                 <p>Date</p>
-                                <h3>29 Oct, 2019</h3>
+                                <h3>{{appointment.appointmentDate | date:"M/d/yy"}}</h3>
                             </div>
                         </div>
                         <div class="techi-user">
                             <i class="icon-clock"></i>
                             <div class="tech-usr-cont">
                                 <p>Time</p>
-                                <h3>5:00 - 5:30 PM</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end -->
-                </div>
-                <!-- end -->
-            </div>
-        </div>
-
-        <div class="comm-headline-btn">
-            <h3 class="main-comm-head m-0">
-                Recent <span>Sales</span>
-                <i class="icon-question rig-icn" data-toggle="tooltip" data-placement="right" title=""
-                    data-original-title="Internet experience without having one."></i>
-            </h3>
-        </div>
-        <div class="f-row f-4 f-1660-3 f-900-2 f-640-1">
-            <div class="f-col">
-                <!-- start -->
-                <div class="app-grid-box">
-                    <!-- start -->
-                    <div class="app-pad-box">
-                        <div class="app-pad-top">
-                            <h4 class="gridhead">Haircut</h4>
-                            <div class="techi-user">
-                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
-                                <div class="tech-usr-cont">
-                                    <h3>Ira Membrit</h3>
-                                    <p>Technician</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="yur-mail-rig">
-                            <i class="icon-status1 status"></i>
-                            <ul class="status-list">
-                                <li><i class="icon-envelope"></i> Email</li>
-                                <li><i class="icon-sms"></i> SMS</li>
-                                <li><i class="icon-edit"></i> Edit</li>
-                                <li><i class="icon-share"></i> Share</li>
-                                <li class="delt"><i class="icon-delete"></i> Delete</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end -->
-                    <!-- start -->
-                    <div class="app-pad-box">
-                        <div class="techi-user">
-                            <i class="icon-calender"></i>
-                            <div class="tech-usr-cont">
-                                <p>Date</p>
-                                <h3>29 Oct, 2019</h3>
-                            </div>
-                        </div>
-                        <div class="techi-user">
-                            <i class="icon-clock"></i>
-                            <div class="tech-usr-cont">
-                                <p>Time</p>
-                                <h3>5:00 - 5:30 PM</h3>
+                                <h3>{{appointment.startTime}} - {{appointment.endTime}}</h3>
                             </div>
                         </div>
                     </div>

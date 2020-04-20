@@ -28,6 +28,7 @@ import { TipAdjustmentSalesComponent } from './sales/newsales/salestipadjustment
 import { ReviewSalesComponent } from './sales/newsales/salestransactionreview.component';
 import { AppointmentListComponent } from './appointments/appointmentlist.component';
 import { AppointmentServiceEditComponent } from './appointments/appointmentserviceedit.component';
+import { SalesDetailsComponent } from './customer/customer-dashboard/sales/salesdetails.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -53,7 +54,8 @@ const routes: Routes = [
   { path: 'mergesalescart', component: MeregeSalesCartComponent },
   { path: 'transactiontipadjustment', component: TipAdjustmentSalesComponent },
   { path: 'transactionreview', component: ReviewSalesComponent },
-  { path: 'appointmentlist', component: AppointmentListComponent}
+  { path: 'appointmentlist', component: AppointmentListComponent},
+  { path: 'salesdetail', component: SalesDetailsComponent }
 ];
 
 @NgModule({

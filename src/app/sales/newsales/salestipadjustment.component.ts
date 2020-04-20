@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AdminService } from 'src/app/admin/admin.service';
 import { SalesService } from '../sales.service';
 import { MessageService } from 'src/app/message.service';
+import { triggerAsyncId } from 'async_hooks';
+import { CustomerService } from 'src/app/customer/customer.service';
 
 @Component({
   selector: 'tip-adjustmentsales',
@@ -59,22 +61,22 @@ import { MessageService } from 'src/app/message.service';
     '                        <div class="split-tip-btns">\n' +
     '                            <h6 class="poptile">Split Tip Evenly</h6>\n' +
     '                            <div class="radio-container">\n' +
-    '                                <div class="radio-box radio-box-2">\n' +
-    '                                    <input type="radio" id="ste-1" name="ste-radio" required>\n' +
-    '                                    <label for="ste-1">15%</label>\n' +
-    '                                </div>\n' +
-    '                                <div class="radio-box radio-box-2">\n' +
-    '                                    <input type="radio" id="ste-2" name="ste-radio" required>\n' +
-    '                                    <label for="ste-2">18%</label>\n' +
-    '                                </div>\n' +
+    // '                                <div class="radio-box radio-box-2">\n' +
+    // '                                    <input type="radio" id="ste-1" name="ste-radio" required>\n' +
+    // '                                    <label for="ste-1">15%</label>\n' +
+    // '                                </div>\n' +
+    // '                                <div class="radio-box radio-box-2">\n' +
+    // '                                    <input type="radio" id="ste-2" name="ste-radio" required>\n' +
+    // '                                    <label for="ste-2">18%</label>\n' +
+    // '                                </div>\n' +
     '                                <div class="radio-box radio-box-2">\n' +
     '                                    <input type="radio" id="ste-3" name="ste-radio" required checked>\n' +
     '                                    <label for="ste-3">20%</label>\n' +
     '                                </div>\n' +
-    '                                <div class="radio-box radio-box-2">\n' +
-    '                                    <input type="radio" id="ste-4" name="ste-radio" required>\n' +
-    '                                    <label for="ste-4">22%</label>\n' +
-    '                                </div>\n' +
+    // '                                <div class="radio-box radio-box-2">\n' +
+    // '                                    <input type="radio" id="ste-4" name="ste-radio" required>\n' +
+    // '                                    <label for="ste-4">22%</label>\n' +
+    // '                                </div>\n' +
     '                            </div>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
@@ -141,11 +143,11 @@ import { MessageService } from 'src/app/message.service';
     '                                <hr>\n' +
     '                                <div *ngIf="tipcashbool" class="tipb">\n' +
     '                                    <h5>Cash Total</h5>\n' +
-    '                                    <h6>$50</h6>\n' +
+    '                                    <h6>${{totaltip}}</h6>\n' +
     '                                </div>\n' +
     '                                <div *ngIf="tipcardbool" class="tipb">\n' +
     '                                    <h5>Card Total</h5>\n' +
-    '                                    <h6>$195</h6>\n' +
+    '                                    <h6>${{totaltip}}</h6>\n' +
     '                                </div>\n' +
     // '                                <div class="tipb">\n' +
     // '                                    <h5>Card Total 2</h5>\n' +
@@ -171,14 +173,16 @@ export class TipAdjustmentSalesComponent implements OnInit {
   tipmode: any;
   tipcardbool: boolean;
   tipcashbool: boolean;
+  totaltip: any;
 
-  constructor(public messageService: MessageService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public customerService: CustomerService,public messageService: MessageService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     document.body.classList.remove('succe-overlay-in')
     this.tipcashbool = true;
     this.tipmode = 'Cash';
     this.tipvalue = 0;
+    this.totaltip = 0;
     this.getCustomerDetail();
     this.orderIdOfSale = localStorage.getItem('orderId');
     this.getTipData();
@@ -210,12 +214,16 @@ export class TipAdjustmentSalesComponent implements OnInit {
         if(event && serviceid == this.customerTipData[i].serviceId){
           this.customerTipData[i]['tip'] = parseInt(event);
           this.tipvalue = this.tipvalue + this.customerTipData[i]['tip'];
+          this.tipvalue = this.tipvalue * 0.2;
+          this.totaltip = this.tipvalue + this.totalamount;
         }else if(event == '' && serviceid == this.customerTipData[i].serviceId){
           if(event == ''){
             this.tipvalue = this.tipvalue - this.customerTipData[i]['tip'];
           }else{
             this.customerTipData[i]['tip'] = parseInt(event);
             this.tipvalue = this.tipvalue - this.customerTipData[i]['tip'];
+            this.tipvalue = this.tipvalue * 0.2;
+            this.totaltip = this.totalamount - this.tipvalue;
           }
         }
       }
@@ -242,7 +250,8 @@ export class TipAdjustmentSalesComponent implements OnInit {
     this.finalSaleTipData['ordersummaryservicesTip'] = this.customerTipData;
     this.finalSaleTipData['tipMode'] = this.tipmode;
     this.salesService.create_final_sales_tip(this.finalSaleTipData).subscribe((data) => {
-      this.router.navigate(['/transactionreview']);
+      this.router.navigate(['/customerdashboard']);
+      this.customerService.showNav(4);
       this.messageService.clear();
       this.messageService.add('Sales Tip Completed Successfully.')
       this.createsaletip = data;
