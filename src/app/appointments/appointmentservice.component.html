@@ -14,14 +14,9 @@
                   <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
-                    [refresh]="refresh"
-                    [ngClass]="{'booked-time': activeDayIsOpen}"
-                    (dayHeaderClicked)="dayHeaderClicked($event)"
-                    [ngStyle]="{ backgroundColor: 'green' }"
-                    (eventClicked)="handleEvent('Clicked', $event.event)"
-
-                    (mwlClick)="dayClicked.emit({ day: viewDate.getDay(), sourceEvent: $event })"
-
+                    [events]="events"
+                    (beforeViewRender)="beforeViewRender($event)"
+                    (dayHeaderClicked)="dayClicked($event.day)">
                   >
                   </mwl-calendar-week-view>
                 </div>
@@ -85,11 +80,11 @@
             </div>
           </div>
           <div class="col-md-4" style="    margin-left: -180px;">
-            <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+            <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}  </h5>
           </div><br/><br/>
         </div>
           <div class="swiper-container apn-swiper">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper"  >
               <div class="swiper-slide radio-box radio-box-2">
 <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
 <!--                <label for="apn-swiper-box-1">-->
@@ -97,10 +92,9 @@
 <!--                </label>-->
         <mwl-calendar-week-view
           [viewDate]="viewDate"
-          [refresh]="refresh"
-          [ngClass]="{'cal-today': selectedDay}"
-          [class.cal-today]="viewDate.getDay()==selectedDay"
-          (dayHeaderClicked)="dayHeaderClicked($event)"
+          [events]="events"
+          (beforeViewRender)="beforeViewRender($event)"
+          (dayHeaderClicked)="dayClicked($event.day)">
         >
         </mwl-calendar-week-view>
                 <div mwlCalendarNextView
@@ -303,9 +297,10 @@
 <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
-                    [refresh]="refresh"
-                    (dayHeaderClicked)="dayHeaderClicked($event)"
-                  >
+                    [events]="events"
+                    (beforeViewRender)="beforeViewRender($event)"
+                    (dayHeaderClicked)="dayClicked($event.day)">
+                    >
                   </mwl-calendar-week-view>
               </div>
             </div>
