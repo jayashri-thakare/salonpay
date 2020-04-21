@@ -167,8 +167,19 @@ export class SalesService {
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  getSalesDetail() {
+    this.parentId = parseInt(localStorage.getItem('companyId'));
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetSalesListForSplitCommissions?ParentCompanyId=' + this.parentId;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
   getProductByCategoryId(productid) {
     this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetProductByCategoryId?ProductCategoryId=' + productid;
+    return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getSalesCommissionSplit(saleid) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/Commission/GetCommissionSplitData?Saleid=' + saleid;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -178,8 +189,14 @@ export class SalesService {
   }
 
   create_final_sales_tip(Sales) {
-    this.parentId = parseInt(localStorage.getItem('companyId'));
+    Sales.parentCompanyId = parseInt(localStorage.getItem('companyId'));
     this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/PostTipData';
+    return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
+    .pipe(map( data => data));
+  }
+
+  finalSaleCommission(Sales) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/Commission/PostCommissionSplitData';
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }

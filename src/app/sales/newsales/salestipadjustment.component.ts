@@ -122,7 +122,7 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                            <div class="tip-payment-box">\n' +
     '                                <h6 class="poptile">Payment Method</h6>\n' +
     '                                <div class="payment-card-box">\n' +
-    '                                    <div class="pay-card"><img src="./img/visa.jpg" alt="card" /></div>\n' +
+    '                                    <div class="pay-card"><img src="../assets/img/visa.jpg" alt="card" /></div>\n' +
     '                                    <h5>Card Number</h5>\n' +
     '                                    <p>**** **** **** <span>1234</span></p>\n' +
     '                                </div>\n' +
@@ -244,9 +244,9 @@ export class TipAdjustmentSalesComponent implements OnInit {
   finalSaleTip() {
     this.finalSaleTipData['saleId'] = parseInt(localStorage.getItem('orderId'));
     this.finalSaleTipData['customerId'] = parseInt(localStorage.getItem('customerId'));
-    this.finalSaleTipData['TotalAmount'] = this.totalamount;
-    this.finalSaleTipData['ReceivedAmount'] = this.totalamount;
-    this.finalSaleTipData['IsFullPaymentComplete'] = true;
+    this.finalSaleTipData['totalAmount'] = this.totalamount;
+    this.finalSaleTipData['receivedAmount'] = this.totalamount;
+    this.finalSaleTipData['isFullPaymentComplete'] = true;
     this.finalSaleTipData['ordersummaryservicesTip'] = this.customerTipData;
     this.finalSaleTipData['tipMode'] = this.tipmode;
     this.salesService.create_final_sales_tip(this.finalSaleTipData).subscribe((data) => {

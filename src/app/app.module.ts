@@ -140,6 +140,8 @@ import { AppointmentListComponent } from './appointments/appointmentlist.compone
 import {AppointmentTimeComponent} from "./appointments/appointmenttime.component";
 import {AppointmentServiceEditComponent} from "./appointments/appointmentserviceedit.component";
 import {SalesDetailsComponent} from "./customer/customer-dashboard/sales/salesdetails.component";
+import {SalesListComponent} from "./sales/saleslist.component";
+import {SalesCommissionSplitComponent} from "./sales/salecommissionsplit.component"
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -178,6 +180,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     declarations: [AppComponent,
         NewSalesComponent,
         SalesDetailsComponent,
+        SalesListComponent,
+        SalesCommissionSplitComponent,
         AppointmentServiceEditComponent,
         AppointmentListComponent,
         SalesTransactionServicesComponent,

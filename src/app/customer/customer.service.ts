@@ -197,6 +197,11 @@ export class CustomerService {
     return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
+  getCustomerSalesDetails(saleid) {
+    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetCustomerSellDetailBySaleId?SaleId='+ saleid;
+    return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
   publish(eventName: string) {
     // ensure a subject for the event name exists
         this.subjects[eventName] = this.subjects[eventName] || new Subject();
