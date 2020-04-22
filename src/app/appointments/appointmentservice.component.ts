@@ -63,13 +63,14 @@ import { WeekDay } from 'calendar-utils';
   '    }' ,
   ],
   encapsulation: ViewEncapsulation.None
-})
-export class AppointmentserviceComponent {
+})export class AppointmentserviceComponent {
   title = 'SalonPay';
   private servicelist: Observable<any>;
   private technicianlist: Observable<any>;
   private checkedList: Array<any>;
   private techserList: Array<any>;
+  searchTechList: any;
+
   @Input('preference') preference1: any;
   @Input('bookedTime') bookedTime: any;
   @Input() activeDay: Date;
@@ -159,14 +160,16 @@ export class AppointmentserviceComponent {
     console.log(this.appointmentService.techserList);
   }
   ;
- 
+
   dayClicked(day: WeekDay): void {
     this.viewDate = day.date;
     if (this.selectedDay) {
       delete this.selectedDay.cssClass;
     }
     let  ele = document.getElementsByClassName("cal-today");
-    ele[0].classList.remove('cal-today')
+    if(ele[0]!=undefined){
+      ele[0].classList.remove('cal-today')
+    }
     day.cssClass = 'cal-today';
     this.selectedDay = day;
   }
@@ -174,7 +177,9 @@ export class AppointmentserviceComponent {
   beforeViewRender({header}: {header: WeekDay[]}): void {
     if(this.viewDate > new Date()){
       let  ele = document.getElementsByClassName("cal-today");
-      ele[0].classList.remove('cal-today')
+      if(ele[0]!=undefined) {
+        ele[0].classList.remove('cal-today')
+      }
     }
     header.forEach((day) => {
       if (this.selectedDay && day.date.getTime() === this.selectedDay.date.getTime()) {
@@ -238,11 +243,6 @@ export class AppointmentserviceComponent {
     myDiv.style.display = 'block'
     datediv.style.display = 'none'
     myDiv1.style.display = 'none'
-    this.viewDate = this.selectedDate1
-
-    // this.dayHeaderClicked(this.event);
-    this.evnVar.style.backgroundColor = 'blue';
-
     ;  }
 
   nextScreen(){
@@ -264,7 +264,7 @@ export class AppointmentserviceComponent {
 
   searchTechnician(){
     this.appointmentService.getSearchTechnician(this.searchTech).subscribe((data) => {
-      this.technicianlist = data['result'];
+      this.searchTechList = data['result'];
     });
   }
 
@@ -334,8 +334,9 @@ export class AppointmentserviceComponent {
 
   getTechnicianList() {
     this.appointmentService.getServiceTechnician(this.checkedList).subscribe((data) => {
-      this.technicianlist = data['result'][0];
-      this.technicianlist = this.technicianlist['technicians'];
+      debugger;
+      this.technicianlist = data['result'];
+      // this.technicianlist = this.technicianlist['technicians'];
     });
   }
 
