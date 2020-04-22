@@ -93,7 +93,7 @@ import {MessageService} from "../message.service";
     '                                <i class="icon-cart"></i>\n' +
     '                                <div class="tech-usr-cont">\n' +
     '                                    <p>Sales Amount</p>\n' +
-    '                                    <h3>$ {{sale.saleAmount}}</h3>\n' +
+    '                                    <h3>$ {{sale.salesAmount}}</h3>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +

@@ -226,10 +226,10 @@
               <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
                 <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(technician)" required />
                 <label for="apn-technician-2-{{j}}">
-                  <div class="apn-technician">
+                  <div class="apn-technician" *ngFor="let tech of technician.technicians">
                     <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
                     <div class="usr-name">
-                      <h3>{{technician?.firstName}} {{technician?.lastName}}</h3>
+                      <h3>{{tech?.firstName}} {{tech?.lastName}}</h3>
                       <ul class="usr-social">
                         <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
                         <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>

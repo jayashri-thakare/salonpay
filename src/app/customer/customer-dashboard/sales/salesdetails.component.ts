@@ -25,7 +25,7 @@ import { CustomerService } from '../../customer.service';
     '                <!-- start -->\n' +
     '                <div class="prof-comm-shad pad-2 mb-3">\n' +
     '                    <div class="comm-cont w100 p-0">\n' +
-    '                        <h6>#987542</h6>\n' +
+    '                        <h6>#{{saleDetails?.saleId}}</h6>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -36,7 +36,7 @@ import { CustomerService } from '../../customer.service';
     '                <!-- start -->\n' +
     '                <div class="prof-comm-shad pad-2 mb-3">\n' +
     '                    <div class="comm-cont w100 p-0">\n' +
-    '                        <h6>5 Aug 2019, 2:30PM</h6>\n' +
+    '                        <h6>{{saleDetails?.dateTime | date:"M/d/yy"}}</h6>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -47,7 +47,7 @@ import { CustomerService } from '../../customer.service';
     '                <!-- start -->\n' +
     '                <div class="prof-comm-shad pad-2 mb-3">\n' +
     '                    <div class="comm-cont w100 p-0">\n' +
-    '                        <h6>Maya Didas</h6>\n' +
+    '                        <h6>{{saleDetails.name}}</h6>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -58,7 +58,7 @@ import { CustomerService } from '../../customer.service';
     '                <!-- start -->\n' +
     '                <div class="prof-comm-shad pad-2 mb-3">\n' +
     '                    <div class="comm-cont w100 p-0">\n' +
-    '                        <h6>mayadidas@salescorp.com</h6>\n' +
+    '                        <h6>{{saleDetails.email}}</h6>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -69,7 +69,7 @@ import { CustomerService } from '../../customer.service';
     '                <!-- start -->\n' +
     '                <div class="prof-comm-shad pad-2 mb-3">\n' +
     '                    <div class="comm-cont w100 p-0">\n' +
-    '                        <h6>+ 1-541-754-3010</h6>\n' +
+    '                        <h6>{{saleDetails.mobile}}</h6>\n' +
     '                    </div>\n' +
     '                </div>\n' +
     '                <!-- end -->\n' +
@@ -87,9 +87,6 @@ import { CustomerService } from '../../customer.service';
     '                        <div class="order-tip">\n' +
     '                            <h4>Tip</h4>\n' +
     '                        </div>\n' +
-    '                        <div class="order-qty">\n' +
-    '                            <h4>Qty</h4>\n' +
-    '                        </div>\n' +
     '                        <div class="order-price">\n' +
     '                            <h4>Price</h4>\n' +
     '                        </div>\n' +
@@ -100,121 +97,28 @@ import { CustomerService } from '../../customer.service';
     '                </div>\n' +
     '                <!-- Ends -->\n' +
     '                <!-- Starts -->\n' +
-    '                <div class="tip-flex">\n' +
+    '                <div class="tip-flex" *ngFor="let service of arrayofservice">\n' +
     '                    <div class="user-det">\n' +
     '                        <i class="icon-dye prodt-ico"></i>\n' +
     '                        <div class="usr-name">\n' +
-    '                            <h3>Hair Color<span>Add On Services : Massage, Hair Spa</span></h3>\n' +
+    '                            <h3>{{service.serviceName}}<span>Add On Services :</span> <span *ngFor="let addon of service.addonServicesBySale">{{addon.serviceName}}</span></h3>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                    <div class="user-det">\n' +
     '                        <div class="user-img"><img src="img/user.svg" alt=""></div>\n' +
     '                        <div class="usr-name">\n' +
-    '                            <h3>Ira Membrit<span>Haircut</span></h3>\n' +
+    '                            <h3>{{service.technicianName}}<span></span></h3>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                    <div class="tip-flex-other">\n' +
     '                        <div class="order-tip">\n' +
-    '                            <p>$2</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-qty">\n' +
-    '                            <p>-</p>\n' +
+    '                            <p>${{service.tipAmount}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-price">\n' +
-    '                            <p>$15</p>\n' +
+    '                            <p>${{service.serviceCost}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-total">\n' +
-    '                            <p>$17</p>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                </div>\n' +
-    '                <!-- Ends -->\n' +
-    '                <!-- Starts -->\n' +
-    '                <div class="tip-flex">\n' +
-    '                    <div class="user-det">\n' +
-    '                        <i class="icon-dye prodt-ico"></i>\n' +
-    '                        <div class="usr-name">\n' +
-    '                            <h3>Hair Color<span>Add On Services : Massage, Hair Spa</span></h3>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <div class="user-det">\n' +
-    '                        <div class="user-img"><img src="img/user.svg" alt=""></div>\n' +
-    '                        <div class="usr-name">\n' +
-    '                            <h3>Ira Membrit<span>Haircut</span></h3>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <div class="tip-flex-other">\n' +
-    '                        <div class="order-tip">\n' +
-    '                            <p>$2</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-qty">\n' +
-    '                            <p>2</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-price">\n' +
-    '                            <p>$15</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-total">\n' +
-    '                            <p>$17</p>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                </div>\n' +
-    '                <!-- Ends -->\n' +
-    '                <!-- Starts -->\n' +
-    '                <div class="tip-flex">\n' +
-    '                    <div class="user-det">\n' +
-    '                        <i class="icon-dye prodt-ico"></i>\n' +
-    '                        <div class="usr-name">\n' +
-    '                            <h3>Hair Color<span>Add On Services : Massage, Hair Spa</span></h3>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <div class="user-det">\n' +
-    '                        <div class="user-img"><img src="img/user.svg" alt=""></div>\n' +
-    '                        <div class="usr-name">\n' +
-    '                            <h3>Ira Membrit<span>Haircut</span></h3>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <div class="tip-flex-other">\n' +
-    '                        <div class="order-tip">\n' +
-    '                            <p>$2</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-qty">\n' +
-    '                            <p>-</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-price">\n' +
-    '                            <p>$15</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-total">\n' +
-    '                            <p>$17</p>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                </div>\n' +
-    '                <!-- Ends -->\n' +
-    '                <!-- Starts -->\n' +
-    '                <div class="tip-flex">\n' +
-    '                    <div class="user-det">\n' +
-    '                        <i class="icon-dye prodt-ico"></i>\n' +
-    '                        <div class="usr-name">\n' +
-    '                            <h3>Hair Color<span>Add On Services : Massage, Hair Spa</span></h3>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <div class="user-det">\n' +
-    '                        <div class="user-img"><img src="img/user.svg" alt=""></div>\n' +
-    '                        <div class="usr-name">\n' +
-    '                            <h3>Ira Membrit<span>Haircut</span></h3>\n' +
-    '                        </div>\n' +
-    '                    </div>\n' +
-    '                    <div class="tip-flex-other">\n' +
-    '                        <div class="order-tip">\n' +
-    '                            <p>$2</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-qty">\n' +
-    '                            <p>2</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-price">\n' +
-    '                            <p>$15</p>\n' +
-    '                        </div>\n' +
-    '                        <div class="order-total">\n' +
-    '                            <p>$17</p>\n' +
+    '                            <p>${{totalsaleamount}}</p>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                </div>\n' +
@@ -232,25 +136,9 @@ import { CustomerService } from '../../customer.service';
     '                        <div class="tip-payment-box">\n' +
     '                            <h6 class="poptile">Payment Method</h6>\n' +
     '                            <div class="payment-card-box">\n' +
-    '                                <div class="pay-card"><img src="./img/visa.jpg" alt="card" /></div>\n' +
+    '                                <div class="pay-card"><img src="../assets/img/visa.jpg" alt="card" /></div>\n' +
     '                                <h5>Card Name</h5>\n' +
     '                                <p>Harsh Metha</p>\n' +
-    '                                <div class="p-card-ht"></div>\n' +
-    '                                <h5>Card Number</h5>\n' +
-    '                                <p>**** **** **** <span>1234</span></p>\n' +
-    '                            </div>\n' +
-    '                            <div class="payment-card-box">\n' +
-    '                                <div class="pay-card"><img src="./img/visa.jpg" alt="card" /></div>\n' +
-    '                                <h5>Card Name</h5>\n' +
-    '                                <p>Pratik Karkera</p>\n' +
-    '                                <div class="p-card-ht"></div>\n' +
-    '                                <h5>Card Number</h5>\n' +
-    '                                <p>**** **** **** <span>1234</span></p>\n' +
-    '                            </div>\n' +
-    '                            <div class="payment-card-box">\n' +
-    '                                <div class="pay-card"><img src="./img/visa.jpg" alt="card" /></div>\n' +
-    '                                <h5>Card Name</h5>\n' +
-    '                                <p>Atmiya Malviya</p>\n' +
     '                                <div class="p-card-ht"></div>\n' +
     '                                <h5>Card Number</h5>\n' +
     '                                <p>**** **** **** <span>1234</span></p>\n' +
@@ -259,11 +147,11 @@ import { CustomerService } from '../../customer.service';
     '                        <div class="tip-total-box">\n' +
     '                            <div class="tipb tipb-hdn">\n' +
     '                                <h5>Sub Total</h5>\n' +
-    '                                <h6>$100</h6>\n' +
+    '                                <h6>${{saleDetails.salesAmount}}</h6>\n' +
     '                            </div>\n' +
     '                            <div class="tipb">\n' +
     '                                <h5>Coupon</h5>\n' +
-    '                                <h6 class="cupn-reward">- $5</h6>\n' +
+    '                                <h6 class="cupn-reward">- ${{coupon.amount}}</h6>\n' +
     '                            </div>\n' +
     '                            <hr>\n' +
     '                            <div class="tipb">\n' +
@@ -271,32 +159,32 @@ import { CustomerService } from '../../customer.service';
     '                                    <h6>Rewards Gained: $1.63</h6>\n' +
     '                                    <p>Cash Rewards Available: <span>$7.87</span></p>\n' +
     '                                </div>\n' +
-    '                                <h6 class="reward-gain">+ $5</h6>\n' +
+    '                                <h6 class="reward-gain">+ ${{reward.amount}}</h6>\n' +
     '                            </div>\n' +
     '                            <hr>\n' +
     '                            <div class="tipb">\n' +
     '                                <h5>Cash</h5>\n' +
-    '                                <h6 class="cartPriceWidth">$20</h6>\n' +
+    '                                <h6 class="cartPriceWidth">${{cash.amount}}</h6>\n' +
     '                            </div>\n' +
     '                            <hr>\n' +
     '                            <div class="tipb">\n' +
     '                                <h5>Card</h5>\n' +
-    '                                <h6 class="cartPriceWidth">$50</h6>\n' +
+    '                                <h6 class="cartPriceWidth">${{card?.amount}}</h6>\n' +
     '                            </div>\n' +
     '                            <hr>\n' +
     '                            <div class="tipb tipbTax">\n' +
     '                                <h5>Tax</h5>\n' +
-    '                                <h6 class="cartPriceWidth">$40</h6>\n' +
+    '                                <h6 class="cartPriceWidth">${{tax.amount}}</h6>\n' +
     '                            </div>\n' +
     '\n' +
     '                            <div class="tipbGray">\n' +
     '                                <div class="tipb">\n' +
     '                                    <h5>Cash Total</h5>\n' +
-    '                                    <h6 class="cartPriceWidth">$30</h6>\n' +
+    '                                    <h6 class="cartPriceWidth">${{cash.amount}}</h6>\n' +
     '                                </div>\n' +
     '                                <div class="tipb">\n' +
     '                                    <h5>Card Total</h5>\n' +
-    '                                    <h6 class="cartPriceWidth">$235</h6>\n' +
+    '                                    <h6 class="cartPriceWidth">${{card?.amount}}</h6>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '\n' +
@@ -318,19 +206,44 @@ import { CustomerService } from '../../customer.service';
 })
 export class SalesDetailsComponent implements OnInit {
   saleDetails: any;
+    arrayofservice: Array<any>=[];
+    totalsaleamount: any;
+    coupon: any;
+    reward: any;
+    cash: any;
+    tax: any;
+    card: any;
 
   constructor(public customerService: CustomerService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+      this.totalsaleamount = 0;
     this.getCustomerSalesDetails(localStorage.getItem('saledetailid'))
   }
 
   getCustomerSalesDetails(saleid) {
     this.customerService.getCustomerSalesDetails(saleid).subscribe((data) => {
       this.saleDetails = data;
+      this.arrayofservice = this.saleDetails['servicesBySaleId'];
+      this.card = this.saleDetails['paymentDetailsBySale'][1];
+      this.coupon = this.saleDetails['paymentDetailsBySale'][2];
+      this.reward = this.saleDetails['paymentDetailsBySale'][3];
+      this.cash = this.saleDetails['paymentDetailsBySale'][4];
+      this.tax = this.saleDetails['paymentDetailsBySale'][5];
       // this.receivedChildMessage = this.receivedChildMessage.ordersummaryservices;
       console.log(this.saleDetails)
+      this.totalofservices();
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  totalofservices(){
+      for(let i=0;i<this.arrayofservice.length;i++){
+        this.totalsaleamount = this.arrayofservice[i]['serviceCost'] + this.arrayofservice[i]['tipAmount']
+        for(let j=0;j<this.arrayofservice[i]['addonServicesBySale'].length;j++){
+            this.totalsaleamount = this.totalsaleamount + this.arrayofservice[i]['addonServicesBySale'][j]['serviceCost']
+        }
+      }
+      console.log(this.totalsaleamount)
   }
 }

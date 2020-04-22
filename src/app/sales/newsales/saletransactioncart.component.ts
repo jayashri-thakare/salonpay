@@ -530,58 +530,99 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   finalSaleService() {
-      this.finalSale['SaleId'] = parseInt(localStorage.getItem('orderId'));
-      this.finalSale['ParentComapnyId'] = parseInt(localStorage.getItem('companyId'));
-      this.finalSale['Currency'] = '$';
-      this.finalSale['TotalAmount'] = this.finalamount;
-      this.finalSale['ReceivedAmount'] = this.finalamount;
-      this.finalSale['IsFullPaymentComplete'] = true;
-      this.finalSale['productsUpdate'] = [
-          {
-              "productCost": 4.00,
-              "productId": 1,
-              "productName": "Nail Polish",
-              "quantity": 2
-          },
-          {
-              "productCost": 2.00,
-              "productId": 2,
-              "productName": "Nykaa Matte Nail Enamel",
-              "quantity": 5
-          }
-      ];
-      this.finalSale['ordersummaryservicesUpdate'] = this.arrayofservices;
-      this.finalSale['PaymentType']=[
-            {
-            "Type":"COUPON",
-            "TypeDescription":"coupon001",
-            "Amount":4.0
-            },
-            {
-            "Type":"REWARD",
-            "Amount":4.0
-            },
-            {
-            "Type":"CASH",
-            "Amount":10.0
-            },
-            {
-            "Type":"TAX",
-            "Amount":1.0
-            }
+      this.finalSale = {
+        "SaleId": parseInt(localStorage.getItem('orderId')),
+      "Currency":"$",
+      "TotalAmount":200.20,
+      "ReceivedAmount":200.20,
+      "IsFullPaymentComplete":true,
+      "ParentCompanyId":6,
+      "PaymentType":[
+              {
+              "Type":"COUPON",
+              "TypeDescription":"coupon001",
+              "Amount":2.0
+              },
+              {
+              "Type":"REWARD",
+              "Amount":2.0
+              },
+              {
+              "Type":"CASH",
+              "Amount":10.0
+              },
+              {
+              "Type":"TAX",
+              "Amount":1.0
+              }
       ],
-      this.finalSale['Card']=[
-            {
-            "Type":"CARD",
-            "CardDescription":"1264-2536-4523-5689",
-            "CardAmount":2.0
-            },
-            {
-            "Type":"CARD",
-            "CardDescription":"1264-2536-4523-5689",
-            "CardAmount":1.0
-            }
+      "Card":[
+              {
+              "Type":"CARD",
+              "CardDescription":"1264-2536-4523-5689",
+              "CardAmount":2.0
+              },
+              {
+              "Type":"CARD",
+              "CardDescription":"1264-2536-4523-5689",
+              "CardAmount":1.0
+              }
       ],
+        "ordersummaryservicesUpdate": this.arrayofservices,
+                "productsUpdate": this.customerProductCart
+            }
+      // this.finalSale['SaleId'] = parseInt(localStorage.getItem('orderId'));
+      // this.finalSale['ParentComapnyId'] = parseInt(localStorage.getItem('companyId'));
+      // this.finalSale['Currency'] = '$';
+      // this.finalSale['TotalAmount'] = 100.00;
+      // this.finalSale['ReceivedAmount'] = 100.00;
+      // this.finalSale['IsFullPaymentComplete'] = true;
+      // this.finalSale['productsUpdate'] = [
+      //     {
+      //         "productCost": 600.00,
+      //         "productId": 19,
+      //         "productName": "Nail Polish",
+      //         "quantity": 5
+      //     },
+      //     {
+      //         "productCost": 122.00,
+      //         "productId": 20,
+      //         "productName": "Nykaa Matte Nail Enamel",
+      //         "quantity": 5
+      //     }
+      // ];
+      // this.finalSale['ordersummaryservicesUpdate'] = this.arrayofservices;
+      // this.finalSale['PaymentType']=[
+      //       {
+      //       "Type":"COUPON",
+      //       "TypeDescription":"coupon001",
+      //       "Amount":100.0
+      //       },
+      //       {
+      //       "Type":"REWARD",
+      //       "Amount":10.0
+      //       },
+      //       {
+      //       "Type":"CASH",
+      //       "Amount":100.0
+      //       },
+      //       {
+      //       "Type":"TAX",
+      //       "Amount":10.0
+      //       }
+      // ],
+      // this.finalSale['Card']=[
+      //       {
+      //       "Type":"CARD",
+      //       "CardDescription":"1264-2536-4523-5689",
+      //       "CardAmount":200.0
+      //       },
+      //       {
+      //       "Type":"CARD",
+      //       "CardDescription":"1264-2536-4523-5689",
+      //       "CardAmount":100.0
+      //       }
+      // ],
       this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
         this.router.navigate(['/transactiontipadjustment']);
         this.messageService.clear();

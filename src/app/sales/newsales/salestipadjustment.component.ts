@@ -242,13 +242,23 @@ export class TipAdjustmentSalesComponent implements OnInit {
   }
 
   finalSaleTip() {
-    this.finalSaleTipData['saleId'] = parseInt(localStorage.getItem('orderId'));
-    this.finalSaleTipData['customerId'] = parseInt(localStorage.getItem('customerId'));
-    this.finalSaleTipData['totalAmount'] = this.totalamount;
-    this.finalSaleTipData['receivedAmount'] = this.totalamount;
-    this.finalSaleTipData['isFullPaymentComplete'] = true;
-    this.finalSaleTipData['ordersummaryservicesTip'] = this.customerTipData;
-    this.finalSaleTipData['tipMode'] = this.tipmode;
+    this.finalSaleTipData = {
+      "saleId": parseInt(localStorage.getItem('orderId')),
+      "customerId": parseInt(localStorage.getItem('customerId')),
+      "parentCompanyId": 6,
+      "totalAmount": 200.20,
+      "receivedAmount": 200.20,
+      "isFullPaymentComplete": true,
+      "tipMode": "CASH",
+      "ordersummaryservicesTip": this.customerTipData 
+  }
+    // this.finalSaleTipData['saleId'] = parseInt(localStorage.getItem('orderId'));
+    // this.finalSaleTipData['customerId'] = parseInt(localStorage.getItem('customerId'));
+    // this.finalSaleTipData['totalAmount'] = this.totalamount;
+    // this.finalSaleTipData['receivedAmount'] = this.totalamount;
+    // this.finalSaleTipData['isFullPaymentComplete'] = true;
+    // this.finalSaleTipData['ordersummaryservicesTip'] = this.customerTipData;
+    // this.finalSaleTipData['tipMode'] = this.tipmode;
     this.salesService.create_final_sales_tip(this.finalSaleTipData).subscribe((data) => {
       this.router.navigate(['/customerdashboard']);
       this.customerService.showNav(4);

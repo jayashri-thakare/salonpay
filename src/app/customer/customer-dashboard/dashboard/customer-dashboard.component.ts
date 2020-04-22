@@ -28,8 +28,11 @@ export class CustDashboardComponent implements OnInit {
   getCustomerRecentSale() {
     this.customerService.getCustomerRecentSale().subscribe((data) => {
       this.customerRecentSale = data;
-      this.favproduct= this.customerRecentSale.favoriteProducts[0];
-      this.favservice= this.customerRecentSale.favoriteServices[0];
+      if(this.customerRecentSale.favoriteProducts[0]){
+        this.favproduct= this.customerRecentSale.favoriteProducts[0];
+      }else if(this.customerRecentSale.favoriteServices[0]){
+        this.favservice= this.customerRecentSale.favoriteServices[0]
+      }
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }

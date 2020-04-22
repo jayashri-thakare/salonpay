@@ -315,8 +315,8 @@ export class AppointmentserviceComponent {
 
   getTechnicianList() {
     this.appointmentService.getServiceTechnician(this.checkedList).subscribe((data) => {
-      this.technicianlist = data['result'][0];
-      this.technicianlist = this.technicianlist['technicians'];
+      this.technicianlist = data['result'];
+      // this.technicianlist = this.technicianlist['technicians'];
     });
   }
 
