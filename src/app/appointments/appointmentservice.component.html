@@ -14,28 +14,21 @@
                   <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
-                    [refresh]="refresh"
-                    [ngClass]="{'booked-time': activeDayIsOpen}"
-                    (dayHeaderClicked)="dayHeaderClicked($event)"
-                    [ngStyle]="{ backgroundColor: 'green' }"
-                    (eventClicked)="handleEvent('Clicked', $event.event)"
-
-                    (mwlClick)="dayClicked.emit({ day: viewDate.getDay(), sourceEvent: $event })"
-
+                    [events]="events"
+                    (beforeViewRender)="beforeViewRender($event)"
+                    (dayHeaderClicked)="dayClicked($event.day)">
                   >
                   </mwl-calendar-week-view>
                 </div>
               </div>
             </div>
-            <div mwlCalendarNextView
-                [view]="view"
-                [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenWeekViewDay()"
+            <div   mwlCalendarNextView
+                   view="month"
+                   [(viewDate)]="viewDate"
                 class="swiper-button-next apn-button-next"></div>
             <div mwlCalendarPreviousView
-                [view]="view"
-                [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
+                 view="month"
+                 [(viewDate)]="viewDate" class="swiper-button-prev apn-button-prev"></div>
             <!-- swiper slider Ends -->
           </div>
         </div>
@@ -57,39 +50,39 @@
         <div class="row text-center">
           <div class="col-md-4">
             <div class="btn-group">
-              <div
-                class="btn btn-primary"
-                mwlCalendarPreviousView
-                [view]="view"
-                [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenWeekViewDay()"
-              >
-                Previous
-              </div>
-              <div
-                class="btn btn-outline-secondary"
-                mwlCalendarToday
-                [(viewDate)]="viewDate"
-              >
-                Today
-              </div>
-              <div
-                class="btn btn-primary"
-                mwlCalendarNextView
-                [view]="view"
-                [(viewDate)]="viewDate"
-                (viewDateChange)="closeOpenWeekViewDay()"
-              >
-                Next
-              </div>
+<!--              <div-->
+<!--                class="btn btn-primary"-->
+<!--                mwlCalendarPreviousView-->
+<!--                [view]="view"-->
+<!--                [(viewDate)]="viewDate"-->
+<!--                (viewDateChange)="closeOpenWeekViewDay()"-->
+<!--              >-->
+<!--                Previous-->
+<!--              </div>-->
+<!--              <div-->
+<!--                class="btn btn-outline-secondary"-->
+<!--                mwlCalendarToday-->
+<!--                [(viewDate)]="viewDate"-->
+<!--              >-->
+<!--                Today-->
+<!--              </div>-->
+<!--              <div-->
+<!--                class="btn btn-primary"-->
+<!--                mwlCalendarNextView-->
+<!--                [view]="view"-->
+<!--                [(viewDate)]="viewDate"-->
+<!--                (viewDateChange)="closeOpenWeekViewDay()"-->
+<!--              >-->
+<!--                Next-->
+<!--              </div>-->
             </div>
           </div>
           <div class="col-md-4" style="    margin-left: -180px;">
-            <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+            <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}  </h5>
           </div><br/><br/>
         </div>
           <div class="swiper-container apn-swiper">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper"  >
               <div class="swiper-slide radio-box radio-box-2">
 <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
 <!--                <label for="apn-swiper-box-1">-->
@@ -97,21 +90,18 @@
 <!--                </label>-->
         <mwl-calendar-week-view
           [viewDate]="viewDate"
-          [refresh]="refresh"
-          [ngClass]="{'cal-today': selectedDay}"
-          [class.cal-today]="viewDate.getDay()==selectedDay"
-          (dayHeaderClicked)="dayHeaderClicked($event)"
+          [events]="events"
+          (beforeViewRender)="beforeViewRender($event)"
+          (dayHeaderClicked)="dayClicked($event.day)">
         >
         </mwl-calendar-week-view>
-                <div mwlCalendarNextView
-                     [view]="view"
-                     [(viewDate)]="viewDate"
-                     (viewDateChange)="closeOpenWeekViewDay()"
-                      class="swiper-button-next apn-button-next"></div>
+                <div   mwlCalendarNextView
+                       view="month"
+                       [(viewDate)]="viewDate"
+                       class="swiper-button-next apn-button-next"></div>
                 <div mwlCalendarPreviousView
-                     [view]="view"
-                     [(viewDate)]="viewDate"
-                     (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
+                     view="month"
+                     [(viewDate)]="viewDate" class="swiper-button-prev apn-button-prev"></div>
               </div>
             </div>
           </div>
@@ -155,7 +145,7 @@
       <div class="apn-service-box">
         <!-- start -->
         <div class="apn-input-selection" *ngFor="let service of  servicelist; let i = index">
-          <input type="checkbox" id="apnChk{{i}}" value="{{service}}"  (change)="selectService($event, service?.serviceId, service)">
+          <input type="radio" name="service" id="apnChk{{i}}" value="{{service}}"  (change)="selectService($event, service?.serviceId, service)">
           <label for="apnChk{{i}}">
             <div class="apn-ser">
               <h5>  {{service?.serviceName}}</h5>
@@ -223,22 +213,24 @@
               </div>
               <!-- end -->
               <!-- start -->
-              <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
-                <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(technician)" required />
-                <label for="apn-technician-2-{{j}}">
-                  <div class="apn-technician" *ngFor="let tech of technician.technicians">
-                    <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
-                    <div class="usr-name">
-                      <h3>{{tech?.firstName}} {{tech?.lastName}}</h3>
-                      <ul class="usr-social">
-                        <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
-                        <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
-                      </ul>
-                    </div>
+                <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
+                  <div *ngFor="let tech of technician?.technicians">
+                  <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(tech)" required />
+                  <label for="apn-technician-2-{{j}}">
+                    <div class="apn-technician" >
+                      <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
+                      <div class="usr-name">
+                        <h3>{{tech?.firstName}} {{tech?.lastName}}</h3>
+                        <ul class="usr-social">
+                          <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                          <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
+                        </ul>
+                      </div>
 
+                    </div>
+                  </label>
                   </div>
-                </label>
-              </div>
+                </div>
 
               <!-- end -->
             </div>
@@ -303,23 +295,21 @@
 <!--                <label for="apn-swiper-box-1">-->
                   <mwl-calendar-week-view
                     [viewDate]="viewDate"
-                    [refresh]="refresh"
-                    (dayHeaderClicked)="dayHeaderClicked($event)"
-                  >
+                    [events]="events"
+                    (beforeViewRender)="beforeViewRender($event)"
+                    (dayHeaderClicked)="dayClicked($event.day)">
+                    >
                   </mwl-calendar-week-view>
               </div>
             </div>
           </div>
-          <div mwlCalendarNextView
-               [view]="view"
-               [(viewDate)]="viewDate"
-               (viewDateChange)="closeOpenWeekViewDay()"
-               class="swiper-button-next apn-button-next"></div>
+          <div   mwlCalendarNextView
+                 view="month"
+                 [(viewDate)]="viewDate"
+                 class="swiper-button-next apn-button-next"></div>
           <div mwlCalendarPreviousView
-               [view]="view"
-               [(viewDate)]="viewDate"
-               (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
-          <!-- swiper slider Ends -->
+               view="month"
+               [(viewDate)]="viewDate" class="swiper-button-prev apn-button-prev"></div> <!-- swiper slider Ends -->
         </div>
       </div>
       <!-- Choose Date Ends -->

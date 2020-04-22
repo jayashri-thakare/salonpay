@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, Output, TemplateRef, ViewChild, EventEmitter} from '@angular/core';
+import {Component, ElementRef, Input, Output, TemplateRef, ViewChild, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppointmentService} from './appointment.service';
 import {Observable} from 'rxjs';
@@ -15,16 +15,19 @@ import {
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { CalendarEvent, CalendarView, CalendarEventAction,
-  CalendarEventTimesChangedEvent,
+  CalendarEventTimesChangedEvent, CalendarMonthViewDay
 } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
-import {DatePipe, WeekDay} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {MessageService} from '../message.service';
+import { WeekDay } from 'calendar-utils';
+
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 @Component({
   selector: 'app-appointmentservice',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './appointmentservice.component.html',
   styles:  ['cal-time-events {\n' +
   '    display: none !important;\n' +
@@ -50,15 +53,24 @@ import {MessageService} from '../message.service';
   '    color: #fff;\n' +
   '    border-color: transparent;\n' +
   '    background: red;\n' +
-  '}' ,
-  ]
-})
-export class AppointmentserviceComponent {
+  '}.cal-day-selected,\n' +
+  '    .cal-day-selected:hover {\n' +
+  '      background-color: deeppink !important;\n' +
+  '    }.cal-today{\n' +
+  '      color: #fff;\n' +
+  '      border-color: transparent;\n' +
+  '      background: linear-gradient(90deg, #2ecbaa 0, #358fd0 100%) !important;\n' +
+  '    }' ,
+  ],
+  encapsulation: ViewEncapsulation.None
+})export class AppointmentserviceComponent {
   title = 'SalonPay';
   private servicelist: Observable<any>;
   private technicianlist: Observable<any>;
   private checkedList: Array<any>;
   private techserList: Array<any>;
+  searchTechList: any;
+
   @Input('preference') preference1: any;
   @Input('bookedTime') bookedTime: any;
   @Input() activeDay: Date;
@@ -66,17 +78,20 @@ export class AppointmentserviceComponent {
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @Input() refresh: Subject<any>;
-  // @Output()
-  // dayHeaderClicked = new EventEmitter<{
-  //   day: WeekDay;
-  //   sourceEvent: MouseEvent;
-  // }>();
 
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
-
+  // viewDate: Date = new Date();
   viewDate: Date = new Date();
+  selectedDay: WeekDay;
+
+  events: CalendarEvent[] = [];
+
+
+  // @Input() viewDate: Date;
+
+  selectedDate1: Date = new Date()
   @Output() viewChange: EventEmitter<string> = new EventEmitter();
 
   @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
@@ -105,7 +120,6 @@ export class AppointmentserviceComponent {
   private objIndex: any;
   private customerEmail: string;
   private customerId: number;
-  selectedDay: WeekDay;
 
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
@@ -113,22 +127,6 @@ export class AppointmentserviceComponent {
   setView(view: CalendarView) {
     this.view = view;
   }
-  // dayClicked(day: WeekDay): void {
-  //   debugger;
-  //   if (this.selectedDay) {
-  //     delete this.selectedDay.cssClass;
-  //   }
-  //   day.cssClass = 'cal-today';
-  //   this.selectedDay = day;
-  // }
-  // beforeViewRender({header}: {header: WeekDay[]}): void {
-  //   header.forEach((day) => {
-  //     if (this.selectedDay && day.date.getTime() === this.selectedDay.date.getTime()) {
-  //       day.cssClass = 'cal-day-selected';
-  //       this.selectedDay = day;
-  //     }
-  //   });
-  // }
   ngOnInit() {
     this.getServiceList();
     this.checkedList = [];
@@ -162,10 +160,33 @@ export class AppointmentserviceComponent {
     console.log(this.appointmentService.techserList);
   }
   ;
-  handleEvent(action: string, event: CalendarEvent): void {
-    debugger;
-    // this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
+
+  dayClicked(day: WeekDay): void {
+    this.viewDate = day.date;
+    if (this.selectedDay) {
+      delete this.selectedDay.cssClass;
+    }
+    let  ele = document.getElementsByClassName("cal-today");
+    if(ele[0]!=undefined){
+      ele[0].classList.remove('cal-today')
+    }
+    day.cssClass = 'cal-today';
+    this.selectedDay = day;
+  }
+
+  beforeViewRender({header}: {header: WeekDay[]}): void {
+    if(this.viewDate > new Date()){
+      let  ele = document.getElementsByClassName("cal-today");
+      if(ele[0]!=undefined) {
+        ele[0].classList.remove('cal-today')
+      }
+    }
+    header.forEach((day) => {
+      if (this.selectedDay && day.date.getTime() === this.selectedDay.date.getTime()) {
+        day.cssClass = 'cal-today';
+        this.selectedDay = day;
+      }
+    });
   }
   selectService(event, serviceId, service) {
     var obj = {};
@@ -200,6 +221,7 @@ export class AppointmentserviceComponent {
     }
     this.viewDate = evn.day.date; // finally get the clicked date value
     this.selectedDay = evn.day;
+    this.selectedDate1 = this.viewDate;
     evn.sourceEvent.target.classList.add('cal-today')
     this.evnVar = evn.sourceEvent.target.parentElement;
     let  ele = document.getElementsByClassName("cal-today");
@@ -221,9 +243,6 @@ export class AppointmentserviceComponent {
     myDiv.style.display = 'block'
     datediv.style.display = 'none'
     myDiv1.style.display = 'none'
-    this.dayHeaderClicked(this.event);
-    this.evnVar.style.backgroundColor = 'blue';
-
     ;  }
 
   nextScreen(){
@@ -245,7 +264,7 @@ export class AppointmentserviceComponent {
 
   searchTechnician(){
     this.appointmentService.getSearchTechnician(this.searchTech).subscribe((data) => {
-      this.technicianlist = data['result'];
+      this.searchTechList = data['result'];
     });
   }
 
@@ -265,9 +284,9 @@ export class AppointmentserviceComponent {
     });
   }
 
-  selectedDate(){
-  debugger;
-  }
+  // selectedDate(){
+  // this.viewDate = this.selectedDate1;
+  // }
 
   saveObj(){
     this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
