@@ -135,8 +135,8 @@ import { WeekDay } from 'calendar-utils';
     this.jobj={};
     this.appointmentService.appObj = {}
     this.appointmentService.techserList = [];
-    this.customerEmail = localStorage.getItem('appointmentCustEmail')
-    this.customerId = parseInt(localStorage.getItem('appointmentCustId'));
+    this.customerEmail = localStorage.getItem('appoointmentCustEmail')
+    this.customerId = parseInt(localStorage.getItem('appoointmentCustId'));
     var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
     var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
