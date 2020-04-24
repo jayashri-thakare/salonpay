@@ -58,7 +58,7 @@ import {MessageService} from "../message.service";
     '                            <div class="app-pad-top">\n' +
     '                                <!-- In order to add Badge Status you need to add (badge-box) class like below example and refer elements.html -->\n' +
     '                                <h4 class="gridhead badge-box">{{service.serviceName | slice:0:17}} <span\n' +
-    '                                        class="ml-2 tech-badge inactive">Close</span>\n' +
+    '                                        class="ml-2 tech-badge active">Open</span>\n' +
     '                                </h4>\n' +
     '                                <p class="girdpara">{{service.technicianName}}</p>\n' +
     '                            </div>\n' +
@@ -93,7 +93,7 @@ import {MessageService} from "../message.service";
     '                                <i class="icon-cart"></i>\n' +
     '                                <div class="tech-usr-cont">\n' +
     '                                    <p>Sales Amount</p>\n' +
-    '                                    <h3>$ {{sale.salesAmount}}</h3>\n' +
+    '                                    <h3>$ {{sale.salesAmount | number:\'1.2-2\'}}</h3>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +
@@ -102,7 +102,7 @@ import {MessageService} from "../message.service";
     '                                <i class="icon-money"></i>\n' +
     '                                <div class="tech-usr-cont">\n' +
     '                                    <p>Tip Amount</p>\n' +
-    '                                    <h3>$ {{sale.tipAmount}}</h3>\n' +
+    '                                    <h3>$ {{sale.tipAmount | number:\'1.2-2\'}}</h3>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +
@@ -120,7 +120,7 @@ import {MessageService} from "../message.service";
     '                                <i class="icon-reward"></i>\n' +
     '                                <div class="tech-usr-cont">\n' +
     '                                    <p>Rewards</p>\n' +
-    '                                    <h3>{{sale.reward}}</h3>\n' +
+    '                                    <h3>{{sale.reward | number:\'1.2-2\'}}</h3>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +

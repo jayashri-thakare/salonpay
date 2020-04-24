@@ -14,14 +14,14 @@ import { SalesService } from '../sales.service';
     '                    </div>\n' +
     '                    <div class="col-12">\n' +
     '                        <div class="f-row f-3 f-1300-2 f-640-1">\n' +
-    '                            <div class="f-col">\n' +
+    '                            <div class="f-col" *ngFor="let product of frequentlyProduct">\n' +
     '                                <!-- start -->\n' +
     '                                <div class="techi-box">\n' +
     '                                    <div class="techi-top">\n' +
     '                                        <div class="user-det">\n' +
     '                                            <i class="icon-haircut prodt-ico"></i>\n' +
     '                                            <div class="usr-name">\n' +
-    '                                                <h3><span>Haircut</span>$ 150</h3>\n' +
+    '                                                <h3><span>{{product.productName}}</span>$ {{product.productCost | number:\'1.2-2\'}}</h3>\n' +
     '                                            </div>\n' +
     '                                        </div>\n' +
     '                                        <div class="main-selt">\n' +

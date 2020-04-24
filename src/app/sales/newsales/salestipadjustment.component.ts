@@ -61,22 +61,26 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                        <div class="split-tip-btns">\n' +
     '                            <h6 class="poptile">Split Tip Evenly</h6>\n' +
     '                            <div class="radio-container">\n' +
-    // '                                <div class="radio-box radio-box-2">\n' +
-    // '                                    <input type="radio" id="ste-1" name="ste-radio" required>\n' +
-    // '                                    <label for="ste-1">15%</label>\n' +
-    // '                                </div>\n' +
-    // '                                <div class="radio-box radio-box-2">\n' +
-    // '                                    <input type="radio" id="ste-2" name="ste-radio" required>\n' +
-    // '                                    <label for="ste-2">18%</label>\n' +
-    // '                                </div>\n' +
     '                                <div class="radio-box radio-box-2">\n' +
-    '                                    <input type="radio" id="ste-3" name="ste-radio" required checked>\n' +
+    '                                    <input type="radio" id="ste-1" (click)="splitamount(15)" name="ste-radio" required>\n' +
+    '                                    <label for="ste-1">15%</label>\n' +
+    '                                </div>\n' +
+    '                                <div class="radio-box radio-box-2">\n' +
+    '                                    <input type="radio" id="ste-2" (click)="splitamount(18)" name="ste-radio" required>\n' +
+    '                                    <label for="ste-2">18%</label>\n' +
+    '                                </div>\n' +
+    '                                <div class="radio-box radio-box-2">\n' +
+    '                                    <input type="radio" id="ste-3" (click)="splitamount(20)" name="ste-radio" required checked>\n' +
     '                                    <label for="ste-3">20%</label>\n' +
     '                                </div>\n' +
-    // '                                <div class="radio-box radio-box-2">\n' +
-    // '                                    <input type="radio" id="ste-4" name="ste-radio" required>\n' +
-    // '                                    <label for="ste-4">22%</label>\n' +
-    // '                                </div>\n' +
+    '                                <div class="radio-box radio-box-2">\n' +
+    '                                    <input type="radio" id="ste-4" (click)="splitamount(22)" name="ste-radio" required>\n' +
+    '                                    <label for="ste-4">22%</label>\n' +
+    '                                </div>\n' +
+    '                                <div class="radio-box radio-box-2">\n' +
+    '                                    <input type="radio" id="ste-5" (click)="splitamount(0)" name="ste-radio" required>\n' +
+    '                                    <label for="ste-5">0%</label>\n' +
+    '                                </div>\n' +
     '                            </div>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
@@ -130,24 +134,24 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                            <div class="tip-total-box">\n' +
     '                                <div class="tipb tipb-hdn">\n' +
     '                                    <h5>Tip</h5>\n' +
-    '                                    <h6>${{tipvalue}}</h6>\n' +
+    '                                    <h6>${{tipvalue | number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     '                                <div class="tipb">\n' +
     '                                    <h5>Tip</h5>\n' +
-    '                                    <h6>${{tipvalue}}</h6>\n' +
+    '                                    <h6>${{tipvalue | number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     '                                <div class="tipb">\n' +
     '                                    <h5>Order Total</h5>\n' +
-    '                                    <h6>${{totalamount}}</h6>\n' +
+    '                                    <h6>${{totalamount | number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     '                                <hr>\n' +
     '                                <div *ngIf="tipcashbool" class="tipb">\n' +
     '                                    <h5>Cash Total</h5>\n' +
-    '                                    <h6>${{totaltip}}</h6>\n' +
+    '                                    <h6>${{totaltip | number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     '                                <div *ngIf="tipcardbool" class="tipb">\n' +
     '                                    <h5>Card Total</h5>\n' +
-    '                                    <h6>${{totaltip}}</h6>\n' +
+    '                                    <h6>${{totaltip | number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     // '                                <div class="tipb">\n' +
     // '                                    <h5>Card Total 2</h5>\n' +
@@ -174,6 +178,7 @@ export class TipAdjustmentSalesComponent implements OnInit {
   tipcardbool: boolean;
   tipcashbool: boolean;
   totaltip: any;
+  splitamountorder: number;
 
   constructor(public customerService: CustomerService,public messageService: MessageService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -208,13 +213,19 @@ export class TipAdjustmentSalesComponent implements OnInit {
     });
   }
 
+  splitamount(value){
+    if(value){
+      this.splitamountorder = this.totalamount * (value/100)
+    }
+    console.log(this.splitamountorder)
+  }
+
   tipvaluefunc(event, serviceid){
     debugger;
       for(let i=0;i<this.customerTipData.length;i++){
         if(event && serviceid == this.customerTipData[i].serviceId){
           this.customerTipData[i]['tip'] = parseInt(event);
           this.tipvalue = this.tipvalue + this.customerTipData[i]['tip'];
-          this.tipvalue = this.tipvalue * 0.2;
           this.totaltip = this.tipvalue + this.totalamount;
         }else if(event == '' && serviceid == this.customerTipData[i].serviceId){
           if(event == ''){
@@ -222,7 +233,6 @@ export class TipAdjustmentSalesComponent implements OnInit {
           }else{
             this.customerTipData[i]['tip'] = parseInt(event);
             this.tipvalue = this.tipvalue - this.customerTipData[i]['tip'];
-            this.tipvalue = this.tipvalue * 0.2;
             this.totaltip = this.totalamount - this.tipvalue;
           }
         }
@@ -245,9 +255,9 @@ export class TipAdjustmentSalesComponent implements OnInit {
     this.finalSaleTipData = {
       "saleId": parseInt(localStorage.getItem('orderId')),
       "customerId": parseInt(localStorage.getItem('customerId')),
-      "parentCompanyId": 6,
-      "totalAmount": 200.20,
-      "receivedAmount": 200.20,
+      "parentCompanyId": parseInt(localStorage.getItem('companyId')),
+      "totalAmount": parseFloat(this.totaltip),
+      "receivedAmount": parseFloat(this.totaltip),
       "isFullPaymentComplete": true,
       "tipMode": "CASH",
       "ordersummaryservicesTip": this.customerTipData 

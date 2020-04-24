@@ -52,14 +52,14 @@
                               <div class="user-det">
                                   <i class="icon-dye prodt-ico"></i>
                                   <div class="usr-name">
-                                      <h3><span>{{selectedservice?.serviceName}}</span>$ {{selectedservice?.serviceCost}}</h3>
+                                      <h3><span>{{selectedservice?.serviceName}}</span>$ {{selectedservice?.serviceCost | number:'1.2-2'}}</h3>
                                   </div>
                               </div>
                           </div>
                           <div class="techi-top border-0 techi-top-btm">
                               <p *ngIf="selectedservice.addonServices">add on services</p>
                               <ul>
-                                  <li *ngFor="let addon of selectedservice.addonServices">{{addon?.serviceName}}: <span>$ {{selectedservice?.serviceCost}}</span>
+                                  <li *ngFor="let addon of selectedservice.addonServices">{{addon?.serviceName}}: <span>$ {{selectedservice?.serviceCost | number:'1.2-2'}}</span>
                                       <div class="addon-remove" (click)="deleteSelectedServices('', addon?.addOnServiceId)"><i class="icon-cir-plus"></i></div>
                                   </li>
                               </ul>

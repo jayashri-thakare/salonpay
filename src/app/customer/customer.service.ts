@@ -148,7 +148,7 @@ export class CustomerService {
 	  this.baseUrl = 'http://172.16.0.114:5555/api/Customers/UploadProfilePicture';
     const input = new FormData();
     input.append('ParentCompanyId', localStorage.companyId)
-    input.append('CustomerId', localStorage.Arrayofcustomer);
+    input.append('Arrayofcustomer', localStorage.Arrayofcustomer);
 	  input.append('file', userdata[0]);
    this.httpClient.post(this.baseUrl, input).subscribe((val) => {
       this.imagepath = '';
@@ -173,7 +173,7 @@ export class CustomerService {
 
   getCustomerSales() {
     this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.customerId = parseInt(localStorage.getItem('customerId'));
+    this.customerId = parseInt(localStorage.getItem('Arrayofcustomer'));
     this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetCustomerSell?ParentCompanyId=' + this.ParentCompanyId + '&CustomerId=' + this.customerId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
@@ -199,6 +199,13 @@ export class CustomerService {
 
   getCustomerSalesDetails(saleid) {
     this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetCustomerSellDetailBySaleId?SaleId='+ saleid;
+    return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
+  }
+
+  getCustomertotalSales() {
+    this.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
+    this.customId = localStorage.getItem('Arrayofcustomer');
+    this.baseUrl = 'http://172.16.0.99:8044/api/CustomerDashboard/GetTotalSaleAndRewardByCustomer?ParentCompanyId=' + this.ParentCompanyId + '&CustomerId=' + this.customId;
     return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 

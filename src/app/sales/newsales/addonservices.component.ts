@@ -23,7 +23,7 @@ import { MessageService } from 'src/app/message.service';
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-haircut prodt-ico"></i>\n' +
     '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>{{addon?.serviceName}}</span>$ {{addon?.serviceCost}}</h3>\n' +
+    '                                            <h3><span>{{addon?.serviceName}}</span>$ {{addon?.serviceCost | number:\'1.2-2\'}}</h3>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                    <div class="main-selt">\n' +

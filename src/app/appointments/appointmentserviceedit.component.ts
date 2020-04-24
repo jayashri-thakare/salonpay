@@ -203,11 +203,11 @@ export class AppointmentServiceEditComponent {
   editAppointment(){
     this.editappointment['Id'] = this.appointmentService.arrayofselectedappointment[0]['appointmentId']
     this.editappointment['AppointmentDate'] = this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
-    this.editappointment['ServicePreferences'] = parseInt('2')
+    this.editappointment['ServicePreference'] = parseInt('2')
     this.editappointment['StartTime'] = "10:00 AM"
     this.editappointment['CustomerId'] = this.appointmentService.arrayofselectedappointment[0]['customerDetails']['customerId']
-    this.editappointment['CustomerEmailId'] = this.appointmentService.arrayofselectedappointment[0]['customerDetails']['email']
-    this.editappointment['Appointment'] = [this.appointmenteditobj]
+    this.editappointment['customeremailid'] = this.appointmentService.arrayofselectedappointment[0]['customerDetails']['email']
+    this.editappointment['Appointments'] = [this.appointmenteditobj]
     this.appointmenteditobj['StartTime'] = "10:00 AM"
     this.appointmenteditobj['DefaultTime'] = "45 00"
     this.appointmenteditobj['ServiceId'] = this.appointmentService.arrayofselectedappointment[0]['technicianList'][0]['serviceId']

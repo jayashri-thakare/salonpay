@@ -60,13 +60,13 @@
         <div class="f-row f-3 f-1300-2 f-640-1">
             <div class="f-col" *ngFor="let sale of customerSales;let index=i;">
                 <!-- start -->
-                <div class="app-grid-box">
+                <div class="app-grid-box" >
                     <!-- start -->
-                    <div class="app-pad-box" *ngFor="let service of sale.completedServices">
+                    <div class="app-pad-box" >
                         <a (click)="saledetail(sale.saleId)">
-                            <div class="app-pad-top">
-                                <h4 class="gridhead m-0">{{service.serviceName}}</h4>
-                                <p class="girdpara">{{service.technicianName}}</p>
+                            <div class="app-pad-top" >
+                                <h4 class="gridhead m-0" *ngFor="let service of sale.completedServices">{{service?.serviceName | slice:0:10}}</h4>
+                                <p class="girdpara">{{service?.technicianName}}</p>
                             </div>
                         </a>
                         <div class="yur-mail-rig">
@@ -84,7 +84,7 @@
                             <i class="icon-calender"></i>
                             <div class="tech-usr-cont">
                                 <p>Date</p>
-                                <h3>{{sale.date | date:'M/d/yy'}}</h3>
+                                <h3>{{sale?.date | date:'M/d/yyy'}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -93,7 +93,7 @@
                             <i class="icon-clock"></i>
                             <div class="tech-usr-cont">
                                 <p>Time</p>
-                                <h3>{{sale.time}}</h3>
+                                <h3>{{sale?.time}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -102,7 +102,7 @@
                             <i class="icon-cart"></i>
                             <div class="tech-usr-cont">
                                 <p>Sales Amount</p>
-                                <h3>$ {{sale.salesAmount}}</h3>
+                                <h3>$ {{sale?.salesAmount | number:'1.2-2'}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -111,16 +111,16 @@
                             <i class="icon-money"></i>
                             <div class="tech-usr-cont">
                                 <p>Tip Amount</p>
-                                <h3>$ {{sale.tipAmount}}</h3>
+                                <h3>$ {{sale?.tipAmount | number:'1.2-2'}}</h3>
                             </div>
                         </div>
                         <!-- end -->
                         <!-- start -->
                         <div class="techi-user">
-                            <div class="tech-user-img"><img src="img/user.svg" alt=""></div>
-                            <div class="tech-usr-cont">
+                            <div class="tech-user-img"><img src="assets/img/user.svg" alt=""></div>
+                            <div class="tech-usr-cont" >
                                 <p>Technician</p>
-                                <h3>Ira Membrit</h3>
+                                <h3 *ngFor="let service1 of sale.completedServices">{{service1?.technicianName | slice:0:10}}</h3>
                             </div>
                         </div>
                         <!-- end -->
@@ -129,7 +129,7 @@
                             <i class="icon-reward"></i>
                             <div class="tech-usr-cont">
                                 <p>Rewards</p>
-                                <h3>{{sale.rewards}}</h3>
+                                <h3>{{sale?.rewards | number:'1.2-2'}}</h3>
                             </div>
                         </div>
                         <!-- end -->

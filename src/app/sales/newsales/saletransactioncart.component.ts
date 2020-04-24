@@ -84,16 +84,16 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                    <div class="user-det curPointer" >\n' +
     '                        <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>\n' +
     '                        <div class="usr-name">\n' +
-    '                            <h3>Ira Membrit<span>Haircut</span></h3>\n' +
+    '                            <h3>{{service.technicianName}}<span>{{service.serviceName}}</span></h3>\n' +
     '                        </div>\n' +
     '                        <i class="icon-down-arrow1 ml-3" *ngIf="techniciantrue" data-toggle="modal" data-target="#suggestedTechPopup"></i>\n' +
     '                    </div>\n' +
     '                    <div class="tip-flex-other">\n' +
     '                        <div class="order-price">\n' +
-    '                            <p>${{service.serviceCost}}</p>\n' +
+    '                            <p>${{service.serviceCost |number:\'1.2-2\'}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-total">\n' +
-    '                            <p>${{service.totalServiceCost}}</p>\n' +
+    '                            <p>${{service.totalServiceCost|number:\'1.2-2\'}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-cancel"></div>\n' +
     '                    </div>\n' +
@@ -149,10 +149,10 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                            <p>{{product.quantity}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-price">\n' +
-    '                            <p>${{product.productCost}}</p>\n' +
+    '                            <p>${{product.productCost|number:\'1.2-2\'}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-total">\n' +
-    '                            <p>${{product.totalProductCost}}</p>\n' +
+    '                            <p>${{product.totalProductCost|number:\'1.2-2\'}}</p>\n' +
     '                        </div>\n' +
     '                        <div class="order-cancel"></div>\n' +
     '                    </div>\n' +
@@ -191,7 +191,7 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                        <div class="tip-total-box">\n' +
     '                            <div class="tipb tipb-hdn">\n' +
     '                                <h5>Sub Total</h5>\n' +
-    '                                <h6>${{totalservicecost}}</h6>\n' +
+    '                                <h6>${{finalamount|number:\'1.2-2\'}}</h6>\n' +
     '                            </div>\n' +
     '                            <div class="tipb">\n' +
     '                                <h5>Coupon</h5>\n' +
@@ -207,13 +207,13 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                            </div>\n' +
     '                                <div *ngIf="couponbool" class="rew-gain-box pad-left">\n' +
     '                                    <p class="greencol">Coupon Applied Successfully! <i class="icon-cir-plus remove-custom" (click)="removecouponapplied()"></i></p>\n' +
-    '                                    <p class="greencol">Coupon Discount: <span>${{couponcodevalue.value}}</span></p>\n' +
+    '                                    <p class="greencol">Coupon Discount: <span>${{couponcodevalue.value|number:\'1.2-2\'}}</span></p>\n' +
     '                                </div>\n' +
     '                            <hr>\n' +
     '                            <div class="tipb">\n' +
     '                                <div class="rew-gain-box">\n' +
     '                                    <h6>Rewards Gained: $0</h6>\n' +
-    '                                    <p>Cash Rewards Available: <span>${{customerReward?.balance}}</span></p>\n' +
+    '                                    <p>Cash Rewards Available: <span>${{customerReward?.balance|number:\'1.2-2\'}}</span></p>\n' +
     '                                </div>\n' +
     '                                <form [formGroup]="addrewardForm">\n' +
     '                                <div class="cart-inp-box">\n' +
@@ -254,19 +254,19 @@ import { CustomerService } from 'src/app/customer/customer.service';
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <hr>\n' +
-    // '                            <div class="tipb tipbTax">\n' +
-    // '                                <h5>Tax</h5>\n' +
-    // '                                <h6 class="cartPriceWidth">$40</h6>\n' +
-    // '                            </div>\n' +
+    '                            <div class="tipb tipbTax">\n' +
+    '                                <h5>Tax</h5>\n' +
+    '                                <h6 class="cartPriceWidth">${{totaltax|number:\'1.2-2\'}}</h6>\n' +
+    '                            </div>\n' +
     '\n' +
     '                            <div class="tipbGray">\n' +
     '                                <div class="tipb">\n' +
     '                                    <h5>Cash Total</h5>\n' +
-    '                                    <h6 class="cartPriceWidth">${{cashamountvalue}}</h6>\n' +
+    '                                    <h6 class="cartPriceWidth">${{cashamountvalue|number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     '                                <div class="tipb">\n' +
     '                                    <h5>Card Total</h5>\n' +
-    '                                    <h6 class="cartPriceWidth">${{cardamountvalue}}</h6>\n' +
+    '                                    <h6 class="cartPriceWidth">${{cardamountvalue|number:\'1.2-2\'}}</h6>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '\n' +
@@ -318,8 +318,13 @@ export class SalesTransactionCartComponent implements OnInit {
   finalSale = {};
   cardamountvalue: any;
   cashamountvalue: any;
+  businesstaxtable: any;
+  totalproductcost: any;
+  totalservicecosttax: number;
+  totalproductcosttax: number;
+  totaltax: number;
 
-  constructor(public customerService: CustomerService, public messageService: MessageService, public modalService: ModalService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(public AdminService: AdminService, public messageService: MessageService, public modalService: ModalService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   get f() {
     return this.addrewardForm.controls;
@@ -338,12 +343,18 @@ export class SalesTransactionCartComponent implements OnInit {
     this.cardamountvalue = 0;
     this.finalamount = 0;
     this.totalservicecost = 0;
+    this.totalproductcost = 0;
+    this.totalservicecosttax = 0;
+    this.totalproductcosttax = 0;
+    this.totaltax = 0;
+    this.couponcodevalue = 0;
     this.getCustomerDetail();
     this.orderIdOfSale = localStorage.getItem('orderId');
     this.arrayofselectedsaleobj = this.salesService.arrayofselectedobj;
     this.getCustomerProductCart();
     this.getCustomerServices();
     this.getCustomerReward();
+    this.getTaxTable();
   }
 
   getCustomerDetail() {
@@ -418,11 +429,11 @@ export class SalesTransactionCartComponent implements OnInit {
       this.finalamount = this.totalservicecost;
     }else if(type == 'product'){
       for(let i=0;i<this.customerProductCart.length;i++){
-        this.totalservicecost = this.totalservicecost + (this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost'])
+        this.totalproductcost = this.totalproductcost + (this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost'])
       }
     }
-    this.finalamount = this.totalservicecost;
-    console.log(this.totalservicecost)
+    this.finalamount = this.totalservicecost + this.totalproductcost;
+    console.log(this.totalservicecost, this.totalproductcost, this.finalamount)
   }
 
   singletotalpriceofserviceandproduct(type){
@@ -471,6 +482,20 @@ export class SalesTransactionCartComponent implements OnInit {
         }
       }
     }
+  }
+
+  getTaxTable() {
+    this.AdminService.GetTaxTableList().subscribe((data) => {
+      this.businesstaxtable = data;
+      this.businesstaxtable = this.businesstaxtable.result;
+      console.log(this.businesstaxtable)
+      if(this.businesstaxtable.productTaxRate || this.businesstaxtable.serviceTaxRate){
+        this.totalservicecosttax = this.totalservicecost * (this.businesstaxtable.serviceTaxRate/100); 
+        this.totalproductcosttax = this.totalproductcost * (this.businesstaxtable.productTaxRate/100); 
+        this.totaltax = this.totalservicecosttax + this.totalproductcosttax;
+      }
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
   }
 
   addreward(reward) {
@@ -532,16 +557,17 @@ export class SalesTransactionCartComponent implements OnInit {
   finalSaleService() {
       this.finalSale = {
         "SaleId": parseInt(localStorage.getItem('orderId')),
+        "CustomerId": parseInt(localStorage.getItem('customerId')),
       "Currency":"$",
-      "TotalAmount":200.20,
-      "ReceivedAmount":200.20,
+      "TotalAmount":this.finalamount,
+      "ReceivedAmount":this.finalamount,
       "IsFullPaymentComplete":true,
-      "ParentCompanyId":6,
+      "ParentCompanyId":parseInt(localStorage.getItem('companyId')),
       "PaymentType":[
               {
               "Type":"COUPON",
               "TypeDescription":"coupon001",
-              "Amount":2.0
+              "Amount":parseFloat(this.cardamountvalue)
               },
               {
               "Type":"REWARD",
@@ -549,23 +575,18 @@ export class SalesTransactionCartComponent implements OnInit {
               },
               {
               "Type":"CASH",
-              "Amount":10.0
+              "Amount":parseFloat(this.cashamountvalue)
               },
               {
               "Type":"TAX",
-              "Amount":1.0
+              "Amount":this.totaltax
               }
       ],
       "Card":[
               {
               "Type":"CARD",
               "CardDescription":"1264-2536-4523-5689",
-              "CardAmount":2.0
-              },
-              {
-              "Type":"CARD",
-              "CardDescription":"1264-2536-4523-5689",
-              "CardAmount":1.0
+              "CardAmount":parseFloat(this.couponcodevalue)
               }
       ],
         "ordersummaryservicesUpdate": this.arrayofservices,

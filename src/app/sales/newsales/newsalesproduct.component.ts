@@ -62,14 +62,14 @@ import { url } from 'inspector';
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-dye prodt-ico"></i>\n' +
     '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>{{service.serviceName}}</span>$ {{service.serviceCost}}</h3>\n' +
+    '                                            <h3><span>{{service.serviceName}}</span>$ {{service.serviceCost | number:\'1.2-2\'}}</h3>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
     '                                <div class="techi-top start border-0">\n' +
     '                                    <p>add on services</p>\n' +
     '                                    <ul>\n' +
-    '                                        <li *ngFor="let addon of service.addonServices">{{addon.serviceName}}: <span>$ {{addon.serviceCost}}</span>\n' +
+    '                                        <li *ngFor="let addon of service.addonServices">{{addon.serviceName}}: <span>$ {{addon.serviceCost | number:\'1.2-2\'}}</span>\n' +
     '                                            <div class="addon-remove"><i class="icon-cir-plus"></i></div>\n' +
     '                                        </li>\n' +
     '                                    </ul>\n' +
@@ -85,7 +85,7 @@ import { url } from 'inspector';
     '                                    <div class="user-det">\n' +
     '                                        <i class="icon-dye prodt-ico"></i>\n' +
     '                                        <div class="usr-name">\n' +
-    '                                            <h3><span>{{selectedproduct?.productName}}</span>$ {{selectedproduct?.productCost}}</h3>\n' +
+    '                                            <h3><span>{{selectedproduct?.productName}}</span>$ {{selectedproduct?.productCost | number:\'1.2-2\'}}</h3>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
@@ -177,12 +177,17 @@ export class NewSalesProductComponent implements OnInit {
 
   createSaleProduct() {
     this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
-    this.Product['Products'] = this.receivedChildMessage;
-    this.salesService.create_sales_product(this.Product).subscribe((data) => {
-      this.router.navigate(['/transactioncart']);
+    if(this.receivedChildMessage.length > 0 || this.arrayofservices.length > 0){
+      this.Product['Products'] = this.receivedChildMessage;
+      this.salesService.create_sales_product(this.Product).subscribe((data) => {
+        this.router.navigate(['/transactioncart']);
+        this.messageService.clear();
+        this.messageService.add('Sales Product added Successfully.')
+        this.createproduct = data;
+      });
+    }else{
       this.messageService.clear();
-      this.messageService.add('Sales Product added Successfully.')
-      this.createproduct = data;
-    });
+      this.messageService.add('Please add atleast one product or one service.')
+    }
   }
 }

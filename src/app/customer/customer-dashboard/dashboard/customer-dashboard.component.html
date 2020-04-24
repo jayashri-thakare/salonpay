@@ -27,7 +27,7 @@
                     <!-- start -->
                     <li class="table-dta">
                         <span>Last Visit</span>
-                        {{customerRecentSale?.lastVisit | date:"M/d/yy"}}
+                        {{customerRecentSale?.lastVisit | date:"M/d/yyy"}}
                     </li>
                     <!-- end -->
                     <!-- start -->
@@ -39,13 +39,13 @@
                     <!-- start -->
                     <li class="table-dta">
                         <span>Average Sale</span>
-                        ${{customerRecentSale?.averageSale}}
+                        ${{customerRecentSale?.averageSale | number:'1.2-2'}}
                     </li>
                     <!-- end -->
                     <!-- start -->
                     <li class="table-dta">
                         <span>Average Tip</span>
-                        ${{customerRecentSale?.averageTip}}
+                        ${{customerRecentSale?.averageTip | number:'1.2-2'}}
                     </li>
                     <!-- end -->
                     <!-- start -->
@@ -80,14 +80,14 @@
                     <i class="icon-cart"></i>
                     <div class="sale-tot-rig">
                         <p>Sales</p>
-                        <h6>$7500</h6>
+                        <h6>${{customertotalSales?.totalSale | number:'1.2-2'}}</h6>
                     </div>
                 </div>
                 <div class="sale-tot">
                     <i class="icon-reward"></i>
                     <div class="sale-tot-rig">
                         <p>Rewards</p>
-                        <h6>800</h6>
+                        <h6>{{customertotalSales?.totalRewards | number:'1.2-2'}}</h6>
                     </div>
                 </div>
             </div>
@@ -143,11 +143,11 @@
                     <!-- start -->
                     <div class="app-pad-box">
                         <div class="app-pad-top">
-                            <h4 class="gridhead">{{appointment.serviceName}}</h4>
+                            <h4 class="gridhead">{{appointment?.serviceName}}</h4>
                             <div class="techi-user">
-                                <div class="tech-user-img"><img src="img/profile.svg" alt=""></div>
+                                <div class="tech-user-img"><img src="assets/img/profile.svg" alt=""></div>
                                 <div class="tech-usr-cont">
-                                    <h3>{{appointment.technicianName}}</h3>
+                                    <h3>{{appointment?.technicianName}}</h3>
                                     <p>Technician</p>
                                 </div>
                             </div>
@@ -170,14 +170,14 @@
                             <i class="icon-calender"></i>
                             <div class="tech-usr-cont">
                                 <p>Date</p>
-                                <h3>{{appointment.appointmentDate | date:"M/d/yy"}}</h3>
+                                <h3>{{appointment?.appointmentDate | date:"M/d/yy"}}</h3>
                             </div>
                         </div>
                         <div class="techi-user">
                             <i class="icon-clock"></i>
                             <div class="tech-usr-cont">
                                 <p>Time</p>
-                                <h3>{{appointment.startTime}} - {{appointment.endTime}}</h3>
+                                <h3>{{appointment?.startTime}} - {{appointment.endTime}}</h3>
                             </div>
                         </div>
                     </div>

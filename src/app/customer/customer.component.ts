@@ -36,9 +36,13 @@ export class CustomerComponent implements OnInit {
       this.customerlist = data;
       this.customerlist = this.customerlist.list;
       console.log(this.customerlist)
-      localStorage.setItem('Arrayofcustomer', JSON.stringify(this.customerlist[this.customerlist.length - 1].id))
+      localStorage.setItem('Arrayofcustomer', JSON.stringify(this.customerlist[this.customerlist.length - 1].customerId))
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  getcustomerid(customerid){
+    localStorage.setItem('Arrayofcustomer', JSON.stringify(customerid));
   }
 
 }

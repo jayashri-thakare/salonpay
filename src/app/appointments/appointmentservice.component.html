@@ -214,7 +214,7 @@
               <!-- end -->
               <!-- start -->
                 <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
-                  <div *ngFor="let tech of technician?.technicians">
+                  <div *ngFor="let tech of technician.technicians">
                   <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(tech)" required />
                   <label for="apn-technician-2-{{j}}">
                     <div class="apn-technician" >

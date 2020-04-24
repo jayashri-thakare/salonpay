@@ -16,6 +16,7 @@ export class CustDashboardComponent implements OnInit {
   favproduct: any;
   favservice: any;
   customerProfile: any;
+  customertotalSales: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 
@@ -23,6 +24,7 @@ export class CustDashboardComponent implements OnInit {
    this.getCustomerRecentSale();
    this.getCustomerRecentAppointment();
    this.getCustomerProfile(localStorage.getItem('Arrayofcustomer'));
+   this.getCustomertotalSales();
   }
 
   getCustomerRecentSale() {
@@ -30,9 +32,11 @@ export class CustDashboardComponent implements OnInit {
       this.customerRecentSale = data;
       if(this.customerRecentSale.favoriteProducts[0]){
         this.favproduct= this.customerRecentSale.favoriteProducts[0];
-      }else if(this.customerRecentSale.favoriteServices[0]){
-        this.favservice= this.customerRecentSale.favoriteServices[0]
       }
+      if(this.customerRecentSale.favoriteServices[0]){
+        this.favservice= this.customerRecentSale.favoriteServices[0];
+      }
+      console.log(this.favproduct, this.favservice)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }
@@ -40,6 +44,15 @@ export class CustDashboardComponent implements OnInit {
   getCustomerRecentAppointment() {
     this.customerService.getCustomerRecentAppointment().subscribe((data) => {
       this.customerRecentAppointment = data;
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+
+  getCustomertotalSales() {
+    this.customerService.getCustomertotalSales().subscribe((data) => {
+      this.customertotalSales = data;
+      // this.receivedChildMessage = this.receivedChildMessage.ordersummaryservices;
+      console.log(this.customertotalSales)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }

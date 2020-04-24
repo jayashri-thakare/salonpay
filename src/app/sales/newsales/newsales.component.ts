@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SalesService} from '../sales.service';
 import { MessageService } from 'src/app/message.service';
 import { Router } from '@angular/router';
+import { AppointmentService } from 'src/app/appointments/appointment.service';
 @Component({
   selector: 'app-newsales',
   templateUrl: './newsales.component.html'
@@ -13,8 +14,9 @@ export class NewSalesComponent implements OnInit {
   orderIdOfSale: string;
   Service= {};
   createservice: any;
+  technicianlist: any;
 
-  constructor( private salesService: SalesService, public messageService: MessageService, public router: Router) { }
+  constructor(public appointmentService: AppointmentService, private salesService: SalesService, public messageService: MessageService, public router: Router) { }
 
   ngOnInit() {
     this.getCustomerDetail();
@@ -25,6 +27,7 @@ export class NewSalesComponent implements OnInit {
   getMessage(message) {
     this.receivedChildMessage = message;
     console.log(this.receivedChildMessage)
+    this.getTechnicianList();
   }
 
   getCustomerDetail() {
@@ -41,6 +44,21 @@ export class NewSalesComponent implements OnInit {
       this.receivedChildMessage = data;
       this.receivedChildMessage = this.receivedChildMessage.ordersummaryservices;
       console.log(this.receivedChildMessage)
+      // localStorage.setItem('companyId', data['ParentCompanyID']);
+    });
+  }
+
+  getTechnicianList() {
+    this.salesService.getTechnicianList().subscribe((data) => {
+      this.technicianlist = data['result'][0];
+      this.technicianlist = this.technicianlist.technicians[0];
+      console.log(this.technicianlist)
+      if(this.receivedChildMessage.length>0){
+        for(let i=0;i<this.receivedChildMessage.length;i++){
+          this.receivedChildMessage[i]['technicianName'] = this.technicianlist['firstName'];
+          this.receivedChildMessage[i]['technicianId'] = this.technicianlist['id'];
+        }
+      }
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
   }

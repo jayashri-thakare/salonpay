@@ -16,7 +16,7 @@
                     <!-- start -->
                     <div class="app-pad-box">
                         <div class="cust-rig">
-                            <a href="customerdashboard" (click)="customerService.selectedCustomerObj(customer)">
+                            <a href="customerdashboard" (click)="customerService.selectedCustomerObj(customer);getcustomerid(customer.customerId)">
                                 <h6>{{customer.firstName}} {{customer.lastName}}</h6>
                             </a>
 
@@ -41,7 +41,7 @@
                                     <i class="icon-calender"></i>
                                     <div class="tech-usr-cont">
                                         <p>Appointments</p>
-                                        <h3>5</h3>
+                                        <h3>{{customer.appointments}}</h3>
                                     </div>
                                 </div>
                             </a>
@@ -53,7 +53,7 @@
                                     <i class="icon-cart"></i>
                                     <div class="tech-usr-cont">
                                         <p>Sales Amount</p>
-                                        <h3>$ 150</h3>
+                                        <h3>$ {{customer.salesAmount | number:'1.2-2'}}</h3>
                                     </div>
                                 </div>
                             </a>
@@ -65,7 +65,7 @@
                                     <i class="icon-reward"></i>
                                     <div class="tech-usr-cont">
                                         <p>Rewards</p>
-                                        <h3>45</h3>
+                                        <h3>{{customer.rewards | number:'1.2-2'}}</h3>
                                     </div>
                                 </div>
                             </a>
@@ -75,11 +75,11 @@
                     <!-- end -->
                     <!-- start -->
                     <div class="app-pad-box">
-                        <div class="techi-user">
+                        <div class="techi-user" *ngFor="let tech of customer.favouriteTechnicianList">
                             <div class="tech-user-img"><img src="../../assets/img/profile.svg" alt=""></div>
                             <div class="tech-usr-cont">
                                 <p>Favorite Technician</p>
-                                <h3>Ira Membrit</h3>
+                                <h3>{{tech.firstName}}</h3>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,7 @@ import { MessageService } from '../../../message.service';
 export class CustomerSalesComponent implements OnInit {
   customerSales: any;
   customerProfile: any;
+  customertotalSales: any;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder, private modalService: ModalService, private router: Router, private messageService: MessageService) { }
 

@@ -66,7 +66,7 @@ import { WeekDay } from 'calendar-utils';
 })export class AppointmentserviceComponent {
   title = 'SalonPay';
   private servicelist: Observable<any>;
-  private technicianlist: Observable<any>;
+   technicianlist: Array<any>=[];
   private checkedList: Array<any>;
   private techserList: Array<any>;
   searchTechList: any;
@@ -120,6 +120,8 @@ import { WeekDay } from 'calendar-utils';
   private objIndex: any;
   private customerEmail: string;
   private customerId: number;
+  technicians: Array<any>=[];
+  techlist: Observable<any>;
 
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
@@ -333,10 +335,14 @@ import { WeekDay } from 'calendar-utils';
   }
 
   getTechnicianList() {
+    debugger;
     this.appointmentService.getServiceTechnician(this.checkedList).subscribe((data) => {
+      this.techlist = data;
       this.technicianlist = data['result'];
-      // this.technicianlist = this.technicianlist['technicians'];
+      this.technicians = this.technicianlist['technicians'];
     });
+    console.log(this.technicianlist, this.techlist);
+    console.log(this.technicians);
   }
 
 }

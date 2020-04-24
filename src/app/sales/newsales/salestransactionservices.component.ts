@@ -13,14 +13,14 @@ import { AddonServicesComponent } from './addonservices.component';
     '                      <h4 class="hdn2 m-0">Select Services</h4>\n' +
     '                      <div class="form-group search-group mb-0">\n' +
     '                          <form>\n' +
-    '                              <input class="form-field" type="text" name="filter-searh" required>\n' +
+    '                              <input class="form-field" type="text" (input)="getSearchofservices($event.target.value)" name="filter-searh" required>\n' +
     '                              <p class="form-label">Search</p>\n' +
     '                              <button class="search icon-search" type="submit"></button>\n' +
     '                          </form>\n' +
     '                      </div>\n' +
     '                  </div>\n' +
     '              </div>\n' +
-    '              <div class="col-12">\n' +
+    '              <div class="col-12" *ngIf="searchstatus">\n' +
     '                  <div class="tab-2">\n' +
     '                      <div class="service-nav-box mCustomScrollbar _mCS_1">\n' +
     '                        <div id="mCSB_1" class="mCustomScrollBox mCS-dark mCSB_horizontal mCSB_inside" style="max-height: none;" tabindex="0">\n' +
@@ -47,7 +47,7 @@ import { AddonServicesComponent } from './addonservices.component';
     '                                                  <div class="user-det">\n' +
     '                                                      <i class="icon-haircut prodt-ico"></i>\n' +
     '                                                      <div class="usr-name">\n' +
-    '                                                          <h3><span>{{addedservice?.serviceName}}</span>$ {{addedservice?.serviceCost}}</h3>\n' +
+    '                                                          <h3><span>{{addedservice?.serviceName}}</span>$ {{addedservice?.serviceCost | number:\'1.2-2\'}}</h3>\n' +
     '                                                      </div>\n' +
     '                                                  </div>\n' +
     '                                                  <div class="main-selt">\n' +
@@ -74,6 +74,44 @@ import { AddonServicesComponent } from './addonservices.component';
     '                      </div>\n' +
     '                  </div>\n' +
     '              </div>\n' +
+    '                      <!-- Tab panes -->\n' +
+    '                      <div class="service-nav-pane-box" *ngIf="searchlist">\n' +
+    '                          <div class="tab-content">\n' +
+    '                              <div class="tab-pane fade show active" id="tab1">\n' +
+    '                                  <!-- Tab 1 Starts -->\n' +
+    '                                  <div class="f-row f-3 f-1300-2 f-640-1">\n' +
+    '                                      <div class="f-col" *ngFor="let addedservice of searchservicelist">\n' +
+    '                                          <!-- start -->\n' +
+    '                                          <div class="techi-box">\n' +
+    '                                              <div class="techi-top">\n' +
+    '                                                  <div class="user-det">\n' +
+    '                                                      <i class="icon-haircut prodt-ico"></i>\n' +
+    '                                                      <div class="usr-name">\n' +
+    '                                                          <h3><span>{{addedservice?.serviceName}}</span>$ {{addedservice?.serviceCost | number:\'1.2-2\'}}</h3>\n' +
+    '                                                      </div>\n' +
+    '                                                  </div>\n' +
+    '                                                  <div class="main-selt">\n' +
+    '                                                      <input type="checkbox" id="{{addedservice?.serviceId}}" name="{{addedservice?.serviceId}}" (click)="selectedServices(addedservice, $event);addingaddon(addedservice?.serviceId, $event)" required>\n' +
+    '                                                      <label for="{{addedservice?.serviceId}}">Select</label>\n' +
+    '                                                  </div>\n' +
+    '                                              </div>\n' +
+    '                                              <div class="techi-top center" *ngIf="addedservice.serviceId == serviceIds">\n' +
+    '                                                  <a href="#" data-toggle="modal"\n' +
+    '                                                      data-target="#addonServicePopup">\n' +
+    '                                                      <h5 class="prodt-ct" (click)="getaddonServiceList(service?.serviceId);"> <i class="icon-cir-plus mr-1"></i>\n' +
+    '                                                          Select Add On\n' +
+    '                                                          Services\n' +
+    '                                                      </h5>\n' +
+    '                                                  </a>\n' +
+    '                                              </div>\n' +
+    '                                          </div>\n' +
+    '                                          <!-- end -->\n' +
+    '                                      </div>\n' +
+    '                                  </div>\n' +
+    '                                  <!-- Tab 1 Ends -->\n' +
+    '                              </div>\n' +
+    '                          </div>\n' +
+    '                      </div>\n' +
     '\n' +
     '          </div>\n' +
     '          <addonservice-modal [addonService]="addonService" (addonsertoparent)="getaddonservice($event)"></addonservice-modal>'
@@ -89,6 +127,9 @@ export class SalesTransactionServicesComponent implements OnInit {
     receivedAddonService: Array<any> = [];
     @Output() addonsertoparent = new EventEmitter<string>();
   serviceIds: any;
+  searchservicelist: any;
+  searchstatus: boolean;
+  searchlist: boolean;
 
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -102,6 +143,8 @@ export class SalesTransactionServicesComponent implements OnInit {
       this.serviceList = this.result.list;
       console.log(this.serviceList)
       this.getAddedServiceList(this.result["list"][0]['serviceCategoryId']);
+      this.searchstatus = true;
+      this.searchlist = false;
     });
   }
 
@@ -109,6 +152,18 @@ export class SalesTransactionServicesComponent implements OnInit {
     this.salesService.getServicesByCategoryId(serviceid).subscribe((res) => {
       this.addedserviceList = res;
     });
+  }
+
+  getSearchofservices(event) {
+    if(event==""){
+      this.getServiceList();
+    }else{
+      this.salesService.getSearchofservices(event).subscribe((res) => {
+        this.searchservicelist = res;
+        this.searchstatus = false;
+        this.searchlist = true;
+      });
+    }
   }
 
   selectedServices(selected_services, event){
