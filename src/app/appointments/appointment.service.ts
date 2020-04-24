@@ -74,23 +74,10 @@ export class AppointmentService {
 
   tecBookTime(tech) {
     var app = {}
-    app['technicianId'] = tech.id
+    app['technicianId'] = tech.technicianId
     app['appointmentDate'] = tech.appointmentDate;
     app['parentCompanyId'] = parseInt(localStorage.getItem('companyId'));
-
-  //
-  //   var app={
-  //   "technicianId": "cfe2e89c-8c8a-47fc-8b72-d4a9ded74079",
-  //   "parentCompanyId": 6,
-  //   "appointmentDate": "7/11/2020",
-  //   "bookedTime": [
-  //     "string"
-  //   ],
-  //   "requestTimeOff": [
-  //     "string"
-  //   ]
-  // }
-      this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/GetTechBookedTime';
+    this.baseUrl = 'http://172.16.0.114:5555/api/Appointments/GetTechBookedTime';
     return this.httpClient.post<Observable<any>>(this.baseUrl, app, httpOptions).pipe(map(data => data));
   }
 

@@ -18,12 +18,17 @@ import { CalendarEvent, CalendarView, CalendarEventAction,
   CalendarEventTimesChangedEvent, CalendarMonthViewDay
 } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 import {MessageService} from '../message.service';
 import { WeekDay } from 'calendar-utils';
+import { debounceTime, distinctUntilChanged, switchMap, catchError  } from 'rxjs/operators';
 
 // import { ToolbarService, LinkService, ImageService, HtmlEditorService, TableService } from '@syncfusion/ej2-angular-richtexteditor';
 
+
+class ErrorInfo {
+  parseObservableResponseError: any;
+}
 
 @Component({
   selector: 'app-appointmentservice',
@@ -122,6 +127,7 @@ import { WeekDay } from 'calendar-utils';
   private customerId: number;
   technicians: Array<any>=[];
   techlist: Observable<any>;
+  private tecSearch: boolean= false;
 
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
@@ -150,6 +156,7 @@ import { WeekDay } from 'calendar-utils';
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
   selectTec(tec) {
+    debugger;
    this.jobj.technicianName = tec.firstName
     // this.jobj.serviceName = this.serviceBind.slice(-1)[0].serviceName;
     // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
@@ -214,6 +221,10 @@ import { WeekDay } from 'calendar-utils';
     this.preference = val;
   }
 
+  onSearchChange(searchValue: string): void {
+    console.log(searchValue);
+
+  }
   //Funtion to getselected week date
   dayHeaderClicked(evn){
 // console.log(evn);
@@ -258,14 +269,15 @@ import { WeekDay } from 'calendar-utils';
     myDiv1.style.display = 'block'
 ;  }
 
-  searchService(){
-    this.appointmentService.getSearchService(this.searchServicen).subscribe((data) => {
+  searchService(searchVal){
+    this.appointmentService.getSearchService(searchVal).subscribe((data) => {
       this.servicelist = data['result'];
     });
   }
 
-  searchTechnician(){
-    this.appointmentService.getSearchTechnician(this.searchTech).subscribe((data) => {
+  searchTechnician(searchtech){
+    this.appointmentService.getSearchTechnician(searchtech).subscribe((data) => {
+      this.tecSearch = true;
       this.searchTechList = data['result'];
     });
   }
@@ -278,7 +290,7 @@ import { WeekDay } from 'calendar-utils';
   }
 
   tecBookTime(tech, i){
-    tech['appointmentDate'] = this.viewDate
+    tech['appointmentDate'] = this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     this.appointmentService.objIndex = i ;
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
@@ -290,6 +302,35 @@ import { WeekDay } from 'calendar-utils';
   // this.viewDate = this.selectedDate1;
   // }
 
+
+  // @ts-ignore
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      // switchMap allows returning an observable rather than maps array
+      switchMap( (searchText) =>  this.appointmentService.getSearchService(searchText) ),
+      catchError(new ErrorInfo().parseObservableResponseError)
+    );
+  }
+
+
+  /**
+   * Used to format the result data from the lookup into the
+   * display and list values. Maps `{name: "band", id:"id" }` into a string
+   */
+  resultFormatBandListValue(value: any) {
+    return value.name;
+  }
+  /**
+   * Initially binds the string value and then after selecting
+   * an item by checking either for string or key/value object.
+   */
+  inputFormatBandListValue(value: any)   {
+    if(value.name)
+      return value.name
+    return value;
+  }
   saveObj(){
     this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     // tslint:disable-next-line:triple-equals
