@@ -18,7 +18,7 @@ import { CalendarEvent, CalendarView, CalendarEventAction,
   CalendarEventTimesChangedEvent, CalendarMonthViewDay
 } from 'angular-calendar';
 import {AbstractControl, FormControl, ValidationErrors} from "@angular/forms";
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 import {MessageService} from '../message.service';
 import { WeekDay } from 'calendar-utils';
 
@@ -148,6 +148,7 @@ import { WeekDay } from 'calendar-utils';
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
   selectTec(tec) {
+    debugger;
    this.jobj.technicianName = tec.firstName
     // this.jobj.serviceName = this.serviceBind.slice(-1)[0].serviceName;
     // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
@@ -276,7 +277,7 @@ import { WeekDay } from 'calendar-utils';
   }
 
   tecBookTime(tech, i){
-    tech['appointmentDate'] = this.viewDate
+    tech['appointmentDate'] = this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     this.appointmentService.objIndex = i ;
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
