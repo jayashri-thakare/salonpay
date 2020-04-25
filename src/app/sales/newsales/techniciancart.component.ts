@@ -99,7 +99,7 @@ export class TechnicianCartComponent implements OnInit {
 
   getCustomerServiceTechnicians() {
     this.salesService.getCustomerServiceTechnicians(this.orderIdOfSale).subscribe((data) => {
-      this.technicianlist = data;
+      this.technicianlist = data['technicians'];
       // this.technicianlist = this.technicianlist[0]['technicians'];
       console.log(this.technicianlist)
       // localStorage.setItem('companyId', data['ParentCompanyID']);

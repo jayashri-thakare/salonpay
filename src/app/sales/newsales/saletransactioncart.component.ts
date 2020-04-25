@@ -420,15 +420,18 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   totalpriceofserviceandproduct(type){
+    debugger;
     if(type == 'service'){
+      this.totalservicecost = 0;
       for(let i=0;i<this.arrayofservices.length;i++){
-        this.totalservicecost = this.arrayofservices[i]['serviceCost']
-        for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
-          this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['addonServices'][j]['serviceCost']
-        }
+        this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['totalServiceCost']
+        // for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
+        //   this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['addonServices'][j]['serviceCost']
+        // }
       }
       this.finalamount = this.totalservicecost;
     }else if(type == 'product'){
+      this.totalproductcost = 0;
       for(let i=0;i<this.customerProductCart.length;i++){
         this.totalproductcost = this.totalproductcost + (this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost'])
       }
@@ -556,6 +559,13 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   finalSaleService() {
+    if(this.arrayofservices.length > 0){
+      for(let i=0;i<this.arrayofservices;i++){
+        this.arrayofservices[i]['technicianId'] = "cfe2e89c-8c8a-47fc-8b72-d4a9ded74079";
+        this.arrayofservices[i]['technicianName'] = "Jaya Test Test"
+      }
+      console.log(this.arrayofservices)
+    }
     this.total = this.finalamount + this.totaltax;
       this.finalSale = {
         "SaleId": parseInt(localStorage.getItem('orderId')),

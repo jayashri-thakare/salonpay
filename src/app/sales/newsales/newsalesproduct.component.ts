@@ -148,17 +148,20 @@ export class NewSalesProductComponent implements OnInit {
     console.log(message)
     this.receivedChildMessagefreq = message;
     this.receivedChildMessage = this.receivedChildMessagefreq;
+    this.arryOfSalesProduct = this.receivedChildMessagefreq;
     console.log(this.receivedChildMessagefreq)
-    for(let i=0;i<this.arryOfSalesProduct.length;i++){
-      if(this.arryOfSalesProduct[i]['productId']==this.receivedChildMessagefreq[0]['productId']){
-        this.freqproduct = false;
+    if(this.arryOfSalesProduct.length > 0){
+      for(let i=0;i<this.arryOfSalesProduct.length;i++){
+        if(this.arryOfSalesProduct[i]['productId']==this.receivedChildMessagefreq[0]['productId']){
+          this.freqproduct = false;
+        }
       }
-    }
-    if(this.freqproduct == false){
-      // this.messageService.clear();
-      // this.messageService.add('Sales Product exist in order summary.')
-    }else{
-      this.arryOfSalesProduct.push(this.receivedChildMessagefreq[0])
+      if(this.freqproduct == false){
+        // this.messageService.clear();
+        // this.messageService.add('Sales Product exist in order summary.')
+      }else{
+        this.arryOfSalesProduct.push(this.receivedChildMessagefreq[0])
+      }
     }
   }
 

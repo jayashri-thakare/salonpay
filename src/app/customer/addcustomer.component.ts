@@ -111,6 +111,9 @@ export class AddCustomerComponent implements OnInit {
           this.customer = JSON.parse(localStorage.getItem('cust'))
           if(customer == true){
             this.router.navigate(['/customerdashboard'])
+          }else if(localStorage.getItem('appointment')){
+            localStorage.setItem('customerId', data['result']['id']);
+            this.router.navigate(['/getcustomerappointment'])
           }else{
             localStorage.setItem('customerId', data['result']['id']);
             this.createSaleOrder(localStorage.getItem('customerId'));
