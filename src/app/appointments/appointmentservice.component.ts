@@ -300,7 +300,7 @@ class ErrorInfo {
   }
 
   tecBookTime(tech, i){
-    tech['appointmentDate'] = this.datePipe.transform(this.viewDate, 'dd/MM/yyyy')
+    tech['appointmentDate'] = this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
     this.appointmentService.objIndex = i ;
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
