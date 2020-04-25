@@ -211,7 +211,10 @@ export class CustomerSaleComponent implements OnInit {
   createAppointment(customer) {
     this.appointment = JSON.parse(localStorage.appointment);
     this.appointment['customerId']= customer.customerId
-    this.appointment['customerEmailId']= customer.email
+    this.appointment['customerEmailId']= customer.email;
+    this.appointment['emailReminder'] = true;
+    this.appointment['smsReminder'] = true;
+
     this.salesService.create_appointment(this.appointment).subscribe((data) => {
       localStorage.removeItem('appointment');
       this.messageService.clear();

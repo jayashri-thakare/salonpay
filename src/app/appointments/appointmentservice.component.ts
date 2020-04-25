@@ -128,6 +128,7 @@ class ErrorInfo {
   technicians: Array<any>=[];
   techlist: Observable<any>;
   private tecSearch: boolean= false;
+  private dateErrormsg: string;
 
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
@@ -171,16 +172,25 @@ class ErrorInfo {
   ;
 
   dayClicked(day: WeekDay): void {
-    this.viewDate = day.date;
-    if (this.selectedDay) {
-      delete this.selectedDay.cssClass;
+    if(day.date < new Date()) {
+    //   setTimeout(() => {
+    //       this.router.navigate(['/appointmentlist']);
+    //     }
+    //     , 5000);
+    // });
+      this.dateErrormsg = "Please select the date greater than today."
+    }else {
+      this.viewDate = day.date;
+      if (this.selectedDay) {
+        delete this.selectedDay.cssClass;
+      }
+      let ele = document.getElementsByClassName("cal-today");
+      if (ele[0] != undefined) {
+        ele[0].classList.remove('cal-today')
+      }
+      day.cssClass = 'cal-today';
+      this.selectedDay = day;
     }
-    let  ele = document.getElementsByClassName("cal-today");
-    if(ele[0]!=undefined){
-      ele[0].classList.remove('cal-today')
-    }
-    day.cssClass = 'cal-today';
-    this.selectedDay = day;
   }
 
   beforeViewRender({header}: {header: WeekDay[]}): void {
@@ -290,7 +300,7 @@ class ErrorInfo {
   }
 
   tecBookTime(tech, i){
-    tech['appointmentDate'] = this.datePipe.transform(this.viewDate, 'MM/dd/yyyy')
+    tech['appointmentDate'] = this.datePipe.transform(this.viewDate, 'dd/MM/yyyy')
     this.appointmentService.objIndex = i ;
     this.appointmentService.tecBookTime(tech).subscribe((data) => {
       this.bookedTime = data['result'];
