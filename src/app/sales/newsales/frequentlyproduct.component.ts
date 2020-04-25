@@ -25,16 +25,16 @@ import { SalesService } from '../sales.service';
     '                                            </div>\n' +
     '                                        </div>\n' +
     '                                        <div class="main-selt">\n' +
-    '                                            <input type="checkbox" id="feq-1" name="feq-1" required>\n' +
-    '                                            <label for="feq-1">Select</label>\n' +
+    '                                            <input type="checkbox" id="freq-{{product?.productId}}" name="freq-{{product?.productId}}" (click)="selectedServices(product, $event)" required>\n' +
+    '                                            <label for="freq-{{product?.productId}}">Select</label>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                    <div class="techi-top techi-top-qty">\n' +
     '                                        <h5 class="prodt-ct">Quantity</h5>\n' +
     '                                        <div class="container-count-box">\n' +
-    '                                            <button class="count-down">-</button>\n' +
+    '                                            <button class="count-down" (click)="productquantity(\'count-down\');quantityselectionofproduct(product.productId)">-</button>\n' +
     '                                            <span class="container-count">00</span>\n' +
-    '                                            <button class="count-up">+</button>\n' +
+    '                                            <button class="count-up" (click)="productquantity(\'count-up\');quantityselectionofproduct(product.productId)">+</button>\n' +
     '                                        </div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
@@ -46,10 +46,14 @@ import { SalesService } from '../sales.service';
 })
 export class FrequentlyAddedProductComponent implements OnInit {
   frequentlyProduct: any;
+  arrayofselectedproduct: Array<any>=[];
+  quantity: any;
+  @Output() messageToEmit = new EventEmitter<string>();
 
   constructor(private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.quantity = 0;
     this.getFrequentlyProductDetail();
   }
 
@@ -60,5 +64,39 @@ export class FrequentlyAddedProductComponent implements OnInit {
       console.log(this.frequentlyProduct)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  selectedServices(selected_product, event){
+    var index = this.arrayofselectedproduct.indexOf(selected_product);
+    if(index<0 && event.currentTarget.checked){
+      this.arrayofselectedproduct.push(selected_product);
+    }else{
+      this.arrayofselectedproduct.splice(index, 1);
+    }
+    console.log(this.arrayofselectedproduct)
+    this.sendMessageToParent(this.arrayofselectedproduct)
+  }
+
+  quantityselectionofproduct(productid){
+    for(let i=0; i<this.arrayofselectedproduct.length;i++){
+      if(productid == this.arrayofselectedproduct[i]['productId']){
+        this.arrayofselectedproduct[i]['quantity'] = this.quantity;
+      }
+    }
+    console.log(this.arrayofselectedproduct)
+    this.sendMessageToParent(this.arrayofselectedproduct)
+  }
+  sendMessageToParent(message) {
+    console.log(message)
+    this.messageToEmit.emit(message)
+  }
+
+  productquantity(type){
+    if(type == 'count-down'){
+      this.quantity--;
+    }else if(type == 'count-up'){
+      this.quantity++;
+    }
+    console.log(this.quantity)
   }
 }

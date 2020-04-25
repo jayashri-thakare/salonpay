@@ -41,7 +41,7 @@ import { url } from 'inspector';
     '                </div>\n' +
     '                <!-- Gap -->\n' +
     '                <div class="row mb-4"></div>\n' +
-    '                <app-frequentlyproduct></app-frequentlyproduct>\n' +
+    '                <app-frequentlyproduct (messageToEmit)="getMessagefreq($event)"></app-frequentlyproduct>\n' +
     '                <app-transactionproduct (messageToEmit)="getMessage($event)"></app-transactionproduct>\n' +
     '\n' +
     '\n' +
@@ -125,6 +125,9 @@ export class NewSalesProductComponent implements OnInit {
     Product= {};
     createproduct: any;
   arrayofservices: any;
+  receivedChildMessagefreq: Array<any>=[];
+  quantitycheck: boolean;
+  freqproduct: boolean;
 
   constructor(public messageService: MessageService,private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -139,6 +142,27 @@ export class NewSalesProductComponent implements OnInit {
     this.receivedChildMessage = message;
     this.arryOfSalesProduct = this.receivedChildMessage;
     console.log(this.receivedChildMessage)
+  }
+
+  getMessagefreq(message) {
+    console.log(message)
+    this.receivedChildMessagefreq = message;
+    this.receivedChildMessage = this.receivedChildMessagefreq;
+    this.arryOfSalesProduct = this.receivedChildMessagefreq;
+    console.log(this.receivedChildMessagefreq)
+    if(this.arryOfSalesProduct.length > 0){
+      for(let i=0;i<this.arryOfSalesProduct.length;i++){
+        if(this.arryOfSalesProduct[i]['productId']==this.receivedChildMessagefreq[0]['productId']){
+          this.freqproduct = false;
+        }
+      }
+      if(this.freqproduct == false){
+        // this.messageService.clear();
+        // this.messageService.add('Sales Product exist in order summary.')
+      }else{
+        this.arryOfSalesProduct.push(this.receivedChildMessagefreq[0])
+      }
+    }
   }
 
   getCustomerDetail() {
@@ -175,16 +199,32 @@ export class NewSalesProductComponent implements OnInit {
     }
   }
 
+  productquantitycheck(){
+    for(let i=0;i<this.receivedChildMessage.length;i++){
+      if(this.receivedChildMessage[i]['quantity'] == 0){
+        this.quantitycheck = false;
+      }else{
+        this.quantitycheck = true;
+      }
+    }
+  }
+
   createSaleProduct() {
+    this.productquantitycheck();
     this.Product['SaleId'] = parseInt(localStorage.getItem('orderId'));
     if(this.receivedChildMessage.length > 0 || this.arrayofservices.length > 0){
-      this.Product['Products'] = this.receivedChildMessage;
-      this.salesService.create_sales_product(this.Product).subscribe((data) => {
-        this.router.navigate(['/transactioncart']);
+      if(this.quantitycheck){
+        this.Product['Products'] = this.receivedChildMessage;
+        this.salesService.create_sales_product(this.Product).subscribe((data) => {
+          this.router.navigate(['/transactioncart']);
+          this.messageService.clear();
+          this.messageService.add('Sales Product added Successfully.')
+          this.createproduct = data;
+        });
+      }else{
         this.messageService.clear();
-        this.messageService.add('Sales Product added Successfully.')
-        this.createproduct = data;
-      });
+      this.messageService.add('Please add quantity for the selected product.')
+      }
     }else{
       this.messageService.clear();
       this.messageService.add('Please add atleast one product or one service.')

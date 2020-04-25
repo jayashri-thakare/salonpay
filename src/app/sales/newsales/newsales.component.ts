@@ -15,6 +15,8 @@ export class NewSalesComponent implements OnInit {
   Service= {};
   createservice: any;
   technicianlist: any;
+  receivedChildMessagefreq: any;
+  freqservice: boolean;
 
   constructor(public appointmentService: AppointmentService, private salesService: SalesService, public messageService: MessageService, public router: Router) { }
 
@@ -28,6 +30,27 @@ export class NewSalesComponent implements OnInit {
     this.receivedChildMessage = message;
     console.log(this.receivedChildMessage)
     this.getTechnicianList();
+  }
+
+  getMessagefreq(message) {
+    this.receivedChildMessagefreq = message;
+    this.receivedChildMessage = this.receivedChildMessagefreq;
+    console.log(this.receivedChildMessagefreq)
+    if(this.receivedChildMessagefreq.length > 0){
+      for(let i=0;i<this.receivedChildMessage.length;i++){
+        if(this.receivedChildMessage[i]['serviceId']==this.receivedChildMessagefreq[0]['serviceId']){
+          this.freqservice = false;
+        }
+      }
+      if(this.freqservice == false){
+        // this.messageService.clear();
+        // this.messageService.add('Sales Service exist in order summary.')
+      }else{
+        this.receivedChildMessage.push(this.receivedChildMessagefreq[0]);
+      }
+    }
+    this.getTechnicianList();
+    // this.getTechnicianList();
   }
 
   getCustomerDetail() {

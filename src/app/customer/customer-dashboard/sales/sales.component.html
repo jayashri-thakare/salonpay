@@ -93,7 +93,7 @@
                             <i class="icon-clock"></i>
                             <div class="tech-usr-cont">
                                 <p>Time</p>
-                                <h3>{{sale?.time}}</h3>
+                                <h3>{{sale?.time | slice:0:4}}{{sale?.time | slice:7:10}}</h3>
                             </div>
                         </div>
                         <!-- end -->

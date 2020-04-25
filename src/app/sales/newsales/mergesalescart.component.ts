@@ -54,7 +54,8 @@ import { MessageService } from 'src/app/message.service';
     '                <div class="f-row f-3 f-1200-2 f-640-1">\n' +
     '                    <div class="f-col" *ngFor="let sales of mergesalecart;let i=index;">\n' +
     '                        <!-- start -->\n' +
-    '                        <div class="techi-box" *ngFor="let services of mergesalecart[i].ordersummaryservices">\n' +
+    '                        <div class="techi-box" *ngFor="let services of mergesalecart[i].ordersummaryservices;let j=index;">\n' +
+    '                         <div *ngIf="j<=0">\n'+
     '                            <div class="techi-top">\n' +
     '                                <div class="user-det">\n' +
     '                                    <i class="icon-haircut prodt-ico"></i>\n' +
@@ -63,13 +64,14 @@ import { MessageService } from 'src/app/message.service';
     '                                    </div>\n' +
     '                                </div>\n' +
     '                                <div class="main-selt">\n' +
-    '                                    <input type="checkbox" (click)="mergesale(sales, $event)" id="{{services.serviceId}}" name="{{services.serviceId}}" required>\n' +
-    '                                    <label for="{{services.serviceId}}">Select</label>\n' +
+    '                                    <input type="checkbox" (click)="mergesale(sales, $event)" id="{{services.serviceId}}-{{i}}" name="{{services.serviceId}}" required>\n' +
+    '                                    <label for="{{services.serviceId}}-{{i}}">Select</label>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <div class="techi-top">\n' +
     '                                <h5 class="prodt-ct">{{sales.saleId}}</h5>\n' +
     '                            </div>\n' +
+    '                        </div>\n' +
     '                        </div>\n' +
     '                        <!-- end -->\n' +
     '                    </div>\n' +

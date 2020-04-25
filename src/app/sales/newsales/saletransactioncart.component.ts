@@ -323,6 +323,7 @@ export class SalesTransactionCartComponent implements OnInit {
   totalservicecosttax: number;
   totalproductcosttax: number;
   totaltax: number;
+  total: number;
 
   constructor(public AdminService: AdminService, public messageService: MessageService, public modalService: ModalService, private salesService: SalesService, public adminService:AdminService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -419,15 +420,18 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   totalpriceofserviceandproduct(type){
+    debugger;
     if(type == 'service'){
+      this.totalservicecost = 0;
       for(let i=0;i<this.arrayofservices.length;i++){
-        this.totalservicecost = this.arrayofservices[i]['serviceCost']
-        for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
-          this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['addonServices'][j]['serviceCost']
-        }
+        this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['totalServiceCost']
+        // for(let j=0;j<this.arrayofservices[i]['addonServices'].length;j++){
+        //   this.totalservicecost = this.totalservicecost + this.arrayofservices[i]['addonServices'][j]['serviceCost']
+        // }
       }
       this.finalamount = this.totalservicecost;
     }else if(type == 'product'){
+      this.totalproductcost = 0;
       for(let i=0;i<this.customerProductCart.length;i++){
         this.totalproductcost = this.totalproductcost + (this.customerProductCart[i]['quantity'] * this.customerProductCart[i]['productCost'])
       }
@@ -473,12 +477,12 @@ export class SalesTransactionCartComponent implements OnInit {
     if(arrayofselectedobj.length > 0){
       for(let i=0;i< this.arrayofservices.length;i++){
         if(this.arrayofservices[i]['serviceId'] == arrayofselectedobj[0]['serviceId']){
-          this.arrayofservices.splice(this.arrayofservices.indexOf(arrayofselectedobj[i]['serviceId']), 1)
+          this.arrayofservices.splice(this.arrayofservices.indexOf(arrayofselectedobj[0]['serviceId']), 1)
         }
       }
       for(let i=0;i< this.customerProductCart.length;i++){
         if(this.customerProductCart[i]['productId'] == arrayofselectedobj[0]['productId']){
-          this.customerProductCart.splice(this.customerProductCart.indexOf(arrayofselectedobj[i]['productId']), 1)
+          this.customerProductCart.splice(this.customerProductCart.indexOf(arrayofselectedobj[0]['productId']), 1)
         }
       }
     }
@@ -555,12 +559,20 @@ export class SalesTransactionCartComponent implements OnInit {
   }
 
   finalSaleService() {
+    if(this.arrayofservices.length > 0){
+      for(let i=0;i<this.arrayofservices;i++){
+        this.arrayofservices[i]['technicianId'] = "cfe2e89c-8c8a-47fc-8b72-d4a9ded74079";
+        this.arrayofservices[i]['technicianName'] = "Jaya Test Test"
+      }
+      console.log(this.arrayofservices)
+    }
+    this.total = this.finalamount + this.totaltax;
       this.finalSale = {
         "SaleId": parseInt(localStorage.getItem('orderId')),
         "CustomerId": parseInt(localStorage.getItem('customerId')),
       "Currency":"$",
-      "TotalAmount":this.finalamount,
-      "ReceivedAmount":this.finalamount,
+      "TotalAmount":this.total,
+      "ReceivedAmount":this.total,
       "IsFullPaymentComplete":true,
       "ParentCompanyId":parseInt(localStorage.getItem('companyId')),
       "PaymentType":[
@@ -586,7 +598,7 @@ export class SalesTransactionCartComponent implements OnInit {
               {
               "Type":"CARD",
               "CardDescription":"1264-2536-4523-5689",
-              "CardAmount":parseFloat(this.couponcodevalue)
+              "CardAmount":parseFloat(this.cardamountvalue)
               }
       ],
         "ordersummaryservicesUpdate": this.arrayofservices,
@@ -644,11 +656,16 @@ export class SalesTransactionCartComponent implements OnInit {
       //       "CardAmount":100.0
       //       }
       // ],
-      this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
-        this.router.navigate(['/transactiontipadjustment']);
+      if(this.cardamountvalue == 0 && this.cashamountvalue == 0){
         this.messageService.clear();
-        this.messageService.add('Sales Completed Successfully.')
-        this.createsale = data;
-      });
+          this.messageService.add('Please add card and cash amount value.')
+      }else{
+        this.salesService.create_final_sales(this.finalSale).subscribe((data) => {
+          this.router.navigate(['/transactiontipadjustment']);
+          this.messageService.clear();
+          this.messageService.add('Sales Completed Successfully.')
+          this.createsale = data;
+        });
+      }
   }
 }

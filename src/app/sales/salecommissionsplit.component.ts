@@ -50,7 +50,7 @@ import {MessageService} from "../message.service";
     '                    <div class="tip-flex-other">\n' +
     '                        <div class="tip-input">\n' +
     '                            <div class="form-group m-0">\n' +
-    '                                <input type="text" class="form-field" required ngModel="{{split.commission}}" />\n' +
+    '                                <input type="text" class="form-field" (input)="totalofsplitamount($event.target.value)" required ngModel="{{split.commission}}" />\n' +
     '                            </div>\n' +
     '                        </div>\n' +
     '                        <div class="tip-input">\n' +
@@ -62,11 +62,8 @@ import {MessageService} from "../message.service";
     '                            <div class="form-group m-0">\n' +
     '                                <select class="select-field form-field">\n' +
     '                                    <option disabled selected>Turns</option>\n' +
-    '                                    <option value="1">Option 1</option>\n' +
-    '                                    <option value="2">Option 2</option>\n' +
-    '                                    <option value="3">Option 3</option>\n' +
-    '                                    <option value="4">Option 4</option>\n' +
-    '                                    <option value="5">Option 5</option>\n' +
+    '                                    <option value="1">quaterly</option>\n' +
+    '                                    <option value="2">monthly</option>\n' +
     '                                </select>\n' +
     '                            </div>\n' +
     '                        </div>\n' +
@@ -80,7 +77,7 @@ import {MessageService} from "../message.service";
     '        <!-- start -->\n' +
     '        <div class="proTot">\n' +
     '            <span>Total</span>\n' +
-    '            <span>$4.50</span>\n' +
+    '            <span>${{totalsplit}}</span>\n' +
     '        </div>\n' +
     '        <!-- end -->\n' +
     '\n' +
@@ -94,10 +91,12 @@ import {MessageService} from "../message.service";
 export class SalesCommissionSplitComponent implements OnInit {
   SalesCommission: Observable<any>;
     commissionsplit= {};
+  totalsplit: number;
 
   constructor(public salesService: SalesService, private formBuilder: FormBuilder, public router: Router, public messageService: MessageService) { }
 
   ngOnInit() {
+    this.totalsplit = 0;
     this.getSalesCommissionSplit(localStorage.getItem('saledetailid'));
   }
 
@@ -108,6 +107,12 @@ export class SalesCommissionSplitComponent implements OnInit {
       console.log(this.SalesCommission)
       // localStorage.setItem('companyId', data['ParentCompanyID']);
     });
+  }
+
+  totalofsplitamount(event){
+    if(event){
+      this.totalsplit = this.totalsplit + parseInt(event);
+    }
   }
 
   finalSaleCommission() {

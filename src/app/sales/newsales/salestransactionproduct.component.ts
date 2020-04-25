@@ -58,7 +58,7 @@ import { SalesService } from '../sales.service';
     '                                            <h5 class="prodt-ct">Quantity</h5>\n' +
     '                                            <div class="container-count-box">\n' +
     '                                                <button class="count-down" (click)="productquantity(\'count-down\');quantityselectionofproduct(addedproduct.productId)">-</button>\n' +
-    '                                                <span class="container-count">{{this.quantity}}</span>\n' +
+    '                                                <span class="container-count">00</span>\n' +
     '                                                <button class="count-up" (click)="productquantity(\'count-up\');quantityselectionofproduct(addedproduct.productId)">+</button>\n' +
     '                                            </div>\n' +
     '                                        </div>\n' +
@@ -97,7 +97,7 @@ import { SalesService } from '../sales.service';
     '                                            <h5 class="prodt-ct">Quantity</h5>\n' +
     '                                            <div class="container-count-box">\n' +
     '                                                <button class="count-down" (click)="productquantity(\'count-down\');quantityselectionofproduct(addedproduct.productId)">-</button>\n' +
-    '                                                <span class="container-count">{{this.quantity}}</span>\n' +
+    '                                                <span class="container-count">00</span>\n' +
     '                                                <button class="count-up" (click)="productquantity(\'count-up\');quantityselectionofproduct(addedproduct.productId)">+</button>\n' +
     '                                            </div>\n' +
     '                                        </div>\n' +

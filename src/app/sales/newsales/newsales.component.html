@@ -33,7 +33,7 @@
           </div>
           <!-- Gap -->
           <div class="row mb-4"></div>
-          <app-frequentlyservices></app-frequentlyservices>
+          <app-frequentlyservices (messageToEmit)="getMessagefreq($event)"></app-frequentlyservices>
           <app-servicestransaction (messageToEmit)="getMessage($event)"></app-servicestransaction>
       </div>
       <!-- left side Ends -->
