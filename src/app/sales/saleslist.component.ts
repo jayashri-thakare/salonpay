@@ -84,7 +84,7 @@ import {MessageService} from "../message.service";
     '                                <i class="icon-clock"></i>\n' +
     '                                <div class="tech-usr-cont">\n' +
     '                                    <p>Time</p>\n' +
-    '                                    <h3>{{sale.time}}</h3>\n' +
+    '                                    <h3>{{sale.time | slice:0:4}}{{sale.time | slice:7:10}}</h3>\n' +
     '                                </div>\n' +
     '                            </div>\n' +
     '                            <!-- end -->\n' +

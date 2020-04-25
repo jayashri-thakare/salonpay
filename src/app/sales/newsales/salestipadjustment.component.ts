@@ -221,7 +221,6 @@ export class TipAdjustmentSalesComponent implements OnInit {
   }
 
   tipvaluefunc(event, serviceid){
-    debugger;
       for(let i=0;i<this.customerTipData.length;i++){
         if(event && serviceid == this.customerTipData[i].serviceId){
           this.customerTipData[i]['tip'] = parseInt(event);

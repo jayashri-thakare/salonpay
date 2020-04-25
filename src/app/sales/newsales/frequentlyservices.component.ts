@@ -31,15 +31,16 @@ import { SalesService } from '../sales.service';
     '                                      </div>\n' +
     '                                  </div>\n' +
     '                                  <div class="main-selt">\n' +
-    '                                      <input type="checkbox" id="{{service?.serviceId}}" name="{{service?.serviceId}}" (click)="selectedServices(addedservice, $event);addingaddon(service?.serviceId, $event)" required>\n' +
-    '                                      <label for="{{service?.serviceId}}">Select</label>\n' +
+    '                                      <input type="checkbox" id="freq-{{service?.serviceId}}" name="{{service?.serviceId}}" (click)="selectedServices(service, $event);addingaddon(service.serviceId, $event)" required>\n' +
+    '                                      <label for="freq-{{service?.serviceId}}">Select</label>\n' +
     '                                  </div>\n' +
     '                              </div>\n' +
     '                              <div class="techi-top center" *ngIf="service.serviceId == serviceIds">\n' +
-    '                                  <a href="#" data-toggle="modal" data-target="#addonServicePopup">\n' +
-    // '                                      <h5 class="prodt-ct" (click)="getaddonServiceList(service?.serviceId);"> <i class="icon-cir-plus mr-1"> <i class="icon-cir-plus mr-1"></i> Select Add On\n' +
-    // '                                          Services\n' +
-    // '                                      </h5>\n' +
+    '                                  <a href="#" data-toggle="modal" data-target="#addonServicePopupfreq">\n' +
+    '                                                      <h5 class="prodt-ct" (click)="getaddonServiceList(service?.serviceId);"> <i class="icon-cir-plus mr-1"></i>\n' +
+    '                                                          Select Add On\n' +
+    '                                                          Services\n' +
+    '                                                      </h5>\n' +
     '                                  </a>\n' +
     '                              </div>\n' +
     '                          </div>\n' +
@@ -47,13 +48,16 @@ import { SalesService } from '../sales.service';
     '                      </div>\n' +
     '                  </div>\n' +
     '              </div>\n' +
-    '          </div>'
+    '          </div>\n' +
+    '          <addonservicefreq-modal [addonService]="addonService" (addonsertoparent)="getaddonservice($event)"></addonservicefreq-modal>'
 })
 export class SalesFrequentlyServicesComponent implements OnInit {
   frequentlyServices: any;
   serviceIds: any;arrayofselectedservices: Array<any>=[];
   @Output() messageToEmit = new EventEmitter<string>();
   receivedAddonService: Array<any> = [];
+  result: any;
+  addonService: any;
 
   constructor(public salesService: SalesService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -82,6 +86,13 @@ export class SalesFrequentlyServicesComponent implements OnInit {
 
   sendMessageToParent(message) {
     this.messageToEmit.emit(message)
+  }
+
+  getaddonServiceList(serviceid) {
+    this.salesService.getAllAddedServices(serviceid).subscribe((res) => {
+      this.result = res ;
+      this.addonService = this.result;
+    });
   }
 
   addingaddon(serviceid, event){

@@ -1,357 +1,423 @@
 <!-- Choose Date Starts -->
 <div class="mainContainer m-0">
-    <div class="apn-container">
-        <div class="apn-left">
-          <div id="chdate">
+  <div class="apn-container">
+      <div class="apn-left">
+        <div id="chdate">
           <h6 class="hdn2 apn-choose-date">Choose Date</h6>
           <div class="apn-date-container">
-            <!-- swiper slider starts -->
-            <div class="apn-swiper-up">
-              <div class="swiper-container apn-swiper">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide radio-box radio-box-2">
-                    <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
-                    <!--                <label for="apn-swiper-box-1">-->
-                    <mwl-calendar-week-view
-                      [viewDate]="viewDate"
-                      [refresh]="refresh"
-                    >
-                    </mwl-calendar-week-view>
-                  </div>
+            <div class="row text-center">
+              <div class="col-md-4">
+                <div class="btn-group">
+                  <!--              <div-->
+                  <!--                class="btn btn-primary"-->
+                  <!--                mwlCalendarPreviousView-->
+                  <!--                [view]="view"-->
+                  <!--                [(viewDate)]="viewDate"-->
+                  <!--                (viewDateChange)="closeOpenWeekViewDay()"-->
+                  <!--              >-->
+                  <!--                Previous-->
+                  <!--              </div>-->
+                  <!--              <div-->
+                  <!--                class="btn btn-outline-secondary"-->
+                  <!--                mwlCalendarToday-->
+                  <!--                [(viewDate)]="viewDate"-->
+                  <!--              >-->
+                  <!--                Today-->
+                  <!--              </div>-->
+                  <!--              <div-->
+                  <!--                class="btn btn-primary"-->
+                  <!--                mwlCalendarNextView-->
+                  <!--                [view]="view"-->
+                  <!--                [(viewDate)]="viewDate"-->
+                  <!--                (viewDateChange)="closeOpenWeekViewDay()"-->
+                  <!--              >-->
+                  <!--                Next-->
+                  <!--              </div>-->
                 </div>
               </div>
-              <div mwlCalendarNextView
-                  [view]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenWeekViewDay()"
-                  class="swiper-button-next apn-button-next"></div>
-              <div mwlCalendarPreviousView
-                  [view]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
-              <!-- swiper slider Ends -->
+              <div class="col-md-4" style="    margin-left: -180px;">
+                <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}  </h5>
+              </div><br/><br/>
             </div>
-          </div>
-            <div class="popBtn mt-0">
-              <button class="button" type="submit" (click)="nextScreen1()">Next</button>
-            </div>
-          <!-- Choose Date Ends -->
-          </div>
-        </div>
-      </div>
-  </div>
-  
-  <div id="appnt1" class="mainContainer m-0 "  style="display:block" xmlns="http://www.w3.org/1999/html">
-    <div class="apn-container">
-      <div class="apn-left">
-        <!-- Choose Date Starts -->
-        <h6 class="hdn2 apn-choose-date">Choose Date</h6>
-        <div class="apn-date-container">
-          <div class="row text-center">
-            <div class="col-md-4">
-              <div class="btn-group">
-                <div
-                  class="btn btn-primary"
-                  mwlCalendarPreviousView
-                  [view]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenWeekViewDay()"
-                >
-                  Previous
-                </div>
-                <div
-                  class="btn btn-outline-secondary"
-                  mwlCalendarToday
-                  [(viewDate)]="viewDate"
-                >
-                  Today
-                </div>
-                <div
-                  class="btn btn-primary"
-                  mwlCalendarNextView
-                  [view]="view"
-                  [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenWeekViewDay()"
-                >
-                  Next
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4" style="    margin-left: -180px;">
-              <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
-            </div><br/><br/>
-          </div>
             <div class="swiper-container apn-swiper">
-              <div class="swiper-wrapper">
+              <div class="swiper-wrapper"  >
                 <div class="swiper-slide radio-box radio-box-2">
-  <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
-  <!--                <label for="apn-swiper-box-1">-->
-  <!--                  <p>Wed <span>18</span></p>-->
-  <!--                </label>-->
-          <mwl-calendar-week-view
-            [viewDate]="viewDate"
-            [refresh]="refresh"
-          >
-          </mwl-calendar-week-view>
-                  <div mwlCalendarNextView
-                       [view]="view"
-                       [(viewDate)]="viewDate"
-                       (viewDateChange)="closeOpenWeekViewDay()"
-                        class="swiper-button-next apn-button-next"></div>
+                  <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
+                  <!--                <label for="apn-swiper-box-1">-->
+                  <!--                  <p>Wed <span>18</span></p>-->
+                  <!--                </label>-->
+                  <mwl-calendar-week-view
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    (beforeViewRender)="beforeViewRender($event)"
+                    (dayHeaderClicked)="dayClicked($event.day)">
+                    >
+                  </mwl-calendar-week-view>
+                  <div   mwlCalendarNextView
+                         view="week"
+                         [(viewDate)]="viewDate"
+                         class="swiper-button-next apn-button-next"></div>
                   <div mwlCalendarPreviousView
-                       [view]="view"
-                       [(viewDate)]="viewDate"
-                       (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
+                       view="week"
+                       [(viewDate)]="viewDate" class="swiper-button-prev apn-button-prev"></div>
                 </div>
               </div>
             </div>
-  <!--              </div>-->
-  
-        </div>
+            <!--              </div>-->
+
+          </div>
+          <div class="popBtn mt-0">
+            <button class="button" type="submit" (click)="nextScreen1()">Next</button>
+          </div>
         <!-- Choose Date Ends -->
-  
-        <!-- Service Preferences Technician Starts -->
-        <div class="apn-serv-mob">
-          <h6 class="hdn2">Service Preferences Technician</h6>
-          <div class="apn-right-radio">
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="apn-r-mob1" name="apn-r-mob" [value]="1"  (click)="selectPref(1)">
-              <label for="apn-r-mob1">Single1</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="apn-r-mob2" name="apn-r-mob" [value]="2" (click)="selectPref(2)">
-              <label for="apn-r-mob2">Multiple</label>
-            </div>
-            <div class="radio-box radio-box-2">
-              <input type="radio" id="apn-r-mob3" name="apn-r-mob" [value]="3" (click)="selectPref(3)">
-              <label for="apn-r-mob3">Simultaneous</label>
-            </div>
-          </div>
-        </div>
-        <!-- Service Preferences Technician Ends -->
-  
-        <!-- Selected Service Starts -->
-        <h6 class="hdn2">Selected Service</h6>
-        <div class="form-group">
-          <form (ngSubmit)="searchService()">
-            <input class="form-field" type="text" name="filter-searh" [(ngModel)]="searchServicen" required>
-            <p class="form-label">Search</p>
-            <button class="search icon-search" type="submit"></button>
-          </form>
-        </div>
-  
-            <!-- Selected Service Ends -->
-  
-        <div class="apn-service-box">
-          <!-- start -->
-          <div class="apn-input-selection" *ngFor="let service of  servicelist; let i = index">
-            <input type="checkbox" id="apnChk{{i}}" value="{{service}}" [checked]="service.serviceId == technicianobj.serviceId" (change)="selectService($event, service?.serviceId, service)">
-            <label for="apnChk{{i}}">
-              <div class="apn-ser">
-                <h5>  {{service?.serviceName}}</h5>
-                <p> {{service?.serviceTime}}</p>
-                <h6>{{service?.seviceCost}}</h6>
-              </div>
-            </label>
-          </div>
-  
-          <!-- end -->
         </div>
       </div>
-      <div class="apn-right-btn"><i class="icon-status1"></i></div>
-      <div class="bgOverlay"></div>
-  
-      <div class="apn-right">
-        <div class="apn-right-in">
-          <div class="scrollbar">
-            <!-- Service Preferences Technician Starts -->
-            <div class="apn-serv-desk">
-              <h6 class="hdn2">Service Preferences Technician</h6>
-              <div class="apn-right-radio">
-                <div class="radio-box radio-box-2">
-                  <input type="radio" id="apn-r1" name="apn-r" [value]="1" [(ngModel)]="preference" [checked]="preference==1">
-                  <label for="apn-r1">Single</label>
-                </div>
-                <div class="radio-box radio-box-2">
-                  <input type="radio" id="apn-r2" name="apn-r" [value]="2" [(ngModel)]="preference" [checked]="preference==2" >
-                  <label for="apn-r2">Multiple</label>
-                </div>
-                <div class="radio-box radio-box-2">
-                  <input type="radio" id="apn-r3" name="apn-r" [value]="3" [(ngModel)]="preference" [checked]="preference==3">
-                  <label for="apn-r3">Simultaneous</label>
-                </div>
+    </div>
+</div>
+
+<div id="appnt1" class="mainContainer m-0 "  style="display:block" xmlns="http://www.w3.org/1999/html">
+  <div class="apn-container">
+    <div class="apn-left">
+      <!-- Choose Date Starts -->
+      <h6 class="hdn2 apn-choose-date">Choose Date</h6>
+      <div class="apn-date-container">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div class="btn-group">
+
+            </div>
+          </div>
+          <div class="col-md-4" style="    margin-left: -180px;">
+            <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}  </h5>
+          </div><br/><br/>
+        </div>
+          <div class="swiper-container apn-swiper">
+            <div class="swiper-wrapper"  >
+              <div class="swiper-slide radio-box radio-box-2">
+<!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
+<!--                <label for="apn-swiper-box-1">-->
+<!--                  <p>Wed <span>18</span></p>-->
+<!--                </label>-->
+        <mwl-calendar-week-view
+          [viewDate]="viewDate"
+          [events]="events"
+          (beforeViewRender)="beforeViewRender($event)"
+          (dayHeaderClicked)="dayClicked($event.day)">
+        >
+        </mwl-calendar-week-view>
+                <div   mwlCalendarNextView
+                       view="week"
+                       [(viewDate)]="viewDate"
+                       class="swiper-button-next apn-button-next"></div>
+                <div mwlCalendarPreviousView
+                     view="week"
+                     [(viewDate)]="viewDate" class="swiper-button-prev apn-button-prev"></div>
               </div>
             </div>
-            <!-- Service Preferences Technician Ends -->
-            <!-- Technician Selection Starts -->
-            <div class="apn-technician-selection">
-              <h6 class="hdn2">Choose Technician</h6>
-              <div class="form-group">
-                <form (ngSubmit)="searchTechnician()">
-                  <input class="form-field" type="text" [(ngModel)]="searchTech" name="filter-searh" required="">
-                  <p class="form-label">Search</p>
-                  <button class="search icon-search" type="submit"></button>
-                </form>
+          </div>
+<!--              </div>-->
+
+      </div>
+      <!-- Choose Date Ends -->
+
+      <!-- Service Preferences Technician Starts -->
+      <div class="apn-serv-mob">
+        <h6 class="hdn2">Service Preferences Technician</h6>
+        <div class="apn-right-radio">
+          <div class="radio-box radio-box-2">
+            <input type="radio" id="apn-r-mob1" name="apn-r-mob" [value]="1"  (click)="selectPref(1)">
+            <label for="apn-r-mob1">Single1</label>
+          </div>
+          <div class="radio-box radio-box-2">
+            <input type="radio" id="apn-r-mob2" name="apn-r-mob" [value]="2" (click)="selectPref(2)">
+            <label for="apn-r-mob2">Multiple</label>
+          </div>
+          <div class="radio-box radio-box-2">
+            <input type="radio" id="apn-r-mob3" name="apn-r-mob" [value]="3" (click)="selectPref(3)">
+            <label for="apn-r-mob3">Simultaneous</label>
+          </div>
+        </div>
+      </div>
+      <!-- Service Preferences Technician Ends -->
+
+      <!-- Selected Service Starts -->
+      <h6 class="hdn2">Selected Service</h6>
+      <div class="form-group">
+<!--        <form (ngSubmit)="searchService()">-->
+<!--          <input id="serviceid" class="form-field" type="text" name="SearchService" [(ngModel)]="searchServicen" required>-->
+        <input type="text" class="form-control form-field" [(ngModel)]="searchServicen" (input)="searchService($event.target.value)">
+          <p class="form-label">Search</p>
+          <button class="search icon-search" type="submit"></button>
+<!--        </form>-->
+      </div>
+
+          <!-- Selected Service Ends -->
+
+      <div class="apn-service-box">
+        <!-- start -->
+        <div class="apn-input-selection" *ngFor="let service of servicelist; let i = index">
+          <input type="radio" name="service" id="apnChk{{i}}" value="{{service}}" [checked]="service.serviceId == technicianobj.serviceId" (change)="selectService($event, service?.serviceId, service)">
+          <label for="apnChk{{i}}">
+            <div class="apn-ser">
+              <h5>  {{service?.serviceName}}</h5>
+              <p> {{service?.serviceTime}}</p>
+              <h6>{{service?.seviceCost}}</h6>
+            </div>
+          </label>
+        </div>
+
+        <!-- end -->
+      </div>
+    </div>
+    <div class="apn-right-btn"><i class="icon-status1"></i></div>
+    <div class="bgOverlay"></div>
+
+    <div class="apn-right">
+      <div class="apn-right-in">
+        <div class="scrollbar">
+          <!-- Service Preferences Technician Starts -->
+          <div class="apn-serv-desk">
+            <h6 class="hdn2">Service Preferences Technician</h6>
+            <div class="apn-right-radio">
+              <div class="radio-box radio-box-2">
+                <input type="radio" id="apn-r1" name="apn-r" [value]="1" [(ngModel)]="preference" [checked]="preference==1">
+                <label for="apn-r1">Single</label>
               </div>
-  
-              <div class="apn-technician-container">
-                <!-- start -->
-                <div class="apn-input-selection">
-                  <input type="checkbox" id="apn-technician-1" name="apn-technician" required />
-                  <label for="apn-technician-1">
-                    <div class="apn-technician">
-                      <div class="user-img"><img src="../assets/img/user-icon.svg" alt=""></div>
-                      <div class="usr-name">
-                        <h3>No Preference</h3>
-                        <ul class="usr-social">
-                          <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
-                          <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-                <!-- end -->
-                <!-- start -->
-                <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
-                  <input type="checkbox" id="apn-technician-2-{{j}}" [checked]="technician.technicianId == technicianobj.technicianId" name="apn-technician" (click)="selectTec(technician)" required />
-                  <label for="apn-technician-2-{{j}}">
-                    <div class="apn-technician">
-                      <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
-                      <div class="usr-name">
-                        <h3>{{technician?.firstName}} {{technician?.lastName}}</h3>
-                        <ul class="usr-social">
-                          <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
-                          <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
-                        </ul>
-                      </div>
-  
-                    </div>
-                  </label>
-                </div>
-  
-                <!-- end -->
+              <div class="radio-box radio-box-2">
+                <input type="radio" id="apn-r2" name="apn-r" [value]="2" [(ngModel)]="preference" [checked]="preference==2" >
+                <label for="apn-r2">Multiple</label>
+              </div>
+              <div class="radio-box radio-box-2">
+                <input type="radio" id="apn-r3" name="apn-r" [value]="3" [(ngModel)]="preference" [checked]="preference==3">
+                <label for="apn-r3">Simultaneous</label>
               </div>
             </div>
-  
-            <!-- Technician Selection ends -->
-  
-            <!-- Appointment Summary Starts -->
-            <div class="apn-appointment-selection" *ngIf="techserList.length>0">
-              <h6 class="hdn2">Appointment Summary</h6>
-              <div class="apn-appointment-container" *ngFor="let tech1 of techserList; let in = index" >
-                <div class="apn-appointment-box" >
-                  <div class="apn-ser">
-                    <h5>{{tech1?.serviceName}}</h5>
-                    <p> {{tech1?.serviceTime}}</p>
-                    <h6> {{tech1?.serviceCost}}</h6>
-                  </div>
+          </div>
+          <!-- Service Preferences Technician Ends -->
+          <!-- Technician Selection Starts -->
+          <div class="apn-technician-selection">
+            <h6 class="hdn2">Choose Technician</h6>
+            <div class="form-group">
+<!--              <form (ngSubmit)="searchTechnician()">-->
+                <input type="text" class="form-control form-field" [ngModel]="searchTech" (ngModelChange)="searchTechnician($event)">
+
+<!--                <input class="form-field" type="text" [(ngModel)]="searchTech" name="filter-searh" required="">-->
+                <p class="form-label">Search</p>
+                <button class="search icon-search" type="submit"></button>
+<!--              </form>-->
+            </div>
+
+            <div class="apn-technician-container">
+              <!-- start -->
+              <div class="apn-input-selection" *ngIf="tecSearch==false">
+                <input type="checkbox" id="apn-technician-1" name="apn-technician" required />
+                <label for="apn-technician-1">
                   <div class="apn-technician">
                     <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
                     <div class="usr-name">
-                      <h3>{{tech1?.technicianName}}</h3>
+                      <h3>No Preference</h3>
                       <ul class="usr-social">
                         <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
                         <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
                       </ul>
                     </div>
-                    <a href="#" class="apn-tech-edit"><img src="../assets/img/edit1.svg"
-                                                           alt="edit" /></a>
+                  </div>
+                </label>
+              </div>
+              <!-- end -->
+              <div *ngIf="tecSearch==true">
+              <div class="apn-input-selection" *ngFor="let tech of searchTechList; let j=index">
+                  <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" [checked]="tech.technicianId == technicianobj.technicianId" (click)="selectTec(tech)" required />
+                  <label for="apn-technician-2-{{j}}">
+                    <div class="apn-technician" >
+                      <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
+                      <div class="usr-name">
+                        <h3>{{tech?.firstName}} {{tech?.lastName}}</h3>
+                        <ul class="usr-social">
+                          <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                          <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
+                        </ul>
+                      </div>
+
+                    </div>
+                  </label>
+              </div>
+              </div><!-- start -->
+                <div *ngIf="tecSearch==false">
+                <div class="apn-input-selection" *ngFor="let technician of technicianlist; let j=index">
+                  <div *ngFor="let tech of technician.technicians">
+                  <input type="checkbox" id="apn-technician-2-{{j}}" name="apn-technician" (click)="selectTec(tech)" required />
+                  <label for="apn-technician-2-{{j}}">
+                    <div class="apn-technician" >
+                      <div class="user-img"><img src="../assets/img/user.svg" alt=""></div>
+                      <div class="usr-name">
+                        <h3>{{tech?.firstName}} {{tech?.lastName}}</h3>
+                        <ul class="usr-social">
+                          <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                          <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
+                        </ul>
+                      </div>
+
+                    </div>
+                  </label>
                   </div>
                 </div>
-                <!-- end -->
-              </div>
+                </div>
+              <!-- end -->
             </div>
-            <!-- Appointment Summary ends -->
           </div>
-        </div>
-        <div class="popBtn mt-0">
-          <button class="button line apnPopBtnClose" type="button">Cancel</button>
-           <button class="button" type="submit" (click)="nextScreen()">Edit</button>
-        </div>
-      </div>
-    </div>
-  
-  <!-- Main Contain-->
-  </div>
-  
-  
-  
-  <!-- Main Container Starts -->
-  <div class="mainContainer m-0 " id="appnt2">
-    <div class="apn-container">
-      <div class="apn-left">
-        <!-- Choose Date Starts -->
-        <h6 class="hdn2 apn-choose-date">Choose Date</h6>
-        <div class="apn-date-container">
-          <!-- swiper slider starts -->
-          <div class="apn-swiper-up">
-            <div class="swiper-container apn-swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide radio-box radio-box-2">
-  <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
-  <!--                <label for="apn-swiper-box-1">-->
-                    <mwl-calendar-week-view
-                      [viewDate]="viewDate"
-                      [refresh]="refresh"
-                    >
-                    </mwl-calendar-week-view>
+
+          <!-- Technician Selection ends -->
+
+          <!-- Appointment Summary Starts -->
+          <div class="apn-appointment-selection" *ngIf="appointmentService.techserList.length>0">
+            <h6 class="hdn2">Appointment Summary</h6>
+            <div class="apn-appointment-container" *ngFor="let tech1 of appointmentService.techserList; let in = index" >
+              <div class="apn-appointment-box" >
+                <div class="apn-ser">
+                  <h5>{{tech1?.serviceName}}</h5>
+                  <p> {{tech1?.serviceTime}}</p>
+                  <h6> {{tech1?.serviceCost}}</h6>
+                </div>
+                <div class="apn-technician">
+                  <div class="user-img"><img src="./assets/img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>{{tech1?.technicianName}}</h3>
+                    <ul class="usr-social">
+                      <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                      <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
+                    </ul>
+                  </div>
+                  <a href="#" class="apn-tech-edit"><img src="../assets/img/edit1.svg"
+                                                         alt="edit" /></a>
                 </div>
               </div>
+              <!-- end -->
             </div>
-            <div mwlCalendarNextView
-                 [view]="view"
-                 [(viewDate)]="viewDate"
-                 (viewDateChange)="closeOpenWeekViewDay()"
-                 class="swiper-button-next apn-button-next"></div>
-            <div mwlCalendarPreviousView
-                 [view]="view"
-                 [(viewDate)]="viewDate"
-                 (viewDateChange)="closeOpenWeekViewDay()" class="swiper-button-prev apn-button-prev"></div>
-            <!-- swiper slider Ends -->
           </div>
+          <!-- Appointment Summary ends -->
         </div>
-        <!-- Choose Date Ends -->
-  
-        <h6 class="hdn2">Choose Main Service </h6>
-         <!-- start -->
-        <div class="apn-appointment-box apn-input-selection" *ngFor="let tech of techserList; let i = index" (click)="tecBookTime(tech)">
-          <input type="checkbox" id="apn-appt-2-{{i}}" name="apn-appt" required />
-          <label for="apn-appt-2-{{i}}">
-            <div class="apn-ser">
-              <h5> {{tech?.serviceName}}</h5>
-              <p> {{tech?.serviceTime}}</p>
-              <h6>{{tech?.serviceCost}}</h6>
-            </div>
-            <div class="apn-technician" >
-              <div class="user-img"><img src="../assets/img/user2.svg" alt="img"></div>
-              <div class="usr-name">
-                <h3> {{tech?.technicianName}}</h3>
-                <ul class="usr-social">
-                  <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
-                  <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
-                </ul>
-              </div>
-              <a (click)="nextScreen1()" class="apn-tech-edit"><img src="../assets/img/edit1.svg" alt="edit" /></a>
-            </div>
-            <div class="apn-date">
-                {{viewDate | date:'M/d/yyyy'}} <span> {{tech?.startTime}}</span>
-            </div>
-          </label>
-        </div>
-        <!-- end -->
       </div>
-      <div class="apn-right-btn"><i class="icon-status1"></i></div>
-      <div class="bgOverlay"></div>
-      <div class="apn-right">
-        <app-appointmenttime [bookedTime]="bookedTime" [preference]="preference"></app-appointmenttime>
-        <div class="popBtn mt-0">
-          <button class="button line apnPopBtnClose" type="button">Cancel</button>
-          <button (click)="editAppointment()" href="customerappointment" class="button btn-col-sub" type="submit">Edit</button>
-        </div>
+      <div class="popBtn mt-0">
+        <button class="button line apnPopBtnClose" type="button">Cancel</button>
+         <button class="button" type="submit" (click)="nextScreen()">Edit</button>
       </div>
     </div>
-  
   </div>
-  <!-- Main Container Ends -->
-  
+
+<!-- Main Contain-->
+</div>
+
+
+
+<!-- Main Container Starts -->
+<div class="mainContainer m-0 " id="appnt2">
+  <div class="apn-container">
+    <div class="apn-left">
+      <!-- Choose Date Starts -->
+      <h6 class="hdn2 apn-choose-date">Choose Date</h6>
+      <div class="apn-date-container">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div class="btn-group">
+              <!--              <div-->
+              <!--                class="btn btn-primary"-->
+              <!--                mwlCalendarPreviousView-->
+              <!--                [view]="view"-->
+              <!--                [(viewDate)]="viewDate"-->
+              <!--                (viewDateChange)="closeOpenWeekViewDay()"-->
+              <!--              >-->
+              <!--                Previous-->
+              <!--              </div>-->
+              <!--              <div-->
+              <!--                class="btn btn-outline-secondary"-->
+              <!--                mwlCalendarToday-->
+              <!--                [(viewDate)]="viewDate"-->
+              <!--              >-->
+              <!--                Today-->
+              <!--              </div>-->
+              <!--              <div-->
+              <!--                class="btn btn-primary"-->
+              <!--                mwlCalendarNextView-->
+              <!--                [view]="view"-->
+              <!--                [(viewDate)]="viewDate"-->
+              <!--                (viewDateChange)="closeOpenWeekViewDay()"-->
+              <!--              >-->
+              <!--                Next-->
+              <!--              </div>-->
+            </div>
+          </div>
+          <div class="col-md-4" style="    margin-left: -180px;">
+            <h5 style="font-size: 18px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}  </h5>
+          </div><br/><br/>
+        </div>
+        <div class="swiper-container apn-swiper">
+          <div class="swiper-wrapper"  >
+            <div class="swiper-slide radio-box radio-box-2">
+              <!--                <input type="radio" id="apn-swiper-box-1" name="apn-swiper-box" checked>-->
+              <!--                <label for="apn-swiper-box-1">-->
+              <!--                  <p>Wed <span>18</span></p>-->
+              <!--                </label>-->
+              <mwl-calendar-week-view
+                [viewDate]="viewDate"
+                [events]="events"
+                (beforeViewRender)="beforeViewRender($event)"
+                (dayHeaderClicked)="dayClicked($event.day)">
+                >
+              </mwl-calendar-week-view>
+              <div   mwlCalendarNextView
+                     view="week"
+                     [(viewDate)]="viewDate"
+                     class="swiper-button-next apn-button-next"></div>
+              <div mwlCalendarPreviousView
+                   view="week"
+                   [(viewDate)]="viewDate" class="swiper-button-prev apn-button-prev"></div>
+            </div>
+          </div>
+        </div>
+        <!--              </div>-->
+
+      </div>
+      <!-- Choose Date Ends -->
+
+      <h6 class="hdn2">Choose Main Service </h6>
+       <!-- start -->
+      <div class="apn-appointment-box apn-input-selection" *ngFor="let tech of appointmentService.techserList; let i = index" (click)="tecBookTime(tech, i)">
+        <input type="checkbox" id="apn-appt-2-{{i}}" name="apn-appt" required />
+        <label for="apn-appt-2-{{i}}">
+          <div class="apn-ser">
+            <h5> {{tech?.serviceName}}</h5>
+            <p> {{tech?.serviceTime}}</p>
+            <h6>{{tech?.serviceCost}}</h6>
+          </div>
+          <div class="apn-technician" >
+            <div class="user-img"><img src="../assets/img/user2.svg" alt="img"></div>
+            <div class="usr-name">
+              <h3> {{tech?.technicianName}}</h3>
+              <ul class="usr-social">
+                <li><a href="#"><img src="../assets/img/fb.svg" alt="img" /></a></li>
+                <li><a href="#"><img src="../assets/img/insta.svg" alt="img" /></a></li>
+              </ul>
+            </div>
+            <a (click)="nextScreen1()" class="apn-tech-edit"><img src="../assets/img/edit1.svg" alt="edit" /></a>
+          </div>
+          <div class="apn-date">
+            {{viewDate | date:'M/d/yyyy'}} <span> {{tech?.startTime}}</span>
+          </div>
+        </label>
+      </div>
+      <!-- end -->
+    </div>
+    <div class="apn-right-btn"><i class="icon-status1"></i></div>
+    <div class="bgOverlay"></div>
+    <div class="apn-right">
+      <app-appointmenttime [bookedTime]="bookedTime" [preference]="preference"></app-appointmenttime>
+      <div class="popBtn mt-0">
+        <button class="button line apnPopBtnClose" type="button">Cancel</button>
+        <button (click)="editAppointment()" class="button btn-col-sub" type="submit">Edit</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Main Container Ends -->
