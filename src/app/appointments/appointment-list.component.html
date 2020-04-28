@@ -39,19 +39,19 @@ title="Merge Sales"></i>
 </div>
 
 <div class="radio-box radio-box-2 rad-org flg-grid-btn">
-<input type="radio" class="listCheck" id="grid" name="list-view" value="grid" checked>
+<input type="radio" class="listCheck" id="grid" name="list-view" value="grid" (click)="gridlistview('grid')" checked >
 <label for="grid"><i class="icon-gird"></i></label>
 </div>
 
 <div class="radio-box radio-box-2 rad-org flg-list-btn">
-<input type="radio" class="listCheck" id="list" name="list-view" value="list">
+<input type="radio" class="listCheck" id="list" name="list-view" value="list" (click)="gridlistview('list')">
   <label for="list"><i class="icon-list"></i></label>
 </div>
 </div>
 </div>
 </div>
 
-<div id="gridView">
+<div id="gridView" [ngStyle]="{'display': gridview ? 'block' : 'none' }">
 <!-- start -->
 <div class="f-row f-4 f-1600-3 f-900-2 f-640-1">
 <div class="f-col" *ngFor="let appoint of appointmentList; let i=index;">
@@ -132,9 +132,9 @@ Delete</li>
 <!-- end -->
 </div>
 
-<div id="listView">
+<div id="listView" [ngStyle]="{'display': listview ? 'block' : 'none' }">
   <!-- Main App List Starts -->
-<div class="table-bdy">
+<div class="table-bdy" *ngFor="let appoint of appointmentList; let i=index;">
 <!-- start -->
 <div class="tab-top-head">
 <h4 class="gridhead m-0">Haircut</h4>

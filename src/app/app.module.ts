@@ -27,6 +27,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 // import { GlobalErrorHandler } from './_errorlogging/global-error-handler';
 // import { ServerErrorInterceptor } from './_errorlogging/server-error.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbdTimepickerSpinners } from './timepicker-spinners';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {ModalModule} from './_modal/modal.module';
 import {ModalComponent} from './_modal/modal.component';
@@ -150,6 +153,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   imports: [
+    NgbModule,
     MultiSelectAllModule,
     DateRangePickerModule,
     DateTimePickerModule,
@@ -284,7 +288,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ],
   providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService, DatePipe],
   entryComponents: [ControlErrorComponent, ModalComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, AddServiceComponent]
 })
 export class AppModule { }
 

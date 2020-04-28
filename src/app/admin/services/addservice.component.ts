@@ -47,7 +47,8 @@ import {MessageService} from '../../message.service';
     '                        <p class="form-label">Service Code/Number</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
-    '                        <input type="text" id="def-time" name="def-time" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceTime}" formControlName="DefaultTime" ngModel="{{adminService.serviceData?.serviceTime}}" required />\n' +
+    '                 <ngb-timepicker [(ngModel)]="time" [spinners]="spinners" formControlName="Time"></ngb-timepicker>\n' +
+    // '                        <input type="text" id="def-time" name="def-time" class="form-field" [ngClass]="{\'field--not-empty\': adminService.serviceData?.serviceTime}" formControlName="DefaultTime" ngModel="{{adminService.serviceData?.serviceTime}}" required />\n' +
     '                        <p class="form-label">Default Time</p>\n' +
     '                    </div>\n' +
     '                    <div class="form-group">\n' +
@@ -128,6 +129,17 @@ import {MessageService} from '../../message.service';
 })
 
 export class AddServiceComponent implements OnInit {
+
+  constructor(public adminService: AdminService, public modalService: ModalService, private formBuilder: FormBuilder,
+              private messageService: MessageService) {
+  }
+
+  get f() {
+    return this.addserviceForm.controls;
+  }
+  get levelFormGroup() {
+    return this.addserviceForm.get('ServicePriceSt') as FormArray;
+  }
   addserviceForm: FormGroup;
   control: FormControl;
   public levelList: FormArray;
@@ -146,23 +158,19 @@ export class AddServiceComponent implements OnInit {
   public multifields: Object = { text: 'serviceName', value: 'serviceId'};
   public multi: boolean;
   public turn: boolean;
+  spinners = true;
+  time = {hour: 13, minute: 30};
 
-  constructor(public adminService: AdminService, public modalService: ModalService, private formBuilder: FormBuilder,
-              private messageService: MessageService) {
-  }
-
-  get f() {
-    return this.addserviceForm.controls;
-  }
-  get levelFormGroup() {
-    return this.addserviceForm.get('ServicePriceSt') as FormArray;
-  }
   createLevel(): FormGroup {
     return this.formBuilder.group({
       ServiceLevelId: [''],
       CommissionSplitPercent: [''],
       Price: ['']
     });
+  }
+
+  toggleSpinners() {
+    this.spinners = !this.spinners;
   }
   ngOnInit() {
     this.addserviceForm = this.formBuilder.group({
@@ -171,7 +179,9 @@ export class AddServiceComponent implements OnInit {
       AddOnServiceIds: [''],
       ServiceCost: [''],
       ServiceCode: [''],
-      DefaultTime: [''],
+      Time : [this.time, Validators.required],
+
+      // DefaultTime: [''],
       PricingBit: [''],
       TurnCountOverride: [''],
       TurnCountValue: [''],
@@ -242,9 +252,12 @@ export class AddServiceComponent implements OnInit {
       userdata.TurnCountOverride = false;
       userdata.TurnCountValue = 0;
     }
+    debugger;
     userdata.PricingBit = Boolean(userdata.PricingBit);
     userdata.TurnCountValue = + (userdata.TurnCountValue)
-    userdata.TurnCountOverride = Boolean(userdata.TurnCountOverride)
+    userdata.TurnCountOverride = Boolean(userdata.TurnCountOverride);
+    userdata.serviceHr = userdata.Time.hour;
+    userdata.serviceMin = userdata.Time.minute;
     // userdata.TurnCountValue = + (userdata.TurnCountValue);
     this.adminService.add_service(userdata).subscribe((data) => {
       this.adminService.publish('service-list');
