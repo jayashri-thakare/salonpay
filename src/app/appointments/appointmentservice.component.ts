@@ -159,24 +159,31 @@ class ErrorInfo {
   }
   selectTec(tec) {
     debugger;
-    // if(this.appointmentService.techserList.length> 0 ) {
-    //   const serv = this.appointmentService.techserList.some(el => el.serviceId === this.serviceBind.slice(-1)[0].serviceId);
-    //   if (serv) {
-    //     return false
-    //     // } //will return true or false
-    //   } else {
-      this.jobj.technicianName = tec.firstName
-      // this.jobj.serviceName = this.serviceBind.slice(-1)[0].serviceName;
-      // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
-      // this.jobj.serviceCost = this.serviceBind.slice(-1)[0].serviceCost
-      this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
-      this.serviceBind.slice(-1)[0].technicianId = tec.id;
-      this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
-      this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
-      this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
-      console.log(this.appointmentService.techserList);
-    // }
-  }
+    if(this.appointmentService.techserList.length> 0 ) {
+      const serv = this.appointmentService.techserList.some(el => el.serviceId === this.serviceBind.slice(-1)[0].serviceId);
+      if (serv) {
+        return false
+        // } //will return true or false
+      } else {
+        this.jobj.technicianName = tec.firstName
+        this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
+        this.serviceBind.slice(-1)[0].technicianId = tec.id;
+        this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
+        this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
+        this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
+        console.log(this.appointmentService.techserList);
+      }
+    } else{
+        this.jobj.technicianName = tec.firstName
+        this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
+        this.serviceBind.slice(-1)[0].technicianId = tec.id;
+        this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
+        this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
+        this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
+        console.log(this.appointmentService.techserList);
+      }
+    }
+  // }
   ;
 
   dayClicked(day: WeekDay): void {
