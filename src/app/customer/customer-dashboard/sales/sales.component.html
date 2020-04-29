@@ -64,8 +64,8 @@
                     <!-- start -->
                     <div class="app-pad-box" >
                         <a (click)="saledetail(sale.saleId)">
-                            <div class="app-pad-top" >
-                                <h4 class="gridhead m-0" *ngFor="let service of sale.completedServices">{{service?.serviceName | slice:0:10}}</h4>
+                            <div class="app-pad-top" *ngFor="let service of sale.completedServices">
+                                <h4 class="gridhead m-0" >{{service?.serviceName | slice:0:10}}</h4>
                                 <p class="girdpara">{{service?.technicianName}}</p>
                             </div>
                         </a>

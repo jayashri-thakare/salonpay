@@ -80,7 +80,7 @@ import { MessageService } from 'src/app/message.service';
     '            </div>\n' +
     '            <div class="popBtn mb-4">\n' +
     '                <a (click)="movetotransactioncart()" class="button line">Cancel</a>\n' +
-    '                <a (click)="movetotransactioncart();mergesaletocurrent();" class="button">Merge Sales</a>\n' +
+    '                <a (click)="movetotransactioncart();mergesaletocurrent();" class="button custom-btn">Merge Sales</a>\n' +
     '            </div>\n' +
     '        </div>\n' +
     '        <!-- Main Container Ends -->'
