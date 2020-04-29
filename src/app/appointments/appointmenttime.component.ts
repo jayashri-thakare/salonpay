@@ -51,7 +51,6 @@ export class AppointmentTimeComponent {
 
 
   addTime(time){
-    debugger;
     if(this.appointmentService.objIndex >= 0) {
       if(this.preference1 ==3) {
         this.appointmentService.techserList[this.appointmentService.objIndex]['startTime'] = this.apptime;

@@ -129,6 +129,7 @@ class ErrorInfo {
   techlist: Observable<any>;
   private tecSearch: boolean= false;
   private dateErrormsg: string;
+  private showMsg: string;
 
   constructor(private elementRef: ElementRef, public router: Router, public appointmentService: AppointmentService, public datePipe: DatePipe, public messageService: MessageService) {
   }
@@ -158,17 +159,31 @@ class ErrorInfo {
   }
   selectTec(tec) {
     debugger;
-   this.jobj.technicianName = tec.firstName
-    // this.jobj.serviceName = this.serviceBind.slice(-1)[0].serviceName;
-    // this.jobj.serviceTime = this.serviceBind.slice(-1)[0].serviceTime
-    // this.jobj.serviceCost = this.serviceBind.slice(-1)[0].serviceCost
-    this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
-    this.serviceBind.slice(-1)[0].technicianId = tec.id;
-    this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
-    this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
-    this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
-    console.log(this.appointmentService.techserList);
-  }
+    if(this.appointmentService.techserList.length> 0 ) {
+      const serv = this.appointmentService.techserList.some(el => el.serviceId === this.serviceBind.slice(-1)[0].serviceId);
+      if (serv) {
+        return false
+        // } //will return true or false
+      } else {
+        this.jobj.technicianName = tec.firstName
+        this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
+        this.serviceBind.slice(-1)[0].technicianId = tec.id;
+        this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
+        this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
+        this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
+        console.log(this.appointmentService.techserList);
+      }
+    } else{
+        this.jobj.technicianName = tec.firstName
+        this.serviceBind.slice(-1)[0].technicianName = tec.firstName;
+        this.serviceBind.slice(-1)[0].technicianId = tec.id;
+        this.serviceBind.slice(-1)[0].technicianEmailId = tec.email;
+        this.serviceBind.slice(-1)[0].defaultTime = this.serviceBind.slice(-1)[0].serviceTime;
+        this.appointmentService.techserList.push(this.serviceBind.slice(-1)[0]);
+        console.log(this.appointmentService.techserList);
+      }
+    }
+  // }
   ;
 
   dayClicked(day: WeekDay): void {
@@ -268,15 +283,22 @@ class ErrorInfo {
     myDiv1.style.display = 'none'
     ;  }
 
-  nextScreen(){
+  nextScreen() {
     // tslint:disable-next-line:prefer-const
-      var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
-      var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
+    if (this.appointmentService.techserList.length == 0 || this.preference == null) {
+      this.showMsg = 'Please select the service and technician first.'
+      if(this.preference==null){
+        this.showMsg = 'Please select the Preferences.'
+      }
+    } else {
+    var myDiv = this.elementRef.nativeElement.querySelector('#appnt1');
+    var myDiv1 = this.elementRef.nativeElement.querySelector('#appnt2');
     var datediv = this.elementRef.nativeElement.querySelector('#chdate');
 
     myDiv.style.display = 'none'
     datediv.style.display = 'none'
     myDiv1.style.display = 'block'
+  }
 ;  }
 
   searchService(searchVal){
