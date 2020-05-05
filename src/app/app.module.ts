@@ -23,7 +23,13 @@ import { BanksettingComponent } from './dashboard/banksetting/banksetting.compon
 import { SchedulesettingComponent } from './dashboard/schedulesetting/schedulesetting.component';
 import { SidebarComponent } from './_layout/sidebar/sidebar.component';
 import { HeaderComponent } from './_layout/header/header.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import {
+  CalendarDateFormatter,
+  CalendarModule,
+  CalendarNativeDateFormatter,
+  DateAdapter,
+  DateFormatterParams
+} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 // import { GlobalErrorHandler } from './_errorlogging/global-error-handler';
 // import { ServerErrorInterceptor } from './_errorlogging/server-error.interceptor';
@@ -146,11 +152,23 @@ import {AppointmentServiceEditComponent} from "./appointments/appointmentservice
 import {SalesDetailsComponent} from "./customer/customer-dashboard/sales/salesdetails.component";
 import {SalesListComponent} from "./sales/saleslist.component";
 import {SalesCommissionSplitComponent} from "./sales/salecommissionsplit.component"
+import {AddashboardComponent} from "./adminDashboard/addashboard.component";
+import {DashboardcalendarComponent} from "./adminDashboard/dashboardcalendar.component";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
+class CustomDateFormatter extends CalendarNativeDateFormatter {
+
+  public dayViewHour({date, locale}: DateFormatterParams): string {
+    return new Intl.DateTimeFormat('ca', {
+      hour: 'numeric',
+      minute: 'numeric'
+    }).format(date);
+  }
+
+}
 @NgModule({
   imports: [
     NgbModule,
@@ -167,6 +185,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
+    }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }, {
+      dateFormatter: {
+        provide: CalendarDateFormatter,
+        useClass: CustomDateFormatter
+      }
     }),
     LoggerModule.forRoot({
       serverLoggingUrl: '/api/logs',
@@ -284,11 +311,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, TimerComponent1, UserDetailsComponent,
         UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
         AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent, CustomerAddNotesComponent, CustomerProfileSettingComponent, BusinessProductsCategoryComponent,
-        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent, AppointmentListComponent, AppointmentTimeComponent
+        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent, AppointmentListComponent, AppointmentTimeComponent, AddashboardComponent, DashboardcalendarComponent
     ],
   providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService, DatePipe],
   entryComponents: [ControlErrorComponent, ModalComponent],
-  bootstrap: [AppComponent, AddServiceComponent]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // private static CustomDateFormatter: any;
+
+
+}
 

@@ -31,6 +31,8 @@ import { AppointmentServiceEditComponent } from './appointments/appointmentservi
 import { SalesDetailsComponent } from './customer/customer-dashboard/sales/salesdetails.component';
 import { SalesListComponent } from './sales/saleslist.component';
 import { SalesCommissionSplitComponent } from './sales/salecommissionsplit.component';
+import {AddashboardComponent} from './adminDashboard/addashboard.component';
+import {DashboardcalendarComponent} from "./adminDashboard/dashboardcalendar.component";
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -57,6 +59,8 @@ const routes: Routes = [
   { path: 'transactiontipadjustment', component: TipAdjustmentSalesComponent },
   { path: 'transactionreview', component: ReviewSalesComponent },
   { path: 'appointmentlist', component: AppointmentListComponent},
+  { path: 'admindashboard', component: AddashboardComponent},
+  { path: 'dashboardcalendar', component: DashboardcalendarComponent},
   { path: 'salesdetail', component: SalesDetailsComponent },
   { path: 'saleslist', component: SalesListComponent },
   { path: 'saleslistcommissionsplit', component: SalesCommissionSplitComponent }

@@ -65,7 +65,11 @@ class ErrorInfo {
   '      color: #fff;\n' +
   '      border-color: transparent;\n' +
   '      background: linear-gradient(90deg, #2ecbaa 0, #358fd0 100%) !important;\n' +
-  '    }' ,
+  '    }' +
+  '.cal-week-view .cal-time-events,\n' +
+  '    .cal-week-view .cal-time-label-column {\n' +
+  '      display: none !important;\n' +
+  '    }\n' ,
   ],
   encapsulation: ViewEncapsulation.None
 })export class AppointmentserviceComponent {
@@ -154,6 +158,18 @@ class ErrorInfo {
     myDiv.style.display = 'none'
     datediv.style.display = 'block'
     myDiv1.style.display = 'none'
+    let ele  = this.elementRef.nativeElement.querySelector('.cal-week-view');
+    let ele1  = this.elementRef.nativeElement.querySelector('.cal-time-events');
+    // let ele = document.getElementsByClassName("cal-week-view");
+    // ele.style.display = 'none'
+    ele1.style.display = 'none'
+    var ele2  = this.elementRef.nativeElement.querySelector('.mwl-calendar-week-view-hour-segment .cal-hour-segment');
+    var ele3  = this.elementRef.nativeElement.querySelector('.cal-hour-segment');
+    ele3.style.display = 'none'
+    ele2.style.display = 'none'
+    // if (ele[0] != undefined) {
+    //   ele[0].classList.remove('cal-today')
+    // }
     // this.jobj = [];
     // this.subscription = this.customerService.on('call-customerDetail').subscribe(() => this.getCustomerList());
   }
@@ -209,6 +225,11 @@ class ErrorInfo {
   }
 
   beforeViewRender({header}: {header: WeekDay[]}): void {
+    var ele1  = this.elementRef.nativeElement.querySelector('.mwl-calendar-week-view-hour-segment .cal-hour-segment');
+    var ele2  = this.elementRef.nativeElement.querySelector('.cal-hour-segment');
+    ele1.style.display = 'none'
+    ele2.style.display = 'none'
+
     if(this.viewDate > new Date()){
       let  ele = document.getElementsByClassName("cal-today");
       if(ele[0]!=undefined) {
@@ -281,10 +302,22 @@ class ErrorInfo {
     myDiv.style.display = 'block'
     datediv.style.display = 'none'
     myDiv1.style.display = 'none'
+    let ele1  = this.elementRef.nativeElement.querySelector('.cal-time-events');
+    ele1.style.display = 'none'
+     // .cal-time-label-column
+    let ele2  = this.elementRef.nativeElement.querySelector('.cal-all-day-events');
+    ele2.style.display = 'none'
+    var ele3  = this.elementRef.nativeElement.querySelector('.mwl-calendar-week-view-hour-segment .cal-hour-segment');
+    var ele4  = this.elementRef.nativeElement.querySelector('.cal-hour-segment');
+    ele3.style.display = 'none'
+    ele4.style.display = 'none'
+
     ;  }
 
   nextScreen() {
     // tslint:disable-next-line:prefer-const
+    let ele1  = this.elementRef.nativeElement.querySelector('.cal-time-events');
+    ele1.style.display = 'none'
     if (this.appointmentService.techserList.length == 0 || this.preference == null) {
       this.showMsg = 'Please select the service and technician first.'
       if(this.preference==null){
