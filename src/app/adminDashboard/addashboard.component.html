@@ -114,76 +114,43 @@
               </div>
             </div>
             <div class="apt-12 scrollbar">
-              <div>
+              <div  *ngIf="admindashboardService.data?.today">
                 <p class="app-head">Today</p>
                 <!-- start -->
-                <div class="user-det user-det-brd">
+                <div class="user-det user-det-brd" *ngFor="let appt of admindashboardService.data?.today">
                   <div class="user-img"><img src="img/user.svg" alt=""></div>
                   <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                    <h3>{{appt?.data[0].technicianName}}<span>{{appt?.data[0].serviceName}}</span></h3>
+                    <p><i class="icon-calender"></i>{{appt?.data[0].days.split(' ')[0]}}, {{appt?.data[0].appointmentTime}} </p>
                   </div>
                 </div>
                 <!-- end -->
-                <!-- start -->
-                <div class="user-det user-det-brd">
-                  <div class="user-img"><img src="img/user.svg" alt=""></div>
-                  <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
-                  </div>
-                </div>
-                <!-- end -->
-                <!-- start -->
-                <div class="user-det user-det-brd">
-                  <div class="user-img"><img src="img/user.svg" alt=""></div>
-                  <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
-                  </div>
-                </div>
-                <!-- end -->
+
               </div>
-              <div>
+              <div *ngIf="admindashboardService.data?.tomorrow">
                 <p class="app-head">Tomorrow</p>
                 <!-- start -->
-                <div class="user-det user-det-brd">
+                <div class="user-det user-det-brd" *ngFor="let appt of admindashboardService.data?.tomorrow">
                   <div class="user-img"><img src="img/user.svg" alt=""></div>
                   <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
-                  </div>
-                </div>
-                <!-- end -->
-                <!-- start -->
-                <div class="user-det user-det-brd">
-                  <div class="user-img"><img src="img/user.svg" alt=""></div>
-                  <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                    <h3>{{appt?.data[0].technicianName}}<span>{{appt?.data[0].serviceName}}</span></h3>
+                    <p><i class="icon-calender"></i>{{appt?.data[0].days.split(' ')[0]}}, {{appt?.data[0].appointmentTime}} </p>
                   </div>
                 </div>
                 <!-- end -->
               </div>
-              <div>
-                <p class="app-head">25 August 2019</p>
+              <div *ngIf="admindashboardService.data?.dayAfterTomorrow">
+                <p class="app-head">Upcoming</p>
                 <!-- start -->
-                <div class="user-det user-det-brd">
+                <div class="user-det user-det-brd" *ngFor="let appt of admindashboardService.data.dayAfterTomorrow">
                   <div class="user-img"><img src="img/user.svg" alt=""></div>
                   <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                    <h3>{{appt?.data[0].technicianName}}<span>{{appt?.data[0].serviceName}}</span></h3>
+                    <p><i class="icon-calender"></i>{{appt?.data[0].days.split(' ')[0]}}, {{appt?.data[0].appointmentTime}} </p>
                   </div>
                 </div>
                 <!-- end -->
                 <!-- start -->
-                <div class="user-det user-det-brd">
-                  <div class="user-img"><img src="img/user.svg" alt=""></div>
-                  <div class="usr-name">
-                    <h3>Ira Membrit<span>Haircut</span></h3>
-                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
-                  </div>
-                </div>
                 <!-- end -->
               </div>
             </div>
@@ -206,6 +173,13 @@
               </div>
             </div>
             <div class="week-calender-box">
+
+
+              <mwl-calendar-week-view
+                [viewDate]="viewDate"
+                [refresh]="refresh"
+              >
+              </mwl-calendar-week-view>
               <div id="demo-one-week"></div>
             </div>
             <div class="apt-12 scrollbar">
