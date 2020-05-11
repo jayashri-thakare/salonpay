@@ -24,6 +24,7 @@ const httpOptions = {
 })
 
 export class AdmindashboardService {
+  private weekscheduledata: ChartmodelModel[];
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
 public data: ChartmodelModel[];
@@ -41,9 +42,38 @@ public data: ChartmodelModel[];
       .catch(err => console.log('Error while starting connection: ' + err));
   }
 
+  public startGraphConnection = () => {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl('http://172.16.0.99:8013/TodaysQuickStatistics_SalaryCommissionTip?parentCompanyId=6&TechnicianId=cfe2e89c-8c8a-47fc-8b72-d4a9ded74079')
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('Connection started'))
+      .catch(err => console.log('Error while starting connection: ' + err));
+  }
+  public startConnectionWeekly = () => {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl('http://172.16.0.99:8013/AppointmentWeeklySchedule?parentCompanyId=6')
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log('Connection started'))
+      .catch(err => console.log('Error while starting connection: ' + err));
+  }
+
   public addTransferChartDataListener = () => {
     this.hubConnection.on('transferchartdata', (data) => {
       this.data = data;
+      console.log(data);
+    });
+  }
+
+  public addWeeklyDataListener = () => {
+    this.hubConnection.on('weeklydata', (data) => {
+      this.weekscheduledata = data;
+      console.log("weekly====")
       console.log(data);
     });
   }

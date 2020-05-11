@@ -6,7 +6,7 @@ import {
   Input,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild, ViewEncapsulation
 } from '@angular/core';
 import {Router} from '@angular/router';
 import {AdmindashboardService} from './admindashboard.service';
@@ -22,17 +22,19 @@ import {WeekDay} from "calendar-utils";
 
 @Component({
   selector: 'app-addashboard',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './addashboard.component.html',
-  styles: ['cal-time-events {\n' +
-  '    display: none !important;\n' +
-  '  }\n' +
-  '.cal-week-view .cal-day-headers {\n' +
-  '    padding-left: 0 !important;\n' +
-  '}\n' +
-  '  .cal-week-view .cal-all-day-events .cal-time-label-column {\n' +
-  '    display: none !important;\n' +
-  '}']
+  // styles: ['cal-time-events {\n' +
+  // '    display: none !important;\n' +
+  // '  }\n' +
+  // '.cal-week-view .cal-day-headers {\n' +
+  // '    padding-left: 0 !important;\n' +
+  // '}\n' +
+  // '  .cal-week-view .cal-all-day-events .cal-time-label-column {\n' +
+  // '    display: none !important;\n' +
+  // '}'],
+  // encapsulation: ViewEncapsulation.None
+
 })
 export class AddashboardComponent {
   title = 'SalonPay';
@@ -56,7 +58,11 @@ export class AddashboardComponent {
   ngOnInit() {
     this.admindashboardService.startConnection();
     this.admindashboardService.addTransferChartDataListener();
-    this.startHttpRequest();
+    this.admindashboardService.startConnectionWeekly();
+    this.admindashboardService.addWeeklyDataListener();
+
+    this.getAppointment();
+    this.getWeeklySchedule();
     let ele  = this.elementRef.nativeElement.querySelector('.cal-week-view');
     let ele1  = this.elementRef.nativeElement.querySelector('.cal-time-events');
     // let ele = document.getElementsByClassName("cal-week-view");
@@ -70,7 +76,13 @@ export class AddashboardComponent {
   }
 
 
-  private startHttpRequest = () => {
+  private getAppointment = () => {
+    this.httpClient.get('http://172.16.0.99:8013/api/TodayAndUpcommingAppointments?parentCompanyId=6')
+      .subscribe(res => {
+        console.log(res);
+      });
+  }
+  private getWeeklySchedule = () => {
     this.httpClient.get('http://172.16.0.99:8013/api/TodayAndUpcommingAppointments?parentCompanyId=6')
       .subscribe(res => {
         console.log(res);

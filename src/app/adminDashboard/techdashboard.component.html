@@ -1,0 +1,250 @@
+<!-- Main Container Starts -->
+<div class="mainContainer m-0">
+  <h3 class="main-comm-head">Dashboard<i class="icon-question rig-icn" data-toggle="tooltip"
+                                         title="Dashboard"></i>
+  </h3>
+  <!-- start -->
+  <div class="row mb-4">
+    <div class="dash-left-box">
+      <div class="row">
+        <div class="w50 w-768-100">
+          <!-- Today's Quick Statistics Starts -->
+          <div class="card-box">
+            <div class="card-hdn">
+              <h5>Today's Quick Statistics</h5>
+              <div class="card-btns">
+                <div class="yur-mail-rig mr-3">
+                  <i class="icon-share status"></i>
+                  <ul class="status-list">
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                  </ul>
+                </div>
+                <div class="yur-mail-rig">
+                  <button type="button" class="button line grey status">
+                    <i class="icon-filter"></i>
+                    <span>Fliters</span>
+                  </button>
+                  <ul class="status-list">
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="chart">
+              <google-chart [type]="myType" [data]="myData"></google-chart>
+              <canvas id="bar1"></canvas>
+            </div>
+          </div>
+          <!-- Today's Quick Statistics Ends -->
+        </div>
+        <div class="w50 w-768-100">
+          <!-- Today's Quick Statistics Starts -->
+          <div class="card-box">
+            <div class="card-hdn">
+              <h5>Today's Quick Statistics</h5>
+              <div class="card-btns">
+                <div class="yur-mail-rig mr-3">
+                  <i class="icon-share status"></i>
+                  <ul class="status-list">
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                  </ul>
+                </div>
+                <div class="yur-mail-rig">
+                  <button type="button" class="button line grey status">
+                    <i class="icon-filter"></i>
+                    <span>Fliters</span>
+                  </button>
+                  <ul class="status-list">
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="chart">
+              <canvas id="bar2"></canvas>
+            </div>
+          </div>
+          <!-- Today's Quick Statistics Ends -->
+        </div>
+        <div class="w100">
+          <!-- Appointments Starts -->
+          <div class="card-box">
+            <div class="card-hdn">
+              <h5>Expected Pay</h5>
+              <div class="card-btns">
+                <div class="yur-mail-rig">
+                  <i class="icon-share status"></i>
+                  <ul class="status-list">
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                  </ul>
+                </div>
+                <a href="dashboard-pay-report.html" class="button line orange ml-3">View All</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="w50  w-768-100">
+                <div class="table-bdy">
+                  <ul class="table-rw">
+                    <li class="w100">
+                      <span>Commissions</span>
+                      <h4>$76</h4>
+                    </li>
+                    <li>
+                      <span>Service Commissions</span>
+                      <b>$15</b>
+                    </li>
+                    <li>
+                      <span>Product Commissions</span>
+                      <b>$54</b>
+                    </li>
+                    <li>
+                      <span>Tips</span>
+                      <b>$23</b>
+                    </li>
+                    <li>
+                      <span>Services</span>
+                      <b>5</b>
+                    </li>
+                    <li>
+                      <span>Product Sold</span>
+                      <b>25</b>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="w50  w-768-100">
+                <div class="table-bdy">
+                  <ul class="table-rw">
+                    <li class="w100">
+                      <span>Total Salary</span>
+                      <h4>$9,689</h4>
+                    </li>
+                    <li>
+                      <span>Hours Worked</span>
+                      <b>87</b>
+                    </li>
+                    <li>
+                      <span>Hourly Rate</span>
+                      <b>$54</b>
+                    </li>
+                    <li>
+                      <span>Hours Per Day</span>
+                      <b>8</b>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Appointments Ends -->
+        </div>
+      </div>
+    </div>
+    <div class="dash-right-box dash-right-box-1">
+      <div class="row">
+        <div class="w100">
+          <!-- Appointments Starts -->
+          <div class="card-box">
+            <div class="card-hdn">
+              <h5>Appointments</h5>
+              <div class="card-btns">
+                <div class="yur-mail-rig">
+                  <i class="icon-share status"></i>
+                  <ul class="status-list">
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                  </ul>
+                </div>
+                <a href="dashboard-my-appointment-calender.html"
+                   class="button line orange ml-3">View All</a>
+              </div>
+            </div>
+            <div class="apt-12 scrollbar">
+              <div>
+                <p class="app-head">Today</p>
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+              </div>
+              <div>
+                <p class="app-head">Tomorrow</p>
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+              </div>
+              <div>
+                <p class="app-head">25 August 2019</p>
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+                <!-- start -->
+                <div class="user-det user-det-brd">
+                  <div class="user-img"><img src="img/user.svg" alt=""></div>
+                  <div class="usr-name">
+                    <h3>Ira Membrit<span>Haircut</span></h3>
+                    <p><i class="icon-calender"></i>5 Aug 2019, 5:30PM</p>
+                  </div>
+                </div>
+                <!-- end -->
+              </div>
+            </div>
+          </div>
+          <!-- Appointments Ends -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end -->
+</div>
+<!-- Main Container Ends -->

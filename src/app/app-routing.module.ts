@@ -33,6 +33,7 @@ import { SalesListComponent } from './sales/saleslist.component';
 import { SalesCommissionSplitComponent } from './sales/salecommissionsplit.component';
 import {AddashboardComponent} from './adminDashboard/addashboard.component';
 import {DashboardcalendarComponent} from "./adminDashboard/dashboardcalendar.component";
+import {TechDashboardComponent} from "./adminDashboard/techdashboard.component";
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path: 'transactionreview', component: ReviewSalesComponent },
   { path: 'appointmentlist', component: AppointmentListComponent},
   { path: 'admindashboard', component: AddashboardComponent},
+  { path: 'techniciandashboard', component: TechDashboardComponent},
   { path: 'dashboardcalendar', component: DashboardcalendarComponent},
   { path: 'salesdetail', component: SalesDetailsComponent },
   { path: 'saleslist', component: SalesListComponent },

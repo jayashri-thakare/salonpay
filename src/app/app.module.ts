@@ -154,6 +154,8 @@ import {SalesListComponent} from "./sales/saleslist.component";
 import {SalesCommissionSplitComponent} from "./sales/salecommissionsplit.component"
 import {AddashboardComponent} from "./adminDashboard/addashboard.component";
 import {DashboardcalendarComponent} from "./adminDashboard/dashboardcalendar.component";
+import {TechDashboardComponent} from "./adminDashboard/techdashboard.component";
+import {GoogleChartsModule} from "angular-google-charts";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -182,6 +184,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     ModalModule,
     FormsModule,
     RichTextEditorAllModule,
+    GoogleChartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -311,7 +314,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
         AccountEditComponent, EmailEditComponent, CustomTimePickerComponent, Safe, TimerComponent, TimerComponent1, UserDetailsComponent,
         UserRightsComponent, UserHistoryComponent, AdminServiceComponent,
         AddServiceComponent, ButtonsComponent, BusinessReviewComponent, PayperiodComponent, CustomerAddNotesComponent, CustomerProfileSettingComponent, BusinessProductsCategoryComponent,
-        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent, AppointmentListComponent, AppointmentTimeComponent, AddashboardComponent, DashboardcalendarComponent
+        SalesComponent, AllcustomerComponent, CustomerSaleComponent, AppointmentserviceComponent, AppointmentListComponent, AppointmentTimeComponent, AddashboardComponent, TechDashboardComponent, DashboardcalendarComponent
     ],
   providers: [UserdataService, DatePipe, AdminService, TimerService, CustomerService, DatePipe],
   entryComponents: [ControlErrorComponent, ModalComponent],
