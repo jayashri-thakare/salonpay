@@ -156,7 +156,7 @@ import {SalesCommissionSplitComponent} from "./sales/salecommissionsplit.compone
 import {AddashboardComponent} from "./adminDashboard/addashboard.component";
 import {DashboardcalendarComponent} from "./adminDashboard/dashboardcalendar.component";
 import {TechDashboardComponent} from "./adminDashboard/techdashboard.component";
-// import {GoogleChartsModule} from "angular-google-charts";
+import {GoogleChartsModule} from "angular-google-charts";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -185,7 +185,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     ModalModule,
     FormsModule,
     RichTextEditorAllModule,
-    // GoogleChartsModule,
+    GoogleChartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
