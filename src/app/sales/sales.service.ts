@@ -46,19 +46,19 @@ export class SalesService {
 
   getCustomers() {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetAllCustomers?ParentCompanyId=' + this.parentId + '&PageNumber=1&PageSize=25';
+    this.baseUrl = 'http://172.16.0.99:8031/api/Sales/GetAllCustomers?ParentCompanyId=' + this.parentId + '&PageNumber=1&PageSize=25';
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getSearchofservices(event) {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = ' http://172.16.0.99:8044/api/CreateSale/GetServicesBySearch?ParentCompanyId=' + this.parentId + '&searchtxt=' + event;
+    this.baseUrl = ' http://172.16.0.99:8031/api/CreateSale/GetServicesBySearch?ParentCompanyId=' + this.parentId + '&searchtxt=' + event;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getSearchofproducts(event) {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetProductBySearch?ParentCompanyId=' + this.parentId + '&searchtxt=' + event;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetProductBySearch?ParentCompanyId=' + this.parentId + '&searchtxt=' + event;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -78,7 +78,7 @@ export class SalesService {
 
   searchCustomer(name) {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetAllCustomersBySearch?ParentCompanyId=' + this.parentId + '&searchtxt=' + name;
+    this.baseUrl = 'http://172.16.0.99:8031/api/Sales/GetAllCustomersBySearch?ParentCompanyId=' + this.parentId + '&searchtxt=' + name;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
     // this.httpClient.get<Observable<customerProfile>>(this.baseUrl).subscribe((data) => {
     //   debugger;
@@ -90,13 +90,13 @@ export class SalesService {
   }
 
   getServicesByCategoryId(serviceid) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetServicesByCategoryId?ServiceCategoryId=' + serviceid;
+    this.baseUrl = 'http://172.16.0.99:8031/api/Sales/GetServicesByCategoryId?ServiceCategoryId=' + serviceid;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getAllAddedServices(serviceid) {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetAddOnsByServiceId?ServiceId=' + serviceid + '&ParentCompanyId=' + this.parentId;
+    this.baseUrl = 'http://172.16.0.99:8031/api/Sales/GetAddOnsByServiceId?ServiceId=' + serviceid + '&ParentCompanyId=' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
@@ -107,108 +107,109 @@ export class SalesService {
   }
 
   create_sales(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/CreateSale';
+    Sales.CreatedBy = localStorage.getItem('userId')
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/CreateSale';
     Sales.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   create_sales_service(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/SaveServices';
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/SaveServices';
     Sales.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   create_sales_product(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/SaveProducts';
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/SaveProducts';
     Sales.ParentCompanyId = parseInt(localStorage.getItem('companyId'));
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   getCustomerProductCart(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetProductDetails?SaleId=' + Sales;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetProductDetails?SaleId=' + Sales;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getCustomerServices(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetServicesAndAddOnServices?SaleId=' + Sales;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetServicesAndAddOnServices?SaleId=' + Sales;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getCustomerServiceTechnicians(Sales) {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetTechnicianList?SaleId=' + Sales + '&parentCompanyId=6' + this.parentId;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetTechnicianList?SaleId=' + Sales + '&parentCompanyId=6' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getCustomerReward(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetCustomerRewward?CustomerId=' + Sales;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetCustomerRewward?CustomerId=' + Sales;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   add_reward(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/PostCustomerRewward';
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/PostCustomerRewward';
     Sales.CustomerId = parseInt(localStorage.getItem('customerId'));
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   add_coupon(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/CoupanValidOrNot?CoupanCode=' + Sales.CouponCode;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/CoupanValidOrNot?CoupanCode=' + Sales.CouponCode;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions)
     .pipe(map( data => data));
   }
 
   create_final_sales(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/SaveFinalSale';
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/SaveFinalSale';
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   create_merge_sales(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/SaveMergeSale';
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/SaveMergeSale';
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   getCustomerMergeSales() {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetOperSaleForMargeList?ParentCompanyId=' + this.parentId;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetOperSaleForMargeList?ParentCompanyId=' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getSalesDetail() {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetSalesListForSplitCommissions?ParentCompanyId=' + this.parentId;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetSalesListForSplitCommissions?ParentCompanyId=' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getProductByCategoryId(productid) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/Sales/GetProductByCategoryId?ProductCategoryId=' + productid;
+    this.baseUrl = 'http://172.16.0.99:8031/api/Sales/GetProductByCategoryId?ProductCategoryId=' + productid;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getSalesCommissionSplit(saleid) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/Commission/GetCommissionSplitData?Saleid=' + saleid;
+    this.baseUrl = 'http://172.16.0.99:8031/api/Commission/GetCommissionSplitData?Saleid=' + saleid;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getTipData(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetTipData?SaleId=' + Sales;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetTipData?SaleId=' + Sales;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   create_final_sales_tip(Sales) {
     Sales.parentCompanyId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/PostTipData';
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/PostTipData';
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
 
   finalSaleCommission(Sales) {
-    this.baseUrl = 'http://172.16.0.99:8044/api/Commission/PostCommissionSplitData';
+    this.baseUrl = 'http://172.16.0.99:8031/api/Commission/PostCommissionSplitData';
     return this.httpClient.post<Observable<any>>(this.baseUrl, Sales, httpOptions)
     .pipe(map( data => data));
   }
@@ -216,13 +217,13 @@ export class SalesService {
   getFrequentlyProductDetails() {
     this.parentId = parseInt(localStorage.getItem('companyId'));
     this.customerId = parseInt(localStorage.getItem('customerId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetFrequentlyPurchasedProduct?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetFrequentlyPurchasedProduct?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 
   getFrequentlyServiceDetails() {
     this.parentId = parseInt(localStorage.getItem('companyId'));
-    this.baseUrl = 'http://172.16.0.99:8044/api/CreateSale/GetFrequentlyUsedServices?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
+    this.baseUrl = 'http://172.16.0.99:8031/api/CreateSale/GetFrequentlyUsedServices?CustomerId=' + this.customerId + '&ParentCompanyId=' + this.parentId;
     return this.httpClient.get<Observable<any>>(this.baseUrl, httpOptions).pipe(map(data => data));
   }
 

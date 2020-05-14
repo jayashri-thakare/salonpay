@@ -89,7 +89,7 @@ import {MessageService} from "../message.service";
     '    <!-- Main Container Ends -->'
 })
 export class SalesCommissionSplitComponent implements OnInit {
-  SalesCommission: Observable<any>;
+  SalesCommission: any;
     commissionsplit= {};
   totalsplit: number;
 
@@ -113,6 +113,12 @@ export class SalesCommissionSplitComponent implements OnInit {
     if(event){
       this.totalsplit = this.totalsplit + parseInt(event);
     }
+    for(let i=0;i<this.SalesCommission.length;i++){
+      if(this.SalesCommission[i]['commission']){
+        this.SalesCommission[i]['commission'] = this.totalsplit
+      }
+    }
+    console.log(this.SalesCommission)
   }
 
   finalSaleCommission() {

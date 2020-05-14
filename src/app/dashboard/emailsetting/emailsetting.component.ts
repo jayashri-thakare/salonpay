@@ -36,6 +36,8 @@ export class EmailsettingComponent implements OnInit {
   private subscription: Subscription;
   emailsign: boolean;
   emailconnect: boolean;
+  accesstoken: any;
+  tokenreq= {};
 
   constructor(private router: Router, public userdataService: UserdataService,
               private formBuilder: FormBuilder,
@@ -105,5 +107,19 @@ export class EmailsettingComponent implements OnInit {
       this.emailsign = true;
       this.emailconnect = false;
     }
+  }
+
+  office_token() {
+    this.tokenreq = {
+      "TenantID": "819c5746-460c-416e-b656-d4f259797ea6",
+      "ClientID": "6196a40d-aa7e-4069-80a5-312865bb368c",
+      "RedirectUri": "http://172.16.0.114:5555/api/Email/Office365CodeResponse",
+      "UserId": localStorage.getItem('userId'),
+      "ParentCompanyId": parseInt(localStorage.getItem('companyId')),
+      "ConnectionType": "Office365"
+    }
+    this.userdataService.office_token(this.tokenreq).subscribe((data) => {
+      this.accesstoken = data;
+    });
   }
 }

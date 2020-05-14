@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {Observable, of, Subject} from 'rxjs';
 import {MessageService} from '../message.service';
@@ -16,6 +16,25 @@ const httpOptions = {
   })
 };
 
+const httpOptionss = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': '*',
+    Authorization: localStorage.getItem('emailToken'),
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+    'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept, Origin'
+  })
+};
+
+const httpOption = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+    'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept, Origin'
+  })
+};
+
 class Customerdetail {
 }
 
@@ -26,6 +45,9 @@ class imagepath {
   providedIn: 'root'
 })
 export class CustomerService {
+  getCustomerEmail(customerid: any) {
+    throw new Error("Method not implemented.");
+  }
   private res: Object;
   private result: {
     serviceDetails: { serviceId: any };
@@ -43,6 +65,7 @@ export class CustomerService {
   arrayofselectedcustobj: Array<any> = [];
   private customId: string;
   customerId: number;
+  formBody: any;
   constructor(private httpClient: HttpClient, private messageService: MessageService) { }
 
   public showNav(nav) {
@@ -154,6 +177,30 @@ export class CustomerService {
       this.imagepath = '';
       this.imagepath = 'http://172.16.0.114:5555/' + val['profilePicPath'] ;
     });
+  }
+
+  saveEmailToken() {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Email/GetOffice365TokenUsingTokenEndPoint';
+  return this.httpClient.get<Observable<Customerdetail>>(this.baseUrl, httpOption)
+  .pipe(map( data => data));
+  }
+
+  sendNewMail(mail) {
+    this.baseUrl = 'https://graph.microsoft.com/v1.0/me/sendmail';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, mail, httpOptionss)
+  .pipe(map( data => data));
+  }
+
+  savesentmail(customer) {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Email/SaveSentEmailInDB';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customer, httpOptions)
+  .pipe(map( data => data));
+  }
+
+  getCustomerEmaiInfo(customerId) {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Email/GetCustomerEmailfromoffice365';
+    return this.httpClient.post<Observable<Customerdetail>>(this.baseUrl, customerId, httpOptions)
+    .pipe(map(data => data));
   }
 
   getCustomerProfilePic(customerId) {

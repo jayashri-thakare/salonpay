@@ -321,6 +321,12 @@ export class UserdataService {
       .pipe(map( data => data));
   }
 
+  office_token(userdata) {
+    this.baseUrl = 'http://172.16.0.114:5555/api/Email/SendOffice365TokenRequest';
+    return this.httpClient.post<Observable<userdetail>>(this.baseUrl, userdata, httpOptions)
+      .pipe(map( data => data));
+  }
+
   getUserUpdated() {
     this.getUserDetail().subscribe((data) => {
       this.userdetail = data;

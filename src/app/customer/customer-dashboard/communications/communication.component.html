@@ -35,7 +35,7 @@
 
             <div class="filter-container-up">
                 <div class="filter-container">
-                    <button class="button comm-btm-popup mr-2 new-email-btn" data-name="add-new-popup">
+                    <button class="button comm-btm-popup mr-2 new-email-btn" (click)="modalService.openemail('add-new-email-popup')">
                         +<span>New Email</span></button>
                     <div class="form-group mb-0">
                         <form>
@@ -54,169 +54,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- start -->
-                        <a href="customer-communication-reply.html">
+                        <a href="customer-communication-reply.html" *ngFor="let email of customeremail.value">
                             <div class="cust-mail">
                                 <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
+                                    <h6 class="ellipsis">{{email.subject}}</h6>
                                 </div>
                                 <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
-                                    <span class="mail-date mail-upr">Aug 25</span>
-                                </div>
-                                <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
-                                    data-backdrop="static" data-keyboard="false"><i class="icon-delete"></i></span>
-                            </div>
-                        </a>
-                        <!-- end -->
-                        <!-- start -->
-                        <a href="customer-communication-reply.html">
-                            <div class="cust-mail">
-                                <div class="mail-subj">
-                                    <h6 class="ellipsis">The Subject Comes Here</h6>
-                                </div>
-                                <div class="mail-cont">
-                                    <p class="ellipsis">These days everyone has an email address, as it’s virtually
-                                        impossible to
-                                        have
-                                        adequate Internet
-                                        experience without having one. Whether you want to adequate</p>
+                                    <p class="ellipsis">{{email.body.content}}</p>
                                     <span class="mail-date mail-upr">Aug 25</span>
                                 </div>
                                 <span class="mail-delete modal-click" data-toggle="modal" data-target="#deletePopup"
@@ -330,67 +174,7 @@
             </div>
         </div>
 
-        <!-- Add email start -->
-        <div class="comm-note mail-compose-box comm-popup-box" id="add-new-popup">
-            <div class="comm-head close-desp">
-                <h6>Compose New Email</h6>
-                <i class="icon-cir-cross"></i>
-            </div>
-            <div class="suprt-body">
-
-                <div id="mail-app">
-                    <div id="recipient-section">
-                        <div id="recipients" class="pt-0">
-                            Recipients
-                        </div>
-                        <div id="to" class="mt-0">
-                            <span id="to-label">To</span>
-                            <div id="to-input" contenteditable="true"></div>
-                            <button id="cc-button">Cc</button>
-                            <button id="bcc-button">Bcc</button>
-                        </div>
-                        <div id="cc">
-                            <span id="to-label">Cc</span>
-                            <div id="cc-input" contenteditable="true"></div>
-                        </div>
-                        <div id="bcc">
-                            <span id="to-label">Bcc</span>
-                            <div id="bcc-input" contenteditable="true"></div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="subject">
-                        <span id="subject-label">Subject</span>
-                        <div id="subject-input" contenteditable="true">
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="subject">
-                        <span id="subject-label">Template</span>
-                        <div id="subject-input" contenteditable="true">
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="body">
-                        <textarea id="body-content"></textarea>
-                    </div>
-                    <div class="mail-btn-box m-0">
-                        <button class="button">Send</button>
-                        <ul class="mail-list">
-                            <li><i class="icon-txt-underline"></i></li>
-                            <li><i class="icon-attach"></i></li>
-                            <li><i class="icon-link"></i></li>
-                            <li><i class="icon-smiling"></i></li>
-                            <li><i class="icon-picture"></i></li>
-                            <li><i class="icon-schedule" data-toggle="modal" data-target="#mailPopup"></i></li>
-                            <li class="mail-del-icon"><i class="icon-delete del"></i></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Add email end -->
-
     </div>
 </div>
+<email-template></email-template>
 <!-- Main Container Ends -->

@@ -34,7 +34,19 @@ export class ModalService {
     modal.openNote();
   }
 
+  openemail(id: string) {
+    // open modal specified by id
+    const modal = this.modals.find(x => x.id === id);
+    modal.openEmail();
+  }
+
   closeNote(id: string) {
+    // close modal specified by id
+    const modal = this.modals.find(x => x.id === id);
+    // document.querySelector('.overlay').classList.remove('overlay-in');
+    modal.closeNote();
+  }
+  closeEmail(id: string) {
     // close modal specified by id
     const modal = this.modals.find(x => x.id === id);
     // document.querySelector('.overlay').classList.remove('overlay-in');
