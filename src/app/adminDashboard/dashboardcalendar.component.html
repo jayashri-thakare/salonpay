@@ -1,0 +1,63 @@
+<!-- Main Container Starts -->
+<div class="mainContainer m-0 main-container-flg">
+  <div class="dash-hdn-flex">
+    <h3 class="main-comm-head m-0">
+      <a href="dashboard.html"><i class="icon-down-arrow com-arw"></i></a><span>Appointment</span> Calendar
+    </h3>
+    <div class="salon-time">
+      Salon Time: <span>9AM-5PM</span>
+    </div>
+  </div>
+
+<div id="calendar">
+<!--  <div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-button-primary" aria-label="prev"><span class="fc-icon fc-icon-chevron-left"></span></button><button type="button" class="fc-next-button fc-button fc-button-primary" aria-label="next"><span class="fc-icon fc-icon-chevron-right"></span></button></div><button type="button" class="fc-today-button fc-button fc-button-primary">today</button></div><div class="fc-center"><h2>December 4, 2019</h2></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-timeGridWeek-button fc-button fc-button-primary">week</button><button type="button" class="fc-timeGridDay-button fc-button fc-button-primary fc-button-active">day</button></div></div></div>-->
+  <div class="fc-left">
+    <div class="fc-button-group">
+      <button type="button" class="fc-prev-button fc-button fc-button-primary" aria-label="prev">
+        <span class="fc-icon fc-icon-chevron-left"></span>
+      </button>
+      <button type="button" class="fc-next-button fc-button fc-button-primary" aria-label="next">
+        <span class="fc-icon fc-icon-chevron-right"></span>
+      </button>
+  </div>
+<!--    <button type="button" class="fc-today-button fc-button fc-button-primary">today</button>-->
+  </div>
+  <div class="fc-right">
+    <div class="fc-button-group">
+      <button type="button" class="fc-timeGridWeek-button fc-button fc-button-primary" class="btn btn-primary"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week">week</button>
+      <button type="button" class="fc-timeGridDay-button fc-button fc-button-primary fc-button-active"
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day">day</button>
+    </div>
+  </div>
+  <div [ngSwitch]="view">
+
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [hourSegments]="hourSegments"
+    [dayStartHour]="dayStartHour"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [hourSegments]="2"
+    [dayStartHour]="8"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-day-view>
+  </div>
+</div>
+</div>
+<!-- Main Container Ends -->
